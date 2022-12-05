@@ -182,6 +182,7 @@ class flash_cache_process {
 		
 	}
 	public static function process_cache_from_query($current_query, $opcional_url = '') {
+		
 		$current_url ='';
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		
@@ -207,11 +208,11 @@ class flash_cache_process {
 		if (!empty($opcional_url)) {
 			$current_url = $opcional_url;
 		}
-
-		if ($is_post && self::$force_permalink) {
+		
+		if ($is_post && empty($current_url)) {
 			$current_url = get_permalink($post->ID);
 		}
-		
+	
 		foreach($patterns as $pt) {
 			$pattern = wpecache_patterns::get_data($pt->ID );
 			
@@ -348,6 +349,7 @@ class flash_cache_process {
 	}
 	public static function process_patterns() {
 
+
 		if (isset($_COOKIE["flash_cache"]) || isset($_COOKIE["flash_cache_backend"])) {
 			return true;
 		}
@@ -415,7 +417,7 @@ class flash_cache_process {
 		self::debug('Procesing a new pattern from template_redirect:'.var_export($current_query, true));
 		$current_query = wp_parse_args($current_query, $default_query);
 		
-		self::process_cache_from_query($current_query);
+		self::process_cache_from_query($current_query, flash_cache_get_current_url());
 		
 	}
 	public static function onload_cache() {
