@@ -1,0 +1,11 @@
+.delete {
+    color: #F88;
+    font-size: 1.6em;
+     opacity: 0.6;
+}
+.delete:hover {
+    opacity: 1;
+}
+.delete:before {
+    content: "\2718";
+}
