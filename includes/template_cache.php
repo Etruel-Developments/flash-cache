@@ -26,7 +26,7 @@ function create_cache($request) {
 	if (!file_exists($cache_path)) {
 		mkdir($cache_path, 0777, true);
 	}
-	$request_url = flash_cache_request_curl($url_path);
+	$request_url = flash_cache_get_content($url_path);
 	file_put_contents($cache_path.$request.'.html', $request_url['response']);
 	file_put_contents($cache_path.$request.'.header', $request_url['content_type']);
 }

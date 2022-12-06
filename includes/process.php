@@ -112,7 +112,7 @@ class flash_cache_process {
 	}
 	public static function create_cache_html() {
 		
-		$response = flash_cache_request_curl(self::$url_to_cache);
+		$response = flash_cache_get_content(self::$url_to_cache);
 
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
@@ -162,7 +162,7 @@ class flash_cache_process {
 		$template_php = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
 		file_put_contents($cache_path.'index-cache.php', $template_php);
-		$request_url = flash_cache_request_curl_to_php(self::$url_to_cache);
+		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
 		if (defined('SS_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));
 		} else {
@@ -510,7 +510,7 @@ class flash_cache_process {
 	*/
 	public static function create_cache_ob_html($response, $use_curl) {
 		if ($use_curl) {
-			$response = flash_cache_request_curl(self::$url_to_cache);
+			$response = flash_cache_get_content(self::$url_to_cache);
 		}
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
@@ -549,7 +549,7 @@ class flash_cache_process {
 		
 		file_put_contents($cache_path.'index-cache.php', $template_php);
 		if ($use_curl) {
-			$response = flash_cache_request_curl(self::$url_to_cache);
+			$response = flash_cache_get_content(self::$url_to_cache);
 		}
 		if (defined('SS_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));

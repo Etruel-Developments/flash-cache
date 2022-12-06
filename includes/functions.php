@@ -68,7 +68,7 @@ function flash_cache_default_query() {
 	);
 	return $default_query;
 }
-function flash_cache_request_curl($url, $args = array()) {
+function flash_cache_get_content($url, $args = array()) {
 	/**
 	 * Filter to allow change the default parameters for wp_remote_request below.
 	 */
@@ -93,10 +93,10 @@ function flash_cache_request_curl($url, $args = array()) {
 			if (isset($response['response']['code']) && 200 === $response['response']['code']) {
 				$data = wp_remote_retrieve_body($response);
 			} else {
-				trigger_error(__('Error with wp_remote_request:', 'wpematico') . print_r($response, 1), E_USER_NOTICE);
+				flash_cache_process::debug('Error with wp_remote_request:' . print_r($response, 1) );
 			}
 		} else {
-			trigger_error(__('Error with wp_remote_get:', 'wpematico') . $response->get_error_message(), E_USER_NOTICE);
+			flash_cache_process::debug('Error with wp_remote_request:' . $response->get_error_message() );
 		}
 	}
 
@@ -347,49 +347,23 @@ function flash_cache_get_home_path() {
 	return str_replace('\\', '/', $home_path);
 }
 
-function flash_cache_request_curl_to_php($url) {
-	$use_post = true;
-	if (empty($_POST)) {
-		$use_post = false;
-	} else {
-		$fields_string = http_build_query($_POST);
-	}
+function flash_cache_get_content_to_php($url) {
 	if (!empty($_GET)) {
 		$url = $url . '?' . http_build_query($_GET);
 	}
+	$args = array(
+		'timeout' => 15,
+		'cookies' => array(
+			'flash_cache' 			=> 'cookie',
+			'flash_cache_backend' 	=> 'cookie',
+		)
+	);
+	if (!empty($_POST)) {
+		$args['method'] = 'POST';
+		$args['body'] = $_POST;
+	} 
 
-	$ch = curl_init($url);
-	$headers = array();
-	$header = array();
-	$header[] = "es-419,es;q=0.8";
-	$header[] = "Accept-Charset: UTF-8,*;q=0.5";
-	$header[] = "Cookie: flash_cache=cookie; flash_cache_backend=cookie;";
-
-	$tmpfname = dirname(__FILE__) . '/cookie.txt';
-	curl_setopt($ch, CURLOPT_COOKIEJAR, $tmpfname);
-	curl_setopt($ch, CURLOPT_COOKIEFILE, $tmpfname);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-	if ($use_post) {
-		curl_setopt($ch, CURLOPT_POST, count($_POST));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-	}
-	curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-	curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-	$response = curl_exec($ch);
-	$content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-	$return = array();
-	$return['response'] = $response;
-	$return['content_type'] = $content_type;
-	$curl_errno = curl_errno($ch);
-	$curl_error = curl_error($ch);
-	if ($curl_errno > 0) {
-		$return = flash_cache_request_curl_to_php($url);
-	}
-	return $return;
+	return flash_cache_get_content($url, $args);
 }
 
 function flash_cache_get_var_javascript($var, $string) {
