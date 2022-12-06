@@ -13,6 +13,7 @@ if (file_exists($file_path)) {
 		exit();
 	} else {
 		create_cache($request);
+		
 	}
 } else {
 	create_cache($request);

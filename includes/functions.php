@@ -86,12 +86,16 @@ function flash_cache_get_content($url, $args = array()) {
 		)
 	);
 	$args = wp_parse_args($args, $defaults);
-
+	$return = array();
+	
 	if (!$data) { // if stil getting error on get file content try WP func, this may give timeouts 
 		$response = wp_remote_request($url, $args);
 		if (!is_wp_error($response)) {
 			if (isset($response['response']['code']) && 200 === $response['response']['code']) {
 				$data = wp_remote_retrieve_body($response);
+				$headers = wp_remote_retrieve_headers( $response );
+				$return['response'] = $data;
+				$return['content_type'] = $content_type;
 			} else {
 				flash_cache_process::debug('Error with wp_remote_request:' . print_r($response, 1) );
 			}
@@ -99,10 +103,9 @@ function flash_cache_get_content($url, $args = array()) {
 			flash_cache_process::debug('Error with wp_remote_request:' . $response->get_error_message() );
 		}
 	}
-
 	
 
-	return $data;
+	return $return;
 }
 
 
