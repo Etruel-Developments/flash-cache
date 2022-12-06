@@ -68,33 +68,43 @@ function flash_cache_default_query() {
 	);
 	return $default_query;
 }
+function flash_cache_request_curl($url, $args = array()) {
+	/**
+	 * Filter to allow change the default parameters for wp_remote_request below.
+	 */
+	$args = apply_filters('flash_cache_contents_request_params', $args, $url);
 
-function flash_cache_request_curl($url) {
-	$ch = curl_init($url);
-	$headers = array();
-	$header = array();
-	$header[] = "es-419,es;q=0.8";
-	$header[] = "Accept-Charset: UTF-8,*;q=0.5";
-	$header[] = "Cookie: flash_cache=cookie";
-	$tmpfname = dirname(__FILE__) . '/cookie.txt';
-	curl_setopt($ch, CURLOPT_COOKIEJAR, $tmpfname);
-	curl_setopt($ch, CURLOPT_COOKIEFILE, $tmpfname);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-	curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-	$response = curl_exec($ch);
-	$curl_errno = curl_errno($ch);
-	$curl_error = curl_error($ch);
-	if ($curl_errno > 0) {
-		$response = flash_cache_request_curl($url);
+	/**
+	 * Filter to allow change the $data or any other action before make the URL request
+	 */
+	$data = apply_filters('flash_cache_before_get_content', false, $args, $url);
+
+	$defaults = array(
+		'timeout' => 15,
+		'cookies' => array(
+			'flash_cache' => 'cookie'
+		)
+	);
+	$args = wp_parse_args($args, $defaults);
+
+	if (!$data) { // if stil getting error on get file content try WP func, this may give timeouts 
+		$response = wp_remote_request($url, $args);
+		if (!is_wp_error($response)) {
+			if (isset($response['response']['code']) && 200 === $response['response']['code']) {
+				$data = wp_remote_retrieve_body($response);
+			} else {
+				trigger_error(__('Error with wp_remote_request:', 'wpematico') . print_r($response, 1), E_USER_NOTICE);
+			}
+		} else {
+			trigger_error(__('Error with wp_remote_get:', 'wpematico') . $response->get_error_message(), E_USER_NOTICE);
+		}
 	}
-	curl_close($ch);
-	return $response;
+
+	
+
+	return $data;
 }
+
 
 function flash_cache_get_htaccess_info() {
 	$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
