@@ -360,39 +360,8 @@ class flash_cache_posts {
 
 
 			flash_cache_process::process_cache_from_query($current_query, $url_feed);
-/* 
-			foreach ( $categories as $category ) {
-				$term_url = get_term_link($category->term_id);
-				$url_feed[] = $term_url;
-			}
-				
-			$term_urls = wp_parse_args($url_feed, $url_def);
-			
-			foreach ( $term_urls as $term_url ) {
-				flash_cache_process::process_cache_from_query($current_query, $term_url);
-				if ($update_current_page) {
-					update_option('flash_cache_preload_current_post', $term_url);
-				}
-			}
-			
-			$tags = get_tags(array(	'hide_empty' => false ));
-			foreach ( $tags as $tag ) {
-				$tag_url = get_term_link($tag->term_id);
-				$url_feed_tag[] = $tag_url;
-			}
 
-			$term_tags_urls = wp_parse_args($url_feed_tag, $url_def_tag);
-			
-
-			foreach ( $term_tags_urls as $term_tag_url ) {
-				flash_cache_process::process_cache_from_query($current_query, $term_tag_url);
-				if ($update_current_page) {
-					update_option('flash_cache_preload_current_post', $term_tag_url);
-				}
-
-			}
-		 */
-		}else{
+		} else {
 			
 			
 			$taxonomy_names = get_post_taxonomies($post_id);
@@ -436,30 +405,7 @@ class flash_cache_posts {
 		}
 
 	}
-/*
-	public static function create_cache_search(){
 
-		if (is_null(flash_cache_process::$origin_url)) {
-			flash_cache_process::$origin_url = get_site_url(null, '/');
-		}
-		if (empty($cache_dir)) {
-			$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-			$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
-		}
-		
-		$default_query = flash_cache_default_query();
-		$current_query = array();
-		$current_query[ 'is_search' ] = 1;
-		$current_query = wp_parse_args($current_query, $default_query);
-		flash_cache_process::$force_process_type = 'curl';
-		flash_cache_process::process_cache_from_query($current_query);
-		
-
-		if ( is_search() ) {
-
-			$current_query[ 'is_search' ] = 1;
-		}
-	}*/
 
 }
 endif;
