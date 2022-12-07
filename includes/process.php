@@ -113,6 +113,10 @@ class flash_cache_process {
 	public static function create_cache_html() {
 		
 		$response = flash_cache_get_content(self::$url_to_cache);
+		
+		if (empty($response['response'])) {
+			return;
+		}
 
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
@@ -132,10 +136,10 @@ class flash_cache_process {
 		
 		self::debug('Creating HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		
-		$response = apply_filters('flash_cache_response_html', $response, self::$url_to_cache);
-
-		file_put_contents($cache_path.'index-cache.html', $response);
-		file_put_contents($cache_path.'index-cache.html.gz', gzencode($response));
+		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
+	
+		file_put_contents($cache_path.'index-cache.html', $response['response']);
+		file_put_contents($cache_path.'index-cache.html.gz', gzencode($response['response']));
 		self::end_create_cache();
 	}
 
@@ -146,7 +150,8 @@ class flash_cache_process {
 		
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		
-		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
+		$home_path = flash_cache_get_home_path();
+		$cache_dir = $home_path.$advanced_settings['cache_dir'];
 		
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
 		
@@ -158,12 +163,16 @@ class flash_cache_process {
 		self::start_create_cache($cache_path.'can_create_cache.txt');
 		self::debug('Creating PHP cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$template_php = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php'); 
+		$template_php = str_replace('{home_path}', "'".$home_path."'", $template_php);
 		$template_php = str_replace('{url_path}', "'".self::$url_to_cache."'", $template_php);
 		$template_php = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
-		file_put_contents($cache_path.'index-cache.php', $template_php);
+	
+		if (!file_exists($cache_path.'index-cache.php')) {
+			file_put_contents($cache_path.'index-cache.php', $template_php);
+		}
 		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
-		if (defined('SS_NOT_USE_THIS_REQUEST')) {
+		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));
 		} else {
 			$request = hash('sha256', http_build_query($_REQUEST));
