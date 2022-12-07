@@ -543,7 +543,8 @@ class flash_cache_process {
 			self::$origin_url = get_site_url(null, '/');
 		}
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
+		$home_path = flash_cache_get_home_path();
+		$cache_dir = $home_path.$advanced_settings['cache_dir'];
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
 		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
 		if (!file_exists($cache_path)) {
@@ -552,11 +553,15 @@ class flash_cache_process {
 		self::start_create_cache($cache_path.'can_create_cache.txt');
 		self::debug('Creating OB PHP cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$template_php = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php'); 
+		$template_php = str_replace('{home_path}', "'".$home_path."'", $template_php);
 		$template_php = str_replace('{url_path}', "'".self::$url_to_cache."'", $template_php);
 		$template_php = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
 		
-		file_put_contents($cache_path.'index-cache.php', $template_php);
+		if (!file_exists($cache_path.'index-cache.php')) {
+			file_put_contents($cache_path.'index-cache.php', $template_php);
+		}
+		
 		if ($use_curl) {
 			$response = flash_cache_get_content(self::$url_to_cache);
 		}
