@@ -22,10 +22,13 @@ if (!class_exists('flash_cache_optimize_styles')) :
             if (empty(flash_cache_process::$advanced_settings)) {
     			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
     		}
+            if (empty(flash_cache_process::$advanced_settings['optimize_styles'])) {
+                return $content;
+            }
     		
-            $noptimizeCSS = apply_filters( 'flash_cache_css_noptimize', false, $content );
-            if ( $noptimizeCSS ) {
-                return false;
+            $noptimize_css = apply_filters( 'flash_cache_css_noptimize', false, $content, $url_to_cache );
+            if ( $noptimize_css ) {
+                return $content;
             }
             
             // Get <style> and <link>.

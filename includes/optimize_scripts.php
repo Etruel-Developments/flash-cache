@@ -22,6 +22,14 @@ if (!class_exists('flash_cache_optimize_scripts')) :
             if (empty(flash_cache_process::$advanced_settings)) {
     			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
     		}
+            if (empty(flash_cache_process::$advanced_settings['optimize_scripts'])) {
+                return $content;
+            }
+            $noptimize_scripts = apply_filters( 'flash_cache_scripts_noptimize', false, $content, $url_to_cache );
+            if ( $noptimize_scripts ) {
+                return $content;
+            }
+            
     		// Get script files.
             if ( preg_match_all( '#<script.*</script>#Usmi', $content, $matches ) ) {
                 foreach( $matches[0] as $tag ) {

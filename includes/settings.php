@@ -77,10 +77,10 @@ if (!class_exists('flash_cache_settings')) :
 
 		public static function all_WP_admin_styles() {
 			?><style type="text/css">
-				#adminmenu .toplevel_page_flash_cache_setting .wp-menu-image img {
-					padding-top: 5px;
-				}
-			</style><?php
+#adminmenu .toplevel_page_flash_cache_setting .wp-menu-image img {
+    padding-top: 5px;
+}
+</style><?php
 		}
 
 		public static function default_general_options() {
@@ -160,6 +160,8 @@ if (!class_exists('flash_cache_settings')) :
 					'wp-postpass_'
 				),
 				'process_type' => 'ob_with_curl_request',
+				'optimize_styles' => false,
+				'optimize_scripts' => false,
 			);
 			$array = apply_filters('flash_cache_default_advanced_options', $array);
 			return $array;
@@ -259,13 +261,11 @@ if (!class_exists('flash_cache_settings')) :
 									<input type="radio" ' . checked($values['viewer_protocol_policy'], 'http_and_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/> ' . __('HTTP and HTTPS (If this protocol is enabled)', 'flash-cache') . '
 									<p class="description">' . __('Keeps the cache in both protocols as in the HTTP and in HTTPS if it exists.', 'flash-cache') . '</p>
 								</div> ';
-//			if (is_ssl()) {
 			echo '
 								<div class="radio-group">
 									<input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . ' 
 									<p class="description">' . __('Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the certificate to improve the speed through the header Strict-Transport-Security.', 'flash-cache') . '</p> 
 								</div>';
-//			}
 			echo '</td>
 						</tr>
 
@@ -308,10 +308,44 @@ if (!class_exists('flash_cache_settings')) :
 								<p class="description">' . __('It is only used with cURL to get the content of the pages to be cached, that’s why it is usually slower, nules there are cases where there are conflicts on OB with others plugins, in these cases is recommended this option.', 'flash-cache') . '</p>
 								</div>
 							</td>
-						</tr>
+						</tr>';
+			echo '
+						<tr valign="top" class="wrap-row">
+							<th scope="row">' . __('Optimize styles', 'flash-cache') . '</th>
+							<td>
+								<div class="switch switch--horizontal switch--no-label">
+									<input type="radio" ' . checked($values['optimize_styles'], false, false) . ' name="flash_cache_advanced[optimize_styles]" value="0"/>
+									<label for="flash_cache_advanced[optimize_styles]">Off</label>
+									<input type="radio" ' . checked($values['optimize_styles'], true, false) . ' name="flash_cache_advanced[optimize_styles]" value="1"/>
+									<label for="flash_cache_advanced[optimize_styles]">On</label>
+									<span class="toggle-outside">
+										<span class="toggle-inside"></span>
+									</span>
+								</div>
+								<p class="description">' . __('Optimize and combine all your Stylesheets files into one minified file, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
 
-						
-					</table>';
+							</td>
+							
+						</tr>';
+			echo '
+						<tr valign="top" class="wrap-row">
+							<th scope="row">' . __('Optimize scripts', 'flash-cache') . '</th>
+							<td>
+								<div class="switch switch--horizontal switch--no-label">
+									<input type="radio" ' . checked($values['optimize_scripts'], false, false) . ' name="flash_cache_advanced[optimize_scripts]" value="0"/>
+									<label for="flash_cache_advanced[optimize_scripts]">Off</label>
+									<input type="radio" ' . checked($values['optimize_scripts'], true, false) . ' name="flash_cache_advanced[optimize_scripts]" value="1"/>
+									<label for="flash_cache_advanced[optimize_scripts]">On</label>
+									<span class="toggle-outside">
+										<span class="toggle-inside"></span>
+									</span>
+								</div>
+								<p class="description">' . __('Optimize and combine all your JavaScript files into one minified file, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
+
+							</td>
+							
+						</tr>';
+			echo '</table>';
 			echo '<div class="wpm_footer">';
 			echo '<div class="wpm_buttons">';
 			submit_button();
