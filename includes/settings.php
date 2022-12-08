@@ -33,7 +33,6 @@ if (!class_exists('flash_cache_settings')) :
 			add_action('admin_print_styles', array(__CLASS__, 'styles'));
 
 			add_action('all_admin_notices', array(__CLASS__, 'cpt_settings_opentags'), 1, 0);
-			//add_filter( 'admin_footer_text', array(__CLASS__, 'cpt_settings_closetags'), 1, 1);
 			add_filter('in_admin_footer', array(__CLASS__, 'cpt_settings_closetags'), 1, 1);
 			add_filter('dbx_post_sidebar', array(__CLASS__, 'cpt_edit_settings_closetags'), 1, 1);
 			//dbx_post_sidebar

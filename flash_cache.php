@@ -103,6 +103,7 @@ if (!class_exists('Flash_Cache')) :
 			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/notices.php';
 			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/patterns.php';
 			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/version.php';
+			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/preload.php';
 			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_styles.php';
 			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_scripts.php';
 		}
