@@ -133,7 +133,7 @@ if (!class_exists('flash_cache_settings')) :
 						</tr>
 						
 					</table>';
-
+			die(print_r(flash_cache_get_nginx_conf_info()));
 			echo '<div class="wpm_footer">';
 
 			echo get_etruel_flash_cache_menu_social_footer();

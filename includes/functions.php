@@ -108,7 +108,161 @@ function flash_cache_get_content($url, $args = array()) {
 	return $return;
 }
 
+/*
+https://www.nginx.com/blog/9-tips-for-improving-wordpress-performance-with-nginx/#w3-total-cache
+ set $cache_uri $request_uri;
 
+    # POST requests and URLs with a query string should always go to PHP
+    if ($request_method = POST) {
+        set $cache_uri 'null cache';
+    }  
+    if ($query_string != "") {
+        set $cache_uri 'null cache';
+    }   
+# Don't cache URIs containing the following segments
+    if ($request_uri ~* "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php
+                          |wp-.*.php|/feed/|index.php|wp-comments-popup.php
+                          |wp-links-opml.php|wp-locations.php |sitemap(_index)?.xml
+                          |[a-z0-9_-]+-sitemap([0-9]+)?.xml)") {
+
+        set $cache_uri 'null cache';
+    }  
+	
+    # Don't use the cache for logged-in users or recent commenters
+    if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+
+                         |wp-postpass|wordpress_logged_in") {
+        set $cache_uri 'null cache';
+    }
+
+    # Use cached or actual file if it exists, otherwise pass request to WordPress
+    location / {
+        try_files /wp-content/cache/supercache/$http_host/$cache_uri/index.html 
+                  $uri $uri/ /index.php;
+    }     
+*/
+function flash_cache_get_nginx_conf_info() {
+
+
+	$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
+	$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+	$cache_dir = $advanced_settings['cache_dir'];
+	$wp_cache_disable_utf8 = 0;
+
+	if (isset($_SERVER['PHP_DOCUMENT_ROOT'])) {
+		$document_root = $_SERVER['PHP_DOCUMENT_ROOT'];
+		$apache_root = $_SERVER['PHP_DOCUMENT_ROOT'];
+	} else {
+		$document_root = $_SERVER['DOCUMENT_ROOT'];
+		$apache_root = '%{DOCUMENT_ROOT}';
+	}
+	$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
+	$content_dir_root = $document_root;
+	if (strpos($document_root, '/kunden/homepages/') === 0) {
+		$content_dir_root = substr($content_dir_root, 7);
+		$apache_root = $document_root;
+	}
+	$home_path = get_home_path();
+	$home_root = parse_url(get_bloginfo('url'));
+	$home_root = isset($home_root['path']) ? trailingslashit($home_root['path']) : '/';
+	$home_root_lc = str_replace('//', '/', strtolower($home_root));
+	$inst_root = $home_root_lc;
+	$wprules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'WordPress'));
+
+
+	$wprules = str_replace("RewriteBase $home_root\n", '', $wprules);
+	$fcrules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache'));
+
+	$condition_rules_php = array();
+	$condition_rules = array();
+	
+	$condition_rules[] = 'if ($request_method = POST)
+	{ 
+		set $cache_uri \'null cache\'; 
+	}';
+
+	$condition_rules[] = 'if ($query_string != "") {
+        set $cache_uri \'null cache\';
+    }';
+
+	$condition_rules[] = 'if ($http_cookie ~* "'. implode('|', $advanced_settings['dont_cache_cookie']) .'") {
+		set $cache_uri \'null cache\';
+	}';
+	
+	$condition_rules[] = 'location / {
+        try_files /'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/$cache_uri/index.html $uri $uri/ /index.php;
+    }';
+	
+	
+	/* 
+	$condition_rules[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
+	$condition_rules[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
+	$condition_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+
+	$condition_rules_php[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
+	$condition_rules_php[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
+	$condition_rules_php[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+
+	$condition_rules = apply_filters('flash_cache_rewrite_conditions', $condition_rules);
+	$rules = "";
+	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
+		$rules .= "<IfModule mod_rewrite.c>\n";
+		$rules .= "RewriteCond %{HTTPS} off\n";
+		$rules .= "RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n";
+		$rules .= "</IfModule>\n";
+		$rules .= "<IfModule mod_expires.c>\n";
+		$rules .= "Header set Strict-Transport-Security \"max-age=" . $advanced_settings['ttl_default'] . "; includeSubDomains; preload\" env=HTTPS\n";
+		$rules .= "</IfModule>\n";
+	}
+	$rules .= "<IfModule mod_rewrite.c>\n";
+	$rules .= "RewriteEngine On\n";
+	$rules .= "RewriteBase $home_root\n"; // props Chris Messina
+
+	if (isset($wp_cache_disable_utf8) == false || $wp_cache_disable_utf8 == 0) {
+		$charset = get_option('blog_charset') == '' ? 'UTF-8' : get_option('blog_charset');
+		$rules .= "AddDefaultCharset {$charset}\n";
+	}
+
+	$rules .= "CONDITION_RULES";
+	$rules .= "RewriteCond %{HTTP:Accept-Encoding} gzip\n";
+	$rules .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz -f\n";
+	$rules .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz\" [L]\n\n";
+
+	$rules .= "CONDITION_RULES";
+	$rules .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f\n";
+	$rules .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]\n\n";
+
+	$rules_php = "";
+	//$rules_php = "CONDITION_RULES";
+	//$rules_php .= "RewriteCond %{HTTP:Accept-Encoding} gzip\n";
+	//$rules_php .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache-gz.php -f\n";
+	//$rules_php .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache-gz.php\" [L]\n\n";
+
+
+
+	$rules_php .= "CONDITION_RULES";
+	$rules_php .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php -f\n";
+	$rules_php .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php\" [L]\n\n";
+
+	$rules = str_replace("CONDITION_RULES", implode("\n", $condition_rules) . "\n", $rules);
+
+	$rules_php = str_replace("CONDITION_RULES", implode("\n", $condition_rules_php) . "\n", $rules_php);
+
+	$rules = $rules . $rules_php;
+
+	$rules .= "</IfModule>\n";
+	$gziprules = "<IfModule mod_mime.c>\n  <FilesMatch \"\\.html\\.gz\$\">\n    ForceType text/html\n    FileETag None\n  </FilesMatch>\n  AddEncoding gzip .gz\n  AddType text/html .gz\n</IfModule>\n";
+	$gziprules .= "<IfModule mod_deflate.c>\n  SetEnvIfNoCase Request_URI \.gz$ no-gzip\n</IfModule>\n";
+	$gziprules .= "<FilesMatch \"index-cache\">\n  <IfModule mod_headers.c>\n    Header set Vary \"Accept-Encoding\"\n    Header set Cache-Control 'max-age=" . $advanced_settings['ttl_default'] . ", public'\n    Header set Cached-By 'Flash Cache from etruel.com'\n  </IfModule>\n </FilesMatch>";
+
+	$rules .= $gziprules;
+	if (!$general_settings['activate']) {
+		$rules = '';
+	} */
+	$rules = implode("\n", $condition_rules);
+	$rules = apply_filters('flash_cache_nginx_rules', $rules);
+
+	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "scrules" => $scrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
+}
 function flash_cache_get_htaccess_info() {
 	$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
 	$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
@@ -124,19 +278,6 @@ function flash_cache_get_htaccess_info() {
 	$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
 	$content_dir_root = $document_root;
 	if (strpos($document_root, '/kunden/homepages/') === 0) {
-		// http://wordpress.org/support/topic/plugin-wp-super-cache-how-to-get-mod_rewrite-working-on-1and1-shared-hosting?replies=1
-		// On 1and1, PHP's directory structure starts with '/homepages'. The
-		// Apache directory structure has an extra '/kunden' before it.
-		// Also 1and1 does not support the %{DOCUMENT_ROOT} variable in
-		// .htaccess files.
-		// This prevents the $inst_root from being calculated correctly and
-		// means that the $apache_root is wrong.
-		//
-		// e.g. This is an example of how Apache and PHP see the directory
-		// structure on	1and1:
-		// Apache: /kunden/homepages/xx/dxxxxxxxx/htdocs/site1/index.html
-		// PHP:           /homepages/xx/dxxxxxxxx/htdocs/site1/index.html
-		// Here we fix up the paths to make mode_rewrite work on 1and1 shared hosting.
 		$content_dir_root = substr($content_dir_root, 7);
 		$apache_root = $document_root;
 	}
