@@ -358,16 +358,27 @@ if (!class_exists('flash_cache_settings')) :
 		}
 
 		public static function get_changes_httacess() {
-			extract(flash_cache_get_htaccess_info());
+			if (flash_cache_enviroment::is_nginx()) { 
+				extract(flash_cache_get_nginx_conf_info());
+			} else {
+				extract(flash_cache_get_htaccess_info());
+			}
+			
 
-			if ($rules != $scrules) {
-				echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your .htaccess file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Mod_Rewrite Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+			if ($rules != $fcrules) {
+
+				if (flash_cache_enviroment::is_nginx()) { 
+					echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				} else {
+					echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				}
+				
 
 				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache<br/>' . esc_html($rules) . '# END FlashCache</pre></p>';
 				echo '<form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_update_httacess" method="post">
 					<input type="hidden" name="action" value="update_flash_cache_httacess"/>';
 				wp_nonce_field('update_flash_cache_httacess');
-				submit_button('Update Mod_Rewrite Rules');
+				submit_button('Update Rules');
 				echo '<hr/></form>';
 			}
 		}

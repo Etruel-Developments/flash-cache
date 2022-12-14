@@ -174,7 +174,9 @@ function flash_cache_get_nginx_conf_info() {
 
 	$condition_rules_php = array();
 	$condition_rules = array();
-	
+	$condition_rules[] = 'set $cache_uri $request_uri;
+		set $cache_uri_php $request_uri;
+	';
 	$condition_rules[] = 'if ($request_method = POST)
 	{ 
 		set $cache_uri \'null cache\'; 
@@ -186,8 +188,9 @@ function flash_cache_get_nginx_conf_info() {
 
 	$condition_rules[] = 'if ($http_cookie ~* "'. implode('|', $advanced_settings['dont_cache_cookie']) .'") {
 		set $cache_uri \'null cache\';
+		set $cache_uri_php \'null cache\';
 	}';
-	
+
 	$condition_rules[] = 'location / {
         try_files /'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/$cache_uri/index.html $uri $uri/ /index.php;
     }';
@@ -261,7 +264,7 @@ function flash_cache_get_nginx_conf_info() {
 	$rules = implode("\n", $condition_rules);
 	$rules = apply_filters('flash_cache_nginx_rules', $rules);
 
-	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "scrules" => $scrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
+	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "scrules" => $fcrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
 }
 function flash_cache_get_htaccess_info() {
 	$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
@@ -290,7 +293,7 @@ function flash_cache_get_htaccess_info() {
 
 	//$wprules = str_replace( "RewriteEngine On\n", '', $wprules );
 	$wprules = str_replace("RewriteBase $home_root\n", '', $wprules);
-	$scrules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache'));
+	$fcrules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache'));
 
 	$condition_rules_php = array();
 
@@ -368,7 +371,7 @@ function flash_cache_get_htaccess_info() {
 	}
 	$rules = apply_filters('flash_cache_rewrite_rules', $rules);
 
-	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "scrules" => $scrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
+	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "fcrules" => $fcrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
 }
 
 function flash_cache_seconds_2_time($seconds) {
@@ -385,12 +388,12 @@ function flash_cache_seconds_2_time($seconds) {
 	}
 	$diff = $dtF->diff($dtT);
 	foreach (array(
-'y' => 'year',
- 'm' => 'month',
- 'd' => 'day',
- 'h' => 'hour',
- 'i' => 'minute',
- 's' => 'second'
+		'y' => 'year',
+		'm' => 'month',
+		'd' => 'day',
+		'h' => 'hour',
+		'i' => 'minute',
+		's' => 'second'
 	) as $time => $timename) {
 		if ($diff->$time !== 0) {
 			$ret .= $diff->$time . ' ' . $timename;
@@ -411,8 +414,18 @@ function flash_cache_get_logged_in_cookie() {
 }
 
 function flash_cache_update_htaccess() {
+	if (flash_cache_enviroment::is_nginx()) {
+		extract(flash_cache_get_nginx_conf_info());
+		flash_cache_remove_marker($home_path . 'nginx.conf', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
+		if (insert_with_markers($home_path . 'nginx.conf', 'FlashCache', explode("\n", $rules)) && insert_with_markers($home_path . 'nginx.conf', 'WordPress', explode("\n", $wprules))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	// By default process with apache webserver.
 	extract(flash_cache_get_htaccess_info());
-	flash_cache_remove_marker($home_path . '.htaccess', 'WordPress'); // remove original WP rules so SuperCache rules go on top
+	flash_cache_remove_marker($home_path . '.htaccess', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
 	if (insert_with_markers($home_path . '.htaccess', 'FlashCache', explode("\n", $rules)) && insert_with_markers($home_path . '.htaccess', 'WordPress', explode("\n", $wprules))) {
 		return true;
 	} else {

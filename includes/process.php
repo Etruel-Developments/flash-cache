@@ -602,9 +602,7 @@ class flash_cache_process {
 			$site_url = site_url();
 			$permalink = get_permalink( $post_id );
 			if ( false === strpos( $permalink, $site_url ) ) {
-				/*
-				 * Sometimes site_url doesn't return the siteurl. See http://wordpress.org/support/topic/wp-super-cache-not-refreshing-post-after-comments-made
-				*/
+				
 				self::debug("flash_cache_get_path: warning! site_url ($site_url) not found in permalink ($permalink).");
 				if ( false === strpos( $permalink, htmlentities($_SERVER['HTTP_HOST']))) {
 					wp_cache_debug( "flash_cache_get_path: WARNING! SERVER_NAME ({$WPSC_HTTP_HOST}) not found in permalink ($permalink). ");
