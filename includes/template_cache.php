@@ -18,8 +18,8 @@ if (file_exists($file_path)) {
 } else {
 	run_site($request);
 }
-header('Content-type:'.file_get_contents($header_path));
-echo file_get_contents($file_path);
+header('Content-type:'.@file_get_contents($header_path));
+echo @file_get_contents($file_path);
 
 function run_site($request) {
 	global $home_path;

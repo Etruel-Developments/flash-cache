@@ -133,7 +133,7 @@ if (!class_exists('flash_cache_settings')) :
 						</tr>
 						
 					</table>';
-			die(print_r(flash_cache_get_nginx_conf_info()));
+
 			echo '<div class="wpm_footer">';
 
 			echo get_etruel_flash_cache_menu_social_footer();
@@ -425,7 +425,7 @@ if (!class_exists('flash_cache_settings')) :
 				wp_die(__('Security check', 'flash-cache'));
 			}
 			flash_cache_update_htaccess();
-			flash_cache_notices::add(__('.httacess updated', 'flash-cache'));
+			flash_cache_notices::add(__('Web server rules updated', 'flash-cache'));
 			wp_redirect($_POST['_wp_http_referer']);
 			exit;
 		}
