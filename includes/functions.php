@@ -108,38 +108,7 @@ function flash_cache_get_content($url, $args = array()) {
 	return $return;
 }
 
-/*
-https://www.nginx.com/blog/9-tips-for-improving-wordpress-performance-with-nginx/#w3-total-cache
- set $cache_uri $request_uri;
 
-    # POST requests and URLs with a query string should always go to PHP
-    if ($request_method = POST) {
-        set $cache_uri 'null cache';
-    }  
-    if ($query_string != "") {
-        set $cache_uri 'null cache';
-    }   
-# Don't cache URIs containing the following segments
-    if ($request_uri ~* "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php
-                          |wp-.*.php|/feed/|index.php|wp-comments-popup.php
-                          |wp-links-opml.php|wp-locations.php |sitemap(_index)?.xml
-                          |[a-z0-9_-]+-sitemap([0-9]+)?.xml)") {
-
-        set $cache_uri 'null cache';
-    }  
-	
-    # Don't use the cache for logged-in users or recent commenters
-    if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+
-                         |wp-postpass|wordpress_logged_in") {
-        set $cache_uri 'null cache';
-    }
-
-    # Use cached or actual file if it exists, otherwise pass request to WordPress
-    location / {
-        try_files /wp-content/cache/supercache/$http_host/$cache_uri/index.html 
-                  $uri $uri/ /index.php;
-    }     
-*/
 function flash_cache_get_nginx_conf_info() {
 
 
@@ -157,87 +126,85 @@ function flash_cache_get_nginx_conf_info() {
 	}
 	$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
 	$content_dir_root = $document_root;
-	if (strpos($document_root, '/kunden/homepages/') === 0) {
-		$content_dir_root = substr($content_dir_root, 7);
-		$apache_root = $document_root;
-	}
+	
 	$home_path = get_home_path();
 	$home_root = parse_url(get_bloginfo('url'));
 	$home_root = isset($home_root['path']) ? trailingslashit($home_root['path']) : '/';
 	$home_root_lc = str_replace('//', '/', strtolower($home_root));
 	$inst_root = $home_root_lc;
-	$wprules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'WordPress'));
-
-
-	$wprules = str_replace("RewriteBase $home_root\n", '', $wprules);
-	$fcrules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache'));
-
-	$condition_rules_php = array();
-	$optimization_rules = array();
-	$condition_cache_rules = array();
 	
-	$condition_cache_rules[] = 'set $cache_uri $request_uri;';
-	$condition_cache_rules[] = 'set $cache_uri_php $request_uri;';
+	$current_wp_rules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'WordPress'));
+	$current_cache_rules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache Page Cache'));
+	$current_utils_rules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache Utils'));
+	$current_optimization_rules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache Optimizations'));
 
-	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
 
-		# Force HTTPS connection. This rules is domain agnostic
-		$condition_rules[] = 'if ($scheme != "https") {';
-		$condition_rules[] = 'rewrite ^ https://$host$uri permanent;';
-		$condition_rules[] = '}';
-		$condition_rules[] = 'add_header Strict-Transport-Security "max-age=' . $advanced_settings['ttl_default'] . '; includeSubDomains; preload env=HTTPS";';
+	$cache_rules = array();
+	if ($general_settings['activate']) {
 
+		$cache_rules[] = 'set $cache_uri $request_uri;';
+		$cache_rules[] = 'set $cache_uri_php $request_uri;';
+
+		$cache_rules[] = 'if ($request_method = POST) {';
+		$cache_rules[] = 'set $cache_uri \'null cache\';';
+		$cache_rules[] = '}';		
+		
+		$cache_rules[] = 'if ($query_string != "") {';
+		$cache_rules[] = 'set $cache_uri \'null cache\';';
+		$cache_rules[] = '}';
+
+		$cache_rules[] = 'if ($request_uri ~ "([^\?]*)\?(.*)") {';
+		$cache_rules[] = 'set $cache_uri_php $1;';
+		$cache_rules[] = '}';
+
+
+		$cache_rules[] = 'if ($http_cookie ~* "'. implode('|', $advanced_settings['dont_cache_cookie']) .'") {';
+		$cache_rules[] = 'set $cache_uri \'null cache\';';
+		$cache_rules[] = 'set $cache_uri_php \'null cache\';';
+		$cache_rules[] = '}';
+
+		$cache_rules[] = 'set $fc_enc "";';
+		$cache_rules[] = 'if ($http_accept_encoding ~ gzip) {';
+		$cache_rules[] = 'set $fc_enc .gz;';
+		$cache_rules[] = '}';
+
+		
+		$cache_rules[] = 'if (!-f "$document_root/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri}/index-cache.html") {';
+		$cache_rules[] = 'set $cache_uri \'null cache\';';
+		$cache_rules[] = '}';
+
+		$cache_rules[] = 'if ($cache_uri != "null cache") {';
+		$cache_rules[] = 'rewrite .* "/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri}/index-cache.html" last;';
+		$cache_rules[] = '}';
+
+		$cache_rules[] = 'if (!-f "$document_root/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri_php}/index-cache.php") {';
+		$cache_rules[] = 'set $cache_uri_php \'null cache\';';
+		$cache_rules[] = '}';
+		
+		$cache_rules[] = 'if ($cache_uri_php != "null cache") {';
+		$cache_rules[] = 'rewrite .* "/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri_php}/index-cache.php" last;';
+		$cache_rules[] = '}';
+		
 	}
-
-	$condition_cache_rules[] = 'if ($request_method = POST) {';
-	$condition_cache_rules[] = 'set $cache_uri \'null cache\';';
-	$condition_cache_rules[] = '}';		
+	$cache_rules = apply_filters('flash_cache_nginx_cache_rules', $cache_rules);
+	$final_cache_rules = apply_filters('flash_cache_nginx_final_cache_rules', implode("\n", $cache_rules));
 	
-	$condition_rules[] = 'if ($query_string != "") {';
-	$condition_rules[] = 'set $cache_uri \'null cache\';';
-	$condition_rules[] = '}';
-
-	$condition_rules[] = 'if ($request_uri ~ "([^\?]*)\?(.*)") {';
-	$condition_rules[] = 'set $cache_uri_php $1;';
-	$condition_rules[] = '}';
-
-
-	$condition_rules[] = 'if ($http_cookie ~* "'. implode('|', $advanced_settings['dont_cache_cookie']) .'") {';
-	$condition_rules[] = 'set $cache_uri \'null cache\';';
-	$condition_rules[] = 'set $cache_uri_php \'null cache\';';
-	$condition_rules[] = '}';
-
-	$condition_rules[] = 'set $fc_enc "";';
-	$condition_rules[] = 'if ($http_accept_encoding ~ gzip) {';
-	$condition_rules[] = 'set $fc_enc .gz;';
-	$condition_rules[] = '}';
-
-	/** 
-	 * For debug enable this header.
-	 * $condition_rules[] = 'add_header X-location-header "/flash_cache/cachenginx.local/${cache_uri_php}/index-cache.php";';
-	 */
+	$utils_rules = array();
+	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
+		# Force HTTPS connection. This rules is domain agnostic
+		$utils_rules[] = 'if ($scheme != "https") {';
+		$utils_rules[] = 'rewrite ^ https://$host$uri permanent;';
+		$utils_rules[] = '}';
+		$utils_rules[] = 'add_header Strict-Transport-Security "max-age=' . $advanced_settings['ttl_default'] . '; includeSubDomains; preload env=HTTPS";';
+	}
+	$utils_rules = apply_filters('flash_cache_nginx_utils_rules', $utils_rules);
+	$final_utils_rules = apply_filters('flash_cache_nginx_final_utils_rules', implode("\n", $utils_rules));
 	
-	$condition_rules[] = 'if (!-f "$document_root/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri}/index-cache.html") {';
-	$condition_rules[] = 'set $cache_uri \'null cache\';';
-	$condition_rules[] = '}';
-
-	$condition_rules[] = 'if ($cache_uri != "null cache") {';
-	$condition_rules[] = 'rewrite .* "/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri}/index-cache.html" last;';
-	$condition_rules[] = '}';
-
-	$condition_rules[] = 'if (!-f "$document_root/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri_php}/index-cache.php") {';
-	$condition_rules[] = 'set $cache_uri_php \'null cache\';';
-	$condition_rules[] = '}';
+	$optimization_rules = array();
+	$optimization_rules = apply_filters('flash_cache_nginx_optimization_rules', $optimization_rules);
+	$final_optimization_rules = apply_filters('flash_cache_nginx_final_optimization_rules', implode("\n", $optimization_rules));
 	
-	$condition_rules[] = 'if ($cache_uri_php != "null cache") {';
-	$condition_rules[] = 'rewrite .* "/'.$cache_dir.''.$_SERVER['SERVER_NAME'].'/${cache_uri_php}/index-cache.php" last;';
-	$condition_rules[] = '}';
-
-	
-	$rules = implode("\n", $condition_rules);
-	$rules = apply_filters('flash_cache_nginx_rules', $rules);
-
-	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "fcrules" => $fcrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
+	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules,  "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules);
 }
 function flash_cache_get_htaccess_info() {
 	$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
@@ -426,7 +393,13 @@ function flash_cache_update_htaccess() {
 	if (flash_cache_enviroment::is_nginx()) {
 		extract(flash_cache_get_nginx_conf_info());
 		flash_cache_remove_marker($home_path . 'nginx.conf', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
-		if (insert_with_markers($home_path . 'nginx.conf', 'FlashCache', explode("\n", $rules)) && insert_with_markers($home_path . 'nginx.conf', 'WordPress', explode("\n", $wprules))) {
+		
+		$cache_inserted 		= insert_with_markers($home_path . 'nginx.conf', 'FlashCache Page Cache', explode("\n", $cache_rules));
+		$utils_inserted 		= insert_with_markers($home_path . 'nginx.conf', 'FlashCache Utils', explode("\n", $utils_rules));
+		$optimization_inserted 	= insert_with_markers($home_path . 'nginx.conf', 'FlashCache Optimizations', explode("\n", $optimization_rules));
+		$wp_inserted 			= insert_with_markers($home_path . 'nginx.conf', 'WordPress', explode("\n", $current_wp_rules));
+		
+		if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
 			return true;
 		} else {
 			return false;
