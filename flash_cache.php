@@ -117,7 +117,9 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function hooks() {
-			register_deactivation_hook( __FILE__, array(__CLASS__, 'deactivate') );
+			register_deactivation_hook( __FILE__, array(__CLASS__, 'deactivation') );
+			register_uninstall_hook( __FILE__, array(__CLASS__, 'uninstall') );
+			
 		}
 		/**
 		 * Static function load_text_domain 
@@ -151,15 +153,30 @@ if (!class_exists('Flash_Cache')) :
 			}
 		}
 		/**
-		 * Static function deactivate
+		 * Static function deactivation
 		 * Deactivation action hook
 		 * @access public
 		 * @return void
 		 * @since 1.0.0
 		 */
-		public static function deactivate() {
-			
+		public static function deactivation() {
+			$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+			flash_cache_remove_rules();
+			$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
+			flash_cache_delete_dir($cache_dir); 
 		}
+		/**
+		 * Static function uninstall
+		 * uninstall action hook
+		 * @access public
+		 * @return void
+		 * @since 1.0.0
+		 */
+		public static function uninstall() {
+			die("Uninstall fired");
+		}
+
+		
 
 	}
 

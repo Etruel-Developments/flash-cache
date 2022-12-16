@@ -419,7 +419,21 @@ function flash_cache_update_htaccess() {
 		return false;
 	}
 }
+function flash_cache_remove_rules() {
+	if (flash_cache_enviroment::is_nginx()) {
+		extract(flash_cache_get_nginx_conf_info());
+		flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Page Cache');
+		flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Utils');
+		flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Optimizations');
+		
+	}
+	// By default process with apache webserver.
+	extract(flash_cache_get_htaccess_info());
+	flash_cache_remove_marker($home_path . '.htaccess', 'FlashCache Page Cache');
+	flash_cache_remove_marker($home_path . '.htaccess', 'FlashCache Utils');
+	flash_cache_remove_marker($home_path . '.htaccess', 'FlashCache Optimizations');
 
+}
 function flash_cache_remove_marker($filename, $marker) {
 	if (!file_exists($filename) || flash_cache_is_writeable_ACLSafe($filename)) {
 		if (!file_exists($filename)) {
