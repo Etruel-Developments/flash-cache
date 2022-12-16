@@ -264,8 +264,10 @@ function flash_cache_get_htaccess_info() {
 	$inst_root = $home_root_lc;
 	$wprules = implode("\n", extract_from_markers($home_path . '.htaccess', 'WordPress'));
 
-	$wprules = str_replace("RewriteBase $home_root\n", '', $wprules);
-	$fc_cache_rules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache Page Cache'));
+	$current_wp_rules = str_replace("RewriteBase $home_root\n", '', $wprules);
+	$current_cache_rules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache Page Cache'));
+	$current_utils_rules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache Utils'));
+	$current_optimization_rules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache Optimizations'));
 
 	$permalink_structure = get_option('permalink_structure');
 
@@ -357,7 +359,7 @@ function flash_cache_get_htaccess_info() {
 		
 	}
 	$cache_rules = apply_filters('flash_cache_apache_cache_rules', $cache_rules);
-
+	$final_cache_rules = apply_filters('flash_cache_apache_final_cache_rules', implode("\n", $cache_rules));
 
 	
 	$utils_rules = array();
@@ -371,18 +373,14 @@ function flash_cache_get_htaccess_info() {
 		$utils_rules[] = "</IfModule>";
 	}
 	$utils_rules = apply_filters('flash_cache_apache_utils_rules', $utils_rules);
-
+	$final_utils_rules = apply_filters('flash_cache_apache_final_utils_rules', implode("\n", $utils_rules));
 	
 
 	$optimization_rules = array();
-	$optimization_rules[]  = "<IfModule mod_headers.c>";
-	$optimization_rules[]  = "Header set Cache-Control 'max-age=" . $advanced_settings['ttl_default'] . ", public";
-	$optimization_rules[]  = "</IfModule>";
 	$optimization_rules = apply_filters('flash_cache_apache_optimization_rules', $optimization_rules);
+	$final_optimization_rules = apply_filters('flash_cache_apache_final_optimization_rules', implode("\n", $optimization_rules));
 	
-
-
-	return array("wprules" => $wprules, "fc_cache_rules" => $fc_cache_rules, "cache_rules" => $cache_rules, "utils_rules" => $utils_rules, "optimization_rules" => $optimization_rules);
+	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules,  "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules);
 }
 
 function flash_cache_seconds_2_time($seconds) {
@@ -437,7 +435,12 @@ function flash_cache_update_htaccess() {
 	// By default process with apache webserver.
 	extract(flash_cache_get_htaccess_info());
 	flash_cache_remove_marker($home_path . '.htaccess', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
-	if (insert_with_markers($home_path . '.htaccess', 'FlashCache', explode("\n", $rules)) && insert_with_markers($home_path . '.htaccess', 'WordPress', explode("\n", $wprules))) {
+	$cache_inserted 		= insert_with_markers($home_path . '.htaccess', 'FlashCache Page Cache', explode("\n", $cache_rules));
+	$utils_inserted 		= insert_with_markers($home_path . '.htaccess', 'FlashCache Utils', explode("\n", $utils_rules));
+	$optimization_inserted 	= insert_with_markers($home_path . '.htaccess', 'FlashCache Optimizations', explode("\n", $optimization_rules));
+	$wp_inserted 			= insert_with_markers($home_path . '.htaccess', 'WordPress', explode("\n", $current_wp_rules));
+
+	if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
 		return true;
 	} else {
 		return false;

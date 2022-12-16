@@ -359,13 +359,15 @@ if (!class_exists('flash_cache_settings')) :
 
 		public static function get_changes_httacess() {
 			if (flash_cache_enviroment::is_nginx()) { 
+				
 				extract(flash_cache_get_nginx_conf_info());
 			} else {
+				//die(print_r(flash_cache_get_htaccess_info())); 
 				extract(flash_cache_get_htaccess_info());
 			}
 			
-
-			if ($rules != $fcrules) {
+			 
+			if ($current_cache_rules != $cache_rules || $current_utils_rules != $utils_rules || $current_optimization_rules != $optimization_rules) {
 
 				if (flash_cache_enviroment::is_nginx()) { 
 					echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
@@ -374,7 +376,10 @@ if (!class_exists('flash_cache_settings')) :
 				}
 				
 
-				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache<br/>' . esc_html($rules) . '# END FlashCache</pre></p>';
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Page Cache<br/>' . esc_html($cache_rules) . '<br/># END FlashCache Page Cache</pre></p>';
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Utils<br/>' . esc_html($utils_rules) . '<br/># END FlashCache Utils</pre></p>';
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Optimizations<br/>' . esc_html($optimization_rules) . '<br/># END FlashCache Optimizations</pre></p>';
+				
 				echo '<form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_update_httacess" method="post">
 					<input type="hidden" name="action" value="update_flash_cache_httacess"/>';
 				wp_nonce_field('update_flash_cache_httacess');
