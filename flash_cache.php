@@ -117,7 +117,7 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function hooks() {
-		
+			register_deactivation_hook( __FILE__, array(__CLASS__, 'deactivate') );
 		}
 		/**
 		 * Static function load_text_domain 
@@ -149,6 +149,16 @@ if (!class_exists('Flash_Cache')) :
 				// Load the default language files
 				load_plugin_textdomain('flash-cache', false, $lang_dir);
 			}
+		}
+		/**
+		 * Static function deactivate
+		 * Deactivation action hook
+		 * @access public
+		 * @return void
+		 * @since 1.0.0
+		 */
+		public static function deactivate() {
+			
 		}
 
 	}

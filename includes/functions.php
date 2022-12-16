@@ -173,9 +173,11 @@ function flash_cache_get_nginx_conf_info() {
 	$fcrules = implode("\n", extract_from_markers($home_path . 'nginx.conf', 'FlashCache'));
 
 	$condition_rules_php = array();
-	$condition_rules = array();
-	$condition_rules[] = 'set $cache_uri $request_uri;';
-	$condition_rules[] = 'set $cache_uri_php $request_uri;';
+	$optimization_rules = array();
+	$condition_cache_rules = array();
+	
+	$condition_cache_rules[] = 'set $cache_uri $request_uri;';
+	$condition_cache_rules[] = 'set $cache_uri_php $request_uri;';
 
 	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
 
@@ -187,9 +189,9 @@ function flash_cache_get_nginx_conf_info() {
 
 	}
 
-	$condition_rules[] = 'if ($request_method = POST) {';
-	$condition_rules[] = 'set $cache_uri \'null cache\';';
-	$condition_rules[] = '}';		
+	$condition_cache_rules[] = 'if ($request_method = POST) {';
+	$condition_cache_rules[] = 'set $cache_uri \'null cache\';';
+	$condition_cache_rules[] = '}';		
 	
 	$condition_rules[] = 'if ($query_string != "") {';
 	$condition_rules[] = 'set $cache_uri \'null cache\';';
@@ -263,81 +265,124 @@ function flash_cache_get_htaccess_info() {
 	$wprules = implode("\n", extract_from_markers($home_path . '.htaccess', 'WordPress'));
 
 	$wprules = str_replace("RewriteBase $home_root\n", '', $wprules);
-	$fcrules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache'));
+	$fc_cache_rules = implode("\n", extract_from_markers($home_path . '.htaccess', 'FlashCache Page Cache'));
 
-	$condition_rules_php = array();
+	$permalink_structure = get_option('permalink_structure');
 
-	if (substr(get_option('permalink_structure'), -1) == '/') {
-		$condition_rules[] = "RewriteCond %{REQUEST_URI} !^.*[^/]$";
-		$condition_rules[] = "RewriteCond %{REQUEST_URI} !^.*//.*$";
-		$condition_rules_php[] = "RewriteCond %{REQUEST_URI} !^.*[^/]$";
-		$condition_rules_php[] = "RewriteCond %{REQUEST_URI} !^.*//.*$";
+
+
+	$cache_rules = array();
+	if ($general_settings['activate']) {
+
+		$cache_rules[] = "<IfModule mod_rewrite.c>";
+		$cache_rules[] = "RewriteEngine On";
+		$cache_rules[] = "RewriteBase $home_root"; 
+
+		if (isset($wp_cache_disable_utf8) == false || $wp_cache_disable_utf8 == 0) {
+			$charset = get_option('blog_charset') == '' ? 'UTF-8' : get_option('blog_charset');
+			$cache_rules[] = "AddDefaultCharset {$charset}";
+		}
+
+		
+		/* Cache static pages with gzip */
+		if (substr($permalink_structure, -1) == '/') {
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*[^/]$";
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*//.*$";
+		}
+		$cache_rules[] = "RewriteCond %{REQUEST_METHOD} !POST";
+		$cache_rules[] = "RewriteCond %{QUERY_STRING} !.*=.*";
+		$cache_rules[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
+		$cache_rules[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond %{HTTP:Accept-Encoding} gzip";
+		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz -f";
+		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz\" [L]";
+
+
+
+		/* Cache static pages with plain html */
+		if (substr($permalink_structure, -1) == '/') {
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*[^/]$";
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*//.*$";
+		}
+		$cache_rules[] = "RewriteCond %{REQUEST_METHOD} !POST";
+		$cache_rules[] = "RewriteCond %{QUERY_STRING} !.*=.*";
+		$cache_rules[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
+		$cache_rules[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f";
+		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]";
+
+
+		$cache_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f";
+		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]";
+		
+		
+
+		/* Cache dynamic pages with PHP */
+		if (substr($permalink_structure, -1) == '/') {
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*[^/]$";
+			$cache_rules[] = "RewriteCond %{REQUEST_URI} !^.*//.*$";
+		}
+
+		$cache_rules[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
+		$cache_rules[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php -f";
+		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php\" [L]";
+
+
+		/** Optimizations for page cached */
+		$cache_rules[] = "<IfModule mod_mime.c>";
+		$cache_rules[] = "<FilesMatch \"\\.html\\.gz\$\">";
+		$cache_rules[] = "ForceType text/html";
+		$cache_rules[] = "FileETag None";
+		$cache_rules[] = "</FilesMatch>";
+		$cache_rules[] = "AddEncoding gzip .gz";
+		$cache_rules[] = "AddType text/html .gz";
+		$cache_rules[] = "</IfModule>";
+
+		$cache_rules[] = "<IfModule mod_deflate.c>";
+		$cache_rules[] = "SetEnvIfNoCase Request_URI \.gz$ no-gzip";
+		$cache_rules[] = "</IfModule>";
+
+		$cache_rules[] = "<FilesMatch \"index-cache\">";
+		$cache_rules[] = "<IfModule mod_headers.c>";
+		$cache_rules[] = "Header set Vary \"Accept-Encoding\"";
+		$cache_rules[] = "Header set Cache-Control 'max-age=" . $advanced_settings['ttl_default'] . ", public";
+		$cache_rules[] = "Header set Cached-By 'Flash Cache'";
+		$cache_rules[] = "</IfModule>";
+		$cache_rules[] = "</FilesMatch>";
+		
 	}
-	$condition_rules[] = "RewriteCond %{REQUEST_METHOD} !POST";
-	$condition_rules[] = "RewriteCond %{QUERY_STRING} !.*=.*";
-	$condition_rules[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
-	$condition_rules[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
-	$condition_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
+	$cache_rules = apply_filters('flash_cache_apache_cache_rules', $cache_rules);
 
-	$condition_rules_php[] = "RewriteCond %{HTTP:Cookie} !^.*(" . implode('|', $advanced_settings['dont_cache_cookie']) . ").*$";
-	$condition_rules_php[] = "RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\\\"]+ [NC]";
-	$condition_rules_php[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
 
-	$condition_rules = apply_filters('flash_cache_rewrite_conditions', $condition_rules);
-	$rules = "";
+	
+	$utils_rules = array();
 	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
-		$rules .= "<IfModule mod_rewrite.c>\n";
-		$rules .= "RewriteCond %{HTTPS} off\n";
-		$rules .= "RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n";
-		$rules .= "</IfModule>\n";
-		$rules .= "<IfModule mod_expires.c>\n";
-		$rules .= "Header set Strict-Transport-Security \"max-age=" . $advanced_settings['ttl_default'] . "; includeSubDomains; preload\" env=HTTPS\n";
-		$rules .= "</IfModule>\n";
+		$utils_rules[] = "<IfModule mod_rewrite.c>";
+		$utils_rules[] = "RewriteCond %{HTTPS} off";
+		$utils_rules[] = "RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]";
+		$utils_rules[] = "</IfModule>";
+		$utils_rules[] = "<IfModule mod_expires.c>";
+		$utils_rules[] = "Header set Strict-Transport-Security \"max-age=" . $advanced_settings['ttl_default'] . "; includeSubDomains; preload\" env=HTTPS";
+		$utils_rules[] = "</IfModule>";
 	}
-	$rules .= "<IfModule mod_rewrite.c>\n";
-	$rules .= "RewriteEngine On\n";
-	$rules .= "RewriteBase $home_root\n"; 
+	$utils_rules = apply_filters('flash_cache_apache_utils_rules', $utils_rules);
 
-	if (isset($wp_cache_disable_utf8) == false || $wp_cache_disable_utf8 == 0) {
-		$charset = get_option('blog_charset') == '' ? 'UTF-8' : get_option('blog_charset');
-		$rules .= "AddDefaultCharset {$charset}\n";
-	}
+	
 
-	$rules .= "CONDITION_RULES";
-	$rules .= "RewriteCond %{HTTP:Accept-Encoding} gzip\n";
-	$rules .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz -f\n";
-	$rules .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html.gz\" [L]\n\n";
-
-	$rules .= "CONDITION_RULES";
-	$rules .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f\n";
-	$rules .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]\n\n";
-
-	$rules_php = "";
+	$optimization_rules = array();
+	$optimization_rules[]  = "<IfModule mod_headers.c>";
+	$optimization_rules[]  = "Header set Cache-Control 'max-age=" . $advanced_settings['ttl_default'] . ", public";
+	$optimization_rules[]  = "</IfModule>";
+	$optimization_rules = apply_filters('flash_cache_apache_optimization_rules', $optimization_rules);
 	
 
 
-	$rules_php .= "CONDITION_RULES";
-	$rules_php .= "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php -f\n";
-	$rules_php .= "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.php\" [L]\n\n";
-
-	$rules = str_replace("CONDITION_RULES", implode("\n", $condition_rules) . "\n", $rules);
-
-	$rules_php = str_replace("CONDITION_RULES", implode("\n", $condition_rules_php) . "\n", $rules_php);
-
-	$rules = $rules . $rules_php;
-
-	$rules .= "</IfModule>\n";
-	$gziprules = "<IfModule mod_mime.c>\n  <FilesMatch \"\\.html\\.gz\$\">\n    ForceType text/html\n    FileETag None\n  </FilesMatch>\n  AddEncoding gzip .gz\n  AddType text/html .gz\n</IfModule>\n";
-	$gziprules .= "<IfModule mod_deflate.c>\n  SetEnvIfNoCase Request_URI \.gz$ no-gzip\n</IfModule>\n";
-	$gziprules .= "<FilesMatch \"index-cache\">\n  <IfModule mod_headers.c>\n    Header set Vary \"Accept-Encoding\"\n    Header set Cache-Control 'max-age=" . $advanced_settings['ttl_default'] . ", public'\n    Header set Cached-By 'Flash Cache from etruel.com'\n  </IfModule>\n </FilesMatch>";
-
-	$rules .= $gziprules;
-	if (!$general_settings['activate']) {
-		$rules = '';
-	}
-	$rules = apply_filters('flash_cache_rewrite_rules', $rules);
-
-	return array("document_root" => $document_root, "apache_root" => $apache_root, "home_path" => $home_path, "home_root" => $home_root, "home_root_lc" => $home_root_lc, "inst_root" => $inst_root, "wprules" => $wprules, "fcrules" => $fcrules, "condition_rules" => $condition_rules, "rules" => $rules, "gziprules" => $gziprules);
+	return array("wprules" => $wprules, "fc_cache_rules" => $fc_cache_rules, "cache_rules" => $cache_rules, "utils_rules" => $utils_rules, "optimization_rules" => $optimization_rules);
 }
 
 function flash_cache_seconds_2_time($seconds) {
