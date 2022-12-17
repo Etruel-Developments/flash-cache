@@ -173,7 +173,11 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function uninstall() {
-			die("Uninstall fired");
+			flash_cache_version::delete_all_patterns();
+			delete_option('flash_cache_version');
+			delete_option('flash_cache_settings');
+			delete_option('flash_cache_advanced_settings');
+			
 		}
 
 		
