@@ -68,6 +68,7 @@ function flash_cache_default_query() {
 	);
 	return $default_query;
 }
+
 function flash_cache_get_content($url, $args = array()) {
 	/**
 	 * Filter to allow change the default parameters for wp_remote_request below.
@@ -568,6 +569,10 @@ function wpe_cache_get_path($url) {
 	return $url;
 }
 
+function flash_cache_increment_disk_usage($bytes) {
+	$disk_usage = get_option('flash_cache_disk_usage', 0);
+	update_option('flash_cache_disk_usage', (int)$disk_usage + $bytes);
+}
 
 function get_etruel_flash_cache_icons() {
 	$flash_cache_icons = [

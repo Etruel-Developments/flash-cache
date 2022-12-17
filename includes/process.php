@@ -137,9 +137,12 @@ class flash_cache_process {
 		self::debug('Creating HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		
 		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
-	
+		
+		$gzip_html = gzencode($response['response']);
 		file_put_contents($cache_path.'index-cache.html', $response['response']);
 		file_put_contents($cache_path.'index-cache.html.gz', gzencode($response['response']));
+		flash_cache_increment_disk_usage(mb_strlen($response['response'], '8bit'));
+		flash_cache_increment_disk_usage(mb_strlen($gzip_html, '8bit'));
 		self::end_create_cache();
 	}
 
@@ -170,6 +173,7 @@ class flash_cache_process {
 	
 		if (!file_exists($cache_path.'index-cache.php')) {
 			file_put_contents($cache_path.'index-cache.php', $template_php);
+			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
 		}
 		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
 		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
@@ -187,6 +191,9 @@ class flash_cache_process {
 
 		file_put_contents($request_file_path, $request_url['response']);
 		file_put_contents($header_file_path, $request_url['content_type']);
+
+		flash_cache_increment_disk_usage(mb_strlen($response['response'], '8bit'));
+		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
 		self::end_create_cache();
 		
 	}
@@ -534,8 +541,13 @@ class flash_cache_process {
 		self::start_create_cache($cache_path.'can_create_cache.txt');
 		self::debug('Creating OB HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$response = apply_filters('flash_cache_response_html', $response, self::$url_to_cache);
+
+		$gzip_response = gzencode($response);
 		file_put_contents($cache_path.'index-cache.html', $response);
-		file_put_contents($cache_path.'index-cache.html.gz', gzencode($response));
+		file_put_contents($cache_path.'index-cache.html.gz', $gzip_response);
+
+		flash_cache_increment_disk_usage(mb_strlen($response, '8bit'));
+		flash_cache_increment_disk_usage(mb_strlen($gzip_response, '8bit'));
 		self::end_create_cache();
 	}
 	public static function create_cache_ob_php($response, $use_curl) {
@@ -560,6 +572,7 @@ class flash_cache_process {
 		
 		if (!file_exists($cache_path.'index-cache.php')) {
 			file_put_contents($cache_path.'index-cache.php', $template_php);
+			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
 		}
 		
 		if ($use_curl) {
@@ -588,6 +601,9 @@ class flash_cache_process {
 		}
 		file_put_contents($request_file_path, $response);
 		file_put_contents($header_file_path, $current_content_type);
+		flash_cache_increment_disk_usage(mb_strlen($response, '8bit'));
+		flash_cache_increment_disk_usage(mb_strlen($current_content_type, '8bit'));
+		
 		self::end_create_cache();
 	}
 	/**

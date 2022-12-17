@@ -129,6 +129,7 @@ if (!class_exists('flash_cache_settings')) :
 							<td>
 								<a href="' . wp_nonce_url(admin_url('admin-post.php?action=delete_flash_cache'), 'delete_flash_cache', '_wpnonce') . '" class="button">' . __('Delete Cache', 'flash-cache') . '</a>
 								<p class="description">' . __('Cached pages are stored on your server. If you need to clean all them, use this button to delete all the files and begin to create the cache from scratch.', 'flash-cache') . '</p>
+								<p class="description">' . __('Current Disk Usage: ', 'flash-cache') . '<code>'.  size_format(get_option('flash_cache_disk_usage', 0)) .'</code></p>
 							</td>
 						</tr>
 						
