@@ -173,6 +173,9 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function uninstall() {
+			if (!class_exists('flash_cache_version')) {
+				require_once plugin_dir_path(__FILE__) . 'includes/version.php';
+			}
 			flash_cache_version::delete_all_patterns();
 			delete_option('flash_cache_version');
 			delete_option('flash_cache_settings');
