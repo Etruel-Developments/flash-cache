@@ -531,6 +531,7 @@ function flash_cache_get_var_javascript($var, $string) {
 }
 
 function flash_cache_delete_dir($path) {
+	delete_option('flash_cache_disk_usage');
 	return is_file($path) ?
 			@unlink($path) :
 			array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
@@ -539,14 +540,17 @@ function flash_cache_delete_dir($path) {
 function wpe_delete_cache_files($cache_dir, $cache_path) {
 	$html_file = $cache_path . 'index-cache.html';
 	if (file_exists($html_file)) {
+		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($html_file), '8bit'));
 		@unlink($html_file);
 	}
 	$gzip_file = $cache_path . 'index-cache.html.gz';
 	if (file_exists($gzip_file)) {
+		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($gzip_file), '8bit'));
 		@unlink($gzip_file);
 	}
 	$php_file = $cache_path . 'index-cache.php';
 	if (file_exists($php_file)) {
+		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($php_file), '8bit'));
 		@unlink($php_file);
 	}
 	$requests_folder = $cache_path . 'requests/';
@@ -573,7 +577,10 @@ function flash_cache_increment_disk_usage($bytes) {
 	$disk_usage = get_option('flash_cache_disk_usage', 0);
 	update_option('flash_cache_disk_usage', (int)$disk_usage + $bytes);
 }
-
+function flash_cache_decrement_disk_usage($bytes) {
+	$disk_usage = get_option('flash_cache_disk_usage', 0);
+	update_option('flash_cache_disk_usage', (int)$disk_usage - $bytes);
+}
 function get_etruel_flash_cache_icons() {
 	$flash_cache_icons = [
 		// Menu

@@ -180,6 +180,7 @@ if (!class_exists('Flash_Cache')) :
 			delete_option('flash_cache_version');
 			delete_option('flash_cache_settings');
 			delete_option('flash_cache_advanced_settings');
+			delete_option('flash_cache_disk_usage');
 			
 		}
 
