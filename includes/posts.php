@@ -22,9 +22,7 @@ class flash_cache_posts {
 		add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99);
 	}
 
-
-
-	function before_data_is_saved_function($post_id) {
+	public static function before_data_is_saved_function($post_id) {
 
 		$taxonomy_names = get_post_taxonomies($post_id);
 		foreach ($taxonomy_names as $key => $tax) {
