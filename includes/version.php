@@ -71,7 +71,7 @@ class flash_cache_version {
 		}
 	}
 	public static function delete_all_patterns() {
-		$patterns = get_pages( array( 'post_type' => 'products') );
+		$patterns = get_pages( array( 'post_type' => 'wpecache_patterns') );
 		foreach ( $patterns as $pattern ) {
 			wp_delete_post( $pattern->ID, true); 
 		} 
