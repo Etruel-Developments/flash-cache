@@ -282,11 +282,6 @@ function flash_cache_get_htaccess_info() {
 		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f";
 		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]";
 
-
-		$cache_rules[] = "RewriteCond %{HTTP:Profile} !^[a-z0-9\\\"]+ [NC]";
-		$cache_rules[] = "RewriteCond {$apache_root}{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html -f";
-		$cache_rules[] = "RewriteRule ^(.*) \"{$inst_root}{$cache_dir}%{SERVER_NAME}/$1/index-cache.html\" [L]";
-		
 		
 
 		/* Cache dynamic pages with PHP */
