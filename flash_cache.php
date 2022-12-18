@@ -176,12 +176,15 @@ if (!class_exists('Flash_Cache')) :
 			if (!class_exists('flash_cache_version')) {
 				require_once plugin_dir_path(__FILE__) . 'includes/version.php';
 			}
+			if (!function_exists('flash_cache_delete_all_options')) {
+				require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
+			}
 			flash_cache_version::delete_all_patterns();
 			delete_option('flash_cache_version');
 			delete_option('flash_cache_settings');
 			delete_option('flash_cache_advanced_settings');
 			delete_option('flash_cache_disk_usage');
-			
+			flash_cache_delete_all_options();
 		}
 
 		

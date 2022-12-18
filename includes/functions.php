@@ -594,6 +594,14 @@ function flash_cache_decrement_disk_usage($bytes) {
 	$disk_usage = get_option('flash_cache_disk_usage', 0);
 	update_option('flash_cache_disk_usage', (int)$disk_usage - $bytes);
 }
+function flash_cache_delete_all_options() {
+	global $wpdb;
+	$results = $wpdb->query(
+		$wpdb->prepare(
+		   "DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'",
+		)
+	);
+}
 function get_etruel_flash_cache_icons() {
 	$flash_cache_icons = [
 		// Menu
