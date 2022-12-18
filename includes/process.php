@@ -42,6 +42,8 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function start_create_cache($path_file) {
+		global $wpdb;
+		
 		if (!file_exists($path_file)) {
 			file_put_contents($path_file, '');
 		}

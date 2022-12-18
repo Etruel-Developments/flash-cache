@@ -1,5 +1,18 @@
 <?php
-
+function flash_cache_get_advanced_settings() {
+	static $advanced_settings = null;
+	if (empty($advanced_settings)) {
+		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+	}
+	return $advanced_settings;
+}
+function flash_cache_get_general_settings() {
+	static $general_settings = null;
+	if (empty($general_settings)) {
+		$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
+	}
+	return $general_settings;
+}
 function flash_cache_admin_bar_render() {
 	global $wp_admin_bar;
 	if (!is_user_logged_in() || is_admin()) {

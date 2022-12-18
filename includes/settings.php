@@ -162,6 +162,7 @@ if (!class_exists('flash_cache_settings')) :
 				'process_type' => 'ob_with_curl_request',
 				'optimize_styles' => false,
 				'optimize_scripts' => false,
+				'lock_type' => 'file',
 			);
 			$array = apply_filters('flash_cache_default_advanced_options', $array);
 			return $array;
@@ -345,6 +346,17 @@ if (!class_exists('flash_cache_settings')) :
 							</td>
 							
 						</tr>';
+				echo '<tr valign="top" class="wrap-row">
+						<th scope="row">' . __('Lock Type', 'flash-cache') . '</th>
+						<td>
+							<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> Lock with files
+								<p class="description">' . __('This option is recommended by default because it uses Files to prevent two processes from creating cache of the same page at the same time.', 'flash-cache') . '</p>
+							</div>
+							<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'db', false) . ' name="flash_cache_advanced[lock_type]" value="db"/> Lock with DB
+								<p class="description">' . __('This option uses DB to prevent two processes from creating cache of the same page at the same time.', 'flash-cache') . '</p>
+							</div>
+						</td>
+					</tr>';
 			echo '</table>';
 			echo '<div class="wpm_footer">';
 			echo '<div class="wpm_buttons">';
