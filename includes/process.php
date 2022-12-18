@@ -36,14 +36,12 @@ class flash_cache_process {
 		add_filter('flash_cache_response_html', array(__CLASS__, 'cache_response_html'), 100, 2);
 	}
 	/**
-	* Static function can_create_cache
+	* Static function get_file_lock
 	* @access public
 	* @return void
 	* @since 1.0.0
 	*/
-	public static function start_create_cache($path_file) {
-		global $wpdb;
-		
+	public static function get_file_lock($path_file) {
 		if (!file_exists($path_file)) {
 			file_put_contents($path_file, '');
 		}
@@ -52,7 +50,59 @@ class flash_cache_process {
 		 * bloquea exclusivamente el archivo (el archivo solo puede ser leído y escrito por el usuario), 
 		 * luego, si otros usuarios nuevos desean acceder al archivo, serán bloqueados hasta que el primero cierre el archivo (libera el bloqueo).
 		 * */
-		flock(self::$can_cache_handler, LOCK_EX | LOCK_NB);
+		return flock(self::$can_cache_handler, LOCK_EX | LOCK_NB);
+	}
+	public static function get_db_lock($path_file) {
+		global $wpdb;
+
+	
+		$wpdb->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
+		$wpdb->query('START TRANSACTION');
+		
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+			   "SELECT * FROM $wpdb->options WHERE option_name = %s FOR UPDATE NOWAIT",
+			   'flash_cache_' . base64_encode($path_file)
+			)
+		);
+		if ($wpdb->last_error) {
+			$wpdb->query('COMMIT');
+			return false;
+		}
+		
+		if (empty($results)) {
+			$wpdb->query(
+				$wpdb->prepare(
+				   "INSERT INTO $wpdb->options (option_name, option_value) VALUES(%s, 1)",
+				   'flash_cache_' . base64_encode($path_file)
+				)
+			);
+		}
+		if ($wpdb->last_error) {
+			$wpdb->query('COMMIT');
+			return false;
+		}
+		$wpdb->query('COMMIT');
+		return true;
+	}
+	/**
+	* Static function can_create_cache
+	* @access public
+	* @return void
+	* @since 1.0.0
+	*/
+	public static function start_create_cache($path_file) {
+		$advanced_settings  = flash_cache_get_advanced_settings();
+		if (empty($advanced_settings)) {
+			return self::get_file_lock($path_file);
+		}
+		if (empty($advanced_settings['lock_type'])) {
+			return self::get_file_lock($path_file);
+		}
+		if ($advanced_settings['lock_type'] == 'db') {
+			return self::get_db_lock($path_file);
+		}
+		return self::get_file_lock($path_file);
 	}
 	/**
 	* Static function end_create_cache
@@ -61,10 +111,15 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function end_create_cache() {
-		//fwrite(self::$can_cache_handler, '');
-		//sleep(10);
+		$advanced_settings  = flash_cache_get_advanced_settings();
+		if (empty($advanced_settings['lock_type'])) {
+			if ($advanced_settings['lock_type'] == 'db') {
+				return true;
+			}
+		}
 		flock(self::$can_cache_handler, LOCK_UN);
 		fclose(self::$can_cache_handler);
+		return true;
 	}
 	/**
 	* Static function debug_log
@@ -114,6 +169,18 @@ class flash_cache_process {
 	}
 	public static function create_cache_html() {
 		
+		$advanced_settings = flash_cache_get_advanced_settings();
+		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
+		
+		// Delete initial path
+		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
+		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
+		
+		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+			self::end_create_cache();
+			return false;
+		}
+		
 		$response = flash_cache_get_content(self::$url_to_cache);
 		
 		if (empty($response['response'])) {
@@ -124,17 +191,13 @@ class flash_cache_process {
 			self::$origin_url = get_site_url(null, '/');
 		}
 		
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
-		// Delete initial path
-		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
-		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
+		
 		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
 		
-		self::start_create_cache($cache_path.'can_create_cache.txt');
+		
 		
 		self::debug('Creating HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		
@@ -165,7 +228,12 @@ class flash_cache_process {
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
-		self::start_create_cache($cache_path.'can_create_cache.txt');
+		
+		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+			self::end_create_cache();
+			return false;
+		}
+	
 		self::debug('Creating PHP cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$template_php = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php'); 
 		$template_php = str_replace('{home_path}', "'".$home_path."'", $template_php);
@@ -527,20 +595,30 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function create_cache_ob_html($response, $use_curl) {
+		$advanced_settings = flash_cache_get_advanced_settings();
+		
+		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
+		$path = self::get_path(self::$optional_post_id);
+		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
+
+		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+			self::end_create_cache();
+			return false;
+		}
+		
 		if ($use_curl) {
 			$response = flash_cache_get_content(self::$url_to_cache);
 		}
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
-		$path = self::get_path(self::$optional_post_id);
-		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
+		
+		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
-		self::start_create_cache($cache_path.'can_create_cache.txt');
+		
+		
 		self::debug('Creating OB HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$response = apply_filters('flash_cache_response_html', $response, self::$url_to_cache);
 
@@ -556,7 +634,7 @@ class flash_cache_process {
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+		$advanced_settings = flash_cache_get_advanced_settings();
 		$home_path = flash_cache_get_home_path();
 		$cache_dir = $home_path.$advanced_settings['cache_dir'];
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
@@ -564,7 +642,11 @@ class flash_cache_process {
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
-		self::start_create_cache($cache_path.'can_create_cache.txt');
+		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+			self::end_create_cache();
+			return false;
+		}
+		
 		self::debug('Creating OB PHP cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		$template_php = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php'); 
 		$template_php = str_replace('{home_path}', "'".$home_path."'", $template_php);

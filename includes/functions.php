@@ -43,6 +43,7 @@ function flash_cache_admin_bar_render() {
 add_action('wp_before_admin_bar_render', 'flash_cache_admin_bar_render');
 
 function wpe_cache_delete_action() {
+	flash_cache_process::get_db_lock('/');
 	// Delete cache for a specific page
 	if (function_exists('current_user_can') && false == current_user_can('delete_others_posts')) {
 		wp_die('You are not authorized to do this action');
@@ -65,7 +66,6 @@ function wpe_cache_delete_action() {
 }
 
 add_action('admin_post_wpe_cache_delete', 'wpe_cache_delete_action');
-
 function flash_cache_default_query() {
 	$default_query = array(
 		'is_search' 	=> 0,
