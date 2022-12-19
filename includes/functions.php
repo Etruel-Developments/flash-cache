@@ -598,7 +598,7 @@ function flash_cache_delete_all_options() {
 	global $wpdb;
 	$results = $wpdb->query(
 		$wpdb->prepare(
-		   "DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'",
+		   "DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'"
 		)
 	);
 }
