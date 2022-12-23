@@ -42,10 +42,12 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function get_file_lock($path_file) {
+		
 		if (!file_exists($path_file)) {
-			file_put_contents($path_file, '');
+			@mkdir($path_file, 0777, true);
+			file_put_contents($path_file . 'can_create_cache.txt', 'Created by Flash Cache');
 		}
-		self::$can_cache_handler = fopen($path_file, 'a');
+		self::$can_cache_handler = fopen($path_file . 'can_create_cache.txt', 'a');
 		/** 
 		 * bloquea exclusivamente el archivo (el archivo solo puede ser leído y escrito por el usuario), 
 		 * luego, si otros usuarios nuevos desean acceder al archivo, serán bloqueados hasta que el primero cierre el archivo (libera el bloqueo).
@@ -92,6 +94,7 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function start_create_cache($path_file) {
+		
 		$advanced_settings  = flash_cache_get_advanced_settings();
 		if (empty($advanced_settings)) {
 			return self::get_file_lock($path_file);
@@ -176,7 +179,7 @@ class flash_cache_process {
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
 		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
 		
-		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+		if ( ! self::start_create_cache($cache_path) ) {
 			self::end_create_cache();
 			return false;
 		}
@@ -229,7 +232,7 @@ class flash_cache_process {
 			@mkdir($cache_path, 0777, true);
 		}
 		
-		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+		if ( ! self::start_create_cache($cache_path) ) {
 			self::end_create_cache();
 			return false;
 		}
@@ -416,7 +419,7 @@ class flash_cache_process {
 				$process_type = self::$force_process_type;
 			}
 
-	
+			
 			
 			if ($create_cache) {
 				if ($process_type == 'ob_with_curl_request') {
@@ -448,6 +451,7 @@ class flash_cache_process {
 		if (isset($_GET['preview'])) {
 			return true;
 		}
+		
 
 		$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
@@ -574,11 +578,14 @@ class flash_cache_process {
 			// No closing html tag. Not caching.
 			$new_cache = false;
 		}
+		
 		if( strpos( $_SERVER[ 'REQUEST_URI' ], 'robots.txt' ) !== false ) {
 			// robots.txt detected. Not caching.
 			$new_cache = false;	
 		}
+		
 		if ($new_cache) {
+			
 			if (self::$cache_type == 'html') {
 				self::create_cache_ob_html(self::$current_buffer, $use_curl);
 			} else {
@@ -595,13 +602,14 @@ class flash_cache_process {
 	* @since 1.0.0
 	*/
 	public static function create_cache_ob_html($response, $use_curl) {
+		
 		$advanced_settings = flash_cache_get_advanced_settings();
 		
 		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
 		$path = self::get_path(self::$optional_post_id);
 		$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
 
-		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+		if ( ! self::start_create_cache($cache_path) ) {
 			self::end_create_cache();
 			return false;
 		}
@@ -642,7 +650,7 @@ class flash_cache_process {
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
-		if ( ! self::start_create_cache($cache_path.'can_create_cache.txt') ) {
+		if ( ! self::start_create_cache($cache_path) ) {
 			self::end_create_cache();
 			return false;
 		}
