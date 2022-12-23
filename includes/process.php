@@ -112,7 +112,7 @@ class flash_cache_process {
 	*/
 	public static function end_create_cache() {
 		$advanced_settings  = flash_cache_get_advanced_settings();
-		if (empty($advanced_settings['lock_type'])) {
+		if ( ! empty($advanced_settings['lock_type'])) {
 			if ($advanced_settings['lock_type'] == 'db') {
 				return true;
 			}
