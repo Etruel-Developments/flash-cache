@@ -65,8 +65,19 @@ function wpe_cache_delete_action() {
 		wp_die('You are not authorized to do this action');
 	}
 }
-
 add_action('admin_post_wpe_cache_delete', 'wpe_cache_delete_action');
+
+function flash_cache_delete_cache_from_url($url) {
+	$path = str_ireplace(home_url(''), '', $url);
+	$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+	$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+	$page_cache_dir = trailingslashit($cache_dir . $_SERVER['SERVER_NAME'] . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path)));
+	$cache_path = realpath($page_cache_dir) . '/';
+	if ($cache_path != '/') {
+		wpe_delete_cache_files($cache_dir, $cache_path);
+	}
+}
+
 function flash_cache_default_query() {
 	$default_query = array(
 		'is_search' 	=> 0,

@@ -20,8 +20,25 @@ class flash_cache_posts {
 		add_action('post_submitbox_minor_actions', array(__CLASS__, 'delete_cache_button') );
 		add_action('admin_post_wpe_delete_cache', array(__CLASS__, 'delete_cache_action'));
 		add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99);
+		add_action( 'transition_post_status', array(__CLASS__, 'status_transition'), 10, 3 );
 	}
-
+	
+	/**
+	* Static function status_transition
+	* Delete the cache of all page relationated with the post updated.
+	* @access public
+	* @return void
+	* @since 1.0.0
+	*/
+	public static function status_transition( $new_status, $old_status, $post ) {
+		if ( $old_status === 'publish') {
+			if ( $new_status === 'draft') {
+				delete_cache_post_taxonomies($post_id);
+				flash_cache_delete_cache_from_url(home_url('/'));
+			}
+		}
+	}
+	
 	public static function before_data_is_saved_function($post_id) {
 
 		$taxonomy_names = get_post_taxonomies($post_id);
@@ -38,6 +55,17 @@ class flash_cache_posts {
 				flash_cache_process::$force_process_type = 'curl';
 				flash_cache_process::process_cache_from_query($current_query, $term_url);
 			
+			}
+		}
+	}
+
+	public static function delete_cache_post_taxonomies($post_id) {
+		$taxonomy_names = get_post_taxonomies($post_id);
+		foreach ($taxonomy_names as $key => $tax) {
+			$term_list = wp_get_post_terms($post_id, $tax, array("fields" => "all"));
+			foreach ($term_list as $term) {
+				$term_url = get_term_link($term->term_id, $tax);
+				flash_cache_delete_cache_from_url($term_url);
 			}
 		}
 	}
@@ -242,6 +270,7 @@ class flash_cache_posts {
 		//}
 		
 	}
+
 	public static function create_cache_publish($postid) {
 		return self::create_cache_post_id($postid);
 	}
