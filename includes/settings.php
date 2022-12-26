@@ -323,7 +323,7 @@ if (!class_exists('flash_cache_settings')) :
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								<p class="description">' . __('Optimize and combine all your Stylesheets files into one minified file, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
+								<p class="description">' . __('Optimize and combine all your Stylesheets files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
 
 							</td>
 							
@@ -341,7 +341,7 @@ if (!class_exists('flash_cache_settings')) :
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								<p class="description">' . __('Optimize and combine all your JavaScript files into one minified file, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
+								<p class="description">' . __('Optimize and combine all your JavaScript files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
 
 							</td>
 							
