@@ -163,7 +163,7 @@ if (!class_exists('Flash_Cache')) :
 			$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 			flash_cache_remove_rules();
 			$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
-			flash_cache_delete_dir($cache_dir); 
+			flash_cache_delete_dir($cache_dir, true); 
 		}
 		/**
 		 * Static function uninstall

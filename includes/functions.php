@@ -50,12 +50,13 @@ function wpe_cache_delete_action() {
 	}
 	$nonce_verify = isset($_GET['_wpnonce']) ? wp_verify_nonce($_REQUEST['_wpnonce'], 'delete-cache') : false;
 	if ($nonce_verify && isset($_GET['path'])) {
-
+		
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		$page_cache_dir = trailingslashit($cache_dir . $_SERVER['SERVER_NAME'] . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $_GET['path'])));
 		$cache_path = realpath($page_cache_dir) . '/';
 		if ($cache_path != '/') {
+		
 			wpe_delete_cache_files($cache_dir, $cache_path);
 		}
 		wp_redirect(get_site_url(null, '/') . preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $_GET['path']));
@@ -543,8 +544,10 @@ function flash_cache_get_var_javascript($var, $string) {
 	return $current_var;
 }
 
-function flash_cache_delete_dir($path) {
-	delete_option('flash_cache_disk_usage');
+function flash_cache_delete_dir($path, $delete_option = false) {
+	if ($delete_option) {
+		delete_option('flash_cache_disk_usage');
+	}
 	return is_file($path) ?
 			@unlink($path) :
 			array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
@@ -552,18 +555,22 @@ function flash_cache_delete_dir($path) {
 
 function wpe_delete_cache_files($cache_dir, $cache_path) {
 	$html_file = $cache_path . 'index-cache.html';
+	
 	if (file_exists($html_file)) {
-		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($html_file), '8bit'));
+		$size_file = mb_strlen(file_get_contents($html_file), '8bit');
+		flash_cache_decrement_disk_usage($size_file);
 		@unlink($html_file);
 	}
 	$gzip_file = $cache_path . 'index-cache.html.gz';
 	if (file_exists($gzip_file)) {
-		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($gzip_file), '8bit'));
+		$size_file = mb_strlen(file_get_contents($gzip_file), '8bit');
+		flash_cache_decrement_disk_usage($size_file);
 		@unlink($gzip_file);
 	}
 	$php_file = $cache_path . 'index-cache.php';
 	if (file_exists($php_file)) {
-		flash_cache_decrement_disk_usage(mb_strlen(file_get_contents($php_file), '8bit'));
+		$size_file = mb_strlen(file_get_contents($php_file), '8bit');
+		flash_cache_decrement_disk_usage($size_file);
 		@unlink($php_file);
 	}
 	$requests_folder = $cache_path . 'requests/';
