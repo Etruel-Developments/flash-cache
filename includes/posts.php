@@ -13,13 +13,15 @@ if (!class_exists('flash_cache_posts')) :
 class flash_cache_posts {
 
 	public static function hooks() {
-		add_action('save_post', array(__CLASS__, 'create_cache'), 999, 3 );
+		
 		add_action('pingback_post', array(__CLASS__, 'cache_from_comment'), 99);
 		add_action('comment_post', array(__CLASS__, 'cache_from_comment'), 99);
 		add_action('edit_comment', array(__CLASS__, 'cache_from_comment'), 99);
 		add_action('post_submitbox_minor_actions', array(__CLASS__, 'delete_cache_button') );
 		add_action('admin_post_wpe_delete_cache', array(__CLASS__, 'delete_cache_action'));
-		add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99);
+		/* add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99); 
+		add_action('save_post', array(__CLASS__, 'create_cache'), 999, 3 );
+		*/
 		add_action( 'transition_post_status', array(__CLASS__, 'status_transition'), 10, 3 );
 	}
 	
@@ -31,11 +33,11 @@ class flash_cache_posts {
 	* @since 1.0.0
 	*/
 	public static function status_transition( $new_status, $old_status, $post ) {
-		if ( $old_status === 'publish') {
-			if ( $new_status === 'draft') {
-				delete_cache_post_taxonomies($post_id);
-				flash_cache_delete_cache_from_url(home_url('/'));
-			}
+		if ($new_status ===  'publish'  || $new_status ===  'draft' || $new_status ===  'trash') {
+			self::delete_cache_post_taxonomies($post->ID);
+			flash_cache_delete_cache_from_url(get_permalink($post));
+			flash_cache_delete_cache_from_url(home_url('/'));
+			flash_cache_delete_cache_from_url(home_url('/feed/'));
 		}
 	}
 	
