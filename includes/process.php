@@ -172,8 +172,12 @@ class flash_cache_process {
 	}
 	public static function create_cache_html() {
 		
+		if (is_null(self::$origin_url)) {
+			self::$origin_url = get_site_url(null, '/');
+		}
 		$advanced_settings = flash_cache_get_advanced_settings();
 		$cache_dir = flash_cache_get_home_path().$advanced_settings['cache_dir'];
+		
 		
 		// Delete initial path
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
@@ -190,18 +194,11 @@ class flash_cache_process {
 			return;
 		}
 
-		if (is_null(self::$origin_url)) {
-			self::$origin_url = get_site_url(null, '/');
-		}
-		
-		
-		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
 		
-		
-		
+	
 		self::debug('Creating HTML cache file path:'.$path.' - URL:'.self::$url_to_cache);
 		
 		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
