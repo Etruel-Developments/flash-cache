@@ -32,7 +32,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 1. Click Plugins
 2. Click Add New
-3. Search for `fakturo`
+3. Search for `flash-cache`
 4. Click Install
 5. Click Install Now
 6. Click Activate Plugin
@@ -40,14 +40,14 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 = Manually =
 
-1. Upload `flash_cache` folder to the `/wp-content/plugins/` directory
+1. Upload `flash-cache` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 
 == Screenshots ==
 
 1. Settings Screens.
-
+1. Advanced Settings.
 
 
 == Frequently Asked Questions ==
