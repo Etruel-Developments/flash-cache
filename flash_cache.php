@@ -117,10 +117,10 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function hooks() {
-			register_deactivation_hook( __FILE__, array(__CLASS__, 'deactivation') );
-			register_uninstall_hook( __FILE__, array(__CLASS__, 'uninstall') );
-			
+			register_deactivation_hook(__FILE__, array(__CLASS__, 'deactivation'));
+			register_uninstall_hook(__FILE__, array(__CLASS__, 'uninstall'));
 		}
+
 		/**
 		 * Static function load_text_domain 
 		 * Load the text domain.
@@ -130,16 +130,16 @@ if (!class_exists('Flash_Cache')) :
 		 */
 		public static function load_text_domain() {
 			// Set filter for plugin's languages directory
-			$lang_dir = dirname(plugin_basename(__FILE__)) . '/languages/';
-			$lang_dir = apply_filters('flash_cache_languages_directory', $lang_dir);
+			$lang_dir	 = dirname(plugin_basename(__FILE__)) . '/languages/';
+			$lang_dir	 = apply_filters('flash_cache_languages_directory', $lang_dir);
 
 			// Traditional WordPress plugin locale filter
-			$locale = apply_filters('plugin_locale', get_locale(), 'flash-cache');
-			$mofile = sprintf('%1$s-%2$s.mo', 'flash-cache', $locale);
+			$locale	 = apply_filters('plugin_locale', get_locale(), 'flash-cache');
+			$mofile	 = sprintf('%1$s-%2$s.mo', 'flash-cache', $locale);
 
 			// Setup paths to current locale file
-			$mofile_local = $lang_dir . $mofile;
-			$mofile_global = WP_LANG_DIR . '/flash-cache/' . $mofile;
+			$mofile_local	 = $lang_dir . $mofile;
+			$mofile_global	 = WP_LANG_DIR . '/flash-cache/' . $mofile;
 
 			if (file_exists($mofile_global)) {
 				// Look in global /wp-content/languages/flash_cache/ folder
@@ -152,6 +152,7 @@ if (!class_exists('Flash_Cache')) :
 				load_plugin_textdomain('flash-cache', false, $lang_dir);
 			}
 		}
+
 		/**
 		 * Static function deactivation
 		 * Deactivation action hook
@@ -160,11 +161,12 @@ if (!class_exists('Flash_Cache')) :
 		 * @since 1.0.0
 		 */
 		public static function deactivation() {
-			$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+			$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 			flash_cache_remove_rules();
-			$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
-			flash_cache_delete_dir($cache_dir, true); 
+			$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
+			flash_cache_delete_dir($cache_dir, true);
 		}
+
 		/**
 		 * Static function uninstall
 		 * uninstall action hook
@@ -186,8 +188,6 @@ if (!class_exists('Flash_Cache')) :
 			delete_option('flash_cache_disk_usage');
 			flash_cache_delete_all_options();
 		}
-
-		
 
 	}
 
