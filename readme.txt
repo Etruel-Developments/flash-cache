@@ -1,8 +1,10 @@
 === Flash Cache ===
 Contributors: sniuk, etruel, khaztiel
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, perfomance, flash-cache, automatically cache, flash, flashcache, flash cache, seo, wordpress cache.
 Requires at least: 4.1
 Tested up to: 6.1.1
+Requires PHP: 5.6
 Stable tag: 3.0
 
 Flash Cache is a plugin to improve the performance of Wordpress Websites by making html versions of each post, pages or sections of your website.
@@ -92,3 +94,5 @@ You can either install it automatically from the WordPress admin, or do it manua
 = 1.0.0 Beta =
 First Release
 
+ == Upgrade Notice ==
+* Released as Free plugin!
