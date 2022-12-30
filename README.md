@@ -1,9 +1,15 @@
 === Flash Cache ===
+
 Contributors: sniuk, etruel, khaztiel
+
 Tags: cache, perfomance, flash-cache, automatically cache, flash, flashcache, flash cache, seo, wordpress cache.
+
 Requires at least: 4.1
+
 Tested up to: 6.1
+
 Stable tag: 3.0
+
 
 Flash Cache is a plugin to improve the performance of Wordpress Websites by making html versions of each post, pages or sections of your website.
 
@@ -12,6 +18,7 @@ Flash Cache is a plugin to improve the performance of Wordpress Websites by maki
 Flash Cache is a powerful plugin which optimizes the websites speed thanks to processes and technologies that reduces the overload of the websites where it is installed, improving the velocity till 10x comparing with other cache plugins for WordPress. 
 
 = Features =
+
 The most important characteristics that makes this add-on the first choice comparing to others are the next ones:
 
     Flash Cache allows infinities configurations thanks to the patterns, these can be done with different cache patterns according the kind of page that will be cached.
