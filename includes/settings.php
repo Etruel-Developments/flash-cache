@@ -10,7 +10,7 @@
 if (!defined('ABSPATH'))
 	exit;
 
-if (!class_exists('flash_cache_settings')) :
+if ( ! class_exists('flash_cache_settings') ) :
 
 	class flash_cache_settings {
 
@@ -101,7 +101,7 @@ if (!class_exists('flash_cache_settings')) :
 			self::get_changes_httacess();
 			echo '<div class="wpm_flex">';
 
-			echo get_etruel_flash_cache_menu();
+			echo flash_cache_get_menus();
 
 			echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" class="pt-30" method="post">
 					<input type="hidden" name="action" value="save_flash_cache_general"/>';
@@ -137,7 +137,7 @@ if (!class_exists('flash_cache_settings')) :
 
 			echo '<div class="wpm_footer">';
 
-			echo get_etruel_flash_cache_menu_social_footer();
+			echo flash_cache_get_menus_social_footer();
 
 			echo '<div class="wpm_buttons">';
 			submit_button();
@@ -187,7 +187,7 @@ if (!class_exists('flash_cache_settings')) :
 				<div class="postbox">';
 				self::get_changes_httacess();
 				echo '<div class="wpm_flex">';
-				echo get_etruel_flash_cache_menu();
+				echo flash_cache_get_menus();
 
 				echo '<div class="wpm_main">';
 			}
@@ -238,7 +238,7 @@ if (!class_exists('flash_cache_settings')) :
 			self::get_changes_httacess();
 			echo '<div class="wpm_flex">';
 
-			echo get_etruel_flash_cache_menu();
+			echo flash_cache_get_menus();
 
 			echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" method="post">
 					<input type="hidden" name="action" value="save_flash_cache_advanced"/>';

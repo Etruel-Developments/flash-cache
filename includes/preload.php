@@ -328,7 +328,7 @@ class flash_cache_preaload {
 
 		echo '<div class="wpm_flex">';
 
-		echo get_etruel_flash_cache_menu();
+		echo flash_cache_get_menus();
 
 		echo '<div class="wpm_main">';
 		if ($values['activate']) {
@@ -401,7 +401,7 @@ class flash_cache_preaload {
 
 		echo '<div class="wpm_footer">';
 
-		echo get_etruel_flash_cache_menu_social_footer();
+		echo flash_cache_get_menus_social_footer();
 
 		echo '<div class="wpm_buttons">';
 		submit_button();

@@ -24,7 +24,7 @@ if (!defined('FLASH_CACHE_VERSION')) {
 }
 
 
-if (!class_exists('Flash_Cache')) :
+if ( ! class_exists('Flash_Cache') ) :
 
 	/**
 	 * Main Flash Cache class
@@ -178,7 +178,7 @@ if (!class_exists('Flash_Cache')) :
 			if (!class_exists('flash_cache_version')) {
 				require_once plugin_dir_path(__FILE__) . 'includes/version.php';
 			}
-			if (!function_exists('flash_cache_delete_all_options')) {
+			if ( ! function_exists('flash_cache_delete_all_options')) {
 				require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 			}
 			flash_cache_version::delete_all_patterns();
@@ -205,10 +205,11 @@ if (!class_exists('Flash_Cache')) :
  *              situations where your extension is activated but EDD is not
  *              present.
  */
-function Flash_Cache_load() {
-	//Flash_Cache::checkPrerequisites();
-	return Flash_Cache::getInstance();
-}
-
+if ( ! function_exists('Flash_Cache_load') ):
+	function Flash_Cache_load() {
+		
+		return Flash_Cache::getInstance();
+	}
+endif;
 add_action('plugins_loaded', 'Flash_Cache_load');
 ?>
