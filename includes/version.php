@@ -31,10 +31,10 @@ class flash_cache_version {
 		$default_html = array(
 		  'post_title'    => 'Default',
 		  'post_status'   => 'publish',
-		  'post_type'   => 'wpecache_patterns',
+		  'post_type'   => 'flash_cache_patterns',
 		);
 		$pattern_id = wp_insert_post($default_html);
-		$fields = wpecache_patterns::default_fields_array();
+		$fields = flash_cache_patterns::default_fields_array();
 		$fields['page_type']['feed'] = 0;
 		$fields['page_type']['search'] = 0;
 		foreach ($fields as $field => $value ) {
@@ -47,10 +47,10 @@ class flash_cache_version {
 		$default_html = array(
 		  'post_title'    => 'Feed & Search',
 		  'post_status'   => 'publish',
-		  'post_type'   => 'wpecache_patterns',
+		  'post_type'   => 'flash_cache_patterns',
 		);
 		$pattern_id = wp_insert_post($default_html);
-		$fields = wpecache_patterns::default_fields_array();
+		$fields = flash_cache_patterns::default_fields_array();
 		$fields['page_type']['single'] = 0;
 		$fields['page_type']['frontpage'] = 0;
 		$fields['page_type']['home'] = 0;
@@ -71,7 +71,7 @@ class flash_cache_version {
 		}
 	}
 	public static function delete_all_patterns() {
-		$patterns = get_posts( array( 'post_type' => 'wpecache_patterns') );
+		$patterns = get_posts( array( 'post_type' => 'flash_cache_patterns') );
 
 		foreach ( $patterns as $pattern ) {
 			wp_delete_post( $pattern->ID, true); 

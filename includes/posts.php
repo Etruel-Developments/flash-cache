@@ -173,7 +173,7 @@ class flash_cache_posts {
 		if (!$general_settings['activate']) {
 			return true;
 		}
-		$args = array('post_type' => 'wpecache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
+		$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
 		$patterns = get_posts($args);
 		
 		$create_cache = false;
@@ -192,7 +192,7 @@ class flash_cache_posts {
 		
 		foreach($patterns as $pt) {
 
-			$pattern = wpecache_patterns::get_data($pt->ID );
+			$pattern = flash_cache_patterns::get_data($pt->ID );
 
 			// Just Default
 			$just_option_post_type_and_create_cache_on_insert_update = $pattern['page_type']['single'] && $pattern['create_cache_on_insert_update'];
@@ -292,11 +292,11 @@ class flash_cache_posts {
 		}
 		$postid = $comment['comment_post_ID'];
 		$post = get_post($postid);
-		$args = array('post_type' => 'wpecache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
+		$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
 		$patterns = get_posts($args);
 		$create_cache = false;
 		foreach($patterns as $pt) {
-			$pattern = wpecache_patterns::get_data($pt->ID );
+			$pattern = flash_cache_patterns::get_data($pt->ID );
 			if ($pattern['page_type']['single'] && $pattern['update_on_comment']) {
 				if (empty($pattern['page_type']['posts'])) {
 					$create_cache = true;

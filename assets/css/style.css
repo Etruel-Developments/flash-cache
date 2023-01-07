@@ -5,14 +5,14 @@
   margin-left: 0;
   box-sizing: border-box;
 }
-.post-type-wpecache_patterns:not(.edit-php) .wpm_container{
+.post-type-flash_cache_patterns:not(.edit-php) .wpm_container{
 	max-width: 1440px;
 }
-.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2{
+.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2{
 	position: relative;
 }
 @media (min-width: 851px){
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1{
 		position: absolute;
 		right: 0;
 		top: -52px;
@@ -25,30 +25,30 @@
 	}
 }
 @media (min-width: 1250px){
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-2{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-2{
 		width: calc(100% - 10px);
 		min-width: initial;
 	}
 }
 @media (max-width: 1249px) and (min-width: 851px){
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container .wpm_main #poststuff,
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1 .postbox{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container .wpm_main #poststuff,
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1 .postbox{
 		min-width: initial;
 	}
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container .wpm_main #poststuff #post-body.columns-2{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container .wpm_main #poststuff #post-body.columns-2{
 		margin-right: 0;
 	}
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1{
 		width: 30%;
 		margin-right: -30px;
 	}
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-2{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #post-body-content,
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-2{
 		width: calc(70% - 30px);
 	}
-	.post-type-wpecache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1 #side-sortables{
+	.post-type-flash_cache_patterns:not(.edit-php) .wpm_container #post-body.columns-2 #postbox-container-1 #side-sortables{
 		width: initial;
 	}
 }

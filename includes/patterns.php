@@ -11,9 +11,9 @@
 if (!defined('ABSPATH'))
 	exit;
 
-if (!class_exists('wpecache_patterns')) :
+if (!class_exists('flash_cache_patterns')) :
 
-	class wpecache_patterns {
+	class flash_cache_patterns {
 
 		/**
 		 * Static function hooks
@@ -27,7 +27,7 @@ if (!class_exists('wpecache_patterns')) :
 			add_filter('parent_file', array(__CLASS__, 'menu_correction'));
 			add_filter('submenu_file', array(__CLASS__, 'submenu_correction'), 999);
 			add_action('transition_post_status', array(__CLASS__, 'default_fields'), 10, 3);
-			add_filter('wpecache_patterns_fields_clean', array(__CLASS__, 'clean_fields'), 100, 1);
+			add_filter('flash_cache_patterns_fields_clean', array(__CLASS__, 'clean_fields'), 100, 1);
 			add_action('save_post', array(__CLASS__, 'save'), 99, 2);
 			add_action('admin_print_scripts-edit.php', array(__CLASS__, 'patterns_edit_scripts'));
 			add_action('admin_print_scripts-post.php', array(__CLASS__, 'patterns_edit_scripts'));
@@ -42,7 +42,7 @@ if (!class_exists('wpecache_patterns')) :
 		 * @since 1.0.0
 		 */
 		public static function setup() {
-			$slug = 'wpecache_patterns';
+			$slug = 'flash_cache_patterns';
 			$labels = array(
 				'name' => __('Patterns', 'flash-cache'),
 				'singular_name' => __('Pattern', 'flash-cache'),
@@ -105,7 +105,7 @@ if (!class_exists('wpecache_patterns')) :
 		 */
 		public static function patterns_edit_scripts() {
 			global $post;
-			if( !isset($post->post_type) or $post->post_type != 'wpecache_patterns')
+			if( !isset($post->post_type) or $post->post_type != 'flash_cache_patterns')
 				return isset($post->ID) ? $post->ID: false;
 			wp_dequeue_script('autosave');
 			wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION, true);
@@ -124,7 +124,7 @@ if (!class_exists('wpecache_patterns')) :
 					__('Patterns', 'flash-cache'),
 					__('Patterns', 'flash-cache'),
 					'manage_options',
-					'edit.php?post_type=wpecache_patterns'
+					'edit.php?post_type=flash_cache_patterns'
 			);
 //			add_action('admin_print_styles-' . $page, array(__CLASS__, 'patterns_edit_scripts'));
 
@@ -133,7 +133,7 @@ if (!class_exists('wpecache_patterns')) :
 					__('Add New Patterns', 'flash-cache'),
 					__('Add New Patterns', 'flash-cache'),
 					'manage_options',
-					'post-new.php?post_type=wpecache_patterns'
+					'post-new.php?post_type=flash_cache_patterns'
 			);
 //			add_action('admin_print_styles-' . $page, array(__CLASS__, 'patterns_edit_scripts'));
 		}
@@ -146,7 +146,7 @@ if (!class_exists('wpecache_patterns')) :
 		 */
 		public static function menu_correction($parent_file) {
 			global $current_screen;
-			if ($current_screen->id == 'edit-wpecache_patterns' || $current_screen->id == 'wpecache_patterns') {
+			if ($current_screen->id == 'edit-flash_cache_patterns' || $current_screen->id == 'flash_cache_patterns') {
 				$parent_file = 'flash_cache_setting';
 				//$parent_file = 'admin.php?page=flash_cache_setting';
 			}
@@ -161,8 +161,8 @@ if (!class_exists('wpecache_patterns')) :
 		 */
 		public static function submenu_correction($submenu_file) {
 			global $current_screen;
-			if ($current_screen->id == 'edit-wpecache_patterns' || $current_screen->id == 'wpecache_patterns') {
-				$submenu_file = 'edit.php?post_type=wpecache_patterns';
+			if ($current_screen->id == 'edit-flash_cache_patterns' || $current_screen->id == 'flash_cache_patterns') {
+				$submenu_file = 'edit.php?post_type=flash_cache_patterns';
 			}
 			return $submenu_file;
 		}
@@ -174,7 +174,7 @@ if (!class_exists('wpecache_patterns')) :
 		 * @since 1.0.0
 		 */
 		public static function meta_boxes() {
-			add_meta_box('flash_cache-pattern-data', __('Pattern Data', 'flash-cache'), array(__CLASS__, 'metabox_data'), 'wpecache_patterns', 'normal', 'default');
+			add_meta_box('flash_cache-pattern-data', __('Pattern Data', 'flash-cache'), array(__CLASS__, 'metabox_data'), 'flash_cache_patterns', 'normal', 'default');
 		}
 
 		/**
@@ -365,12 +365,12 @@ if (!class_exists('wpecache_patterns')) :
 		 */
 		public static function default_fields($new_status, $old_status, $post) {
 
-			if ($post->post_type == 'wpecache_patterns' && $old_status == 'new') {
+			if ($post->post_type == 'flash_cache_patterns' && $old_status == 'new') {
 				$fields = wp_parse_args(array(), self::default_fields_array());
-				$fields = apply_filters('wpecache_patterns_fields_clean', $fields);
+				$fields = apply_filters('flash_cache_patterns_fields_clean', $fields);
 				foreach ($fields as $field => $value) {
 					if (!is_null($value)) {
-						$new = apply_filters('wpecache_patterns_metabox_save_' . $field, $value);
+						$new = apply_filters('flash_cache_patterns_metabox_save_' . $field, $value);
 						update_post_meta($post->ID, $field, $new);
 					}
 				}
@@ -480,7 +480,7 @@ if (!class_exists('wpecache_patterns')) :
 				$fields[$key] = maybe_unserialize($value[0]);
 			}
 
-			$fields = apply_filters('wpecache_patterns_fields_clean', $fields);
+			$fields = apply_filters('flash_cache_patterns_fields_clean', $fields);
 
 			return $fields;
 		}
@@ -497,7 +497,7 @@ if (!class_exists('wpecache_patterns')) :
 				return false;
 			}
 
-			if (isset($post->post_type) && $post->post_type == 'revision' || $post->post_type != 'wpecache_patterns') {
+			if (isset($post->post_type) && $post->post_type == 'revision' || $post->post_type != 'flash_cache_patterns') {
 				return false;
 			}
 
@@ -509,8 +509,8 @@ if (!class_exists('wpecache_patterns')) :
 			}
 
 
-			$fields = apply_filters('wpecache_patterns_fields_clean', $_POST);
-			$fields = apply_filters('wpecache_patterns_save', $fields);
+			$fields = apply_filters('flash_cache_patterns_fields_clean', $_POST);
+			$fields = apply_filters('flash_cache_patterns_save', $fields);
 
 			foreach ($fields as $field => $value) {
 
@@ -519,11 +519,11 @@ if (!class_exists('wpecache_patterns')) :
 					update_post_meta($post_id, $field, $new);
 				}
 			}
-			do_action('save_wpecache_patterns', $post_id, $post);
+			do_action('save_flash_cache_patterns', $post_id, $post);
 		}
 
 	}
 
 	endif;
-wpecache_patterns::hooks();
+flash_cache_patterns::hooks();
 ?>

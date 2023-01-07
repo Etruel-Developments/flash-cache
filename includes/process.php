@@ -274,7 +274,7 @@ class flash_cache_process {
 		
 		self::$cache_type = 'html';
 		$create_cache = false;
-		$args = array('post_type' => 'wpecache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
+		$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1 );
 		$patterns = get_posts( $args );
 		$is_post = false;
 		
@@ -300,7 +300,7 @@ class flash_cache_process {
 		}
 	
 		foreach($patterns as $pt) {
-			$pattern = wpecache_patterns::get_data($pt->ID );
+			$pattern = flash_cache_patterns::get_data($pt->ID );
 			
 			$url_must_contain_array = array();
 			$line_arr = explode("\n", $pattern['url_must_contain']);	 

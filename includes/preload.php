@@ -168,7 +168,7 @@ class flash_cache_preaload {
 			}
 			$types = implode(',', $post_types);
 
-			$args = array('post_type' => 'wpecache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
+			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns = get_posts($args);
 			if (is_null(flash_cache_process::$origin_url)) {
 				flash_cache_process::$origin_url = get_site_url(null, '/');
@@ -186,7 +186,7 @@ class flash_cache_preaload {
 				update_option('flash_cache_preload_current_post', $current_url);
 				$create_cache = false;
 				foreach ($patterns as $pt) {
-					$pattern = wpecache_patterns::get_data($pt->ID);
+					$pattern = flash_cache_patterns::get_data($pt->ID);
 					$url_must_contain_array = array();
 					$line_arr = explode("\n", $pattern['url_must_contain']);
 					foreach ($line_arr as $key => $value) {

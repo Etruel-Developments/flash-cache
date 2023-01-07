@@ -170,12 +170,12 @@ if (!class_exists('flash_cache_settings')) :
 
 		public static function cpt_settings_opentags() {
 //		global $current_screen;
-//		if( $current_screen->id == 'edit-wpecache_patterns' ) {
+//		if( $current_screen->id == 'edit-flash_cache_patterns' ) {
 			global $typenow;
 //			die(var_dump($typenow));
-			//if( $current_screen->id == 'edit-wpecache_patterns' ) {
+			//if( $current_screen->id == 'edit-flash_cache_patterns' ) {
 
-			if ($typenow == 'wpecache_patterns') {
+			if ($typenow == 'flash_cache_patterns') {
 
 				wp_enqueue_style('flash_cache-style', FLASH_CACHE_PLUGIN_URL . 'assets/css/style.css');
 				wp_enqueue_style('flash_cache-icons', FLASH_CACHE_PLUGIN_URL . 'assets/css/icons.css');
@@ -197,9 +197,9 @@ if (!class_exists('flash_cache_settings')) :
 			global $typenow;
 //			global $current_screen;
 //			die(var_dump($typenow));
-			//if( $current_screen->id == 'edit-wpecache_patterns' ) {
+			//if( $current_screen->id == 'edit-flash_cache_patterns' ) {
 
-			if ($typenow == 'wpecache_patterns') {
+			if ($typenow == 'flash_cache_patterns') {
 				//$closetags = '</div></div></div></div>';
 				$closetags = '<div class="clear"></div></div>
 				<div class="clear"></div></div>
@@ -215,7 +215,7 @@ if (!class_exists('flash_cache_settings')) :
 		public static function cpt_settings_closetags() {
 			global $typenow, $current_screen;
 //			die(var_dump($current_screen));
-			if ($current_screen->id == 'edit-wpecache_patterns') {
+			if ($current_screen->id == 'edit-flash_cache_patterns') {
 				$closetags = '</div> <!-- wpfooter fix -->
 				<div class="clear"></div></div>
 				<div class="clear"></div></div>
