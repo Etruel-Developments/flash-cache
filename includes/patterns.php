@@ -270,7 +270,7 @@ if (!class_exists('wpecache_patterns')) :
 						<tr valign="top">
 							<th scope="row">' . __('URL must contain', 'flash-cache') . '</th>
 							<td>
-								<textarea style="min-height: 100px;" id="url_must_contain" name="url_must_contain">' . $values['url_must_contain'] . '</textarea>
+								<textarea style="min-height: 100px;" id="url_must_contain" name="url_must_contain">' . esc_textarea($values['url_must_contain']) . '</textarea>
 								<p class="description">' . __('Allows use values which must contain the URLs of the pages so you can create a cache object of this one.', 'flash-cache') . '</p>
 								<p class="description">' . __('Use each line for different values.', 'flash-cache') . '</p>
 							</td>
@@ -278,7 +278,7 @@ if (!class_exists('wpecache_patterns')) :
 						<tr valign="top">
 							<th scope="row">' . __('URL should not contain', 'flash-cache') . '</th>
 							<td>
-								<textarea style="min-height: 100px;" id="url_not_contain" name="url_not_contain">' . $values['url_not_contain'] . '</textarea>
+								<textarea style="min-height: 100px;" id="url_not_contain" name="url_not_contain">' . esc_textarea($values['url_not_contain']) . '</textarea>
 								<p class="description">' . __('Allows establish the values which can’t contain in the URLs of the pages to create a cache object of it. You can assign many values in every line of the text field. For example, add “login” in the text field to avoid a cache of a page which contents “login” in the URL.', 'flash-cache') . '</p>
 								<p class="description">' . __('Use each line for different values.', 'flash-cache') . '</p>
 							</td>
@@ -307,14 +307,14 @@ if (!class_exists('wpecache_patterns')) :
 						<tr valign="top">
 							<th scope="row">' . __('Minimum TTL', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="ttl_minimum" id="ttl_minimum" value="' . $values['ttl_minimum'] . '"/>
+								<input type="text" name="ttl_minimum" id="ttl_minimum" value="' . absint( $values['ttl_minimum'] )  . '"/>
 								<p class="description">' . __('Is the lifetime of the cache to be rebuilded or updated when is visited by the users that are navigating for the website.', 'flash-cache') . '</p>
 							</td>
 						</tr>
 						<tr valign="top">
 							<th scope="row">' . __('Maximum TTL', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="ttl_maximum" id="ttl_maximum" value="' . $values['ttl_maximum'] . '"/>
+								<input type="text" name="ttl_maximum" id="ttl_maximum" value="' . absint( $values['ttl_maximum'] ) . '"/>
 								<p class="description">' . __('Is the lifetime of the cache objects to be rebuilded or updated from the preload process of the Flash Cache.', 'flash-cache') . '</p>
 							</td>
 						</tr>

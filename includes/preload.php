@@ -379,14 +379,14 @@ class flash_cache_preaload {
 						<tr class="wrap-row" valign="top">
 							<th scope="row">' . __('Number of pages per execution', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="flash_cache_preload[pages_per_execution]" id="pages_per_execution" value="' . $values['pages_per_execution'] . '">
+								<input type="text" name="flash_cache_preload[pages_per_execution]" id="pages_per_execution" value="' . absint( esc_attr( $values['pages_per_execution'] ) ) . '">
 								<p class="description">' . __('The preload process is separated by different processes to avoid the collapse of the website. With this option you can set the number of pages which will create a cache object for every execution of the preload process.', 'flash-cache') . '</p>
 							</td>
 						</tr>
 						<tr class="wrap-row" valign="top">
 							<th scope="row">' . __('Time per Preload', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="flash_cache_preload[time_per_preload]" id="time_per_preload" value="' . $values['time_per_preload'] . '">
+								<input type="text" name="flash_cache_preload[time_per_preload]" id="time_per_preload" value="' . absint( esc_attr( $values['time_per_preload'] ) ) . '">
 								<p class="description">' . __('Is the time in seconds for the next execution of the preload alter finishing the previous execution.', 'flash-cache') . '</p>
 							</td>
 						</tr>
@@ -411,8 +411,12 @@ class flash_cache_preaload {
 			wp_die(__('Security check', 'flash-cache'));
 		}
 		$new_options = wp_parse_args($_POST['flash_cache_preload'], self::default_options());
-		$new_options['activate'] = ($new_options['activate'] ? true : false);
-		$new_options['cache_taxonomies'] = ($new_options['cache_taxonomies'] ? true : false);
+		$new_options['activate'] 			= ($new_options['activate'] ? true : false);
+		$new_options['cache_taxonomies'] 	= ($new_options['cache_taxonomies'] ? true : false);
+		$new_options['pages_per_execution'] = absint($new_options['pages_per_execution']);
+		$new_options['time_per_preload'] 	= absint($new_options['time_per_preload']);
+		
+
 		$new_options = apply_filters('flash_cache_check_preload_settings', $new_options);
 
 		update_option('flash_cache_preload', $new_options);

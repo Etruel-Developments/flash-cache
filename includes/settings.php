@@ -250,7 +250,7 @@ if (!class_exists('flash_cache_settings')) :
 						<tr valign="top" class="wrap-row">
 							<th scope="row">' . __('Cache Location', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="flash_cache_advanced[cache_dir]" id="flash_cache_advanced_cache_dir" value="' . $values['cache_dir'] . '"/>
+								<input type="text" name="flash_cache_advanced[cache_dir]" id="flash_cache_advanced_cache_dir" value="' . esc_attr( $values['cache_dir'] ) . '"/>
 								<code>' . get_home_path() . '</code>
 								<p class="description">' . __('Specifies the path of the file system, where it will kept the cache objects of every page, this option can be changed to other customized path.', 'flash-cache') . '</p>
 							</td>
@@ -273,7 +273,7 @@ if (!class_exists('flash_cache_settings')) :
 						<tr valign="top" class="wrap-row">
 							<th scope="row">' . __('Default TTL', 'flash-cache') . '</th>
 							<td>
-								<input type="text" name="flash_cache_advanced[ttl_default]" id="flash_cache_advanced_ttl_default" value="' . $values['ttl_default'] . '"/>
+								<input type="text" name="flash_cache_advanced[ttl_default]" id="flash_cache_advanced_ttl_default" value="' . absint( esc_attr( $values['ttl_default'] ) )  . '"/>
 								<p class="description">' . __('The time life by default is used in the whole website to specifies the lifetime of the cache objects but in the client-side rather the user browser is besieged the header Cache-Control with the value specified in the field.', 'flash-cache') . '</p>
 							</td>
 						</tr>
@@ -289,7 +289,7 @@ if (!class_exists('flash_cache_settings')) :
 			foreach ($values['dont_cache_cookie'] as $value) {
 				echo '<tr valign="top" class="tr_item_dont_cache_cookie">
 											<td scope="row">
-												<input type="text" name="flash_cache_advanced[dont_cache_cookie][]" value="' . $value . '"/><label title="" data-id="1" class="delete"><span class="dashicons dashicons-trash"></span></label>
+												<input type="text" name="flash_cache_advanced[dont_cache_cookie][]" value="' . esc_attr( $value  ) . '"/><label title="" data-id="1" class="delete"><span class="dashicons dashicons-trash"></span></label>
 											</td>
 										</tr>';
 			}
@@ -422,6 +422,19 @@ if (!class_exists('flash_cache_settings')) :
 				wp_die(__('Security check', 'flash-cache'));
 			}
 			$new_options = wp_parse_args($_POST['flash_cache_advanced'], self::default_general_options());
+			
+			$new_options['cache_dir'] = sanitize_text_field($new_options['cache_dir']);
+			$new_options['ttl_default'] = absint($new_options['cache_dir']);
+			
+			// Sanitizes all cookies set by users.
+			$dont_cache_cookies = array();
+			if ( ! empty( $new_options['dont_cache_cookie'] ) ) {
+				foreach($new_options['dont_cache_cookie'] as $cookie) {
+					$dont_cache_cookies[] = sanitize_text_field($cookie);
+				}
+			}
+			$new_options['dont_cache_cookie'] = $dont_cache_cookies;
+
 
 			$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
 

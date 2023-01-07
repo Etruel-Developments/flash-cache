@@ -61,7 +61,6 @@ class flash_cache_notices {
 		$screen = get_current_screen();
 		$notice = get_option(self::$option_notices, array());
 
-		$admin_message = '';
 		if (!empty($notice)) {
 			foreach($notice as $key => $mess) {
 				if($mess['user_ID'] == get_current_user_id()) {
@@ -69,15 +68,14 @@ class flash_cache_notices {
 						$class = ($mess['error']) ? "notice notice-error" : "notice notice-success";
 						$class .= ($mess['is-dismissible']) ? " is-dismissible" : "";
 						$class .= ($mess['below-h2']) ? " below-h2" : "";
-						$admin_message .= '<div id="message" class="'.$class.'"><p>'.$mess['text'].'</p></div>';
+						echo '<div id="message" class="' . esc_attr( $class ) . '"><p>' . esc_html($mess['text']) .'</p></div>';
 						unset( $notice[$key] );
 					}	
 				}
 			}
 			update_option(self::$option_notices, $notice);
 		}
-		
-		echo $admin_message;
+	
 	}
 	
 }
