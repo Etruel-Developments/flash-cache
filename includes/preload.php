@@ -161,7 +161,7 @@ class flash_cache_preaload {
 			if ($values_cron['next_run'] > time() || !$values_cron['started']) {
 				return true;
 			}
-			$c = $values_cron['execution_offeset'];
+			$execution_offeset = $values_cron['execution_offeset'];
 			$post_types = get_post_types(array('public' => true));
 			foreach ($post_types as $kpt => $ptype) {
 				$post_types[$kpt] = "'" . $ptype . "'";
@@ -177,7 +177,14 @@ class flash_cache_preaload {
 			$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 			$default_posts_per_page = get_option('posts_per_page', 10);
 
-			$posts = $wpdb->get_col("SELECT ID FROM {$wpdb->posts} WHERE ( post_type IN ( $types ) ) AND post_status = 'publish' ORDER BY ID ASC LIMIT $c, 100");
+			$posts = $wpdb->get_col( 
+					$wpdb->prepare(
+						"SELECT ID FROM {$wpdb->posts} WHERE ( post_type IN ( %s ) ) AND post_status = 'publish' ORDER BY ID ASC LIMIT %d, %d", 
+						sanitize_text_field( $types ),
+						absint($execution_offeset),
+						100
+					)
+			);
 			foreach ($posts as $k => $post_id) {
 				if (!self::check_time_exection()) {
 					return false;
