@@ -482,7 +482,7 @@ if ( ! function_exists('flash_cache_remove_rules') ):
 			flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Page Cache');
 			flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Utils');
 			flash_cache_remove_marker($home_path . 'nginx.conf', 'FlashCache Optimizations');
-			
+			return;
 		}
 		// By default process with apache webserver.
 		extract(flash_cache_get_htaccess_info());

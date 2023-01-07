@@ -6,7 +6,7 @@ if ( !defined('ABSPATH') ) {
 }
 
 add_action('admin_init', 'flash_cache_admin_init');
-if ( ! function_exists('flash_cache_get_menus_social_footer') ):
+if ( ! function_exists('flash_cache_admin_init') ):
 	function flash_cache_admin_init(){
 		add_filter(	'plugin_row_meta',	'flash_cache_init_row_meta',10,2);
 		add_filter(	'plugin_action_links_' . plugin_basename( FLASH_CACHE_PLUGIN_FILE ), 'flash_cache_init_action_links');
@@ -19,7 +19,7 @@ endif;
 * @param   array   $data  Original Links
 * @return  array   $data  modified Links
 */
-if ( ! function_exists('flash_cache_get_menus_social_footer') ):
+if ( ! function_exists('flash_cache_init_action_links') ):
 	function flash_cache_init_action_links($data)	{
 		if ( !current_user_can('manage_options') ) {
 			return $data;
@@ -39,7 +39,7 @@ endif;
 * @param   string  $page  plugin actual
 * @return  array   $data  modified Links
 */
-if ( ! function_exists('flash_cache_get_menus_social_footer') ):
+if ( ! function_exists('flash_cache_init_row_meta') ):
 	function flash_cache_init_row_meta($data, $page)	{
 		if ( basename($page) != 'flash_cache.php' ) {
 			return $data;

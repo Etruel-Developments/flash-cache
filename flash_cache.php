@@ -200,7 +200,6 @@ if ( ! class_exists('Flash_Cache') ) :
  */
 if ( ! function_exists('Flash_Cache_load') ):
 	function Flash_Cache_load() {
-		
 		return Flash_Cache::getInstance();
 	}
 endif;
