@@ -504,7 +504,7 @@ if (!class_exists('flash_cache_patterns')) :
 			if (!current_user_can('manage_options', $post_id)) {
 				return false;
 			}
-			if (( defined('FKTR_STOP_PROPAGATION') && FKTR_STOP_PROPAGATION)) {
+			if (( defined('FLASH_CACHE_STOP_PROPAGATION') && FLASH_CACHE_STOP_PROPAGATION)) {
 				return false;
 			}
 
