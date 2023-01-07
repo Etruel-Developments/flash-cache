@@ -42,7 +42,7 @@ if (!class_exists('flash_cache_optimize_scripts')) :
                     
                     if ( preg_match( '#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source ) ) {
                         $url = current( explode( '?', $source[2], 2 ) );
-                        self::$js_tags[] = wpe_cache_get_path( $url );
+                        self::$js_tags[] = flash_cache_get_path( $url );
                     } else {
                          $tag = '';
                     }

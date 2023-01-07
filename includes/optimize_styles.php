@@ -61,7 +61,7 @@ if (!class_exists('flash_cache_optimize_styles')) :
                     if ( preg_match( '#<link.*href=("|\')(.*)("|\')#Usmi', $tag, $source ) ) {
                         // <link>.
                         $url  = current( explode( '?', $source[2], 2 ) );
-                        $path = wpe_cache_get_path( $url );
+                        $path = flash_cache_get_path( $url );
 
                         if ( false !== $path && preg_match( '#\.css$#', $path ) ) {
                             // Good link.

@@ -35,14 +35,14 @@ function flash_cache_admin_bar_render() {
 			'id' => 'delete-cache',
 			'title' => __('Delete Cache', 'flash-cache'),
 			'meta' => array('title' => __('Delete cache of the current page', 'flash-cache')),
-			'href' => wp_nonce_url(admin_url('admin-post.php?action=wpe_cache_delete&path=' . urlencode(preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $path_cache))), 'delete-cache')
+			'href' => wp_nonce_url(admin_url('admin-post.php?action=flash_cache_delete&path=' . urlencode(preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $path_cache))), 'delete-cache')
 		));
 	}
 }
 
 add_action('wp_before_admin_bar_render', 'flash_cache_admin_bar_render');
 
-function wpe_cache_delete_action() {
+function flash_cache_delete_action() {
 	flash_cache_process::get_db_lock('/');
 	// Delete cache for a specific page
 	if (function_exists('current_user_can') && false == current_user_can('delete_others_posts')) {
@@ -65,7 +65,7 @@ function wpe_cache_delete_action() {
 		wp_die('You are not authorized to do this action');
 	}
 }
-add_action('admin_post_wpe_cache_delete', 'wpe_cache_delete_action');
+add_action('admin_post_flash_cache_delete', 'flash_cache_delete_action');
 
 function flash_cache_delete_cache_from_url($url) {
 	$path = str_ireplace(home_url(''), '', $url);
@@ -612,7 +612,7 @@ function wpe_delete_cache_files($cache_dir, $cache_path) {
 	}
 }
 
-function wpe_cache_get_path($url) {
+function flash_cache_get_path($url) {
 
 	$url = apply_filters('flash_cache_get_path_url', $url);
 
