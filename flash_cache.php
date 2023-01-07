@@ -78,14 +78,7 @@ if ( ! class_exists('Flash_Cache') ) :
 			if (!defined('FLASH_CACHE_PLUGIN_FILE')) {
 				define('FLASH_CACHE_PLUGIN_FILE', __FILE__);
 			}
-
-			if (!defined('FLASH_CACHE_STORE_URL')) {
-				define('FLASH_CACHE_STORE_URL', 'https://etruel.com');
-			}
-
-			if (!defined('FLASH_CACHE_ITEM_NAME')) {
-				define('FLASH_CACHE_ITEM_NAME', 'Flash Cache');
-			}
+			
 		}
 
 		/**
