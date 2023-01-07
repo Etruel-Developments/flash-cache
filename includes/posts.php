@@ -18,7 +18,7 @@ class flash_cache_posts {
 		add_action('comment_post', array(__CLASS__, 'cache_from_comment'), 99);
 		add_action('edit_comment', array(__CLASS__, 'cache_from_comment'), 99);
 		add_action('post_submitbox_minor_actions', array(__CLASS__, 'delete_cache_button') );
-		add_action('admin_post_wpe_delete_cache', array(__CLASS__, 'delete_cache_action'));
+		add_action('admin_post_flash_cache_delete_cache', array(__CLASS__, 'delete_cache_action'));
 		/* add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99); 
 		add_action('save_post', array(__CLASS__, 'create_cache'), 999, 3 );
 		*/
@@ -158,9 +158,9 @@ class flash_cache_posts {
 		if (!file_exists($cache_path)) {
 			return false;
 		}
-		$delete_url = wp_nonce_url(admin_url('admin-post.php?id=' . absint( $post->ID ) . '&action=wpe_delete_cache&referer='. esc_attr(base64_encode(wp_unslash( $_SERVER['REQUEST_URI'] ))  )), 'delete_cache_nonce', '_nonce');
+		$delete_url = wp_nonce_url(admin_url('admin-post.php?id=' . absint( $post->ID ) . '&action=flash_cache_delete_cache&referer='. esc_attr(base64_encode(wp_unslash( $_SERVER['REQUEST_URI'] ))  )), 'delete_cache_nonce', '_nonce');
 		$delete_button = '<a  id="reset_button" class="button button-large" href="'. esc_attr( $delete_url ) . '" style="margin:5px;">'. __('Clear Entry Cache', 'flash-cache') . '</a>';
-		echo '<div class="misc-pub-section sec_wpe_delete_cache_button" style="text-align:center;">
+		echo '<div class="misc-pub-section sec_flash_cache_delete_cache_button" style="text-align:center;">
 			'.$delete_button.'
 		</div>';
 	}

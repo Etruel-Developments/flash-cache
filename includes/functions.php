@@ -57,7 +57,7 @@ function flash_cache_delete_action() {
 		$cache_path = realpath($page_cache_dir) . '/';
 		if ($cache_path != '/') {
 		
-			wpe_delete_cache_files($cache_dir, $cache_path);
+			flash_cache_delete_cache_files($cache_dir, $cache_path);
 		}
 		wp_redirect(get_site_url(null, '/') . preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $_GET['path']));
 		die();
@@ -76,7 +76,7 @@ function flash_cache_delete_cache_from_url($url) {
 	$cache_path = realpath($page_cache_dir) . '/';
 
 	if ($cache_path != '/') {
-		wpe_delete_cache_files($cache_dir, $cache_path);
+		flash_cache_delete_cache_files($cache_dir, $cache_path);
 	}
 }
 
@@ -583,7 +583,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 			array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
 }
 
-function wpe_delete_cache_files($cache_dir, $cache_path) {
+function flash_cache_delete_cache_files($cache_dir, $cache_path) {
 	$html_file = $cache_path . 'index-cache.html';
 	
 	if (file_exists($html_file)) {
