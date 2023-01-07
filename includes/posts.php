@@ -322,8 +322,8 @@ class flash_cache_posts {
 		if ($post->post_status != 'publish') {
 			return true;
 		}
-		if (!defined('SS_NOT_USE_THIS_REQUEST')) {
-			define('SS_NOT_USE_THIS_REQUEST', true); 
+		if (!defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
+			define('FLASH_CACHE_NOT_USE_THIS_REQUEST', true); 
 		} 
 
 		$default_query = flash_cache_default_query();

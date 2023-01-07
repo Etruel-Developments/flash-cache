@@ -151,20 +151,20 @@ class flash_cache_process {
 	*/
 	public static function cache_response_html($response, $url_to_cache) {
 		$defer_flash_cache_js = '<script type="text/javascript">
-		function SSJSAtOnload() {
-		var pattern_minimum = '.self::$pattern['ttl_minimum'].';
-		var current_query = "'.base64_encode(json_encode(self::$current_query)).'";
-		var ss_optional_post_id = '.self::$optional_post_id.';
+		function flash_cache_onloadjs() {
+		var pattern_minimum = ' . absint( self::$pattern['ttl_minimum'] )  . ';
+		var current_query = " ' . base64_encode( json_encode( self::$current_query ) ) .'";
+		var flash_cache_optional_post_id = ' . absint( self::$optional_post_id ) . ';
 		var element = document.createElement("script");
 		element.src = "'.admin_url('admin-post.php?action=onload_flash_cache&p='.urlencode(base64_encode(self::$url_to_cache)).'').'";
 		document.body.appendChild(element);
 		}
 		if (window.addEventListener) {
-			window.addEventListener("load", SSJSAtOnload, false);
+			window.addEventListener("load", flash_cache_onloadjs, false);
 		} else if (window.attachEvent) {
-			window.attachEvent("onload", SSJSAtOnload);
+			window.attachEvent("onload", flash_cache_onloadjs);
 		} else {
-			window.onload = SSJSAtOnload;
+			window.onload = flash_cache_onloadjs;
 		}
 		</script>';
 		$response = str_replace('</body>', $defer_flash_cache_js.'</body>', $response);
@@ -549,7 +549,7 @@ class flash_cache_process {
 			$current_query = json_decode(base64_decode($current_query), true);
 			self::debug('Procesing a new pattern from onload_cache:'.var_export($current_query, true));
 			self::$force_process_type = 'curl';
-			self::$optional_post_id = flash_cache_get_var_javascript('ss_optional_post_id', $cache_response);
+			self::$optional_post_id = flash_cache_get_var_javascript('flash_cache_optional_post_id', $cache_response);
 			self::process_cache_from_query($current_query, $opcional_url);
 		}
 	}
@@ -667,7 +667,7 @@ class flash_cache_process {
 		if ($use_curl) {
 			$response = flash_cache_get_content(self::$url_to_cache);
 		}
-		if (defined('SS_NOT_USE_THIS_REQUEST')) {
+		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));
 		} else {
 			$request = hash('sha256', http_build_query($_REQUEST));
