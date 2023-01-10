@@ -9,7 +9,7 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
-if (!class_exists('flash_cache_posts')) :
+
 class flash_cache_posts {
 
 	public static function hooks() {
@@ -437,6 +437,6 @@ class flash_cache_posts {
 
 
 }
-endif;
+
 flash_cache_posts::hooks();
 ?>

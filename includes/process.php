@@ -9,7 +9,7 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
-if (!class_exists('flash_cache_process')) :
+
 class flash_cache_process {
 	public static $origin_url = null;
 	public static $template_redirect = false;
@@ -742,6 +742,6 @@ class flash_cache_process {
 		return $uri;
 	}
 }
-endif;
+
 flash_cache_process::hooks();
 ?>

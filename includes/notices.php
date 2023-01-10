@@ -11,7 +11,7 @@ if (!defined('ABSPATH'))  {
 	exit;
 }
 
-if ( ! class_exists( 'flash_cache_notices' ) ) :
+
 /**
 * flash_cache_notices class
 * @since 1.0.0
@@ -80,7 +80,6 @@ class flash_cache_notices {
 	
 }
 
-endif; // End if class_exists check
 flash_cache_notices::hooks();
 
 ?>
