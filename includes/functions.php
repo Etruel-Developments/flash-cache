@@ -158,10 +158,10 @@ if ( ! function_exists('flash_cache_get_nginx_conf_info') ):
 		$wp_cache_disable_utf8 = 0;
 
 		if (isset($_SERVER['PHP_DOCUMENT_ROOT'])) {
-			$document_root = $_SERVER['PHP_DOCUMENT_ROOT'];
-			$apache_root = $_SERVER['PHP_DOCUMENT_ROOT'];
+			$document_root = sanitize_text_field( $_SERVER['PHP_DOCUMENT_ROOT'] );
+			$apache_root = sanitize_text_field( $_SERVER['PHP_DOCUMENT_ROOT'] );
 		} else {
-			$document_root = $_SERVER['DOCUMENT_ROOT'];
+			$document_root = sanitize_text_field( $_SERVER['DOCUMENT_ROOT'] );
 			$apache_root = '%{DOCUMENT_ROOT}';
 		}
 		$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
@@ -261,10 +261,10 @@ if ( ! function_exists('flash_cache_get_htaccess_info') ):
 		$cache_dir = $advanced_settings['cache_dir'];
 		$wp_cache_disable_utf8 = 0;
 		if (isset($_SERVER['PHP_DOCUMENT_ROOT'])) {
-			$document_root = $_SERVER['PHP_DOCUMENT_ROOT'];
-			$apache_root = $_SERVER['PHP_DOCUMENT_ROOT'];
+			$document_root = sanitize_text_field( $_SERVER['PHP_DOCUMENT_ROOT'] );
+			$apache_root = sanitize_text_field( $_SERVER['PHP_DOCUMENT_ROOT'] );
 		} else {
-			$document_root = $_SERVER['DOCUMENT_ROOT'];
+			$document_root = sanitize_text_field( $_SERVER['DOCUMENT_ROOT'] );
 			$apache_root = '%{DOCUMENT_ROOT}';
 		}
 		$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
