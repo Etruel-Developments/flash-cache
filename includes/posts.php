@@ -392,6 +392,7 @@ class flash_cache_posts {
 
 		} else {
 			
+			$server_name = flash_cache_get_server_name();
 			
 			$taxonomy_names = get_post_taxonomies($post_id);
 			foreach ($taxonomy_names as $key => $tax) {
@@ -409,7 +410,7 @@ class flash_cache_posts {
 						if (stripos($path, '?') !== false) { //Not create cache of taxonomies if have query strings.
 							continue;
 						}
-						$cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/'.$path;
+						$cache_path = $cache_dir.$server_name.'/'.$path;
 						$cache_file = $cache_path.'index-cache.html';
 						if (file_exists($cache_file)) {
 							if (time()-filemtime($cache_file) < (int)$ttl) {

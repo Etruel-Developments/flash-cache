@@ -148,6 +148,16 @@ function flash_cache_get_content($url, $args = array()) {
 	return $return;
 }
 
+function flash_cache_get_server_name() {
+	if ( ! empty( $_SERVER['SERVER_NAME'] ) ) {
+		$server_name = sanitize_text_field( $_SERVER['SERVER_NAME'] );
+	} else {
+		$server_name = parse_url(get_bloginfo('url'));
+		$server_name = $server_name['host'];
+		$server_name = sanitize_text_field( $server_name );
+	}
+}
+
 
 function flash_cache_get_nginx_conf_info() {
 
@@ -164,6 +174,9 @@ function flash_cache_get_nginx_conf_info() {
 		$document_root = sanitize_text_field( $_SERVER['DOCUMENT_ROOT'] );
 		$apache_root = '%{DOCUMENT_ROOT}';
 	}
+
+	$server_name = flash_cache_get_server_name();
+	
 	$advanced_settings['dont_cache_cookie'][] = 'flash_cache';
 	$content_dir_root = $document_root;
 	
@@ -216,20 +229,20 @@ function flash_cache_get_nginx_conf_info() {
 		$cache_rules[] = '}';
 
 		
-		$cache_rules[] = 'if (!-f "$document_root/'. esc_attr($cache_dir) . esc_attr($_SERVER['SERVER_NAME']) . '/${cache_uri}/index-cache.html") {';
+		$cache_rules[] = 'if (!-f "$document_root/'. esc_attr($cache_dir) . esc_attr( $server_name ) . '/${cache_uri}/index-cache.html") {';
 		$cache_rules[] = 'set $cache_uri \'null cache\';';
 		$cache_rules[] = '}';
 
 		$cache_rules[] = 'if ($cache_uri != "null cache") {';
-		$cache_rules[] = 'rewrite .* "/'. esc_attr($cache_dir) . esc_attr($_SERVER['SERVER_NAME']) . '/${cache_uri}/index-cache.html" last;';
+		$cache_rules[] = 'rewrite .* "/'. esc_attr($cache_dir) . esc_attr( $server_name ) . '/${cache_uri}/index-cache.html" last;';
 		$cache_rules[] = '}';
 
-		$cache_rules[] = 'if (!-f "$document_root/'. esc_attr($cache_dir) . esc_attr($_SERVER['SERVER_NAME']) . '/${cache_uri_php}/index-cache.php") {';
+		$cache_rules[] = 'if (!-f "$document_root/'. esc_attr($cache_dir) . esc_attr( $server_name ) . '/${cache_uri_php}/index-cache.php") {';
 		$cache_rules[] = 'set $cache_uri_php \'null cache\';';
 		$cache_rules[] = '}';
 		
 		$cache_rules[] = 'if ($cache_uri_php != "null cache") {';
-		$cache_rules[] = 'rewrite .* "/'.esc_attr($cache_dir) . esc_attr($_SERVER['SERVER_NAME']) . '/${cache_uri_php}/index-cache.php" last;';
+		$cache_rules[] = 'rewrite .* "/'.esc_attr($cache_dir) . esc_attr( $server_name ) . '/${cache_uri_php}/index-cache.php" last;';
 		$cache_rules[] = '}';
 		
 	}

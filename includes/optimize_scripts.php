@@ -73,7 +73,7 @@ class flash_cache_optimize_scripts {
         if (is_null(flash_cache_process::$origin_url)) {
             flash_cache_process::$origin_url = get_site_url(null, '/');
         }
-        
+        $server_name = flash_cache_get_server_name();
         $all_js_code = '';
         $basename_js = '';
         foreach (self::$js_tags as $path) {
@@ -92,7 +92,7 @@ class flash_cache_optimize_scripts {
         
         
         $cache_dir = flash_cache_get_home_path(). flash_cache_process::$advanced_settings['cache_dir'];
-        $cache_path = $cache_dir.$_SERVER['SERVER_NAME'].'/scripts/';
+        $cache_path = $cache_dir . $server_name . '/scripts/' ;
         if (!file_exists($cache_path)) {
             @mkdir($cache_path, 0777, true);
         }

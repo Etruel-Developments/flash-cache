@@ -340,15 +340,21 @@ class flash_cache_preaload {
 
 		if ($values['activate']) {
 			$values_cron = wp_parse_args(get_option('flash_cache_preload_cron', array()), self::default_options_cron());
-			if ($values_cron['next_run'] < time() && $values_cron['started'] && !$values_cron['finished']) {
+			$execution_offeset = absint( $values_cron['execution_offeset'] );
+			$next_run = absint( $values_cron['next_run'] );
+
+			
+			if ($next_run < time() && $values_cron['started'] && !$values_cron['finished']) {
 				$current_post_url = get_option('flash_cache_preload_current_post', '');
-				echo '<code>' . sprintf(__('Preload is executing now: %s - %s - %s', 'flash-cache'), $values_cron['execution_offeset'], ((int) $values_cron['execution_offeset'] + (int) $values['pages_per_execution']), $current_post_url) . '</code>';
+				$next_page = ( absint($values_cron['execution_offeset']) + absint( $values['pages_per_execution'] ) );
+				
+				echo '<code>' . sprintf(__('Preload is executing now: %s - %s - %s', 'flash-cache'), esc_attr( $execution_offeset ), esc_attr(  $next_page ), esc_url( $current_post_url ) ) . '</code>';
 			} else {
-				if ($values_cron['next_run'] < time() && $values_cron['finished'] && !$values_cron['started']) {
+				if ($next_run < time() && $values_cron['finished'] && !$values_cron['started']) {
 					echo '<code>' . __('Preload is pending to execution.', 'flash-cache') . '</code>';
 				} else {
-					if ($values_cron['next_run'] > time() && $values_cron['finished'] && !$values_cron['started']) {
-						echo '<code>' . sprintf(__('Next run: %s', 'flash-cache'), date('Y-m-d H:i:s', $values_cron['next_run'])) . '</code>';
+					if ($next_run > time() && $values_cron['finished'] && !$values_cron['started']) {
+						echo '<code>' . sprintf(__('Next run: %s', 'flash-cache'), esc_attr( date('Y-m-d H:i:s', $next_run ) ) ) . '</code>';
 					}
 				}
 			}
