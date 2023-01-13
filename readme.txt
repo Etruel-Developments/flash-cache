@@ -61,6 +61,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 == Changelog ==
 = 3.0 Jan XX, 2023 =
 * New version released as free plugin.
+* Many security improvements.
 
 = 2.0 Apr 5, 2022 =
 * Rebranding images, logo and name change to Flash Cache!

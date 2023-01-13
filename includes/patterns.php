@@ -11,7 +11,6 @@
 if (!defined('ABSPATH'))
 	exit;
 
-
 class flash_cache_patterns {
 
 	/**
@@ -31,7 +30,6 @@ class flash_cache_patterns {
 		add_action('admin_print_scripts-edit.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_print_scripts-post.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_print_scripts-post-new.php', array(__CLASS__, 'patterns_edit_scripts'));
-
 	}
 
 	/**
@@ -41,56 +39,56 @@ class flash_cache_patterns {
 	 * @since 1.0.0
 	 */
 	public static function setup() {
-		$slug = 'flash_cache_patterns';
-		$labels = array(
-			'name' => __('Patterns', 'flash-cache'),
-			'singular_name' => __('Pattern', 'flash-cache'),
-			'add_new' => __('Add New', 'flash-cache'),
-			'add_new_item' => __('Add New Pattern', 'flash-cache'),
-			'edit_item' => __('Edit Pattern', 'flash-cache'),
-			'new_item' => __('New Pattern', 'flash-cache'),
-			'view_item' => __('View Pattern', 'flash-cache'),
-			'search_items' => __('Search Patterns', 'flash-cache'),
-			'not_found' => __('No Patterns found', 'flash-cache'),
+		$slug			 = 'flash_cache_patterns';
+		$labels			 = array(
+			'name'				 => __('Patterns', 'flash-cache'),
+			'singular_name'		 => __('Pattern', 'flash-cache'),
+			'add_new'			 => __('Add New', 'flash-cache'),
+			'add_new_item'		 => __('Add New Pattern', 'flash-cache'),
+			'edit_item'			 => __('Edit Pattern', 'flash-cache'),
+			'new_item'			 => __('New Pattern', 'flash-cache'),
+			'view_item'			 => __('View Pattern', 'flash-cache'),
+			'search_items'		 => __('Search Patterns', 'flash-cache'),
+			'not_found'			 => __('No Patterns found', 'flash-cache'),
 			'not_found_in_trash' => __('No Patterns found in Trash', 'flash-cache'),
-			'parent_item_colon' => __('Parent Pattern:', 'flash-cache'),
-			'menu_name' => __('Patterns', 'flash-cache'),
+			'parent_item_colon'	 => __('Parent Pattern:', 'flash-cache'),
+			'menu_name'			 => __('Patterns', 'flash-cache'),
 		);
-		$capabilities = array(
-			'publish_post' => 'publish_flash_cache_pattern',
-			'publish_posts' => 'publish_flash_cache_patterns',
-			'read_post' => 'read_flash_cache_pattern',
-			'read_private_posts' => 'read_private_flash_cache_patterns',
-			'edit_post' => 'edit_flash_cache_pattern',
-			'edit_published_posts' => 'edit_published_flash_cache_patterns',
-			'edit_private_posts' => 'edit_private_flash_cache_patterns',
-			'edit_posts' => 'edit_flash_cache_patterns',
-			'edit_others_posts' => 'edit_others_flash_cache_patterns',
-			'delete_post' => 'delete_flash_cache_pattern',
-			'delete_posts' => 'delete_flash_cache_patterns',
+		$capabilities	 = array(
+			'publish_post'			 => 'publish_flash_cache_pattern',
+			'publish_posts'			 => 'publish_flash_cache_patterns',
+			'read_post'				 => 'read_flash_cache_pattern',
+			'read_private_posts'	 => 'read_private_flash_cache_patterns',
+			'edit_post'				 => 'edit_flash_cache_pattern',
+			'edit_published_posts'	 => 'edit_published_flash_cache_patterns',
+			'edit_private_posts'	 => 'edit_private_flash_cache_patterns',
+			'edit_posts'			 => 'edit_flash_cache_patterns',
+			'edit_others_posts'		 => 'edit_others_flash_cache_patterns',
+			'delete_post'			 => 'delete_flash_cache_pattern',
+			'delete_posts'			 => 'delete_flash_cache_patterns',
 			'delete_published_posts' => 'delete_published_flash_cache_patterns',
-			'delete_private_posts' => 'delete_private_flash_cache_patterns',
-			'delete_others_posts' => 'delete_others_flash_cache_patterns',
+			'delete_private_posts'	 => 'delete_private_flash_cache_patterns',
+			'delete_others_posts'	 => 'delete_others_flash_cache_patterns',
 		);
 
 		$args = array(
-			'labels' => $labels,
-			'hierarchical' => false,
-			'description' => 'Flash Cache Patterns',
-			'supports' => array('title', /* 'custom-fields' */),
-			'register_meta_box_cb' => array(__CLASS__, 'meta_boxes'),
-			'public' => false,
-			'show_ui' => true,
-			'show_in_menu' => false,
-			'menu_position' => 27,
-			'menu_icon' => 'dashicons-images-alt2',
-			'show_in_nav_menus' => false,
-			'publicly_queryable' => false,
-			'exclude_from_search' => false,
-			'has_archive' => false,
-			'query_var' => true,
-			'can_export' => true,
-			'rewrite' => true,
+			'labels'				 => $labels,
+			'hierarchical'			 => false,
+			'description'			 => 'Flash Cache Patterns',
+			'supports'				 => array('title', /* 'custom-fields' */),
+			'register_meta_box_cb'	 => array(__CLASS__, 'meta_boxes'),
+			'public'				 => false,
+			'show_ui'				 => true,
+			'show_in_menu'			 => false,
+			'menu_position'			 => 27,
+			'menu_icon'				 => 'dashicons-images-alt2',
+			'show_in_nav_menus'		 => false,
+			'publicly_queryable'	 => false,
+			'exclude_from_search'	 => false,
+			'has_archive'			 => false,
+			'query_var'				 => true,
+			'can_export'			 => true,
+			'rewrite'				 => true,
 		);
 
 		register_post_type($slug, $args);
@@ -104,8 +102,8 @@ class flash_cache_patterns {
 	 */
 	public static function patterns_edit_scripts() {
 		global $post;
-		if( !isset($post->post_type) or $post->post_type != 'flash_cache_patterns')
-			return isset($post->ID) ? $post->ID: false;
+		if (!isset($post->post_type) or $post->post_type != 'flash_cache_patterns')
+			return isset($post->ID) ? $post->ID : false;
 		wp_dequeue_script('autosave');
 		wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION, true);
 	}
@@ -184,40 +182,42 @@ class flash_cache_patterns {
 	 */
 	public static function metabox_data() {
 		global $post;
-		$values = self::get_data($post->ID);
-		$args = array(
-			'public' => true,
-			'_builtin' => false
+		$values	 = self::get_data($post->ID);
+		$args	 = array(
+			'public'	 => true,
+			'_builtin'	 => false
 		);
 
 		echo '<div class="wrap wpm_container"><table class="form-table">
 					<tr valign="top">
-						<th scope="row">' . 
-							__('Page Types', 'flash-cache') . 				
-					'</th>
+						<th scope="row">' .
+		__('Page Types', 'flash-cache') .
+		'</th>
 						<td>
-						<p class="description">' . 
-								__('The options of the kind of pages, are the different post types where it will be used other cache options. For example, if it only select Home ( is_home() ) the options configured in that pattern only affects to the homepage in the website. This way, you can create different patterns to draw on and better configure how the cache will be created.', 'flash-cache') .
-							'<div class="checkbox-group">
+						<p class="description">' .
+		__('The options of the kind of pages, are the different post types where it will be used other cache options. For example, if it only select Home ( is_home() ) the options configured in that pattern only affects to the homepage in the website. This way, you can create different patterns to draw on and better configure how the cache will be created.', 'flash-cache') .
+		'<div class="checkbox-group">
 								<input type="checkbox" value="1" name="page_type[single]" ' . checked(1, $values['page_type']['single'], false) . ' />Post Type
 							</div>';
-		$args = array('public' => true);
-		$output = 'names'; // names or objects
-		$post_types = get_post_types($args, $output);
+
+		$args		 = array('public' => true);
+		$output		 = 'names'; // names or objects
+		$post_types	 = get_post_types($args, $output);
 		echo '<div style="margin-left:20px">';
+
 		foreach ($post_types as $post_type_name) {
 			$cpt_data = get_post_type_object($post_type_name);
 			if (!isset($values['page_type']['posts'][$post_type_name])) {
 				$values['page_type']['posts'][$post_type_name] = false;
 			}
-			echo '<div class="checkbox-group"><input type="checkbox" value="1" name="page_type[posts][' . $post_type_name . ']" ' . checked(1, $values['page_type']['posts'][$post_type_name], false) . ' />' . 
-					$cpt_data->label . 
-				'</div>';
+			echo '<div class="checkbox-group"><input type="checkbox" value="1" name="page_type[posts][' . $post_type_name . ']" ' . checked(1, $values['page_type']['posts'][$post_type_name], false) . ' />' .
+			$cpt_data->label .
+			'</div>';
 		}
 
-		echo '<p class="description">' . 
-				__('If you do not select any of the Post Type options, it will be interpreted as selecting all the options.', 'flash-cache') . '</p><br/>' .
-			'</p>
+		echo '<p class="description">' .
+		__('If you do not select any of the Post Type options, it will be interpreted as selecting all the options.', 'flash-cache') . '</p><br/>' .
+		'</p>
 				<div class="checkbox-group"><input type="checkbox" value="1" name="create_cache_on_insert_update" ' . checked(1, $values['create_cache_on_insert_update'], false) . ' />' . __('Create cache on insert or update a post.', 'flash-cache') . '
 				</div>
 				<div class="checkbox-group"><input type="checkbox" value="1" name="update_home_on_insert_post" ' . checked(1, $values['update_home_on_insert_post'], false) . ' />' . __('Update home page on insert a new post.', 'flash-cache') . '
@@ -306,14 +306,14 @@ class flash_cache_patterns {
 					<tr valign="top">
 						<th scope="row">' . __('Minimum TTL', 'flash-cache') . '</th>
 						<td>
-							<input type="text" name="ttl_minimum" id="ttl_minimum" value="' . absint( $values['ttl_minimum'] )  . '"/>
+							<input type="text" name="ttl_minimum" id="ttl_minimum" value="' . esc_attr(absint($values['ttl_minimum'])) . '"/>
 							<p class="description">' . __('Is the lifetime of the cache to be rebuilded or updated when is visited by the users that are navigating for the website.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">' . __('Maximum TTL', 'flash-cache') . '</th>
 						<td>
-							<input type="text" name="ttl_maximum" id="ttl_maximum" value="' . absint( $values['ttl_maximum'] ) . '"/>
+							<input type="text" name="ttl_maximum" id="ttl_maximum" value="' . esc_attr(absint($values['ttl_maximum'])) . '"/>
 							<p class="description">' . __('Is the lifetime of the cache objects to be rebuilded or updated from the preload process of the Flash Cache.', 'flash-cache') . '</p>
 						</td>
 					</tr>
@@ -328,31 +328,32 @@ class flash_cache_patterns {
 	 * @since 1.0.0
 	 */
 	public static function default_fields_array() {
-		$array = array(
-			'ttl_minimum' => '86400',
-			'ttl_maximum' => '31536000',
-			'page_type' => array(
-				'single' => 1,
-				'posts' => array(),
-				'frontpage' => 1,
-				'home' => 1,
-				'archives' => 1,
-				'tag' => 1,
-				'category' => 1,
-				'feed' => 1,
-				'search' => 1,
-				'author' => 1,
+		$array	 = array(
+			'ttl_minimum'					 => '86400',
+			'ttl_maximum'					 => '31536000',
+			'page_type'						 => array(
+				'single'	 => 1,
+				'posts'		 => array(),
+				'frontpage'	 => 1,
+				'home'		 => 1,
+				'archives'	 => 1,
+				'tag'		 => 1,
+				'category'	 => 1,
+				'feed'		 => 1,
+				'search'	 => 1,
+				'author'	 => 1,
 			),
-			'update_on_comment' => 1,
-			'create_cache_on_insert_update' => 1,
-			'update_home_on_insert_post' => 1,
-			'update_categories_on_post' => 1,
-			'update_tax_on_comment' => 1,
-			'cache_type' => 'html',
-			'url_must_contain' => '',
-			'url_not_contain' => '',
+			'update_on_comment'				 => 1,
+			'create_cache_on_insert_update'	 => 1,
+			'update_home_on_insert_post'	 => 1,
+			'update_categories_on_post'		 => 1,
+			'update_tax_on_comment'			 => 1,
+			'cache_type'					 => 'html',
+			'url_must_contain'				 => '',
+			'url_not_contain'				 => '',
 		);
-		$array = apply_filters('flash_cache_pattern_default_fields', $array);
+		
+		$array	 = apply_filters('flash_cache_pattern_default_fields', $array);
 		return $array;
 	}
 
@@ -365,8 +366,8 @@ class flash_cache_patterns {
 	public static function default_fields($new_status, $old_status, $post) {
 
 		if ($post->post_type == 'flash_cache_patterns' && $old_status == 'new') {
-			$fields = wp_parse_args(array(), self::default_fields_array());
-			$fields = apply_filters('flash_cache_patterns_fields_clean', $fields);
+			$fields	 = wp_parse_args(array(), self::default_fields_array());
+			$fields	 = apply_filters('flash_cache_patterns_fields_clean', $fields);
 			foreach ($fields as $field => $value) {
 				if (!is_null($value)) {
 					$new = apply_filters('flash_cache_patterns_metabox_save_' . $field, $value);
@@ -404,8 +405,6 @@ class flash_cache_patterns {
 			$fields['update_categories_on_post'] = 1;
 		}
 
-
-
 		if (empty($fields['update_on_comment'])) {
 			$fields['update_on_comment'] = 0;
 		} else {
@@ -415,7 +414,6 @@ class flash_cache_patterns {
 		if (empty($fields['page_type'])) {
 			$fields['page_type'] = array();
 		}
-
 
 		if (empty($fields['page_type']['single'])) {
 			$fields['page_type']['single'] = 0;
@@ -473,8 +471,9 @@ class flash_cache_patterns {
 	 * @since 1.0.0
 	 */
 	public static function get_data($patern_id) {
-		$custom_field_keys = get_post_custom($patern_id);
-		$fields = array();
+		$custom_field_keys	 = get_post_custom($patern_id);
+		$fields				 = array();
+
 		foreach ($custom_field_keys as $key => $value) {
 			$fields[$key] = maybe_unserialize($value[0]);
 		}
@@ -507,9 +506,8 @@ class flash_cache_patterns {
 			return false;
 		}
 
-
-		$fields = apply_filters('flash_cache_patterns_fields_clean', $_POST);
-		$fields = apply_filters('flash_cache_patterns_save', $fields);
+		$fields	 = apply_filters('flash_cache_patterns_fields_clean', $_POST);
+		$fields	 = apply_filters('flash_cache_patterns_save', $fields);
 
 		foreach ($fields as $field => $value) {
 
@@ -522,7 +520,6 @@ class flash_cache_patterns {
 	}
 
 }
-
 
 flash_cache_patterns::hooks();
 ?>

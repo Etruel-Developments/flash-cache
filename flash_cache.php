@@ -23,9 +23,6 @@ if (!defined('FLASH_CACHE_VERSION')) {
 	define('FLASH_CACHE_VERSION', '3.0');
 }
 
-
-
-
 /**
  * Main Flash Cache class
  *
@@ -78,7 +75,6 @@ class Flash_Cache {
 		if (!defined('FLASH_CACHE_PLUGIN_FILE')) {
 			define('FLASH_CACHE_PLUGIN_FILE', __FILE__);
 		}
-		
 	}
 
 	/**
@@ -171,7 +167,7 @@ class Flash_Cache {
 		if (!class_exists('flash_cache_version')) {
 			require_once plugin_dir_path(__FILE__) . 'includes/version.php';
 		}
-		if ( ! function_exists('flash_cache_delete_all_options')) {
+		if (!function_exists('flash_cache_delete_all_options')) {
 			require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 		}
 		flash_cache_version::delete_all_patterns();
@@ -183,8 +179,6 @@ class Flash_Cache {
 	}
 
 }
-
-
 
 /**
  * The main function responsible for returning the one true Flash Cache
@@ -198,7 +192,6 @@ class Flash_Cache {
  *              situations where your extension is activated but EDD is not
  *              present.
  */
-
 function Flash_Cache_load() {
 	return Flash_Cache::getInstance();
 }

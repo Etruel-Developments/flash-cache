@@ -11,40 +11,42 @@
 if (!defined('ABSPATH'))
 	exit;
 
-
-
 class flash_cache_enviroment {
-    /**
-     * Returns true if server is Apache.
-     *
-     * @static
-     *
-     * @return bool
-     */
-    public static function is_apache() {
-        if ( empty( $_SERVER['SERVER_SOFTWARE'] ) ) {
-            return true;
-        }
-        return isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( htmlspecialchars( stripslashes( $_SERVER['SERVER_SOFTWARE'] ) ), 'Apache' ) !== false; 
-    }
-    /**
-     * Check whether server is LiteSpeed.
-     *
-     * @static
-     *
-     * @return bool
-     */
-    public static function is_litespeed() {
-        return isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( htmlspecialchars( stripslashes( $_SERVER['SERVER_SOFTWARE'] ) ), 'LiteSpeed' ) !== false;
-    }
-    /**
-     * Returns true if server is nginx.
-     *
-     * @static
-     *
-     * @return bool
-     */
-    public static function is_nginx() {
-        return isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( htmlspecialchars( stripslashes( $_SERVER['SERVER_SOFTWARE'] ) ), 'nginx' ) !== false;
-    }
+
+	/**
+	 * Returns true if server is Apache.
+	 *
+	 * @static
+	 *
+	 * @return bool
+	 */
+	public static function is_apache() {
+		if (empty($_SERVER['SERVER_SOFTWARE'])) {
+			return true;
+		}
+		return isset($_SERVER['SERVER_SOFTWARE']) && stristr(htmlspecialchars(stripslashes($_SERVER['SERVER_SOFTWARE'])), 'Apache') !== false;
+	}
+
+	/**
+	 * Check whether server is LiteSpeed.
+	 *
+	 * @static
+	 *
+	 * @return bool
+	 */
+	public static function is_litespeed() {
+		return isset($_SERVER['SERVER_SOFTWARE']) && stristr(htmlspecialchars(stripslashes($_SERVER['SERVER_SOFTWARE'])), 'LiteSpeed') !== false;
+	}
+
+	/**
+	 * Returns true if server is nginx.
+	 *
+	 * @static
+	 *
+	 * @return bool
+	 */
+	public static function is_nginx() {
+		return isset($_SERVER['SERVER_SOFTWARE']) && stristr(htmlspecialchars(stripslashes($_SERVER['SERVER_SOFTWARE'])), 'nginx') !== false;
+	}
+
 }
