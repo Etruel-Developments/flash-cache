@@ -676,6 +676,7 @@ function flash_cache_get_menus() {
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'edit-flash_cache_patterns' ) ? " active" : "" ) . '" href="edit.php?post_type=flash_cache_patterns"><span class="wpm_link_icon">' . $flash_cache_icons['icon_patterns'] . '</span> <span class="wpm_link_text">' . __('Patterns', 'flash-cache') . '</span></a>
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'flash_cache_patterns' ) ? " active" : "" ) . '" href="post-new.php?post_type=flash_cache_patterns"><span class="wpm_link_icon">' . $flash_cache_icons['icon_addpattern'] . '</span> <span class="wpm_link_text">' . __('Add New Pattern', 'flash-cache') . '</span></a>
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'flash-cache_page_flash_cache_preload' ) ? " active" : "" ) . '" href="admin.php?page=flash_cache_preload"><span class="wpm_link_icon">' . $flash_cache_icons['icon_preload'] . '</span> <span class="wpm_link_text">' . __('Preload', 'flash-cache') . '</span></a>
+		' . apply_filters('flash_cache_add_menus', '', $flash_cache_icons ) . '
 	</div>'
 	);
 }

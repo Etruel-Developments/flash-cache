@@ -98,7 +98,7 @@ class flash_cache_optimize_scripts {
 
 		$full_path_file_js	 = $cache_path . $basename_js . '.js';
 		$url_file_js		 = str_replace(flash_cache_get_home_path(), flash_cache_process::$origin_url, $full_path_file_js);
-
+		$all_css_code = apply_filters('flash_cache_js_code_before_join', $all_js_code, $full_path_file_js );
 		file_put_contents($full_path_file_js, $all_js_code);
 
 		$content = self::insert_before_of($content, 'body', '<script type="text/javascript" src="' . $url_file_js . '"></script>');
