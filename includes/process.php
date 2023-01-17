@@ -435,8 +435,8 @@ class flash_cache_process {
 	}
 
 	public static function process_patterns() {
-
-
+		
+		die(print_r(flash_cache_sanitize_querystring_cache($_GET)));
 
 		if (isset($_COOKIE["flash_cache"]) || isset($_COOKIE["flash_cache_backend"])) {
 			return true;

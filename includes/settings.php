@@ -31,8 +31,8 @@ class flash_cache_settings {
 		add_action('admin_print_styles', array(__CLASS__, 'styles'));
 
 		add_action('all_admin_notices', array(__CLASS__, 'cpt_settings_opentags'), 1, 0);
-		add_filter('in_admin_footer', array(__CLASS__, 'cpt_settings_closetags'), 1, 1);
-		add_filter('dbx_post_sidebar', array(__CLASS__, 'cpt_edit_settings_closetags'), 1, 1);
+		add_action('in_admin_footer', array(__CLASS__, 'cpt_settings_closetags'), 1, 1);
+		add_action('dbx_post_sidebar', array(__CLASS__, 'cpt_edit_settings_closetags'), 1, 1);
 		//dbx_post_sidebar
 	}
 
@@ -151,7 +151,7 @@ class flash_cache_settings {
 		$array	 = array(
 			'cache_dir'				 => 'flash_cache/',
 			'viewer_protocol_policy' => 'http_and_https',
-			'ttl_default'			 => '86400',
+			'ttl_default'			 => 86400,
 			'dont_cache_cookie'		 => array(
 				'comment_author_',
 				flash_cache_get_logged_in_cookie(),
@@ -189,13 +189,12 @@ class flash_cache_settings {
 
 	public static function cpt_edit_settings_closetags($post) {
 		global $typenow;
-
 		if ($typenow == 'flash_cache_patterns') {
-			$closetags = '<div class="clear"></div></div>
+			?>
 			<div class="clear"></div></div>
-			<div class="clear"></div></div>';
-
-			echo $closetags;
+			<div class="clear"></div></div>
+			<div class="clear"></div></div>
+			<?php
 		}
 	}
 
@@ -203,13 +202,13 @@ class flash_cache_settings {
 		global $typenow, $current_screen;
 
 		if ($current_screen->id == 'edit-flash_cache_patterns') {
-			$closetags = '</div> <!-- wpfooter fix -->
+			?>
+			</div> <!-- wpfooter fix -->
 			<div class="clear"></div></div>
 			<div class="clear"></div></div>
 			<div class="clear"></div></div>
-			<div id="wpfooter" role="contentinfo">';
-
-			echo $closetags;
+			<div id="wpfooter" role="contentinfo">
+			<?php
 		}
 	}
 
@@ -247,11 +246,14 @@ class flash_cache_settings {
 								<input type="radio" ' . checked($values['viewer_protocol_policy'], 'http_and_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/> ' . __('HTTP and HTTPS (If this protocol is enabled)', 'flash-cache') . '
 								<p class="description">' . __('Keeps the cache in both protocols as in the HTTP and in HTTPS if it exists.', 'flash-cache') . '</p>
 							</div> ';
-		echo '
-							<div class="radio-group">
-								<input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . ' 
-								<p class="description">' . __('Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the certificate to improve the speed through the header Strict-Transport-Security.', 'flash-cache') . '</p> 
-							</div>';
+							if ( is_ssl() ) {
+								echo '
+								<div class="radio-group">
+									<input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . ' 
+									<p class="description">' . __('Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the certificate to improve the speed through the header Strict-Transport-Security.', 'flash-cache') . '</p> 
+								</div>';
+							}
+							
 		echo '</td>
 					</tr>
 
@@ -387,8 +389,20 @@ class flash_cache_settings {
 		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_general')) {
 			wp_die(__('Security check', 'flash-cache'));
 		}
-		$new_options			 = wp_parse_args($_POST['flash_cache_general'], self::default_general_options());
-		$new_options['activate'] = ($new_options['activate'] ? true : false);
+
+		/** Validating user inputs  */
+		$post_values = array();
+		if ( ! empty( $_POST['flash_cache_general'] ) ) {
+			$post_values = $_POST['flash_cache_general'];
+			if (  ! is_array( $post_values ) ) {
+				$post_values = array();
+			}
+		}
+
+		/** Sanitize all inputs and only accept the valid settings */
+		$post_values = flash_cache_sanitize_settings_deep( self::default_general_options(), $post_values);
+
+		$new_options			 = wp_parse_args( $post_values , self::default_general_options());
 		$new_options			 = apply_filters('flash_cache_check_general_settings', $new_options);
 
 		update_option('flash_cache_settings', $new_options);
@@ -403,20 +417,20 @@ class flash_cache_settings {
 		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_advanced')) {
 			wp_die(__('Security check', 'flash-cache'));
 		}
-		$new_options = wp_parse_args($_POST['flash_cache_advanced'], self::default_general_options());
 
-		$new_options['cache_dir']	 = sanitize_text_field($new_options['cache_dir']);
-		$new_options['ttl_default']	 = absint(sanitize_text_field($new_options['ttl_default']));
-
-		// Sanitizes all cookies set by users.
-		$dont_cache_cookies = array();
-		if (!empty($new_options['dont_cache_cookie'])) {
-			foreach ($new_options['dont_cache_cookie'] as $cookie) {
-				$dont_cache_cookies[] = sanitize_text_field($cookie);
+		/** Validating user inputs  */
+		$post_values = array();
+		if ( ! empty( $_POST['flash_cache_advanced'] ) ) {
+			$post_values = $_POST['flash_cache_advanced'];
+			if (  ! is_array( $post_values ) ) {
+				$post_values = array();
 			}
 		}
-		$new_options['dont_cache_cookie'] = $dont_cache_cookies;
+		/** Sanitize all inputs and only accept the valid settings */
+		$post_values = flash_cache_sanitize_settings_deep( self::default_advanced_options(), $post_values);
+		
 
+		$new_options = wp_parse_args( $post_values, self::default_advanced_options());
 		$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
 
 		update_option('flash_cache_advanced_settings', $new_options);

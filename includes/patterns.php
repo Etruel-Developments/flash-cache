@@ -210,8 +210,8 @@ class flash_cache_patterns {
 			if (!isset($values['page_type']['posts'][$post_type_name])) {
 				$values['page_type']['posts'][$post_type_name] = false;
 			}
-			echo '<div class="checkbox-group"><input type="checkbox" value="1" name="page_type[posts][' . $post_type_name . ']" ' . checked(1, $values['page_type']['posts'][$post_type_name], false) . ' />' .
-			$cpt_data->label .
+			echo '<div class="checkbox-group"><input type="checkbox" value="1" name="page_type[posts][' . esc_attr( $post_type_name ) . ']" ' . checked(1, $values['page_type']['posts'][$post_type_name], false) . ' />'
+			. esc_html( $cpt_data->label ) .
 			'</div>';
 		}
 

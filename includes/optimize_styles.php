@@ -144,7 +144,7 @@ class flash_cache_optimize_styles {
 		}
 
 		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
-		$cache_path	 = $cache_dir . $_SERVER['SERVER_NAME'] . '/styles/';
+		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/styles/';
 		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);

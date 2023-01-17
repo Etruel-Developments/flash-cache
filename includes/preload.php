@@ -253,7 +253,7 @@ class flash_cache_preaload {
 				}
 
 				$path		 = str_replace(flash_cache_process::$origin_url, '', $current_url);
-				$cache_path	 = $cache_dir . $_SERVER['SERVER_NAME'] . '/' . $path;
+				$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
 				$cache_file	 = $cache_path . 'index-cache.html';
 
 				if (file_exists($cache_file)) {
