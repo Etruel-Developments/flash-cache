@@ -439,11 +439,23 @@ class flash_cache_preaload {
 		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_preload')) {
 			wp_die(__('Security check', 'flash-cache'));
 		}
-		$new_options						 = wp_parse_args($_POST['flash_cache_preload'], self::default_options());
-		$new_options['activate']			 = ($new_options['activate'] ? true : false);
-		$new_options['cache_taxonomies']	 = ($new_options['cache_taxonomies'] ? true : false);
-		$new_options['pages_per_execution']	 = absint($new_options['pages_per_execution']);
-		$new_options['time_per_preload']	 = absint($new_options['time_per_preload']);
+		/** Validating user inputs  */
+		$post_values = array();
+		if ( ! empty( $_POST['flash_cache_preload'] ) ) {
+			$post_values = $_POST['flash_cache_preload'];
+			if (  ! is_array( $post_values ) ) {
+				$post_values = array();
+			}
+		}		
+		
+		/** Sanitize all inputs and only accept the valid settings */
+//		$new_options = wp_parse_args($_POST['flash_cache_preload'], self::default_options());
+		$new_options = flash_cache_sanitize_settings_deep( self::default_options(), $post_values);
+		
+//		$new_options['activate']			 = ($new_options['activate'] ? true : false);
+//		$new_options['cache_taxonomies']	 = ($new_options['cache_taxonomies'] ? true : false);
+//		$new_options['pages_per_execution']	 = absint($new_options['pages_per_execution']);
+//		$new_options['time_per_preload']	 = absint($new_options['time_per_preload']);
 
 		$new_options = apply_filters('flash_cache_check_preload_settings', $new_options);
 
