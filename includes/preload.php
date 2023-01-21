@@ -451,7 +451,7 @@ class flash_cache_preaload {
 		/** Sanitize all inputs and only accept the valid settings */
 		$post_values = flash_cache_sanitize_settings_deep( self::default_options(), $post_values);
 		
-		$new_options = wp_parse_args( $post_values , self::default_general_options());
+		$new_options = wp_parse_args( $post_values , self::default_options());
 		$new_options = apply_filters('flash_cache_check_preload_settings', $new_options);
 
 		update_option('flash_cache_preload', $new_options);
