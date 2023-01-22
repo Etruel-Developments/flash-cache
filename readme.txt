@@ -5,7 +5,7 @@ Tags: cache, perfomance, flash-cache, automatically cache, flash, flashcache, fl
 Requires at least: 3.6
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 3.0
+Stable tag: trunk
 License: GPLv2 or later
 
 Flash Cache is a plugin to improve the performance of Wordpress Websites by making html versions of each post, pages or sections of your website.
@@ -59,8 +59,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
-= 3.0 Jan XX, 2023 =
+= 3.0 Jan 22, 2023 =
 * New version released as free plugin.
+* Many fixes and improvements to the preload cache process.
 * Many security improvements.
 
 = 2.0 Apr 5, 2022 =
