@@ -100,7 +100,7 @@ class flash_cache_settings {
 		echo '<div class="wpm_flex">';
 
 		echo flash_cache_get_menus();
-
+		
 		echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" class="pt-30" method="post">
 				<input type="hidden" name="action" value="save_flash_cache_general"/>';
 		wp_nonce_field('save_flash_cache_general');

@@ -25,26 +25,7 @@ class flash_cache_preaload {
 		add_action('admin_post_reset_to_default_preload', array(__CLASS__, 'reset_to_default_preload'));
 	}
 
-	/**
-	 * Static function start_cron
-	 * @access public
-	 * @return void
-	 * @since 1.2.1
-	 */
-	public static function start_cron() {
-		if (!file_exists(FLASH_CACHE_PLUGIN_DIR . 'can_cron.txt')) {
-			file_put_contents(FLASH_CACHE_PLUGIN_DIR . 'can_cron.txt', '');
-		}
-		self::$can_cron_handler = fopen(FLASH_CACHE_PLUGIN_DIR . 'can_cron.txt', 'a');
-		flock(self::$can_cron_handler, LOCK_EX);
-
-		if (!flock(self::$can_cron_handler, LOCK_EX, $wouldblock)) {
-			if ($wouldblock) {
-				return false;
-			}
-		}
-		return true;
-	}
+	
 
 	/**
 	 * Static function end_cron
@@ -123,7 +104,9 @@ class flash_cache_preaload {
 			return true;
 		}
 
-		if (!self::start_cron()) {
+		
+		if (!flash_cache_process::start_create_cache(FLASH_CACHE_PLUGIN_DIR)) {
+			flash_cache_process::end_create_cache();
 			return false;
 		}
 
@@ -134,12 +117,12 @@ class flash_cache_preaload {
 			$in_while = false;
 		}
 
-		while (self::check_time_exection() && $in_while) {
+		if ($in_while) {
 			self::execution_callback();
 		}
 
 		update_option('flash_cache_preload_now', false);
-		self::end_cron();
+		flash_cache_process::end_create_cache();
 	}
 
 	/**
@@ -149,7 +132,8 @@ class flash_cache_preaload {
 	 * @since version
 	 */
 	public static function execution_callback() {
-		global $wpdb, $post;
+		global $wpdb;
+		
 		$values_general = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
 
 		$values_settings = wp_parse_args(get_option('flash_cache_preload', array()), self::default_options());
@@ -167,14 +151,8 @@ class flash_cache_preaload {
 				return true;
 			}
 
-			$execution_offeset	 = $values_cron['execution_offeset'];
-			$post_types			 = get_post_types(array('public' => true));
+			$execution_offeset	 = absint($values_cron['execution_offeset']);
 
-			foreach ($post_types as $kpt => $ptype) {
-				$post_types[$kpt] = "'" . $ptype . "'";
-			}
-
-			$types		 = implode(',', $post_types);
 			$args		 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns	 = get_posts($args);
 
@@ -186,19 +164,27 @@ class flash_cache_preaload {
 			$cache_dir				 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 			$default_posts_per_page	 = get_option('posts_per_page', 10);
 
+			/** Prepare WHERE statement like wp-admin\includes\export.php:111 */
+			$post_types	 = get_post_types(array('public' => true));
+			foreach ($post_types as $kpt => $ptype) {
+				$post_types[$kpt] = sanitize_text_field($ptype);
+			}
+			$types      = array_fill( 0, count( $post_types ), '%s' );
+			$where = $wpdb->prepare( "( post_type IN ( " . implode( ',',  $types  ) . " ) ) AND post_status = 'publish'", $post_types );
+
 			$posts = $wpdb->get_col(
 					$wpdb->prepare(
-							"SELECT ID FROM {$wpdb->posts} WHERE ( post_type IN ( %s ) ) AND post_status = 'publish' ORDER BY ID ASC LIMIT %d, %d",
-							sanitize_text_field($types),
+							"SELECT ID FROM {$wpdb->posts} WHERE $where ORDER BY ID ASC LIMIT %d, %d",
 							absint($execution_offeset),
-							100
+							absint($values_settings['pages_per_execution'])
 					)
 			);
-
+			
 			foreach ($posts as $k => $post_id) {
 				if (!self::check_time_exection()) {
 					return false;
 				}
+				$post = get_post( $post_id );
 				$current_url	 = get_permalink($post_id);
 				update_option('flash_cache_preload_current_post', $current_url);
 				$create_cache	 = false;
@@ -268,12 +254,19 @@ class flash_cache_preaload {
 						flash_cache_posts::update_taxonomies($post_id, $pattern['ttl_maximum'], $default_posts_per_page, $cache_dir, true);
 					}
 				}
+				
 			}
+			
 
+			$values_cron['next_run'] = time() + intval($values_settings['time_per_preload']);
 			if (empty($posts)) {
 				$values_cron['started']	 = false;
 				$values_cron['finished'] = true;
-				$values_cron['next_run'] = time() + intval($values_settings['time_per_preload']);
+				if ($values_settings['disable_preload_finish']) {
+					$values_settings['activate'] = false;
+					update_option('flash_cache_preload', $values_settings);
+				}
+				
 			}
 			$values_cron['execution_offeset'] = (int) $values_cron['execution_offeset'] + (int) $values_settings['pages_per_execution'];
 
@@ -304,7 +297,8 @@ class flash_cache_preaload {
 			'activate'				 => false,
 			'cache_taxonomies'		 => true,
 			'pages_per_execution'	 => 100,
-			'time_per_preload'		 => 605000,
+			'time_per_preload'		 => 300,
+			'disable_preload_finish' => false,
 		);
 		$array	 = apply_filters('flash_cache_default_preload_options', $array);
 		return $array;
@@ -360,7 +354,7 @@ class flash_cache_preaload {
 			$execution_offeset	 = absint($values_cron['execution_offeset']);
 			$next_run			 = absint($values_cron['next_run']);
 
-			if ($next_run < time() && $values_cron['started'] && !$values_cron['finished']) {
+			if ( $values_cron['started'] && !$values_cron['finished']) {
 				$current_post_url	 = get_option('flash_cache_preload_current_post', '');
 				$next_page			 = ( absint($values_cron['execution_offeset']) + absint($values['pages_per_execution']) );
 
@@ -417,6 +411,21 @@ class flash_cache_preaload {
 					<td>
 						<input type="text" name="flash_cache_preload[time_per_preload]" id="time_per_preload" value="' . esc_attr(absint($values['time_per_preload'])) . '">
 						<p class="description">' . __('Is the time in seconds for the next execution of the preload alter finishing the previous execution.', 'flash-cache') . '</p>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">' . __('Disable preload on finish', 'flash-cache') . '</th>
+					<td>
+						<div class="switch switch--horizontal switch--no-label">
+							<input type="radio" ' . checked($values['disable_preload_finish'], false, false) . ' name="flash_cache_preload[disable_preload_finish]" value="0"/> Off 
+							<label for="flash_cache_preload[disable_preload_finish]">Off</label>
+							<input type="radio" ' . checked($values['disable_preload_finish'], true, false) . ' name="flash_cache_preload[disable_preload_finish]" value="1"/> On 
+							<label for="flash_cache_preload[disable_preload_finish]">On</label>
+							<span class="toggle-outside">
+								<span class="toggle-inside"></span>
+							</span>
+						</div>
+						<p class="description">' . __('By activating this option will turn off the preload cache process upon completion. This means that the cache will not be preloaded again after the initial load.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 			</table>';

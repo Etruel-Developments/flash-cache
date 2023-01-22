@@ -371,7 +371,7 @@ class flash_cache_posts {
 		}
 
 
-		flash_cache_delete_dir($cache_dir);
+		//flash_cache_delete_dir($cache_dir);
 
 		if ($post_id == 0) {
 			//$categories = get_categories( array( 'hide_empty'   => 0 ) );

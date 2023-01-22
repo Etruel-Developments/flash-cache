@@ -178,7 +178,7 @@ class flash_cache_process {
 	}
 
 	public static function create_cache_html() {
-
+		
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
@@ -188,21 +188,22 @@ class flash_cache_process {
 		// Delete initial path
 		$path		 = str_replace(self::$origin_url, '', self::$url_to_cache);
 		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
-
+		
+		
+		if (!file_exists($cache_path)) {
+			@mkdir($cache_path, 0777, true);
+		}
 		if (!self::start_create_cache($cache_path)) {
 			self::end_create_cache();
 			return false;
 		}
-
+	
 		$response = flash_cache_get_content(self::$url_to_cache);
-
+	
 		if (empty($response['response'])) {
 			return;
 		}
 
-		if (!file_exists($cache_path)) {
-			@mkdir($cache_path, 0777, true);
-		}
 
 
 		self::debug('Creating HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
@@ -274,7 +275,7 @@ class flash_cache_process {
 	}
 
 	public static function process_cache_from_query($current_query, $opcional_url = '') {
-
+		
 		$current_url		 = '';
 		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 
@@ -418,7 +419,7 @@ class flash_cache_process {
 				$process_type = self::$force_process_type;
 			}
 
-
+			
 
 			if ($create_cache) {
 				if ($process_type == 'ob_with_curl_request') {
