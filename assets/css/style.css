@@ -517,6 +517,20 @@
 		margin-bottom: 0;
 	}
 }
+/*===========Preload===========*/
+.preload_info{
+	display: block;
+  text-align: right;
+  margin-top: 20px;
+}
+.preload_info code{
+	display: inline-flex;
+  background: #f7f7f7;
+  border: 1px solid #b5bfc9;
+  font-size: 12px;
+  margin: 0;
+	padding: 10px 15px;
+}
 /*===========Footer===========*/
 .wpm_head,
 .wpm_footer{

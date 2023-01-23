@@ -236,7 +236,7 @@ class flash_cache_settings {
 						<td>
 							<input type="text" name="flash_cache_advanced[cache_dir]" id="flash_cache_advanced_cache_dir" value="' . esc_attr($values['cache_dir']) . '"/>
 							<code>' . get_home_path() . '</code>
-							<p class="description">' . __('Specifies the path of the file system, where it will kept the cache objects of every page, this option can be changed to other customized path.', 'flash-cache') . '</p>
+							<p class="description">' . __('Specifies the file system path where the cache objects for each page will be placed, this option can be changed to another custom path.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					<tr valign="top">
