@@ -59,8 +59,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
-= 3.0 Jan 22, 2023 =
+= 3.0 Jan 24, 2023 =
 * New version released as free plugin.
+* Fixes an issue with the cache template file.
 * Many fixes and improvements to the preload cache process.
 * Many security improvements.
 

@@ -242,7 +242,7 @@ class flash_cache_process {
 		}
 
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php');
+		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl');
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
 		$template_php	 = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
 		$template_php	 = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
@@ -672,7 +672,7 @@ class flash_cache_process {
 		}
 
 		self::debug('Creating OB PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/template_cache.php');
+		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl');
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
 		$template_php	 = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
 		$template_php	 = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
