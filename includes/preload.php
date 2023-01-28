@@ -410,7 +410,7 @@ class flash_cache_preaload {
 					<th scope="row">' . __('Time per Preload', 'flash-cache') . '</th>
 					<td>
 						<input type="text" name="flash_cache_preload[time_per_preload]" id="time_per_preload" value="' . esc_attr(absint($values['time_per_preload'])) . '">
-						<p class="description">' . __('Is the time in seconds for the next execution of the preload alter finishing the previous execution.', 'flash-cache') . '</p>
+						<p class="description">' . __('The time in seconds per page quantity until the next execution of the preload process. This value avoid timeouts. Increase it if you have timeouts PHP problems on executing the Preload.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 				<tr valign="top">
