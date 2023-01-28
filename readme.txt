@@ -1,7 +1,7 @@
 === Flash Cache ===
 Contributors: sniuk, etruel, khaztiel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
-Tags: cache, perfomance, flash, automatically cache, flashcache, flash cache, seo, wordpress cache
+Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
 Tested up to: 6.1.1
 Requires PHP: 5.6
