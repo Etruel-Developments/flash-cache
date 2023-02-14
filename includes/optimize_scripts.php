@@ -43,6 +43,9 @@ class flash_cache_optimize_scripts {
 
 				if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
 					$url			 = current(explode('?', $source[2], 2));
+					if ( ! self::is_valid_url( $url ) ) {
+						continue;
+					}
 					self::$js_tags[] = flash_cache_get_path($url);
 				} else {
 					$tag = '';
@@ -120,7 +123,7 @@ class flash_cache_optimize_scripts {
 		if (!empty($tag_parts[1])) {
 			$tag_without_contents = $tag_parts[1];
 		}
-
+		
 		$has_type = ( strpos($tag_without_contents, 'type') !== false );
 
 		$type_valid = false;
@@ -134,6 +137,16 @@ class flash_cache_optimize_scripts {
 		}
 
 		return $should_aggregate;
+	}
+	public static function is_valid_url($url) {
+		$url_host = parse_url($url);
+		if ( empty( $url_host['host'] ) ) {
+			return false;
+		}
+		$url_host = $url_host['host'];
+		$url_host = sanitize_text_field($url_host);
+		
+		return flash_cache_get_server_name() == $url_host;
 	}
 
 }
