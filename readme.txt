@@ -77,6 +77,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.0.1 Feb 21, 2023 =
+* Improves the urls validating. 
+* Minor tweaks & texts improvements.
+
 = 3.0 Jan 24, 2023 =
 * New version released as free plugin.
 * Fixes an issue with the cache template file.
@@ -117,4 +121,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
  == Upgrade Notice ==
-* Released as Free plugin!
+* Few improvements!
