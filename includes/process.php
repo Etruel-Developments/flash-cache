@@ -182,9 +182,11 @@ class flash_cache_process {
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
+		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
+
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
-
+		
 		// Delete initial path
 		$path		 = str_replace(self::$origin_url, '', self::$url_to_cache);
 		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
@@ -222,7 +224,7 @@ class flash_cache_process {
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
-
+		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 
 		$home_path	 = flash_cache_get_home_path();
@@ -658,6 +660,7 @@ class flash_cache_process {
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
+		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$home_path			 = flash_cache_get_home_path();
 		$cache_dir			 = $home_path . $advanced_settings['cache_dir'];
@@ -752,6 +755,7 @@ class flash_cache_process {
 			if (is_null(self::$origin_url)) {
 				self::$origin_url = get_site_url(null, '/');
 			}
+			self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 			if ($process_type == 'ob_with_curl_request' && false === strpos(self::$url_to_cache, self::$origin_url)) {
 				$request_URI = sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
 				$uri = strtolower($request_URI);

@@ -27,6 +27,13 @@ function flash_cache_get_server_name() {
 
 	return $server_name;
 }
+function flash_cache_sanitize_origin_url($origin_url) {
+	$parsed_url = parse_url($origin_url);
+	$scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : 'https://';
+	$host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+	$origin_url = $scheme . $host . '/';
+	return $origin_url;
+}
 function flash_cache_sanitize_settings_deep($default_values, $post_values) {
 	if ( ! empty( $post_values ) ) {
 		foreach( $default_values as $key => $default_value ) {
@@ -572,7 +579,6 @@ function flash_cache_get_home_path() {
 	$siteurl = set_url_scheme(get_option('siteurl'), 'http');
 
 	$script_filename = sanitize_text_field( $_SERVER['SCRIPT_FILENAME'] );
-	
 
 	if (!empty($home) && 0 !== strcasecmp($home, $siteurl)) {
 		$wp_path_rel_to_home = str_ireplace($home, '', $siteurl); /* $siteurl - $home */
@@ -581,6 +587,9 @@ function flash_cache_get_home_path() {
 		$home_path			 = trailingslashit($home_path);
 	} else {
 		$home_path = ABSPATH;
+	}
+	if ($home_path == '/') {
+		$home_path = trailingslashit( dirname( $script_filename ) );
 	}
 	return str_replace('\\', '/', $home_path);
 }
