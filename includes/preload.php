@@ -329,7 +329,7 @@ class flash_cache_preaload {
 
 		$values = wp_parse_args(get_option('flash_cache_preload', array()), self::default_options());
 
-		echo '<div class="wrap wpm_container show_menu">
+		echo '<div class="wrap wpm_container show_menu"><h1></h1>
 				<div class="wpm_header">
 				<h1>' . __('Preload', 'flash-cache') . '</h1>
 				<p class="description">' . __('Preload is a process that creates a cache of all public pages and taxonomies depending on your options and patterns.', 'flash-cache') . '</p>
