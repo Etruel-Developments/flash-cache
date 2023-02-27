@@ -91,7 +91,7 @@ class flash_cache_settings {
 	public static function general_settings_page() {
 
 		$values = wp_parse_args(get_option('flash_cache_settings', array()), self::default_general_options());
-		echo '<div class="wrap wpm_container show_menu">
+		echo '<div class="wrap wpm_container show_menu"><h1></h1>
 			<div class="wpm_header">
 			<h1>' . __('General Settings', 'flash-cache') . '</h1>
 			</div>

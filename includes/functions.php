@@ -745,7 +745,7 @@ function flash_cache_get_menus_social_footer() {
 			<a href="https://www.instagram.com/etruel_com/" title="Visit us on Instagram" target="_blank">
 				' . $flash_cache_icons['social_instagram'] . '
 			</a>
-			<a href="https://www.instagram.com/etruel_com/" title="Visit us on LinkedIn" target="_blank">
+			<a href="https://www.linkedin.com/in/etruel/" title="Visit us on LinkedIn" target="_blank">
 				' . $flash_cache_icons['social_linkedin'] . '
 			</a>
 			<a href="https://profiles.wordpress.org/etruel#content-plugins" title="Visit us on WordPress" target="_blank">
