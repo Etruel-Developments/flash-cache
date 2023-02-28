@@ -415,7 +415,7 @@ class flash_cache_process {
 			self::$current_query = $current_query;
 			self::$url_to_cache	 = $current_url;
 			self::$pattern		 = $pattern;
-
+			
 			$process_type = $advanced_settings['process_type'];
 			if (!empty(self::$force_process_type)) {
 				$process_type = self::$force_process_type;
@@ -664,7 +664,7 @@ class flash_cache_process {
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$home_path			 = flash_cache_get_home_path();
 		$cache_dir			 = $home_path . $advanced_settings['cache_dir'];
-		$path				 = str_replace(self::$origin_url, '', self::$url_to_cache);
+		$path		 		 = self::get_path(self::$optional_post_id);
 		$cache_path			 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);

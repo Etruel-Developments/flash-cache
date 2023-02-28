@@ -23,6 +23,7 @@ echo @file_get_contents($file_path);
 
 function run_site($request) {
 	global $home_path;
+	$_SERVER['SCRIPT_FILENAME'] = $home_path.'index.php';
 	include $home_path.'index.php';
 }
 
