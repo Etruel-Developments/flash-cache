@@ -81,6 +81,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Fixes a bug for WordPress based sites installed in subdirectories.
 * Fixes an issue with third party notices showing below the Flash Cache Settings title.
 * Fixes LinkeIn link in the icon at Settings.
+* Fixes menu position for some third party plugins.
 
 = 3.0.1 Feb 21, 2023 =
 * Improves the urls validating. 

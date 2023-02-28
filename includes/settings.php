@@ -61,7 +61,7 @@ class flash_cache_settings {
 				'manage_options',
 				'flash_cache_setting',
 				array(__CLASS__, 'general_settings_page'),
-				FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-icon.png', 26);
+				FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-icon.png', 29);
 		$page = add_submenu_page(
 				'flash_cache_setting',
 				__('Advanced options', 'flash-cache'),
