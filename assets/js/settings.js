@@ -23,3 +23,9 @@ jQuery(document).ready(function () {
     }
   });
 });
+jQuery(window).load(function() {
+  jQuery( init );
+  function init() {
+    jQuery('.flash-wrap-notices').append( jQuery('.error, .success, .notice, .message, .fade, .updated') );
+  }
+});
