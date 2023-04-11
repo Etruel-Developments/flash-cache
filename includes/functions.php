@@ -473,7 +473,8 @@ function flash_cache_get_logged_in_cookie() {
 	return $logged_in_cookie;
 }
 
-function flash_cache_update_htaccess() {
+function flash_cache_update_htaccess()
+{
 	if (flash_cache_enviroment::is_nginx()) {
 		extract(flash_cache_get_nginx_conf_info());
 		flash_cache_remove_marker($home_path . 'nginx.conf', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
@@ -484,7 +485,7 @@ function flash_cache_update_htaccess() {
 		$wp_inserted			 = insert_with_markers($home_path . 'nginx.conf', 'WordPress', explode("\n", $current_wp_rules));
 
 		if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
-			return true;
+			return flash_cache_remove_breakspaces($home_path . 'nginx.conf');
 		} else {
 			return false;
 		}
@@ -492,13 +493,14 @@ function flash_cache_update_htaccess() {
 	// By default process with apache webserver.
 	extract(flash_cache_get_htaccess_info());
 	flash_cache_remove_marker($home_path . '.htaccess', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
+
 	$cache_inserted			 = insert_with_markers($home_path . '.htaccess', 'FlashCache Page Cache', explode("\n", $cache_rules));
 	$utils_inserted			 = insert_with_markers($home_path . '.htaccess', 'FlashCache Utils', explode("\n", $utils_rules));
 	$optimization_inserted	 = insert_with_markers($home_path . '.htaccess', 'FlashCache Optimizations', explode("\n", $optimization_rules));
 	$wp_inserted			 = insert_with_markers($home_path . '.htaccess', 'WordPress', explode("\n", $current_wp_rules));
 
 	if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
-		return true;
+		return flash_cache_remove_breakspaces($home_path . '.htaccess');
 	} else {
 		return false;
 	}
@@ -689,6 +691,25 @@ function flash_cache_delete_all_options() {
 					"DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'"
 			)
 	);
+}
+
+/**
+ * Function for erase the breakspaces in the file specificated.
+ *
+ * @author @Gerarjos14 https://github.com/gerarjos14
+ * @param string   $filename       The filename to search and modify.
+ * @return bool
+ */
+function flash_cache_remove_breakspaces($filename): bool
+{
+	$file_array = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+	$first_code_line = array_search(true, array_map('trim', $file_array));
+	$file_array = array_slice($file_array, $first_code_line);
+	$file_string = implode("\n", $file_array);
+	$file_string = preg_replace('/^# END.*/m', '$0' . PHP_EOL, $file_string);
+	$file_string = rtrim($file_string);
+
+	return (bool) file_put_contents($filename, $file_string);
 }
 
 function flash_cache_settings_icons() {

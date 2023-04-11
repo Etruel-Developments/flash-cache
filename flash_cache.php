@@ -154,6 +154,7 @@ class Flash_Cache {
 		flash_cache_remove_rules();
 		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_delete_dir($cache_dir, true);
+		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
 	}
 
 	/**
@@ -176,6 +177,7 @@ class Flash_Cache {
 		delete_option('flash_cache_advanced_settings');
 		delete_option('flash_cache_disk_usage');
 		flash_cache_delete_all_options();
+		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
 	}
 
 }
