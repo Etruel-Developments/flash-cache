@@ -118,7 +118,9 @@ class flash_cache_optimize_styles {
 			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		}
 		if (is_null(flash_cache_process::$origin_url)) {
-			flash_cache_process::$origin_url = get_site_url(null, '/');
+			flash_cache_process::$origin_url = home_url('/');
+		}elseif(flash_cache_process::$origin_url != home_url('/')){
+			flash_cache_process::$origin_url = home_url('/');
 		}
 		
 		$basename_css	 = '';
