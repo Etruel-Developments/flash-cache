@@ -73,11 +73,8 @@ class flash_cache_optimize_scripts {
 			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		}
 		if (is_null(flash_cache_process::$origin_url)) {
-			flash_cache_process::$origin_url = home_url('/');
-		}elseif(flash_cache_process::$origin_url != home_url('/')){
-			flash_cache_process::$origin_url = home_url('/');
+			flash_cache_process::$origin_url = get_site_url(null, '/');
 		}
-		
 		$server_name = flash_cache_get_server_name();
 		$all_js_code = '';
 		$basename_js = '';
@@ -103,7 +100,7 @@ class flash_cache_optimize_scripts {
 		}
 
 		$full_path_file_js	 = $cache_path . $basename_js . '.js';
-		$url_file_js		 = str_replace(flash_cache_get_home_path(), flash_cache_process::$origin_url, $full_path_file_js);
+		$url_file_js		 = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $full_path_file_js);
 		$all_css_code = apply_filters('flash_cache_js_code_before_join', $all_js_code, $full_path_file_js, flash_cache_process::$advanced_settings );
 		file_put_contents($full_path_file_js, $all_js_code);
 
