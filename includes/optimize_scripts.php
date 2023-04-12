@@ -87,11 +87,7 @@ class flash_cache_optimize_scripts {
 			}
 		}
 
-		if (!class_exists('JSMin')) {
-			require_once FLASH_CACHE_PLUGIN_DIR . 'includes/lib/jsmin.php';
-		}
-
-		$all_js_code = trim(JSMin::minify($all_js_code));
+		$all_js_code = trim($all_js_code);
 		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
 		$cache_path	 = $cache_dir . $server_name . '/scripts/';
 
@@ -109,11 +105,6 @@ class flash_cache_optimize_scripts {
 
 		return $content;
 	}
-
-	// public static function insert_before_of($content, $element = 'body', $code = '') {
-	// 	$content = str_replace('</' . $element . '>', $code . '</' . $element . '>', $content);
-	// 	return $content;
-	// }
 
 	public static function insert_html_before_element($html, $element_selector, $new_html)
 	{
