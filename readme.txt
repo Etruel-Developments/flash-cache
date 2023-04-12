@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -77,6 +77,13 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.0.3 Apr 12, 2023 =
+* Fixes a bug for css styles and js code sometimes failing to load.
+* Fixes javascript errors on loading javascript combined file.
+* Fixes an issue on filter flash_cache_js_code_before_join.
+* Fixes an issue on calculating cache size.
+* Fixes the blank lines added to .htaccess on modifing its rules.
+
 = 3.0.2 Feb 28, 2023 =
 * Fixes a bug for WordPress based sites installed in subdirectories.
 * Fixes an issue with third party notices showing below the Flash Cache Settings title.
