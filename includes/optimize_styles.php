@@ -153,7 +153,7 @@ class flash_cache_optimize_styles {
 		$full_path_file_css	 = $cache_path . $basename_css . '.css';
 		$url_file_css		 = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $full_path_file_css);
 
-		// $all_css_code = apply_filters('flash_cache_css_code_before_join', $all_css_code, $full_path_file_css, flash_cache_process::$advanced_settings );
+		$all_css_code = apply_filters('flash_cache_css_code_before_join', $all_css_code, $full_path_file_css, flash_cache_process::$advanced_settings );
 		file_put_contents($full_path_file_css, $all_css_code);
 
 		//Call the function insert_html_before_element for change the actual html by the new with styles and scripts
