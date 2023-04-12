@@ -271,7 +271,7 @@ class flash_cache_process {
 		file_put_contents($request_file_path, $request_url['response']);
 		file_put_contents($header_file_path, $request_url['content_type']);
 
-		flash_cache_increment_disk_usage(mb_strlen($response['response'], '8bit'));
+		flash_cache_increment_disk_usage(mb_strlen($request_url['response'], '8bit'));
 		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
 		self::end_create_cache();
 	}

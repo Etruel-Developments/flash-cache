@@ -156,15 +156,30 @@ class flash_cache_optimize_styles {
 		$all_css_code = apply_filters('flash_cache_css_code_before_join', $all_css_code, $full_path_file_css, flash_cache_process::$advanced_settings );
 		file_put_contents($full_path_file_css, $all_css_code);
 
-		$content = self::insert_before_of($content, 'body', '<link media="all" rel="stylesheet" href="' . $url_file_css . '" />');
-		
+		//Call the function insert_html_before_element for change the actual html by the new with styles and scripts
+		$content = self::insert_html_before_element($content, '<title>', '<link media="all" rel="stylesheet" href="' . $url_file_css . '" />');
+
 		return $content;
 	}
 
-	public static function insert_before_of($content, $element = 'body', $code = '') {
-		$content = str_replace('</' . $element . '>', $code . '</' . $element . '>', $content);
+	// public static function insert_before_of($content, $element = 'body', $code = '') {
+	// 	$content = str_replace('<' . $element . '>', $code . '</' . $element . '>', $content);
 
-		return $content;
+	// 	return $content;
+	// }
+
+	public static function insert_html_before_element( $html, $element_selector, $new_html)
+	{
+		// Find the position of the element in the HTML
+		$pos = strpos($html, $element_selector);
+
+		if ($pos !== false) {
+			// Insert the new HTML before the element
+			$html = substr_replace($html, $new_html . PHP_EOL, $pos, 0);
+		}
+
+		// Return the modified HTML code
+		return $html;
 	}
 
 }
