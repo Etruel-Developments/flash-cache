@@ -101,17 +101,32 @@ class flash_cache_optimize_scripts {
 
 		$full_path_file_js	 = $cache_path . $basename_js . '.js';
 		$url_file_js		 = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $full_path_file_js);
-		$all_css_code = apply_filters('flash_cache_js_code_before_join', $all_js_code, $full_path_file_js, flash_cache_process::$advanced_settings );
+		// $all_css_code = apply_filters('flash_cache_js_code_before_join', $all_js_code, $full_path_file_js, flash_cache_process::$advanced_settings );
 		file_put_contents($full_path_file_js, $all_js_code);
-
-		$content = self::insert_before_of($content, 'body', '<script type="text/javascript" src="' . $url_file_js . '"></script>');
+		
+		//Call the function insert_html_before_element for change the actual html by the new with styles and scripts
+		$content = self::insert_html_before_element($content, '<title>', '<script type="text/javascript" src="' . $url_file_js . '"></script>');
 
 		return $content;
 	}
 
-	public static function insert_before_of($content, $element = 'body', $code = '') {
-		$content = str_replace('</' . $element . '>', $code . '</' . $element . '>', $content);
-		return $content;
+	// public static function insert_before_of($content, $element = 'body', $code = '') {
+	// 	$content = str_replace('</' . $element . '>', $code . '</' . $element . '>', $content);
+	// 	return $content;
+	// }
+
+	public static function insert_html_before_element($html, $element_selector, $new_html)
+	{
+		// Find the position of the element in the HTML
+		$pos = strpos($html, $element_selector);
+
+		if ($pos !== false) {
+			// Insert the new HTML before the element
+			$html = substr_replace($html, $new_html . PHP_EOL, $pos, 0);
+		}
+
+		// Return the modified HTML code
+		return $html;
 	}
 
 	public static function should_aggregate($tag) {
