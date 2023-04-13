@@ -134,4 +134,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
  == Upgrade Notice ==
-* Few improvements!
+* Few improvements and bug fixes!
