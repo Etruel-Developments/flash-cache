@@ -136,18 +136,22 @@ class flash_cache_optimize_styles {
 				$basename_css	 = md5($basename_css . $code);
 			}
 		}
-		foreach (self::$css_tags['files'] as $css_tag) {
-			$media	 = $css_tag[0];
-			$path	 = $css_tag[1];
+		
+		$all_css_code = array_reduce(self::$css_tags['files'], function ($carry, $css_tag) use ($cache_dir, &$basename_css) {
+			$media = $css_tag[0];
+			$path = $css_tag[1];
+
 			if (!empty($path)) {
-				$code = self::flash_cache_link_fonts_from_url($path, $cache_dir, $arrContextOptions);
+				$code = apply_filters('flash_cache_save_fonts', $path, $cache_dir);
 				// Process font URLs
-				if(!empty($code)){
-					$all_css_code	 .= $code;
-					$basename_css	 = md5($basename_css . $path);
+				if (!empty($code)) {
+					$carry .= $code;
+					$basename_css = md5($basename_css . $path);
 				}
 			}
-		}
+
+			return $carry;
+		}, $all_css_code);
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -163,90 +167,6 @@ class flash_cache_optimize_styles {
 		$content = self::insert_html_before_element($content, '<title>', '<link media="all" rel="stylesheet" href="' . $url_file_css . '" />');
 
 		return $content;
-	}
-
-	public static function flash_cache_link_fonts_from_url($url, $cache_dir, $arrContextOptions)
-	{
-		// Obtener el contenido CSS de la URL
-		$all_css_code = file_get_contents($url, false, stream_context_create($arrContextOptions));
-
-		// Obtener todas las URLs de fuentes en el contenido.
-		$font_urls = array();
-		if (preg_match_all('/url\((["\']?)([^)]+)\1\)/i', $all_css_code, $matches)) {
-			$font_urls = $matches[2];
-		}
-
-		// Crear la carpeta que contiene las fuentes, si aún no existe.
-		$font_folder_path = $cache_dir . flash_cache_get_server_name() . '/webfonts/';
-		if (!file_exists($font_folder_path)) {
-			mkdir($font_folder_path, 0777, true);
-		}
-		$font_folder_path_public = $cache_dir . flash_cache_get_server_name() . '/public/';
-		if (!file_exists($font_folder_path_public)) {
-			mkdir($font_folder_path_public, 0777,
-				true
-			);
-		}
-
-		// Reemplazar las URLs de las fuentes con las URLs de las fuentes en la carpeta de caché.
-		foreach ($font_urls as $font_url) {
-			// Obtener la ruta completa de la fuente.
-			$font_path = self::get_full_font_path($font_url, $url);
-
-			// Solo continuar si la fuente se encuentra en la misma instancia de WordPress.
-			$wordpress_host = parse_url(get_home_url(), PHP_URL_HOST);
-			$font_host = parse_url($font_url, PHP_URL_HOST);
-			if ($font_host === null || $font_host === $wordpress_host) {
-				// La fuente se encuentra en la misma instancia de WordPress.
-				$font_cached_path = '';
-				if (preg_match('/\.(woff|woff2|eot|ttf|otf|svg)$/i', $font_url)) {
-					$font_cached_path = $font_folder_path . basename($font_path);
-				}else {
-					$font_cached_path = $font_folder_path_public . md5($font_path) . '.' . pathinfo($font_path, PATHINFO_EXTENSION);
-				}
-
-				if (!file_exists($font_cached_path)) {
-					// El archivo aún no está en la carpeta de caché, así que lo guardamos.
-					$file_content = file_get_contents($font_path);
-					if (!empty($file_content)) {
-						file_put_contents($font_cached_path, $file_content);
-					}
-				}
-
-				// // Reemplazar la URL del archivo en el CSS con la URL del archivo en la carpeta de caché.
-				// $file_cached_url = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $font_cached_path);
-				// $all_css_code = str_replace($font_url, $file_cached_url, $all_css_code);
-			}
-		}
-
-		return $all_css_code;
-	}
-
-	public static function get_full_font_path($font_url, $css_url) {
-		$font_url_parts = parse_url($font_url);
-	
-		if (isset($font_url_parts['scheme']) && isset($font_url_parts['host'])) {
-			// The font URL is absolute, so we can use it directly.
-			$full_font_path = $font_url;
-		} else {
-			// The font URL is relative, so we need to calculate the full path.
-			$css_url_parts = parse_url($css_url);
-			$base_path = $css_url_parts['scheme'] . '://' . $css_url_parts['host'];
-	
-			if (isset($css_url_parts['port'])) {
-				$base_path .= ':' . $css_url_parts['port'];
-			}
-	
-			if (isset($css_url_parts['path'])) {
-				$base_path .= dirname($css_url_parts['path']) . '/';
-			} else {
-				$base_path .= '/';
-			}
-	
-			$full_font_path = $base_path . $font_url;
-		}
-	
-		return $full_font_path;
 	}
 
 	public static function insert_html_before_element( $html, $element_selector, $new_html)

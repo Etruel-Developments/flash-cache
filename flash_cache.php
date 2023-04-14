@@ -96,6 +96,7 @@ class Flash_Cache {
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/enviroment.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_styles.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_scripts.php';
+		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_fonts.php';
 	}
 
 	/**
