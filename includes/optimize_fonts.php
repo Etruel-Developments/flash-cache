@@ -50,9 +50,9 @@ class flash_cache_optimize_fonts
             if ($font_host === null || $font_host === $wordpress_host && $font_path) {
                 // Font is on same WordPress instance
                 $font_cached_path = '';
-                if (preg_match('/\.(woff|woff2|eot|ttf|otf|svg)(\?[\w]*)?(?:#.*)?$/i', $font_url)) {
+                if (preg_match('/\.(woff2|woff|woff2?|eot|ttf|otf|svg)(\?[\w-]*)?(#[\w-]*)?/i', $font_url)) {
                     $font_cached_path = $font_folder_path . basename($font_path);
-                } elseif (preg_match('/\.(jpg|jpeg|png|gif)$/i', $font_url)) {
+                } elseif (preg_match('/\.(jpg|jpeg|png|gif)([\?\#].*)?$/i', $font_url)) {
                     $font_cached_path = $font_folder_path_images . basename($font_path);
                 }
                 if ($font_cached_path !== '') {
