@@ -2,9 +2,8 @@
 
 /**
  * @package         etruel\Flash Cache
- * @subpackage 	    Optimize Styles
- * @author          Sebastian Robles
- * @author          Esteban Truelsegaard
+ * @subpackage 	    Optimize Fonts
+ * @author          Gerardo Medina
  * @copyright       Copyright (c) 2017
  */
 // Exit if accessed directly
@@ -13,10 +12,6 @@ if (!defined('ABSPATH'))
 
 class flash_cache_optimize_fonts
 {
-
-    public static $css_tags             = array();
-    public static $include_inline     = true;
-
     public static function hooks()
     {
         add_filter('flash_cache_save_fonts', array(__CLASS__, 'flash_cache_link_fonts_from_url'), 1, 2);
