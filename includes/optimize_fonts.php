@@ -4,6 +4,7 @@
  * @package         etruel\Flash Cache
  * @subpackage 	    Optimize Fonts
  * @author          Gerardo Medina
+ * @author          Esteban Truelsegaard
  * @copyright       Copyright (c) 2017
  */
 // Exit if accessed directly
