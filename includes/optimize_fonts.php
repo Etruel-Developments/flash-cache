@@ -61,9 +61,9 @@ class flash_cache_optimize_fonts
                     if (!file_exists($font_cached_path) && !in_array($font_cached_path, $links_cached, true)) {
                         // The file doesn't exist yet.
                         $file_content = wp_safe_remote_get($font_path, array('sslverify' => false));
-                        if (is_wp_error($file_content)) {
-                            continue;
-                        }
+                        // if (is_wp_error($file_content)) {
+                        //     continue;
+                        // }
                         $file_content = wp_remote_retrieve_body($file_content);
                         if (!empty($file_content)) {
                             file_put_contents($font_cached_path, $file_content);
@@ -71,7 +71,8 @@ class flash_cache_optimize_fonts
                     }
                     // Replace URL from file in the css with the URL with the cached file 
                     $file_cached_url = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $font_cached_path);
-                    $all_css_code = str_replace($font_url, $file_cached_url, $all_css_code);
+                    $pattern = '/(?<=url\()[\'"]?' . preg_quote($font_url, '/') . '[\'"]?(?=\))/';
+                    $all_css_code = preg_replace($pattern, $file_cached_url, $all_css_code);
                 }
             }
         }
