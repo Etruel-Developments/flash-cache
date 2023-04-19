@@ -97,6 +97,7 @@ class flash_cache_optimize_styles {
 				// Remove the original style tag.
 				$content = str_replace($tag, '', $content);
 			}
+			
 		}
 		//$content .= print_r($matches[0], true);
 
@@ -123,7 +124,10 @@ class flash_cache_optimize_styles {
 		
 		$basename_css	 = '';
 		$all_css_code	 = '';
-		
+
+		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
+		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/styles/';
+
 		foreach (self::$css_tags['inline'] as $css_tag) {
 			$media	 = $css_tag[0];
 			$code	 = $css_tag[1];
@@ -132,28 +136,31 @@ class flash_cache_optimize_styles {
 				$basename_css	 = md5($basename_css . $code);
 			}
 		}
-
-		foreach (self::$css_tags['files'] as $css_tag) {
-			$media	 = $css_tag[0];
-			$path	 = $css_tag[1];
-			if (!empty($path)) {
-				$code			 = file_get_contents($path, false, stream_context_create($arrContextOptions));
-				$all_css_code	 .= $code;
-				$basename_css	 = md5($basename_css . $path);
-			}
-		}
-
-		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
-		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/styles/';
 		
+		$all_css_code = array_reduce(self::$css_tags['files'], function ($carry, $css_tag) use ($cache_dir, &$basename_css) {
+			$media = $css_tag[0];
+			$path = $css_tag[1];
+
+			if (!empty($path)) {
+				$code = apply_filters('flash_cache_save_fonts', $path, $cache_dir);
+				// Process font URLs
+				if (!empty($code)) {
+					$carry .= $code;
+					$basename_css = md5($basename_css . $path);
+				}
+			}
+
+			return $carry;
+		}, $all_css_code);
+
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
 
 		$full_path_file_css	 = $cache_path . $basename_css . '.css';
 		$url_file_css		 = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $full_path_file_css);
-
 		$all_css_code = apply_filters('flash_cache_css_code_before_join', $all_css_code, $full_path_file_css, flash_cache_process::$advanced_settings );
+		
 		file_put_contents($full_path_file_css, $all_css_code);
 
 		//Call the function insert_html_before_element for change the actual html by the new with styles and scripts
@@ -161,12 +168,6 @@ class flash_cache_optimize_styles {
 
 		return $content;
 	}
-
-	// public static function insert_before_of($content, $element = 'body', $code = '') {
-	// 	$content = str_replace('<' . $element . '>', $code . '</' . $element . '>', $content);
-
-	// 	return $content;
-	// }
 
 	public static function insert_html_before_element( $html, $element_selector, $new_html)
 	{
