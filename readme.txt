@@ -35,6 +35,12 @@ The most important characteristics that makes this add-on the first choice compa
 > * It allows to make a preload of the entire website, to keep a cache of all the site optimized and configurable.
 > * Most of the cache plugins in WordPress break the website structure, and this brings problems at the time of move the websites to another hosting or domain.  This problem doesn’t exist with Flash Cache. You only need to deactivate the cache and the plugin you can change the hosting of the website and reinstalled the Flash Cache without problems.
 
+
+= Known third-party plugins or theme compatibility issues =
+In some cases, there are compatibility issues with other plugins. Most of the time this is caused by other plugins inserting javascript or styles in a wrong or weird way.
+
+**Shortcodes Ultimate:** _Uncaught ReferenceError: SUShortcodesL10n is not defined._
+
 == Installation ==
 
 You can either install it automatically from the WordPress admin, or do it manually:
@@ -77,6 +83,12 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.0.4 Apr 19, 2023 =
+* Added delete cache feature on save WordPress Permalinks structure as changes also directories of cache.
+* Added fonts cache on its own directory.
+* Added style images cache on its own directory.
+* Fixes CSS styles for icons and fonts URLs for combined files.
+
 = 3.0.3 Apr 12, 2023 =
 * Fixes a bug for css styles and js code sometimes failing to load.
 * Fixes javascript errors on loading javascript combined file.
