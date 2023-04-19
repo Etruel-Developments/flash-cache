@@ -38,8 +38,6 @@ class flash_cache_optimize_fonts
 
         $font_folder_path_images = $cache_dir . flash_cache_get_server_name() . '/images/';
         wp_mkdir_p($font_folder_path_images);
-        //array for evaluate the links and paths
-        $links_cached = [];
         // Replace font URLs with cached URLs
         foreach ($font_urls as $font_url) {
             // Get full path of font
@@ -52,18 +50,16 @@ class flash_cache_optimize_fonts
                 $font_cached_path = '';
                 if (preg_match('/\.(woff2|woff|woff2?|eot|ttf|otf)(\?[\w-]*)?(#[\w-]*)?/i', $font_url)) {
                     $font_cached_path = $font_folder_path . basename($font_path);
-                    $links_cached[$font_cached_path];
                 } elseif (preg_match('/\.(jpg|jpeg|png|gif|bmp|webp|svg)(\?[\w-]*)?(#[\w-]*)?/i', $font_url)) {
                     $font_cached_path = $font_folder_path_images . basename($font_path);
-                    $links_cached[$font_cached_path];
                 }
                 if ($font_cached_path !== '') {
-                    if (!file_exists($font_cached_path) && !in_array($font_cached_path, $links_cached, true)) {
+                    if (!file_exists($font_cached_path)) {
                         // The file doesn't exist yet.
                         $file_content = wp_safe_remote_get($font_path, array('sslverify' => false));
-                        // if (is_wp_error($file_content)) {
-                        //     continue;
-                        // }
+                        if (is_wp_error($file_content)) {
+                            continue;
+                        }
                         $file_content = wp_remote_retrieve_body($file_content);
                         if (!empty($file_content)) {
                             file_put_contents($font_cached_path, $file_content);
