@@ -50,6 +50,7 @@ class Flash_Cache {
 			self::$instance->load_text_domain();
 			self::$instance->hooks();
 			self::$instance->includes();
+			self::$instance->flash_cache_permalinks();
 		}
 		return self::$instance;
 	}
@@ -180,8 +181,22 @@ class Flash_Cache {
 		flash_cache_delete_all_options();
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
 	}
+	
+	/**
+	 * Static function deactivation
+	 * Deactivation action hook
+	 * @access public
+	 * @return void
+	 * @since 1.0.0
+	 */
+	protected static function flash_cache_permalinks()
+	{
+		add_action('permalink_structure_changed', 'flash_cache_changes_permalinks', 10, 2);
+	}
 
 }
+
+
 
 /**
  * The main function responsible for returning the one true Flash Cache
