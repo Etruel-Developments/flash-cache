@@ -1,5 +1,5 @@
 === Flash Cache ===
-Contributors: sniuk, etruel, khaztiel
+Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
