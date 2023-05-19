@@ -39,6 +39,7 @@ class flash_cache_posts {
 			flash_cache_delete_cache_from_url(get_permalink($post));
 			flash_cache_delete_cache_from_url(home_url('/'));
 			flash_cache_delete_cache_from_url(home_url('/feed/'));
+			flash_cache_delete_cache_from_url(home_url('/page/'));
 		}
 	}
 
