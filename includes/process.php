@@ -208,7 +208,7 @@ class flash_cache_process {
 
 
 
-		self::debug('Creating HTML cache file path:' . $path . ' - Manooooo:' . self::$url_to_cache);
+		self::debug('Creating HTML cache file path:' . $path . ' -URL:' . self::$url_to_cache);
 
 		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
 
