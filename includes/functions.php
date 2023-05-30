@@ -782,8 +782,18 @@ function flash_cache_changes_permalinks($old_permalink_structure, $permalink_str
 		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_delete_dir($cache_dir, true);
-		flash_cache_notices::add(__('The cache files have been deleted.', 'flash-cache'));
+		flash_cache_notices::add(['text' => __('The cache files have been deleted.', 'flash-cache')]);
 	}
+	if($permalink_structure == ''){
+		$post_values = flash_cache_settings::default_general_options();
+		$post_values['activate'] = 0;
+		$new_options			 = wp_parse_args( $post_values , flash_cache_settings::default_general_options());
+		$new_options			 = apply_filters('flash_cache_check_general_settings', $new_options);
+		update_option('flash_cache_settings', $new_options);
+		flash_cache_update_htaccess();
+		$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('options-permalink.php')) . '">here</a>.';
+		flash_cache_notices::add(['text' => $notice_text, 'error' => true]);
+}
 }
 
 ?>

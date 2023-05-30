@@ -89,7 +89,6 @@ class flash_cache_settings {
 	}
 
 	public static function general_settings_page() {
-
 		$values = wp_parse_args(get_option('flash_cache_settings', array()), self::default_general_options());
 		echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
 			<div class="wpm_header">
@@ -104,16 +103,26 @@ class flash_cache_settings {
 		echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" class="pt-30" method="post">
 				<input type="hidden" name="action" value="save_flash_cache_general"/>';
 		wp_nonce_field('save_flash_cache_general');
-
+		//Option for do and show a message in case that permalinks will be "Plain".
+		if(get_option('permalink_structure') == ''){
+			$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('options-permalink.php')) . '">here</a>.';
+			flash_cache_notices::add(['text' => $notice_text, 'error' => true]);
+			$activation = '<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="0" disabled/>
+			<label for="flash_cache_general[activate]">Off</label>
+			<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="1" disabled/>
+			<label for="flash_cache_general[activate]">On</label>';
+		}else{
+			$activation = '<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="0" />
+			<label for="flash_cache_general[activate]">Off</label>
+			<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="1" />
+			<label for="flash_cache_general[activate]">On</label>';
+		}
 		echo '<table class="form-table mh-250">
 					<tr valign="top">
 						<th scope="row">' . __('Enable Cache', 'flash-cache') . '</th>
 						<td>
 							<div class="switch switch--horizontal switch--no-label">
-								<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="0"/>
-								<label for="flash_cache_general[activate]">Off</label>
-								<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="1"/>
-								<label for="flash_cache_general[activate]">On</label>
+								'.$activation.'
 								<span class="toggle-outside">
 									<span class="toggle-inside"></span>
 								</span>
@@ -389,7 +398,6 @@ class flash_cache_settings {
 		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_general')) {
 			wp_die(__('Security check', 'flash-cache'));
 		}
-
 		/** Validating user inputs  */
 		$post_values = array();
 		if ( ! empty( $_POST['flash_cache_general'] ) ) {
