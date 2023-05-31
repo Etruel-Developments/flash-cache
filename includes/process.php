@@ -189,7 +189,7 @@ class flash_cache_process {
 		
 		// Delete initial path
 		$path		 = str_replace(self::$origin_url, '', self::$url_to_cache);
-		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
+		$cache_path	 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		
 		
 		if (!file_exists($cache_path)) {
@@ -208,7 +208,7 @@ class flash_cache_process {
 
 
 
-		self::debug('Creating HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
+		self::debug('Creating HTML cache file path:' . $path . ' -URL:' . self::$url_to_cache);
 
 		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
 
@@ -232,7 +232,7 @@ class flash_cache_process {
 
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
 
-		$cache_path = $cache_dir . flash_cache_get_server_name() . '/' . $path;
+		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -547,7 +547,7 @@ class flash_cache_process {
 		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		$path				 = str_replace(self::$origin_url, '', $url);
-		$cache_path			 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
+		$cache_path			 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		$cache_file			 = $cache_path . 'index-cache.html';
 		if (file_exists($cache_file)) {
 			$cache_response = file_get_contents($cache_file);
@@ -624,7 +624,7 @@ class flash_cache_process {
 
 		$cache_dir	 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		$path		 = self::get_path(self::$optional_post_id);
-		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
+		$cache_path	 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 
 		if (!self::start_create_cache($cache_path)) {
 			self::end_create_cache();
@@ -665,7 +665,7 @@ class flash_cache_process {
 		$home_path			 = flash_cache_get_home_path();
 		$cache_dir			 = $home_path . $advanced_settings['cache_dir'];
 		$path		 		 = self::get_path(self::$optional_post_id);
-		$cache_path			 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
+		$cache_path			 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
