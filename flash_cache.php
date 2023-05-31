@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: Flash Cache
  * Plugin URI: https://flashcache.net
