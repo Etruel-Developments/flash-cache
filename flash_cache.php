@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name: Flash Cache
  * Plugin URI: https://flashcache.net
  * Description: Flash Cache is a plugin to really improve performance of Wordpress Websites. If you like it, please rate it 5 stars to allow us to improve its development.
- * Version: 3.0.4
+ * Version: 3.0.5
  * Author: Etruel Developments LLC
  * Author URI: https://etruel.com/
  * Text Domain: flash-cache
@@ -20,7 +21,7 @@ if (!defined('ABSPATH'))
 
 // Plugin version
 if (!defined('FLASH_CACHE_VERSION')) {
-	define('FLASH_CACHE_VERSION', '3.0.4');
+	define('FLASH_CACHE_VERSION', '3.0.5');
 }
 
 /**
@@ -153,8 +154,8 @@ class Flash_Cache {
 	 */
 	public static function deactivation() {
 		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		flash_cache_remove_rules();
 		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
+		flash_cache_remove_rules();
 		flash_cache_delete_dir($cache_dir, true);
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
 	}
@@ -173,19 +174,18 @@ class Flash_Cache {
 		if (!function_exists('flash_cache_delete_all_options')) {
 			require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 		}
+		$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_version::delete_all_patterns();
 		delete_option('flash_cache_version');
 		delete_option('flash_cache_settings');
 		delete_option('flash_cache_advanced_settings');
 		delete_option('flash_cache_disk_usage');
 		flash_cache_delete_all_options();
-		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_delete_dir($cache_dir, true);
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
 	}
+
 }
-
-
 
 /**
  * The main function responsible for returning the one true Flash Cache

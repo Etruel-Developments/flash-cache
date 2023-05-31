@@ -83,6 +83,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.0.5 May 31, 2023 =
+* Added controls to check the allowed Permalink structure to work.
+* Fixes a notices bug showing duplicated ones. 
+* Fixes the uninstall sometimes did not remove the cache files. 
+
 = 3.0.4 Apr 19, 2023 =
 * Added delete cache feature on save WordPress Permalinks structure as changes also directories of cache.
 * Added fonts cache on its own directory.
