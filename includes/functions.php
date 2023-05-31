@@ -791,7 +791,7 @@ function flash_cache_changes_permalinks($old_permalink_structure, $permalink_str
 		$new_options			 = apply_filters('flash_cache_check_general_settings', $new_options);
 		update_option('flash_cache_settings', $new_options);
 		flash_cache_update_htaccess();
-		$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('options-permalink.php')) . '">here</a>.';
+		$notice_text = 'Flash Cache requires a different Permalinks structure to work.';
 		flash_cache_notices::add(['text' => $notice_text, 'error' => true]);
 }
 }

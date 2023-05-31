@@ -65,10 +65,11 @@ class flash_cache_notices {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public static function show() {
+	public static function show()
+	{
 		$screen = get_current_screen();
 		$notice = get_option(self::$option_notices, array());
-	
+
 		if (!empty($notice)) {
 			foreach ($notice as $key => $mess) {
 				if ($mess['user_ID'] == get_current_user_id()) {
@@ -76,11 +77,7 @@ class flash_cache_notices {
 						$class = ($mess['error']) ? "notice notice-error" : "notice notice-success";
 						$class .= ($mess['is-dismissible']) ? " is-dismissible" : "";
 						$class .= ($mess['below-h2']) ? " below-h2" : "";
-						
-						// Use wp_kses_post to allow HTML tags in the notice text
-						$notice_text = wp_kses_post($mess['text']);
-						
-						echo '<div id="message" class="' . esc_attr($class) . '"><p>' . $notice_text . '</p></div>';
+						echo '<div id="message" class="' . esc_attr($class) . '"><p>' . $mess['text'] . '</p></div>';
 						unset($notice[$key]);
 					}
 				}

@@ -19,6 +19,7 @@ class flash_cache_settings {
 	 * @since 1.0.0
 	 */
 	public static function hooks() {
+		add_action('admin_init', array(__CLASS__, 'flash_cache_check_permalinks'));
 		add_action('admin_menu', array(__CLASS__, 'admin_menu'));
 		add_action('admin_print_styles', array(__CLASS__, 'all_WP_admin_styles'));
 		add_action('admin_post_save_flash_cache_general', array(__CLASS__, 'save_general'));
@@ -105,8 +106,6 @@ class flash_cache_settings {
 		wp_nonce_field('save_flash_cache_general');
 		//Option for do and show a message in case that permalinks will be "Plain".
 		if(get_option('permalink_structure') == ''){
-			$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('options-permalink.php')) . '">here</a>.';
-			flash_cache_notices::add(['text' => $notice_text, 'error' => true]);
 			$activation = '<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="0" disabled/>
 			<label for="flash_cache_general[activate]">Off</label>
 			<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="1" disabled/>
@@ -496,6 +495,13 @@ class flash_cache_settings {
 		update_option('flash_cache_advanced_settings', self::default_advanced_options());
 		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
 		wp_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
+	}
+
+	public static function flash_cache_check_permalinks(){
+		if(get_option('permalink_structure') == ''){
+			$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('/options-permalink.php')) . '">here</a>.';
+			flash_cache_notices::add(['text' => $notice_text, 'error' => true, 'screen' => 'toplevel_page_flash_cache_setting']);
+		}
 	}
 
 }
