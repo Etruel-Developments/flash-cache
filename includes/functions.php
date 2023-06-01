@@ -27,24 +27,26 @@ function flash_cache_get_server_name() {
 
 	return $server_name;
 }
+
 function flash_cache_sanitize_origin_url($origin_url) {
-	$parsed_url = parse_url($origin_url);
-	$scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : 'https://';
-	$host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
-	$origin_url = $scheme . $host . '/';
+	$parsed_url	 = parse_url($origin_url);
+	$scheme		 = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : 'https://';
+	$host		 = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+	$origin_url	 = $scheme . $host . '/';
 	return $origin_url;
 }
+
 function flash_cache_sanitize_settings_deep($default_values, $post_values) {
-	if ( ! empty( $post_values ) ) {
-		foreach( $default_values as $key => $default_value ) {
-			if ( ! empty( $post_values[$key] ) ) {
-				if ( is_bool( $default_value ) === true ) {
+	if (!empty($post_values)) {
+		foreach ($default_values as $key => $default_value) {
+			if (!empty($post_values[$key])) {
+				if (is_bool($default_value) === true) {
 					$post_values[$key] = ($post_values[$key] ? true : false);
-				} elseif ( is_string( $default_value ) ) {
-					$post_values[$key] = sanitize_text_field( $post_values[$key] );
-				} else if ( is_numeric( $default_value ) ) {
-					$post_values[$key] = absint( sanitize_text_field( $post_values[$key] ) );
-				} else if ( is_array( $default_value ) ) {
+				} elseif (is_string($default_value)) {
+					$post_values[$key] = sanitize_text_field($post_values[$key]);
+				} else if (is_numeric($default_value)) {
+					$post_values[$key] = absint(sanitize_text_field($post_values[$key]));
+				} else if (is_array($default_value)) {
 					foreach ($post_values[$key] as $key_array => $value_array) {
 						$post_values[$key][$key_array] = sanitize_text_field($post_values[$key][$key_array]);
 					}
@@ -54,14 +56,15 @@ function flash_cache_sanitize_settings_deep($default_values, $post_values) {
 	}
 	return $post_values;
 }
+
 function flash_cache_sanitize_querystring_cache($get_queries_vars) {
 	global $wp_query;
 	$new_queries_vars = array();
-	if ( ! empty( $get_queries_vars ) ) {
-		if ( ! empty( $wp_query->query_vars ) ) {
-			foreach( $wp_query->query_vars as $key => $default_value ) {
-				if ( ! empty( $get_queries_vars[$key] ) ) {
-					$new_queries_vars[$key] = sanitize_text_field( $get_queries_vars[$key] );
+	if (!empty($get_queries_vars)) {
+		if (!empty($wp_query->query_vars)) {
+			foreach ($wp_query->query_vars as $key => $default_value) {
+				if (!empty($get_queries_vars[$key])) {
+					$new_queries_vars[$key] = sanitize_text_field($get_queries_vars[$key]);
 				}
 			}
 		}
@@ -448,12 +451,12 @@ function flash_cache_seconds_2_time($seconds) {
 	}
 	$diff = $dtF->diff($dtT);
 	foreach (array(
-'y'	 => 'year',
- 'm'	 => 'month',
- 'd'	 => 'day',
- 'h'	 => 'hour',
- 'i'	 => 'minute',
- 's'	 => 'second'
+		'y'	 => 'year',
+		'm'	 => 'month',
+		'd'	 => 'day',
+		'h'	 => 'hour',
+		'i'	 => 'minute',
+		's'	 => 'second'
 	) as $time => $timename) {
 		if ($diff->$time !== 0) {
 			$ret .= $diff->$time . ' ' . $timename;
@@ -473,8 +476,7 @@ function flash_cache_get_logged_in_cookie() {
 	return $logged_in_cookie;
 }
 
-function flash_cache_update_htaccess()
-{
+function flash_cache_update_htaccess() {
 	if (flash_cache_enviroment::is_nginx()) {
 		extract(flash_cache_get_nginx_conf_info());
 		flash_cache_remove_marker($home_path . 'nginx.conf', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
@@ -580,26 +582,25 @@ function flash_cache_get_home_path() {
 	$home	 = set_url_scheme(get_option('home'), 'http');
 	$siteurl = set_url_scheme(get_option('siteurl'), 'http');
 
-	$script_filename = sanitize_text_field( $_SERVER['SCRIPT_FILENAME'] );
+	$script_filename = sanitize_text_field($_SERVER['SCRIPT_FILENAME']);
 
 	if (!empty($home) && 0 !== strcasecmp($home, $siteurl)) {
 		$wp_path_rel_to_home = str_ireplace($home, '', $siteurl); /* $siteurl - $home */
-		$pos				 = strripos(str_replace('\\', '/', $script_filename ), trailingslashit($wp_path_rel_to_home));
-		$home_path			 = substr( $script_filename, 0, $pos);
+		$pos				 = strripos(str_replace('\\', '/', $script_filename), trailingslashit($wp_path_rel_to_home));
+		$home_path			 = substr($script_filename, 0, $pos);
 		$home_path			 = trailingslashit($home_path);
 	} else {
 		$home_path = ABSPATH;
 	}
 	if ($home_path == '/') {
-		$home_path = trailingslashit( dirname( $script_filename ) );
+		$home_path = trailingslashit(dirname($script_filename));
 	}
 	return str_replace('\\', '/', $home_path);
 }
 
 function flash_cache_get_content_to_php($url) {
 	if (!empty($_GET)) {
-		$url = $url . '?' . http_build_query( flash_cache_sanitize_querystring_cache( $_GET ) );
-		
+		$url = $url . '?' . http_build_query(flash_cache_sanitize_querystring_cache($_GET));
 	}
 	$args = array(
 		'timeout'	 => 15,
@@ -610,7 +611,6 @@ function flash_cache_get_content_to_php($url) {
 	);
 
 	$args = apply_filters('flash_cache_get_content_to_php_args', $args);
-
 
 	return flash_cache_get_content($url, $args);
 }
@@ -700,14 +700,13 @@ function flash_cache_delete_all_options() {
  * @param string   $filename       The filename to search and modify.
  * @return bool
  */
-function flash_cache_remove_breakspaces($filename): bool
-{
-	$file_array = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+function flash_cache_remove_breakspaces($filename): bool {
+	$file_array		 = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 	$first_code_line = array_search(true, array_map('trim', $file_array));
-	$file_array = array_slice($file_array, $first_code_line);
-	$file_string = implode("\n", $file_array);
-	$file_string = preg_replace('/^# END.*/m', '$0' . PHP_EOL, $file_string);
-	$file_string = rtrim($file_string);
+	$file_array		 = array_slice($file_array, $first_code_line);
+	$file_string	 = implode("\n", $file_array);
+	$file_string	 = preg_replace('/^# END.*/m', '$0' . PHP_EOL, $file_string);
+	$file_string	 = rtrim($file_string);
 
 	return (bool) file_put_contents($filename, $file_string);
 }
@@ -744,14 +743,14 @@ function flash_cache_get_menus() {
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'edit-flash_cache_patterns' ) ? " active" : "" ) . '" href="edit.php?post_type=flash_cache_patterns"><span class="wpm_link_icon">' . $flash_cache_icons['icon_patterns'] . '</span> <span class="wpm_link_text">' . __('Patterns', 'flash-cache') . '</span></a>
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'flash_cache_patterns' ) ? " active" : "" ) . '" href="post-new.php?post_type=flash_cache_patterns"><span class="wpm_link_icon">' . $flash_cache_icons['icon_addpattern'] . '</span> <span class="wpm_link_text">' . __('Add New Pattern', 'flash-cache') . '</span></a>
 		<a class="wpm_menu_link' . ( ( $current_screen->id == 'flash-cache_page_flash_cache_preload' ) ? " active" : "" ) . '" href="admin.php?page=flash_cache_preload"><span class="wpm_link_icon">' . $flash_cache_icons['icon_preload'] . '</span> <span class="wpm_link_text">' . __('Preload', 'flash-cache') . '</span></a>
-		' . apply_filters('flash_cache_add_menus', '', $flash_cache_icons ) . '
+		' . apply_filters('flash_cache_add_menus', '', $flash_cache_icons) . '
 	</div>'
 	);
 }
 
 function flash_cache_get_menus_social_footer() {
 	$flash_cache_icons = flash_cache_settings_icons();
-	
+
 	return apply_filters('flash_cache_get_menus_social_footer', '
 		<div class="wpm_share">
 			<a href="https://twitter.com/etruel_com" title="Visit us on twitter" target="_blank">
@@ -776,24 +775,21 @@ function flash_cache_get_menus_social_footer() {
 	);
 }
 
-function flash_cache_changes_permalinks($old_permalink_structure, $permalink_structure)
-{
+function flash_cache_changes_permalinks($old_permalink_structure, $permalink_structure) {
 	if ($old_permalink_structure != $permalink_structure) {
 		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_delete_dir($cache_dir, true);
-		flash_cache_notices::add(['text' => __('The cache files have been deleted.', 'flash-cache')]);
+		flash_cache_notices::add(['text' => __('Cache files have been removed to fit the new permalinks structure.', 'flash-cache')]);
 	}
-	if($permalink_structure == ''){
-		$post_values = flash_cache_settings::default_general_options();
+	if ($permalink_structure == '') {
+		$post_values			 = flash_cache_settings::default_general_options();
 		$post_values['activate'] = 0;
-		$new_options			 = wp_parse_args( $post_values , flash_cache_settings::default_general_options());
+		$new_options			 = wp_parse_args($post_values, flash_cache_settings::default_general_options());
 		$new_options			 = apply_filters('flash_cache_check_general_settings', $new_options);
 		update_option('flash_cache_settings', $new_options);
 		flash_cache_update_htaccess();
-		$notice_text = 'Flash Cache requires a different Permalinks structure to work.';
-		flash_cache_notices::add(['text' => $notice_text, 'error' => true]);
-}
+	}
 }
 
 ?>

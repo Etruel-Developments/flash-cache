@@ -77,7 +77,8 @@ class flash_cache_notices {
 						$class = ($mess['error']) ? "notice notice-error" : "notice notice-success";
 						$class .= ($mess['is-dismissible']) ? " is-dismissible" : "";
 						$class .= ($mess['below-h2']) ? " below-h2" : "";
-						echo '<div id="message" class="' . esc_attr($class) . '"><p>' . $mess['text'] . '</p></div>';
+						// Use wp_kses_post to allow HTML tags in the notice text
+						echo '<div id="message" class="' . esc_attr($class) . '"><p>' . wp_kses_post($mess['text']) . '</p></div>';
 						unset($notice[$key]);
 					}
 				}

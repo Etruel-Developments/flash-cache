@@ -19,7 +19,7 @@ class flash_cache_settings {
 	 * @since 1.0.0
 	 */
 	public static function hooks() {
-		add_action('admin_init', array(__CLASS__, 'flash_cache_check_permalinks'));
+		add_action('admin_notices', array(__CLASS__, 'flash_cache_check_permalinks'));
 		add_action('admin_menu', array(__CLASS__, 'admin_menu'));
 		add_action('admin_print_styles', array(__CLASS__, 'all_WP_admin_styles'));
 		add_action('admin_post_save_flash_cache_general', array(__CLASS__, 'save_general'));
@@ -100,17 +100,17 @@ class flash_cache_settings {
 		echo '<div class="wpm_flex">';
 
 		echo flash_cache_get_menus();
-		
+
 		echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" class="pt-30" method="post">
 				<input type="hidden" name="action" value="save_flash_cache_general"/>';
 		wp_nonce_field('save_flash_cache_general');
 		//Option for do and show a message in case that permalinks will be "Plain".
-		if(get_option('permalink_structure') == ''){
+		if (get_option('permalink_structure') == '') {
 			$activation = '<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="0" disabled/>
 			<label for="flash_cache_general[activate]">Off</label>
 			<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="1" disabled/>
 			<label for="flash_cache_general[activate]">On</label>';
-		}else{
+		} else {
 			$activation = '<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="0" />
 			<label for="flash_cache_general[activate]">Off</label>
 			<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="1" />
@@ -121,7 +121,7 @@ class flash_cache_settings {
 						<th scope="row">' . __('Enable Cache', 'flash-cache') . '</th>
 						<td>
 							<div class="switch switch--horizontal switch--no-label">
-								'.$activation.'
+								' . $activation . '
 								<span class="toggle-outside">
 									<span class="toggle-inside"></span>
 								</span>
@@ -216,29 +216,29 @@ class flash_cache_settings {
 			<div class="clear"></div></div>
 			<div class="clear"></div></div>
 			<div id="wpfooter" role="contentinfo">
-			<?php
+				<?php
+			}
 		}
-	}
 
-	public static function advanced_settings_page() {
-		$values = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
-		echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
+		public static function advanced_settings_page() {
+			$values = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+			echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
 			<div class="wpm_header">
 			<h1>' . __('Advanced Settings', 'flash-cache') . '</h1>
 			</div>
 			<div class="postbox">';
-		self::get_changes_httacess();
-		echo '<div class="wpm_flex">';
+			self::get_changes_httacess();
+			echo '<div class="wpm_flex">';
 
-		echo flash_cache_get_menus();
+			echo flash_cache_get_menus();
 
-		echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" method="post">
+			echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" method="post">
 				<input type="hidden" name="action" value="save_flash_cache_advanced"/>';
-		wp_nonce_field('save_flash_cache_advanced');
-		echo '<div class="wpm_head"><div class="wpm_buttons">';
-		submit_button();
-		echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a></div></div>';
-		echo '<table class="form-table">
+			wp_nonce_field('save_flash_cache_advanced');
+			echo '<div class="wpm_head"><div class="wpm_buttons">';
+			submit_button();
+			echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a></div></div>';
+			echo '<table class="form-table">
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Cache Location', 'flash-cache') . '</th>
 						<td>
@@ -254,15 +254,15 @@ class flash_cache_settings {
 								<input type="radio" ' . checked($values['viewer_protocol_policy'], 'http_and_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/> ' . __('HTTP and HTTPS (If this protocol is enabled)', 'flash-cache') . '
 								<p class="description">' . __('Keeps the cache in both protocols as in the HTTP and in HTTPS if it exists.', 'flash-cache') . '</p>
 							</div> ';
-							if ( is_ssl() ) {
-								echo '
+			if (is_ssl()) {
+				echo '
 								<div class="radio-group">
 									<input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . ' 
 									<p class="description">' . __('Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the certificate to improve the speed through the header Strict-Transport-Security.', 'flash-cache') . '</p> 
 								</div>';
-							}
-							
-		echo '</td>
+			}
+
+			echo '</td>
 					</tr>
 
 					<tr valign="top" class="wrap-row">
@@ -277,23 +277,23 @@ class flash_cache_settings {
 						<th scope="row">' . __('Do not cache users with cookies', 'flash-cache') . '</th>
 						<td>';
 
-		echo '<table class="form-table" id="table_dont_cache_cookie">';
+			echo '<table class="form-table" id="table_dont_cache_cookie">';
 
-		echo '	<p class="description">' . __('This list allows add the users which have the part of the name of a Cookie, it won’t be showed in the objects in cache, as the users that have begun session in the WP-ADMIN, you can also add other cookies to websites which uses user roles at the theme system.', 'flash-cache') . '</p>';
+			echo '	<p class="description">' . __('This list allows add the users which have the part of the name of a Cookie, it won’t be showed in the objects in cache, as the users that have begun session in the WP-ADMIN, you can also add other cookies to websites which uses user roles at the theme system.', 'flash-cache') . '</p>';
 
-		foreach ($values['dont_cache_cookie'] as $value) {
-			echo '<tr valign="top" class="tr_item_dont_cache_cookie">
+			foreach ($values['dont_cache_cookie'] as $value) {
+				echo '<tr valign="top" class="tr_item_dont_cache_cookie">
 										<td scope="row">
 											<input type="text" name="flash_cache_advanced[dont_cache_cookie][]" value="' . esc_attr($value) . '"/><label title="" data-id="1" class="delete"><span class="dashicons dashicons-trash"></span></label>
 										</td>
 									</tr>';
-		}
+			}
 
-		echo '</table>';
-		echo '<div class="add-cookie form-table">
+			echo '</table>';
+			echo '<div class="add-cookie form-table">
 						<input type="button" name="add_new_dont_cache_cookie" id="add_new_dont_cache_cookie" class="button" value="Add"/>
 				</div>';
-		echo '</td>
+			echo '</td>
 					</tr>
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Cache Process', 'flash-cache') . '</th>
@@ -305,7 +305,7 @@ class flash_cache_settings {
 							</div>
 						</td>
 					</tr>';
-		echo '
+			echo '
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Optimize styles', 'flash-cache') . '</th>
 						<td>
@@ -319,11 +319,11 @@ class flash_cache_settings {
 								</span>
 							</div>
 							<p class="description">' . __('Optimize and combine all your Stylesheets files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
-							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values ) . ' 
+							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values) . ' 
 						</td>
 						
 					</tr>';
-		echo '
+			echo '
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Optimize scripts', 'flash-cache') . '</th>
 						<td>
@@ -337,11 +337,11 @@ class flash_cache_settings {
 								</span>
 							</div>
 							<p class="description">' . __('Optimize and combine all your JavaScript files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
-							' . apply_filters('flash_cache_optimize_scripts_extra_html', '', $values ) . ' 
+							' . apply_filters('flash_cache_optimize_scripts_extra_html', '', $values) . ' 
 						</td>
 						
 					</tr>';
-		echo '<tr valign="top" class="wrap-row">
+			echo '<tr valign="top" class="wrap-row">
 					<th scope="row">' . __('Lock Type', 'flash-cache') . '</th>
 					<td>
 						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> Lock with files
@@ -352,159 +352,168 @@ class flash_cache_settings {
 						</div>
 					</td>
 				</tr>';
-		echo '</table>';
-		echo '<div class="wpm_footer">';
-		echo '<div class="wpm_buttons">';
-		submit_button();
-		echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a>
+			echo '</table>';
+			echo '<div class="wpm_footer">';
+			echo '<div class="wpm_buttons">';
+			submit_button();
+			echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a>
 			</div> <!-- wpm_buttons -->
 		</div>'; // wpm_footer
 
-		echo '</form></div></div>';
+			echo '</form></div></div>';
 
-		echo ' </div>';
-	}
-
-	public static function get_changes_httacess() {
-
-		if (flash_cache_enviroment::is_nginx()) {
-			extract(flash_cache_get_nginx_conf_info());
-		} else {
-			extract(flash_cache_get_htaccess_info());
+			echo ' </div>';
 		}
 
-		if ($current_cache_rules != $cache_rules || $current_utils_rules != $utils_rules || $current_optimization_rules != $optimization_rules) {
+		public static function get_changes_httacess() {
 
 			if (flash_cache_enviroment::is_nginx()) {
-				echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				extract(flash_cache_get_nginx_conf_info());
 			} else {
-				echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				extract(flash_cache_get_htaccess_info());
 			}
 
-			echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Page Cache<br/>' . esc_html($cache_rules) . '<br/># END FlashCache Page Cache</pre></p>';
-			echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Utils<br/>' . esc_html($utils_rules) . '<br/># END FlashCache Utils</pre></p>';
-			echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Optimizations<br/>' . esc_html($optimization_rules) . '<br/># END FlashCache Optimizations</pre></p>';
+			if ($current_cache_rules != $cache_rules || $current_utils_rules != $utils_rules || $current_optimization_rules != $optimization_rules) {
 
-			echo '<form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_update_httacess" method="post">
+				if (flash_cache_enviroment::is_nginx()) {
+					echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				} else {
+					echo '<div id="message" class="notice notice-error below-h2"><p>' . __('A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules.', 'flash-cache') . '</p></div>';
+				}
+
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Page Cache<br/>' . esc_html($cache_rules) . '<br/># END FlashCache Page Cache</pre></p>';
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Utils<br/>' . esc_html($utils_rules) . '<br/># END FlashCache Utils</pre></p>';
+				echo '<p><pre style="background:#fcf6f6;"># BEGIN FlashCache Optimizations<br/>' . esc_html($optimization_rules) . '<br/># END FlashCache Optimizations</pre></p>';
+
+				echo '<form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_update_httacess" method="post">
 				<input type="hidden" name="action" value="update_flash_cache_httacess"/>';
-			wp_nonce_field('update_flash_cache_httacess');
-			submit_button('Update Rules');
-			echo '<hr/></form>';
-		}
-	}
-
-	public static function save_general() {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_general')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-		/** Validating user inputs  */
-		$post_values = array();
-		if ( ! empty( $_POST['flash_cache_general'] ) ) {
-			$post_values = $_POST['flash_cache_general'];
-			if (  ! is_array( $post_values ) ) {
-				$post_values = array();
+				wp_nonce_field('update_flash_cache_httacess');
+				submit_button('Update Rules');
+				echo '<hr/></form>';
 			}
 		}
 
-		/** Sanitize all inputs and only accept the valid settings */
-		$post_values = flash_cache_sanitize_settings_deep( self::default_general_options(), $post_values);
+		public static function save_general() {
+			if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_general')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+			/** Validating user inputs  */
+			$post_values = array();
+			if (!empty($_POST['flash_cache_general'])) {
+				$post_values = $_POST['flash_cache_general'];
+				if (!is_array($post_values)) {
+					$post_values = array();
+				}
+			}
 
-		$new_options			 = wp_parse_args( $post_values , self::default_general_options());
-		$new_options			 = apply_filters('flash_cache_check_general_settings', $new_options);
+			/** Sanitize all inputs and only accept the valid settings */
+			$post_values = flash_cache_sanitize_settings_deep(self::default_general_options(), $post_values);
 
-		update_option('flash_cache_settings', $new_options);
-		flash_cache_update_htaccess();
+			$new_options = wp_parse_args($post_values, self::default_general_options());
+			$new_options = apply_filters('flash_cache_check_general_settings', $new_options);
 
-		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
-		exit;
-	}
+			update_option('flash_cache_settings', $new_options);
+			flash_cache_update_htaccess();
 
-	public static function save_advanced() {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_advanced')) {
-			wp_die(__('Security check', 'flash-cache'));
+			flash_cache_notices::add(__('Settings updated', 'flash-cache'));
+			wp_redirect(sanitize_url($_POST['_wp_http_referer']));
+			exit;
 		}
 
-		/** Validating user inputs  */
-		$post_values = array();
-		if ( ! empty( $_POST['flash_cache_advanced'] ) ) {
-			$post_values = $_POST['flash_cache_advanced'];
-			if (  ! is_array( $post_values ) ) {
-				$post_values = array();
+		public static function save_advanced() {
+			if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_advanced')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+
+			/** Validating user inputs  */
+			$post_values = array();
+			if (!empty($_POST['flash_cache_advanced'])) {
+				$post_values = $_POST['flash_cache_advanced'];
+				if (!is_array($post_values)) {
+					$post_values = array();
+				}
+			}
+			/** Sanitize all inputs and only accept the valid settings */
+			$post_values = flash_cache_sanitize_settings_deep(self::default_advanced_options(), $post_values);
+
+			$new_options = wp_parse_args($post_values, self::default_advanced_options());
+			$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
+
+			update_option('flash_cache_advanced_settings', $new_options);
+			flash_cache_update_htaccess();
+			flash_cache_notices::add(__('Settings updated', 'flash-cache'));
+			wp_redirect(sanitize_url($_POST['_wp_http_referer']));
+			exit;
+		}
+
+		public static function update_httacess() {
+			if (!wp_verify_nonce($_POST['_wpnonce'], 'update_flash_cache_httacess')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+			flash_cache_update_htaccess();
+			flash_cache_notices::add(__('Web server rules updated', 'flash-cache'));
+			wp_redirect(sanitize_url($_POST['_wp_http_referer']));
+			exit;
+		}
+
+		public static function delete_cache() {
+			if (!wp_verify_nonce($_GET['_wpnonce'], 'delete_flash_cache')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+			$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+			$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
+			flash_cache_delete_dir($cache_dir, true);
+			flash_cache_notices::add(__('The cache files have been deleted.', 'flash-cache'));
+			wp_redirect(admin_url('admin.php?page=flash_cache_setting'));
+		}
+
+		public static function reset_to_default_general_settings() {
+			if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_general_settings')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+
+			$new_options = wp_parse_args(array('activate' => false), self::default_general_options());
+			$new_options = apply_filters('flash_cache_check_general_settings', $new_options);
+
+			update_option('flash_cache_settings', $new_options);
+			flash_cache_update_htaccess();
+
+			$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+
+			$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
+			flash_cache_delete_dir($cache_dir, true);
+			flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
+			wp_redirect(admin_url('admin.php?page=flash_cache_setting'));
+		}
+
+		public static function reset_to_default_advanced_options() {
+			if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_advanced_options')) {
+				wp_die(__('Security check', 'flash-cache'));
+			}
+
+			update_option('flash_cache_advanced_settings', self::default_advanced_options());
+			flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
+			wp_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
+		}
+
+		public static function flash_cache_check_permalinks() {
+			global $current_screen;
+			if (isset($current_screen->id) &&
+					($current_screen->id == 'toplevel_page_flash_cache_setting' || $current_screen->id == 'options-permalink')
+			) {
+				if (get_option('permalink_structure') == '') {
+					if ($current_screen->id == 'options-permalink') {
+						$notice_text = 'Flash Cache requires a different Permalink structure to work.';
+						flash_cache_notices::add(['text' => $notice_text, 'error' => true, 'screen' => 'options-permalink']);
+					} elseif ($current_screen->id == 'toplevel_page_flash_cache_setting') {
+						$notice_text = 'Flash Cache requires a different Permalink structure to work. You can change it <a href="' . esc_url(admin_url('/options-permalink.php')) . '">here</a>.';
+						flash_cache_notices::add(['text' => $notice_text, 'error' => true, 'screen' => 'toplevel_page_flash_cache_setting']);
+					}
+				}
 			}
 		}
-		/** Sanitize all inputs and only accept the valid settings */
-		$post_values = flash_cache_sanitize_settings_deep( self::default_advanced_options(), $post_values);
-		
 
-		$new_options = wp_parse_args( $post_values, self::default_advanced_options());
-		$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
-
-		update_option('flash_cache_advanced_settings', $new_options);
-		flash_cache_update_htaccess();
-		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
-		exit;
 	}
 
-	public static function update_httacess() {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'update_flash_cache_httacess')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-		flash_cache_update_htaccess();
-		flash_cache_notices::add(__('Web server rules updated', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
-		exit;
-	}
-
-	public static function delete_cache() {
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'delete_flash_cache')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
-		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
-		flash_cache_delete_dir($cache_dir, true);
-		flash_cache_notices::add(__('The cache files have been deleted.', 'flash-cache'));
-		wp_redirect(admin_url('admin.php?page=flash_cache_setting'));
-	}
-
-	public static function reset_to_default_general_settings() {
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_general_settings')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-
-		$new_options = wp_parse_args(array('activate' => false), self::default_general_options());
-		$new_options = apply_filters('flash_cache_check_general_settings', $new_options);
-
-		update_option('flash_cache_settings', $new_options);
-		flash_cache_update_htaccess();
-
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
-
-		$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
-		flash_cache_delete_dir($cache_dir, true);
-		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_redirect(admin_url('admin.php?page=flash_cache_setting'));
-	}
-
-	public static function reset_to_default_advanced_options() {
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_advanced_options')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-
-		update_option('flash_cache_advanced_settings', self::default_advanced_options());
-		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
-	}
-
-	public static function flash_cache_check_permalinks(){
-		if(get_option('permalink_structure') == ''){
-			$notice_text = 'Flash Cache requires a different Permalinks structure to work. You can change it <a href="' . esc_url(admin_url('/options-permalink.php')) . '">here</a>.';
-			flash_cache_notices::add(['text' => $notice_text, 'error' => true, 'screen' => 'toplevel_page_flash_cache_setting']);
-		}
-	}
-
-}
-
-flash_cache_settings::hooks();
-?>
+	flash_cache_settings::hooks();
+	?>
