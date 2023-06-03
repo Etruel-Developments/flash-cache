@@ -14,6 +14,8 @@ Flash Cache is a plugin to improve the performance of Wordpress Websites by maki
 
 Flash Cache is a powerful plugin which optimizes the websites speed thanks to processes and technologies that reduces the overload of the websites where it is installed, improving the velocity till 10x comparing with other cache plugins for WordPress.
 
+[youtube https://www.youtube-nocookie.com/embed/htlgaxQQIwk?controls=0"]
+
 #### With the Flash Cache plugin you will be able to:
 
 * Increase the speed at which your site is displayed to the end user.
