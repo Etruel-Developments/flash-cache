@@ -85,6 +85,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.0.6 Jul 04, 2023 =
+* Added Settings footer link to YouTube tutorials for Flash Cache.
+
 = 3.0.5 May 31, 2023 =
 * Added controls to check the allowed Permalink structure to work.
 * Fixes a notices bug showing duplicated ones. 
