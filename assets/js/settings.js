@@ -3,7 +3,7 @@ function hooks_cookie() {
     jQuery(this).parent().parent().remove();
   });
 }
-jQuery(document).ready(function () {
+jQuery(document).ready(function ($) {
   hooks_cookie();
   jQuery("#add_new_dont_cache_cookie").click(function (e) {
     jQuery("#table_dont_cache_cookie").append(
@@ -27,4 +27,31 @@ jQuery(document).ready(function () {
   function init() {
     jQuery('.flash-wrap-notices').append( jQuery('.error, .success, .notice, .message, .fade, .updated') );
   }
+
+  // Check the initial value of the radio button
+  if ($('input[name="flash_cache_advanced[plugins_files]"]:checked').val() == '1') {
+    $('#plugins_to_exclude').show();  // Show the checkboxes if "On" is selected by default
+  }
+
+  // Handle change event on radio buttons
+  $('input[name="flash_cache_advanced[plugins_files]"]').change(function () {
+    if ($(this).val() == '1') {
+      $('#plugins_to_exclude').show();  // Show the checkboxes if "On" is selected
+    } else {
+      $('#plugins_to_exclude').hide();  // Hide the checkboxes if "Off" is selected
+    }
+  });
+
+  // Check the initial value of the radio button
+  if ($('input[name="flash_cache_advanced[avoid_optimize]"]:checked').val() == '1') {
+    $('#textarea_avoid_optimize').show();  // Show the textarea if "On" is selected by default
+  }
+  // Handle change event on radio buttons
+  $('input[name="flash_cache_advanced[avoid_optimize]"]').change(function () {
+    if ($(this).val() == '1') {
+      $('#textarea_avoid_optimize').show();  // Show the textarea if "On" is selected
+    } else {
+      $('#textarea_avoid_optimize').hide();  // Hide the textarea if "Off" is selected
+    }
+  });
 });

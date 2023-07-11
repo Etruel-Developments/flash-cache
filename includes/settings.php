@@ -279,38 +279,14 @@ class flash_cache_settings {
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								 <p class="description">Avoid optimizing plugins JavaScript files.</p>
-								 <!-- <div class="flash_cache_select_plugins">
-									<ul>
-										<li><input type="checkbox" name="yoastseo"><label for="yoastseo">Yoast SEO</label></li>
-										<li><input type="checkbox" name="jetpack"><label for="jetpack">Jetpack</label></li>
-										<li><input type="checkbox" name="elementor"><label for="elementor">Elementor</label></li>
-										<li><input type="checkbox" name="wordfence"><label for="wordfence">Wordfence</label></li>
-										<li><input type="checkbox" name="wpforms"><label for="wpforms">WPForms</label></li>
-										<li><input type="checkbox" name="woocommerce"><label for="woocommerce">WooCommerce</label></li>
-										<li><input type="checkbox" name="hubspot"><label for="hubspot">HubSpot</label></li>
-										<li><input type="checkbox" name="wpbakery"><label for="wpbakery">WPBakery</label></li>
-									</ul>
-								</div> -->
+								<p class="description">Avoid optimizing plugins JavaScript files.</p>
+								'.
+									apply_filters('flash_cache_exclude_scripts_extra_html','', $values)
+								.'
 							</td>
-						</tr>
-						<!-- <tr valign="top" class="wrap-row">
-							<th scope="row">Avoid optimize files</th>
-							<td>
-								<div class="switch switch--horizontal switch--no-label">
-									<input type="radio" checked="checked" name="flash_cache_advanced[avoid_optimize]"' . checked($values["avoid_optimize"], false, false) . ' value="0">
-									<label for="flash_cache_advanced[avoid_optimize]">Off</label>
-									<input type="radio" name="flash_cache_advanced[avoid_optimize]"' . checked($values["avoid_optimize"], true, false) . ' value="1">
-									<label for="flash_cache_advanced[avoid_optimize]">On</label>
-									<span class="toggle-outside">
-										<span class="toggle-inside"></span>
-									</span>
-								</div>
-								<p class="description">Prevents optimizing specific files by name and path, one per line.</p>
-								<textarea rows="5" name="flash_cache_advanced[avoid_optimize_text]" placeholder="\plugins\easy-digital-downloads\assets\jsedd-checkout-global.js"></textarea>
-							</td>
-						</tr> -->
-					</tbody>
+						</tr>'.
+						 	apply_filters('flash_cache_exclude_scripts_extra_html','', $values, 1) 		
+					.'</tbody>
 				</table>
 			</div>';
 
