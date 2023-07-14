@@ -198,7 +198,7 @@ class flash_cache_optimize_scripts {
 		// Check if the "plugins_files" option is enabled
 		if ($advanced_settings['plugins_files']) {
 			// Exclude scripts from plugins
-			$tag = self::excludeScriptsPlugins($tag);
+			$tag = self::excludeScriptsPlugins($tag, $advanced_settings);
 		}
 
 		return $tag;
@@ -239,24 +239,34 @@ class flash_cache_optimize_scripts {
 	
 		return $tag;
 	}
-	
-	private static function excludeScriptsPlugins($tag) {
+
+	private static function excludeScriptsPlugins($tag, $values)
+	{
+		$pluginValues = isset($values['plugins_exclude']) ? $values['plugins_exclude'] : array();
 		// Get the list of active plugins
 		$active_plugins = get_option('active_plugins', array());
 		// Loop through each active plugin
 		foreach ($active_plugins as $plugin) {
-			// Get the plugin directory path
-			$plugin_directory = WP_PLUGIN_DIR . '/' . dirname($plugin);
-			//This plugin is not taked when the variable $active_plugins is declared
-			// if(strpos(FLASH_CACHE_PLUGIN_DIR, $plugin_directory) !== false || strpos(FLASH_CACHE_PRO_PLUGIN_DIR, $plugin_directory) !== false){
-				// Check if the script is from the plugin directory
-				if (strpos($tag, $plugin_directory) !== false) {
+			//If exist $name_plugins
+			if (!empty($pluginValues)) {
+				$plugin_name = dirname($plugin);
+				$plugin_exclude = plugins_url() . '/' . $plugin_name;
+				$isChecked = isset($pluginValues[$plugin_name]) && $pluginValues[$plugin_name] === 'on';
+
+				if ($isChecked) {
+					if (strpos($tag, $plugin_exclude) !== false) {
+						$tag = ''; // Exclude the script
+						break; // Stop checking other plugins
+					}
+				}
+			} else {
+				if (strpos($tag, plugins_url()) !== false) {
 					$tag = ''; // Exclude the script
 					break; // Stop checking other plugins
 				}
-			// }
+			}
 		}
-	
+
 		return $tag;
 	}
 	private static function excludeSocialScripts($tag)

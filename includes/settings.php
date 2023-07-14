@@ -173,6 +173,7 @@ class flash_cache_settings {
 			'social_scripts'		 => false,
 			'theme_files'		 	 => false,
 			'plugins_files'		 	 => false,
+			'plugins_exclude'		 	 => array(),
 			'avoid_optimize'		 => false,
 			'lock_type'				 => 'file',
 		);
@@ -560,7 +561,6 @@ class flash_cache_settings {
 
 			$new_options = wp_parse_args($post_values, self::default_advanced_options());
 			$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
-
 			update_option('flash_cache_advanced_settings', $new_options);
 			flash_cache_update_htaccess();
 			flash_cache_notices::add(__('Settings updated', 'flash-cache'));
