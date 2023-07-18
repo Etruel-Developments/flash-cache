@@ -175,6 +175,7 @@ class flash_cache_settings {
 			'plugins_files'		 	 => false,
 			'plugins_exclude'		 	 => array(),
 			'avoid_optimize'		 => false,
+			'avoid_optimize_text'		 => '',
 			'lock_type'				 => 'file',
 		);
 		$array	 = apply_filters('flash_cache_default_advanced_options', $array);

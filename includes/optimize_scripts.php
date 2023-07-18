@@ -53,7 +53,15 @@ class flash_cache_optimize_scripts {
 						}
 						self::$js_tags_links[] = flash_cache_get_path($url);
 					} else {
-						$tag = '';
+						if(flash_cache_process::$advanced_settings['inline_scripts']){
+							$tag = '';
+						} else {
+							// Extract the script content from the tag
+							preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content);
+							if (!empty($script_content[1])) {
+								$tag = $script_content[1];
+							}
+						}
 					}
 					
 					$content = str_replace($tag, '', $content);
@@ -283,7 +291,6 @@ class flash_cache_optimize_scripts {
 		// Loop through the excluded platforms
 		foreach ($excludedPlatforms as $platform) {
 			// Check if the tag contains the platform URL or any content related to the platform
-			$response = wp_remote_get($tag);
 			if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
 				$url			 = current(explode('?', $source[2], 2));
 				// Obtener el contenido de la URL
@@ -312,7 +319,7 @@ class flash_cache_optimize_scripts {
 	private static function excludeOptimizeText($tag, $text)
 	{
 		// Get the URLs to exclude from the "avoid_optimize_text" textarea
-		$urls_to_exclude = explode("\n", $text);
+		$urls_to_exclude = explode(" ", $text);
 
 		// Loop through each URL and check if it matches the script URL
 		foreach ($urls_to_exclude as $url) {
