@@ -59,7 +59,7 @@ class flash_cache_optimize_scripts {
 							// Extract the script content from the tag
 							preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content);
 							if (!empty($script_content[1])) {
-								$tag = $script_content[1];
+								$js_tags_inline[] = $script_content[1];
 							}
 						}
 					}
@@ -96,9 +96,7 @@ class flash_cache_optimize_scripts {
 
 		foreach (self::$js_tags_inline as $tag) {
 			if (!empty($tag)) {
-				preg_match('#<script.*?>(.*?)</script>#s', $tag, $matches);
-				$script_content = $matches[1];
-				$all_js_code .= $script_content;
+				$all_js_code .= $tag;
 			}
 		}
 
@@ -281,38 +279,47 @@ class flash_cache_optimize_scripts {
 	{
 		// Define the list of social media platforms to exclude
 		$excludedPlatforms = array(
-			'twitter.com',
-			'youtube.com',
-			'tiktok.com',
-			'alexa.com',
-			'google.com',
+			'twitter',
+			'youtube',
+			'tiktok',
+			'alexa',
+			'google',
+			'facebook',
 			// Add more social media platforms here
 		);
-		// Loop through the excluded platforms
-		foreach ($excludedPlatforms as $platform) {
-			// Check if the tag contains the platform URL or any content related to the platform
-			if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
-				$url			 = current(explode('?', $source[2], 2));
-				// Obtener el contenido de la URL
-				$response = wp_remote_get($url);
-				if (!is_wp_error($response)) {
-					// Obtener el contenido de la respuesta
-					$body = wp_remote_retrieve_body($response);
-	
-					// Verificar si el contenido coincide con el nombre del tema
-					if (strpos($body, $platform) !== false) {
-						$tag = ''; // Excluir el script
+
+		// Check if the tag contains a URL
+		if (preg_match('/<script[^>]*src=("|\')([^>]*)("|\')/i', $tag, $matches)) {
+			$url = current(explode('?', $matches[2], 2));
+			// Get the content of the URL
+			$response = wp_remote_get($url);
+			if (!is_wp_error($response)) {
+				$body = wp_remote_retrieve_body($response);
+				// Check if any excluded platform name is found in the URL content
+				foreach ($excludedPlatforms as $platform) {
+					if (stripos($body, $platform) !== false) {
+						$tag = ''; // Exclude the script
+						break;
+					}else{
+						if (stripos($tag, $platform) !== false) {
+							$tag = ''; // Exclude the script
+							break;
+						}
 					}
 				}
 			}
-
-			if (strpos($tag, $platform) !== false) {
-				// If the tag matches any excluded platform, return an empty string to exclude it
-				return '';
+		} else {
+			// If the tag is not a URL, check if it contains any excluded platform name
+			foreach ($excludedPlatforms as $platform) {
+				if (stripos($tag, $platform) !== false) {
+					$tag = ''; // Exclude the script
+					break;
+				}
 			}
 		}
 
-		// If the tag doesn't match any excluded platform, return the original tag
+		flash_cache_process::debug($tag);
+
 		return $tag;
 	}
 
