@@ -37,7 +37,6 @@ class flash_cache_optimize_scripts {
 			foreach ($matches[0] as $tag) {
 				if (!preg_match("/<script[^>]+json[^>]+>.+/", $tag) && !preg_match("/<script[^>]+text\/template[^>]+>.+/", $tag)) {
 
-					// flash_cache_process::debug($tag);
 					$should_aggregate = self::should_aggregate($tag);
 					if (!$should_aggregate) {
 						$tag = '';
@@ -287,7 +286,6 @@ class flash_cache_optimize_scripts {
 			'facebook',
 			// Add more social media platforms here
 		);
-
 		// Check if the tag contains a URL
 		if (preg_match('/<script[^>]*src=("|\')([^>]*)("|\')/i', $tag, $matches)) {
 			$url = current(explode('?', $matches[2], 2));
@@ -297,14 +295,14 @@ class flash_cache_optimize_scripts {
 				$body = wp_remote_retrieve_body($response);
 				// Check if any excluded platform name is found in the URL content
 				foreach ($excludedPlatforms as $platform) {
+					if (stripos($tag, $platform) !== false) {
+						$tag = ''; // Exclude the script
+						break;
+					}
+
 					if (stripos($body, $platform) !== false) {
 						$tag = ''; // Exclude the script
 						break;
-					}else{
-						if (stripos($tag, $platform) !== false) {
-							$tag = ''; // Exclude the script
-							break;
-						}
 					}
 				}
 			}
@@ -317,8 +315,6 @@ class flash_cache_optimize_scripts {
 				}
 			}
 		}
-
-		flash_cache_process::debug($tag);
 
 		return $tag;
 	}
