@@ -28,6 +28,19 @@ jQuery(document).ready(function ($) {
     jQuery('.flash-wrap-notices').append( jQuery('.error, .success, .notice, .message, .fade, .updated') );
   }
 
+  if ($('input[name="flash_cache_advanced[optimize_scripts]"]:checked').val() == '1') {
+    $('.flash_cache_avoid_optimize').show();  
+  }
+
+  $('input[name="flash_cache_advanced[optimize_scripts]"]').change(function () {
+    if ($(this).val() == '1') {
+      $('.flash_cache_avoid_optimize').show();  
+    } else {
+      $('.flash_cache_avoid_optimize').hide(); 
+    }
+  }); 
+
+
   // Check the initial value of the radio button
   if ($('input[name="flash_cache_advanced[plugins_files]"]:checked').val() == '1') {
     $('#plugins_to_exclude').show();  // Show the checkboxes if "On" is selected by default

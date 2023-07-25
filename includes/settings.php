@@ -220,7 +220,7 @@ class flash_cache_settings {
 					margin-top: 10px;
 				}
 			</style>
-			<div class="flash_cache_avoid_optimize">
+			<div class="flash_cache_avoid_optimize" style="display:none">
 				<p class="description">If you encounter any issues with optimization, you can exclude JS files using these options.</p>
 				<table class="form-table">
 					<tbody>
