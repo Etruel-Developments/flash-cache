@@ -286,7 +286,7 @@ class flash_cache_optimize_scripts {
 			'alexa',
 			'google',
 			'facebook',
-			'gtag'
+			'gtag()'
 			// Add more social media platforms here
 		);
 		// Check if the tag contains a URL
