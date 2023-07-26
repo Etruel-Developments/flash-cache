@@ -55,10 +55,12 @@ class flash_cache_optimize_scripts {
 						if(flash_cache_process::$advanced_settings['inline_scripts']){
 							$tag = '';
 						} else {
-							// Extract the script content from the tag
-							preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content);
-							if (!empty($script_content[1])) {
-								$js_tags_inline[] = $script_content[1];
+							flash_cache_process::debug('1', $tag);
+
+							if(preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content)){
+								if (!empty($script_content[1])) {
+									self::$js_tags_inline[] = $script_content[1];
+								}
 							}
 						}
 					}
@@ -284,6 +286,7 @@ class flash_cache_optimize_scripts {
 			'alexa',
 			'google',
 			'facebook',
+			'gtag'
 			// Add more social media platforms here
 		);
 		// Check if the tag contains a URL
