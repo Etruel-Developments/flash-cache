@@ -185,49 +185,6 @@ class flash_cache_settings {
 	public static function get_advanced_scripts_settings($values)
 	{
 		$form_html = '
-			<style>
-				.flash_cache_allow_optimize{
-					padding-bottom: 20px;
-					margin-bottom: 10px;
-					border-bottom: 1px solid #dadfe4;
-				}
-				.flash_cache_allow_optimize table tbody tr:first-child {
-					padding-top: 0;
-				}
-				.wpm_container .flash_cache_avoid_optimize {
-					padding: 20px 0;
-					margin: 20px 0;
-					border-top: 1px solid #dadfe4;
-					border-bottom: 1px solid #dadfe4;
-				}
-
-				.wpm_container .flash_cache_avoid_optimize p:first-child {
-					padding-top: 0;
-				}
-
-				.wpm_container .flash_cache_avoid_optimize .form-table tr:not(:last-child) {
-					border-bottom: 0;
-					padding-bottom: 0;
-				}
-
-				.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins {
-					padding: 15px;
-					border: 1px solid #dadfe4;
-					max-height: 120px;
-					overflow-y: scroll;
-					box-sizing: border-box;
-					margin-top: 10px;
-				}
-
-				.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins ul {
-					margin: 0;
-				}
-
-				.wpm_container .flash_cache_avoid_optimize textarea {
-					max-width: 100%;
-					margin-top: 10px;
-				}
-			</style>
 			<div class="flash_cache_avoid_optimize" style="display:none">
 				<p class="description">'.__('If you find any issues with optimizations, you can exclude JS files using these options.', 'flash-cache').'</p>
 				<table class="form-table">
@@ -284,7 +241,7 @@ class flash_cache_settings {
 					.'</tbody>
 				</table>
 			</div>
-			<div class="flash_cache_allow_optimize">
+			<div class="flash_cache_allow_optimize" style="display: none;">
 				<table class="form-table">
 					<tbody>
 					<tr valign="top" class="wrap-row">

@@ -31,6 +31,8 @@ jQuery(document).ready(function ($) {
   if ($('input[name="flash_cache_advanced[optimize_scripts]"]:checked').val() == '1') {
     $('.flash_cache_avoid_optimize').show(); 
     $('.flash_cache_allow_optimize').show(); 
+  }else{
+    $('.flash_cache_allow_optimize').hide(); 
   }
 
   $('input[name="flash_cache_advanced[optimize_scripts]"]').change(function () {
