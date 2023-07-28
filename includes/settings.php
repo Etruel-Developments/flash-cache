@@ -186,6 +186,11 @@ class flash_cache_settings {
 	{
 		$form_html = '
 			<style>
+				.flash_cache_allow_optimize{
+					padding-bottom: 20px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #dadfe4;
+				}
 				.wpm_container .flash_cache_avoid_optimize {
 					padding: 20px 0;
 					margin: 20px 0;
@@ -239,21 +244,7 @@ class flash_cache_settings {
 								<p class="description">Avoid optimizing inline JS scripts.</p>
 							</td>
 						</tr>
-						<tr valign="top" class="wrap-row">
-							<th scope="row">SEO &amp; social scripts</th>
-							<td>
-								<div class="switch switch--horizontal switch--no-label">
-									<input type="radio" checked="checked" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], false, false) . ' value="0">
-									<label for="flash_cache_advanced[social_scripts]">Off</label>
-									<input type="radio" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], true, false) . ' value="1">
-									<label for="flash_cache_advanced[social_scripts]">On</label>
-									<span class="toggle-outside">
-										<span class="toggle-inside"></span>
-									</span>
-								</div>
-								<p class="description">Avoid optimizing Alexa, Google, and social network scripts.</p>
-							</td>
-						</tr>
+						
 						<tr valign="top" class="wrap-row">
 							<th scope="row">Theme JS files</th>
 							<td>
@@ -289,6 +280,27 @@ class flash_cache_settings {
 						</tr>'.
 						 	apply_filters('flash_cache_exclude_scripts_extra_html','', $values, 1) 		
 					.'</tbody>
+				</table>
+			</div>
+			<div class="flash_cache_allow_optimize">
+				<table class="form-table">
+					<tbody>
+					<tr valign="top" class="wrap-row">
+						<th scope="row">Include SEO &amp; Social scripts in optimized file</th>
+						<td>
+						<div class="switch switch--horizontal switch--no-label">
+							<input type="radio" checked="checked" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], false, false) . ' value="0">
+							<label for="flash_cache_advanced[social_scripts]">Off</label>
+							<input type="radio" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], true, false) . ' value="1">
+							<label for="flash_cache_advanced[social_scripts]">On</label>
+							<span class="toggle-outside">
+								<span class="toggle-inside"></span>
+							</span>
+						</div>
+						<p class="description">By default these scripts are not included because there are already optimized, hosted on remote servers and load asyncroniously. But by activating this option you can try to optimize and host them in your server.</p>
+						</td>
+					</tr>
+					</tbody>
 				</table>
 			</div>';
 

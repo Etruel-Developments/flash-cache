@@ -55,8 +55,6 @@ class flash_cache_optimize_scripts {
 						if(flash_cache_process::$advanced_settings['inline_scripts']){
 							$tag = '';
 						} else {
-							flash_cache_process::debug('1', $tag);
-
 							if(preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content)){
 								if (!empty($script_content[1])) {
 									self::$js_tags_inline[] = $script_content[1];
@@ -94,18 +92,16 @@ class flash_cache_optimize_scripts {
 		$all_js_code = '';
 		$basename_js = '';
 
-
-		foreach (self::$js_tags_inline as $tag) {
-			if (!empty($tag)) {
-				$all_js_code .= $tag;
-			}
-		}
-
 		foreach (self::$js_tags_links as $path) {
 			if (!empty($path)) {
 				$code		 = file_get_contents($path, false, stream_context_create($arrContextOptions));
 				$all_js_code .= $code;
 				$basename_js = md5($basename_js . $path);
+			}
+		}
+		foreach (self::$js_tags_inline as $tag) {
+			if (!empty($tag)) {
+				$all_js_code .= $tag;
 			}
 		}
 		
@@ -174,7 +170,15 @@ class flash_cache_optimize_scripts {
 		$url_host = $url_host['host'];
 		$url_host = sanitize_text_field($url_host);
 		
-		return flash_cache_get_server_name() == $url_host;
+		$is_valid = flash_cache_get_server_name() == $url_host;
+
+		if(!$is_valid){
+			if(flash_cache_process::$advanced_settings['social_scripts']){
+				$is_valid = 1;
+			}
+		}
+		
+		return $is_valid;
 	}
 
 	public static function checkExcludes($tag)
@@ -183,7 +187,7 @@ class flash_cache_optimize_scripts {
 		$advanced_settings = flash_cache_process::$advanced_settings;
 
 		// Check if the "social_scripts" option is enabled
-		if ($advanced_settings['social_scripts']) {
+		if (!$advanced_settings['social_scripts']) {
 			// Exclude social scripts
 			$tag = self::excludeSocialScripts($tag);
 		}
@@ -286,7 +290,8 @@ class flash_cache_optimize_scripts {
 			'alexa',
 			'google',
 			'facebook',
-			'gtag()'
+			'gtag()',
+			'fbq'
 			// Add more social media platforms here
 		);
 		// Check if the tag contains a URL
