@@ -155,7 +155,8 @@ class flash_cache_settings {
 		echo ' </div>';
 	}
 
-	public static function default_advanced_options() {
+	public static function default_advanced_options()
+	{
 		$array	 = array(
 			'cache_dir'				 => 'flash_cache/',
 			'viewer_protocol_policy' => 'http_and_https',
@@ -168,10 +169,101 @@ class flash_cache_settings {
 			'process_type'			 => 'ob_with_curl_request',
 			'optimize_styles'		 => false,
 			'optimize_scripts'		 => false,
+			'inline_scripts'		 => false,
+			'social_scripts'		 => false,
+			'theme_files'		 	 => false,
+			'plugins_files'		 	 => false,
+			'plugins_exclude'		 	 => array(),
+			'avoid_optimize'		 => false,
+			'avoid_optimize_text'		 => '',
 			'lock_type'				 => 'file',
 		);
 		$array	 = apply_filters('flash_cache_default_advanced_options', $array);
 		return $array;
+	}
+
+	public static function get_advanced_scripts_settings($values)
+	{
+		$form_html = '
+			<div class="flash_cache_avoid_optimize" style="display:none">
+				<p class="description">'.__('If you find any issues with optimizations, you can exclude JS files using these options.', 'flash-cache').'</p>
+				<table class="form-table">
+					<tbody>
+						<tr valign="top" class="wrap-row">
+							<th scope="row">'. __('Inline scripts', 'flash-cache') .'</th>
+							<td>
+								<div class="switch switch--horizontal switch--no-label">
+									<input type="radio" checked="checked" name="flash_cache_advanced[inline_scripts]"' . checked($values["inline_scripts"], false, false) . ' value="0">
+									<label for="flash_cache_advanced[inline_scripts]">Off</label>
+									<input type="radio" name="flash_cache_advanced[inline_scripts]"' . checked($values["inline_scripts"], true, false) . ' value="1">
+									<label for="flash_cache_advanced[inline_scripts]">On</label>
+									<span class="toggle-outside">
+										<span class="toggle-inside"></span>
+									</span>
+								</div>
+								<p class="description">'. __('Avoid optimizing inline JS scripts.', 'flash-cache') .'</p>
+							</td>
+						</tr>
+						<tr valign="top" class="wrap-row">
+							<th scope="row">'. __('Theme JS files', 'flash-cache') .'</th>
+							<td>
+								<div class="switch switch--horizontal switch--no-label">
+									<input type="radio" checked="checked" name="flash_cache_advanced[theme_files]"' . checked($values["theme_files"], false, false) . ' value="0">
+									<label for="flash_cache_advanced[theme_files]">Off</label>
+									<input type="radio" name="flash_cache_advanced[theme_files]"' . checked($values["theme_files"], true, false) . ' value="1">
+									<label for="flash_cache_advanced[theme_files]">On</label>
+									<span class="toggle-outside">
+										<span class="toggle-inside"></span>
+									</span>
+								</div>
+								<p class="description">'. __('Avoid optimizing theme JavaScript files.', 'flash-cache') .'</p>
+							</td>
+						</tr>
+						 <tr valign="top" class="wrap-row">
+							<th scope="row">'. __('Plugins JS files', 'flash-cache') .'</th>
+							<td>
+								<div class="switch switch--horizontal switch--no-label">
+									<input type="radio" checked="checked" name="flash_cache_advanced[plugins_files]"' . checked($values["plugins_files"], false, false) . ' value="0">
+									<label for="flash_cache_advanced[plugins_files]">Off</label>
+									<input type="radio" name="flash_cache_advanced[plugins_files]"' . checked($values["plugins_files"], true, false) . ' value="1">
+									<label for="flash_cache_advanced[plugins_files]">On</label>
+									<span class="toggle-outside">
+										<span class="toggle-inside"></span>
+									</span>
+								</div>
+								<p class="description">'. __('Avoid optimizing plugins JavaScript files.', 'flash-cache') .'</p>
+								'.
+									apply_filters('flash_cache_exclude_scripts_extra_html','', $values)
+								.'
+							</td>
+						</tr>'.
+						 	apply_filters('flash_cache_exclude_scripts_extra_html','', $values, 1) 		
+					.'</tbody>
+				</table>
+			</div>
+			<div class="flash_cache_allow_optimize" style="display: none;">
+				<table class="form-table">
+					<tbody>
+					<tr valign="top" class="wrap-row">
+						<th scope="row">'. __('Include SEO &amp; Social scripts in optimized file', 'flash-cache') .'</th>
+						<td>
+						<div class="switch switch--horizontal switch--no-label">
+							<input type="radio" checked="checked" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], false, false) . ' value="0">
+							<label for="flash_cache_advanced[social_scripts]">Off</label>
+							<input type="radio" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], true, false) . ' value="1">
+							<label for="flash_cache_advanced[social_scripts]">On</label>
+							<span class="toggle-outside">
+								<span class="toggle-inside"></span>
+							</span>
+						</div>
+						<p class="description">'. __('By default these scripts are not included because there are already optimized, hosted on remote servers and load asyncroniously. But by activating this option you can try to optimize and host them in your server.', 'flash-cache') .'</p>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>';
+
+		return $form_html;
 	}
 
 	public static function cpt_settings_opentags() {
@@ -222,6 +314,7 @@ class flash_cache_settings {
 
 		public static function advanced_settings_page() {
 			$values = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+			$new_advanced_options = self::get_advanced_scripts_settings($values);
 			echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
 			<div class="wpm_header">
 			<h1>' . __('Advanced Settings', 'flash-cache') . '</h1>
@@ -335,7 +428,9 @@ class flash_cache_settings {
 								<span class="toggle-outside">
 									<span class="toggle-inside"></span>
 								</span>
-							</div>
+							</div>'. 
+								$new_advanced_options 
+							.'
 							<p class="description">' . __('Optimize and combine all your JavaScript files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
 							' . apply_filters('flash_cache_optimize_scripts_extra_html', '', $values) . ' 
 						</td>
@@ -438,7 +533,6 @@ class flash_cache_settings {
 
 			$new_options = wp_parse_args($post_values, self::default_advanced_options());
 			$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
-
 			update_option('flash_cache_advanced_settings', $new_options);
 			flash_cache_update_htaccess();
 			flash_cache_notices::add(__('Settings updated', 'flash-cache'));

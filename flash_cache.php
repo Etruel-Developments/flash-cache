@@ -173,7 +173,7 @@ class Flash_Cache {
 		if (!function_exists('flash_cache_delete_all_options')) {
 			require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 		}
-		$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
+		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_version::delete_all_patterns();
 		delete_option('flash_cache_version');
 		delete_option('flash_cache_settings');

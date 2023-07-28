@@ -13,7 +13,8 @@ if (!defined('ABSPATH'))
 
 class flash_cache_optimize_scripts {
 
-	public static $js_tags = array();
+	public static $js_tags_links = array();
+	public static $js_tags_inline = array();
 
 	public static function hooks() {
 		add_filter('flash_cache_response_html', array(__CLASS__, 'init_process'), 2, 2);
@@ -34,24 +35,36 @@ class flash_cache_optimize_scripts {
 		// Get script files.
 		if (preg_match_all('#<script.*</script>#Usmi', $content, $matches)) {
 			foreach ($matches[0] as $tag) {
+				if (!preg_match("/<script[^>]+json[^>]+>.+/", $tag) && !preg_match("/<script[^>]+text\/template[^>]+>.+/", $tag)) {
 
-				$should_aggregate = self::should_aggregate($tag);
-				if (!$should_aggregate) {
-					$tag = '';
-					continue;
-				}
-
-				if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
-					$url			 = current(explode('?', $source[2], 2));
-					if ( ! self::is_valid_url( $url ) ) {
+					$should_aggregate = self::should_aggregate($tag);
+					if (!$should_aggregate) {
+						$tag = '';
 						continue;
 					}
-					self::$js_tags[] = flash_cache_get_path($url);
-				} else {
-					$tag = '';
-				}
 
-				$content = str_replace($tag, '', $content);
+					$tag = self::checkExcludes($tag);
+
+					if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
+						$url			 = current(explode('?', $source[2], 2));
+						if (!self::is_valid_url($url)) {
+							continue;
+						}
+						self::$js_tags_links[] = flash_cache_get_path($url);
+					} else {
+						if(flash_cache_process::$advanced_settings['inline_scripts']){
+							$tag = '';
+						} else {
+							if(preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content)){
+								if (!empty($script_content[1])) {
+									self::$js_tags_inline[] = $script_content[1];
+								}
+							}
+						}
+					}
+					
+					$content = str_replace($tag, '', $content);
+				}
 			}
 		}
 
@@ -79,14 +92,19 @@ class flash_cache_optimize_scripts {
 		$all_js_code = '';
 		$basename_js = '';
 
-		foreach (self::$js_tags as $path) {
+		foreach (self::$js_tags_links as $path) {
 			if (!empty($path)) {
 				$code		 = file_get_contents($path, false, stream_context_create($arrContextOptions));
 				$all_js_code .= $code;
 				$basename_js = md5($basename_js . $path);
 			}
 		}
-
+		foreach (self::$js_tags_inline as $tag) {
+			if (!empty($tag)) {
+				$all_js_code .= $tag;
+			}
+		}
+		
 		$all_js_code = trim($all_js_code);
 		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
 		$cache_path	 = $cache_dir . $server_name . '/scripts/';
@@ -152,9 +170,179 @@ class flash_cache_optimize_scripts {
 		$url_host = $url_host['host'];
 		$url_host = sanitize_text_field($url_host);
 		
-		return flash_cache_get_server_name() == $url_host;
+		$is_valid = flash_cache_get_server_name() == $url_host;
+
+		if(!$is_valid){
+			if(flash_cache_process::$advanced_settings['social_scripts']){
+				$is_valid = 1;
+			}
+		}
+		
+		return $is_valid;
 	}
 
+	public static function checkExcludes($tag)
+	{
+		// Get advanced settings
+		$advanced_settings = flash_cache_process::$advanced_settings;
+
+		// Check if the "social_scripts" option is enabled
+		if (!$advanced_settings['social_scripts']) {
+			// Exclude social scripts
+			$tag = self::excludeSocialScripts($tag);
+		}
+
+		// Check if the "social_scripts" option is enabled
+		if ($advanced_settings['theme_files']) {
+			// Exclude social scripts
+			$tag = self::excludeThemes($tag);
+		}
+
+		// Check if the "avoid_optimize" option is enabled
+		if ($advanced_settings['avoid_optimize']) {
+			if (!empty($advanced_settings['avoid_optimize_text'])) {
+				// Exclude scripts from the specified URLs in the textarea
+				$tag = self::excludeOptimizeText($tag, $advanced_settings['avoid_optimize_text']);
+			}
+		}
+
+		// Check if the "plugins_files" option is enabled
+		if ($advanced_settings['plugins_files']) {
+			// Exclude scripts from plugins
+			$tag = self::excludeScriptsPlugins($tag, $advanced_settings);
+		}
+
+		return $tag;
+	}
+	
+	private static function excludeThemes($tag) {
+		// Obtener la ruta del directorio del tema
+		$theme_directory = get_template_directory();
+	
+		// Obtener la URL base del sitio
+		$base_url = home_url('/');
+	
+		// Construir la URL completa del directorio del tema
+		$theme_url = str_replace(ABSPATH, $base_url, $theme_directory);
+		
+		// Obtener el nombre del tema actual
+		$current_theme = wp_get_theme();
+		$theme_name = $current_theme->get('Name');
+		if (preg_match('#<script[^>]*src=("|\')([^>]*)("|\')#Usmi', $tag, $source)) {
+			$url			 = current(explode('?', $source[2], 2));
+			// Obtener el contenido de la URL
+			$response = wp_remote_get($url);
+			if (!is_wp_error($response)) {
+				// Obtener el contenido de la respuesta
+				$body = wp_remote_retrieve_body($response);
+
+				// Verificar si el contenido coincide con el nombre del tema
+				if (strpos($body, $theme_name) !== false) {
+					$tag = ''; // Excluir el script
+				}
+			}
+		}
+		
+		// Verificar si el script proviene del directorio del tema
+		if (strpos($tag, $theme_url) !== false || strpos($tag, $theme_name) !== false) {
+			$tag = ''; // Excluir el script
+		}
+	
+		return $tag;
+	}
+
+	private static function excludeScriptsPlugins($tag, $values)
+	{
+		$pluginValues = isset($values['plugins_exclude']) ? $values['plugins_exclude'] : array();
+		// Get the list of active plugins
+		$active_plugins = get_option('active_plugins', array());
+		// Loop through each active plugin
+		foreach ($active_plugins as $plugin) {
+			//If exist $name_plugins
+			if (!empty($pluginValues)) {
+				$plugin_name = dirname($plugin);
+				$plugin_exclude = plugins_url() . '/' . $plugin_name;
+				$isChecked = isset($pluginValues[$plugin_name]) && $pluginValues[$plugin_name] === 'on';
+
+				if ($isChecked) {
+					if (strpos($tag, $plugin_exclude) !== false) {
+						$tag = ''; // Exclude the script
+						break; // Stop checking other plugins
+					}
+				}
+			} else {
+				if (strpos($tag, plugins_url()) !== false) {
+					$tag = ''; // Exclude the script
+					break; // Stop checking other plugins
+				}
+			}
+		}
+
+		return $tag;
+	}
+	private static function excludeSocialScripts($tag)
+	{
+		// Define the list of social media platforms to exclude
+		$excludedPlatforms = array(
+			'twitter',
+			'youtube',
+			'tiktok',
+			'alexa',
+			'google',
+			'facebook',
+			'gtag()',
+			'fbq'
+			// Add more social media platforms here
+		);
+		// Check if the tag contains a URL
+		if (preg_match('/<script[^>]*src=("|\')([^>]*)("|\')/i', $tag, $matches)) {
+			$url = current(explode('?', $matches[2], 2));
+			// Get the content of the URL
+			$response = wp_remote_get($url);
+			if (!is_wp_error($response)) {
+				$body = wp_remote_retrieve_body($response);
+				// Check if any excluded platform name is found in the URL content
+				foreach ($excludedPlatforms as $platform) {
+					if (stripos($tag, $platform) !== false) {
+						$tag = ''; // Exclude the script
+						break;
+					}
+
+					if (stripos($body, $platform) !== false) {
+						$tag = ''; // Exclude the script
+						break;
+					}
+				}
+			}
+		} else {
+			// If the tag is not a URL, check if it contains any excluded platform name
+			foreach ($excludedPlatforms as $platform) {
+				if (stripos($tag, $platform) !== false) {
+					$tag = ''; // Exclude the script
+					break;
+				}
+			}
+		}
+
+		return $tag;
+	}
+
+	private static function excludeOptimizeText($tag, $text)
+	{
+		// Get the URLs to exclude from the "avoid_optimize_text" textarea
+		$urls_to_exclude = explode(" ", $text);
+
+		// Loop through each URL and check if it matches the script URL
+		foreach ($urls_to_exclude as $url) {
+			$url = trim($url);
+			if (!empty($url) && strpos($tag, $url) !== false) {
+				$tag = ''; // Exclude the script
+				break; // Stop checking other URLs
+			}
+		}
+
+		return $tag;
+	}
 }
 
 flash_cache_optimize_scripts::hooks();
