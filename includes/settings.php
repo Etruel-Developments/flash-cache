@@ -191,6 +191,9 @@ class flash_cache_settings {
 					margin-bottom: 10px;
 					border-bottom: 1px solid #dadfe4;
 				}
+				.flash_cache_allow_optimize table tbody tr:first-child {
+					padding-top: 0;
+				}
 				.wpm_container .flash_cache_avoid_optimize {
 					padding: 20px 0;
 					margin: 20px 0;
@@ -226,11 +229,11 @@ class flash_cache_settings {
 				}
 			</style>
 			<div class="flash_cache_avoid_optimize" style="display:none">
-				<p class="description">If you encounter any issues with optimization, you can exclude JS files using these options.</p>
+				<p class="description">'.__('If you find any issues with optimizations, you can exclude JS files using these options.', 'flash-cache').'</p>
 				<table class="form-table">
 					<tbody>
 						<tr valign="top" class="wrap-row">
-							<th scope="row">Inline scripts</th>
+							<th scope="row">'. __('Inline scripts', 'flash-cache') .'</th>
 							<td>
 								<div class="switch switch--horizontal switch--no-label">
 									<input type="radio" checked="checked" name="flash_cache_advanced[inline_scripts]"' . checked($values["inline_scripts"], false, false) . ' value="0">
@@ -241,12 +244,11 @@ class flash_cache_settings {
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								<p class="description">Avoid optimizing inline JS scripts.</p>
+								<p class="description">'. __('Avoid optimizing inline JS scripts.', 'flash-cache') .'</p>
 							</td>
 						</tr>
-						
 						<tr valign="top" class="wrap-row">
-							<th scope="row">Theme JS files</th>
+							<th scope="row">'. __('Theme JS files', 'flash-cache') .'</th>
 							<td>
 								<div class="switch switch--horizontal switch--no-label">
 									<input type="radio" checked="checked" name="flash_cache_advanced[theme_files]"' . checked($values["theme_files"], false, false) . ' value="0">
@@ -257,11 +259,11 @@ class flash_cache_settings {
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								<p class="description">Avoid optimizing theme JavaScript files.</p>
+								<p class="description">'. __('Avoid optimizing theme JavaScript files.', 'flash-cache') .'</p>
 							</td>
 						</tr>
 						 <tr valign="top" class="wrap-row">
-							<th scope="row">Plugins JS files</th>
+							<th scope="row">'. __('Plugins JS files', 'flash-cache') .'</th>
 							<td>
 								<div class="switch switch--horizontal switch--no-label">
 									<input type="radio" checked="checked" name="flash_cache_advanced[plugins_files]"' . checked($values["plugins_files"], false, false) . ' value="0">
@@ -272,7 +274,7 @@ class flash_cache_settings {
 										<span class="toggle-inside"></span>
 									</span>
 								</div>
-								<p class="description">Avoid optimizing plugins JavaScript files.</p>
+								<p class="description">'. __('Avoid optimizing plugins JavaScript files.', 'flash-cache') .'</p>
 								'.
 									apply_filters('flash_cache_exclude_scripts_extra_html','', $values)
 								.'
@@ -286,7 +288,7 @@ class flash_cache_settings {
 				<table class="form-table">
 					<tbody>
 					<tr valign="top" class="wrap-row">
-						<th scope="row">Include SEO &amp; Social scripts in optimized file</th>
+						<th scope="row">'. __('Include SEO &amp; Social scripts in optimized file', 'flash-cache') .'</th>
 						<td>
 						<div class="switch switch--horizontal switch--no-label">
 							<input type="radio" checked="checked" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], false, false) . ' value="0">
@@ -297,7 +299,7 @@ class flash_cache_settings {
 								<span class="toggle-inside"></span>
 							</span>
 						</div>
-						<p class="description">By default these scripts are not included because there are already optimized, hosted on remote servers and load asyncroniously. But by activating this option you can try to optimize and host them in your server.</p>
+						<p class="description">'. __('By default these scripts are not included because there are already optimized, hosted on remote servers and load asyncroniously. But by activating this option you can try to optimize and host them in your server.', 'flash-cache') .'</p>
 						</td>
 					</tr>
 					</tbody>
