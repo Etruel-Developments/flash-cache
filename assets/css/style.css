@@ -1,9 +1,9 @@
 /*===========Container===========*/
 .wpm_container{
 	width: calc(100% - 20px);
-  max-width: 1080px;
-  margin-left: 0;
-  box-sizing: border-box;
+	max-width: 1080px;
+	margin-left: 0;
+	box-sizing: border-box;
 }
 .post-type-flash_cache_patterns:not(.edit-php) .wpm_container{
 	max-width: 1440px;
@@ -75,49 +75,6 @@
 	margin: 0;
 }
 /*===========Main===========*/
-/*===========get_advanced_scripts_settings===========*/
-.flash_cache_allow_optimize{
-	padding-bottom: 20px;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #dadfe4;
-}
-.flash_cache_allow_optimize table tbody tr:first-child {
-	padding-top: 0;
-}
-.wpm_container .flash_cache_avoid_optimize {
-	padding: 20px 0;
-	margin: 20px 0;
-	border-top: 1px solid #dadfe4;
-	border-bottom: 1px solid #dadfe4;
-}
-
-.wpm_container .flash_cache_avoid_optimize p:first-child {
-	padding-top: 0;
-}
-
-.wpm_container .flash_cache_avoid_optimize .form-table tr:not(:last-child) {
-	border-bottom: 0;
-	padding-bottom: 0;
-}
-
-.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins {
-	padding: 15px;
-	border: 1px solid #dadfe4;
-	max-height: 120px;
-	overflow-y: scroll;
-	box-sizing: border-box;
-	margin-top: 10px;
-}
-
-.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins ul {
-	margin: 0;
-}
-
-.wpm_container .flash_cache_avoid_optimize textarea {
-	max-width: 100%;
-	margin-top: 10px;
-}
-
 .wpm_container .postbox{
 	background-color: transparent;
 	border: 0;
@@ -134,12 +91,12 @@
 	flex-wrap: wrap;
 }
 .wpm_container .postbox .wpm_main{
-  box-sizing: border-box;
+	box-sizing: border-box;
 	background-color: #fff;
 	box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
 	border: 1px solid #b5bfc9;
 	border-top: 0;
-  border-radius: 0 0 6px 6px;
+	border-radius: 0 0 6px 6px;
 	width: 100%;
 }
 .wpm_container .postbox .wpm_main .wrap{
@@ -153,7 +110,7 @@
 	margin-bottom: 15px;
 }
 .wpm_container .postbox .wpm_menu{
-  box-sizing: border-box;
+	box-sizing: border-box;
 	width: 100%;
 }
 .wpm_container .postbox .wpm_main form{
@@ -206,7 +163,7 @@
 	display: none;
 	font-size: 18px;
 	font-weight: 500;
-  padding: 13px 15px;
+	padding: 13px 15px;
 }
 .wpm_container.show_menu .wpm_menu a .wpm_link_icon{
 	margin-right: 10px;
@@ -239,8 +196,8 @@
 	height: 46px;
 	min-width: 150px;
 	background: #fff;
-  border: 1px solid #b5bfc9;
-  border-left: 0;
+	border: 1px solid #b5bfc9;
+	border-left: 0;
 	box-shadow: 5px 2px 8px rgba(0,0,0,.2);
 	box-sizing: border-box;
 }
@@ -412,7 +369,7 @@
 	height: initial;
 }
 .wpm_container .tablenav .actions{
-  display: flex;	
+	display: flex;
 }
 .wpm_container textarea,
 .wpm_container input[type="text"]{
@@ -429,7 +386,7 @@
 .wpm_container input[type="text"]:focus,
 .wpm_container select:focus{
 	border-color: #00E065;
-  box-shadow: 0 0 0 1px #00E065;
+	box-shadow: 0 0 0 1px #00E065;
 }
 .wpm_container input[type=checkbox]:checked, .wpm_container input[type=checkbox]:checked:focus {
 	border-color: #00E065;
@@ -454,94 +411,133 @@
 	background: #00E065;
 }
 .wpm_container .switch {
-  width: 50px;
-  position: relative;
+	width: 50px;
+	position: relative;
 }
 .wpm_container .switch input {
-  position: absolute;
-  top: 0;
-  z-index: 2;
-  opacity: 0;
-  cursor: pointer;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+	opacity: 0;
+	cursor: pointer;
 }
 .wpm_container .switch input:checked {
-  z-index: 1;
+	z-index: 1;
 }
 .wpm_container .switch input:checked + label {
-  opacity: 1;
-  cursor: default;
+	opacity: 1;
+	cursor: default;
 }
 .wpm_container .switch input:not(:checked) + label:hover {
-  opacity: 0.5;
+	opacity: 0.5;
 }
 .wpm_container .switch label {
-  color: #fff;
-  opacity: 0.33;
-  transition: opacity 0.25s ease;
-  cursor: pointer;
+	color: #fff;
+	opacity: 0.33;
+	transition: opacity 0.25s ease;
+	cursor: pointer;
 }
 .wpm_container .switch .toggle-outside {
-  height: 100%;
-  border-radius: 34px;
-  padding: 0.25rem;
-  overflow: hidden;
-  transition: 0.25s ease all;
+	height: 100%;
+	border-radius: 34px;
+	padding: 0.25rem;
+	overflow: hidden;
+	transition: 0.25s ease all;
 }
 .wpm_container .switch .toggle-inside {
-  border-radius: 25px;
-  background: #6c7781;
-  position: absolute;
-  transition: 0.25s ease all;
+	border-radius: 25px;
+	background: #6c7781;
+	position: absolute;
+	transition: 0.25s ease all;
 }
 .wpm_container .switch--horizontal {
-  height: 24px;
-  font-size: 0;
+	height: 24px;
+	font-size: 0;
 }
 .wpm_container .switch--horizontal input {
-  height: 24px;
-  width: 50px;
-  margin: 0;
+	height: 24px;
+	width: 50px;
+	margin: 0;
 }
 .wpm_container .switch--horizontal label {
-  width: 0;
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	overflow: hidden;
 }
 .wpm_container .switch--horizontal .toggle-outside {
-  background: #fff;
-  position: absolute;
-  left: 0;
-  width: 50px;
-  border: 2px solid #6c7781;
-  box-sizing: border-box;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	width: 50px;
+	border: 2px solid #6c7781;
+	box-sizing: border-box;
 }
 .wpm_container .switch--horizontal .toggle-inside {
 	height: 14px;
 	width: 14px;
-  bottom: 3px;
+	bottom: 3px;
 }
 .wpm_container .switch--horizontal input:checked ~ .toggle-outside .toggle-inside {
-  left: 4px;
+	left: 4px;
 }
 .wpm_container .switch--horizontal input ~ input:checked ~ .toggle-outside{
-  background-color: #00E065;
-  border-color: #00E065;
+	background-color: #00E065;
+	border-color: #00E065;
 }
 .wpm_container .switch--horizontal input ~ input:checked ~ .toggle-outside .toggle-inside {
 	background-color: #fff;
-  left: 29px;
+	left: 29px;
 }
 @media (min-width: 992px){
 	.wpm_container select,
 	.wpm_container textarea,
 	.wpm_container input[type="text"]{
 		max-width: 75%;
-	}	
+	}
 	.wpm_container #titlediv input[type="text"]{
 		max-width: initial;
-	}	
+	}
 }
+
+/*===========get_advanced_scripts_settings===========*/
+.flash_cache_allow_optimize{
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #dadfe4;
+}
+.flash_cache_allow_optimize table tbody tr:first-child {
+	padding-top: 0;
+}
+.wpm_container .flash_cache_avoid_optimize {
+	padding: 20px 0;
+	margin: 20px 0;
+	border-top: 1px solid #dadfe4;
+	border-bottom: 1px solid #dadfe4;
+}
+.wpm_container .flash_cache_avoid_optimize p:first-child {
+	padding-top: 0;
+}
+.wpm_container .flash_cache_avoid_optimize .form-table tr:not(:last-child) {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins {
+	padding: 15px;
+	border: 1px solid #dadfe4;
+	max-height: 120px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	margin-top: 10px;
+}
+.wpm_container .flash_cache_avoid_optimize .flash_cache_select_plugins ul {
+	margin: 0;
+}
+.wpm_container .flash_cache_avoid_optimize textarea {
+	max-width: 100%;
+	margin-top: 10px;
+}
+
 /*===========Buttons===========*/
 .wpm_container .button{
 	font-size: 14px;
@@ -563,15 +559,15 @@
 /*===========Preload===========*/
 .preload_info{
 	display: block;
-  text-align: right;
-  margin-top: 20px;
+	text-align: right;
+	margin-top: 20px;
 }
 .preload_info code{
 	display: inline-flex;
-  background: #f7f7f7;
-  border: 1px solid #b5bfc9;
-  font-size: 12px;
-  margin: 0;
+	background: #f7f7f7;
+	border: 1px solid #b5bfc9;
+	font-size: 12px;
+	margin: 0;
 	padding: 10px 15px;
 }
 /*===========Footer===========*/
@@ -580,9 +576,9 @@
 	display: flex;
 	align-items: center;
 	background: #F7F7F7;
-  padding: 6px 10px;
-  margin-left: -30px;
-  margin-right: -30px;
+	padding: 6px 10px;
+	margin-left: -30px;
+	margin-right: -30px;
 }
 .wpm_head{
 	border-bottom: 1px solid #b5bfc9;
@@ -594,7 +590,7 @@
 	flex-wrap: wrap;
 	margin-top: 30px;
 	border-top: 1px solid #b5bfc9;
-  border-radius: 0 0 6px 6px;
+	border-radius: 0 0 6px 6px;
 }
 .wpm_head .wpm_buttons,
 .wpm_footer .wpm_buttons{
@@ -625,7 +621,7 @@
 	order: 1;
 }
 .wpm_footer .wpm_share a{
-  color: #7f868d;
+	color: #7f868d;
 	display: inline-flex;
 	margin-right: 8px;
 	text-decoration: none;
@@ -644,7 +640,7 @@
 .wpm_footer .wpm_buttons .submit{
 	margin: 0;
 	padding: 0;
-  text-align: right;
+	text-align: right;
 }
 @media (min-width: 581px){
 	.wpm_footer{

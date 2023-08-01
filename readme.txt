@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -28,7 +28,7 @@ Flash Cache is a powerful plugin which optimizes the websites speed thanks to pr
 == Some Features ==
 The most important characteristics that makes this add-on the first choice comparing to others are the next ones:
 
-> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and supports *PHP 5.6 to 8.1.*
+> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and supports *PHP 5.6 to 8.2.*
 > * Flash Cache allows infinities configurations thanks to the patterns, these can be done with different cache patterns according the kind of page that will be cached.
 > * It avoid the PHP execution in foreground at time of serve the cache objects, improving significantly the performance and the overload of the server.
 > * Crawl Budget optimization, the majority of the search engines assigns a quantity of means to go over the websites, with Flash Cache a higher number of pages are indexes and is better positioned in the search engines.
@@ -42,6 +42,11 @@ The most important characteristics that makes this add-on the first choice compa
 In some cases, there are compatibility issues with other plugins. Most of the time this is caused by other plugins inserting javascript or styles in a wrong or weird way.
 
 **Shortcodes Ultimate:** _Uncaught ReferenceError: SUShortcodesL10n is not defined._
+
+### Translations
+
+Many thanks to the generous efforts of all translators.
+If you'd like to help out by translating this plugin, please [sign up for an account and dig in](https://translate.wordpress.org/projects/wp-plugins/flash-cache).
 
 == Installation ==
 
@@ -85,6 +90,12 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.1 Jul 31, 2023 =
+* New options to exclude specific JS files:
+* Avoid optimization of inline JS scripts found in HTML DOM.
+* Avoid optimization of JavaScript files from themes.
+* Avoid optimization of JavaScript files from plugins.
+
 = 3.0.6 Jul 04, 2023 =
 * Added Settings footer link to YouTube tutorials for Flash Cache.
 
