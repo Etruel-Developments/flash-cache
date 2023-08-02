@@ -90,6 +90,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.2 Aug 02, 2023 =
+* Fixes error on using new function to include SEO Platforms in optimized scripts.
+
 = 3.1 Jul 31, 2023 =
 * New options to exclude specific JS files:
 * Avoid optimization of inline JS scripts found in HTML DOM.
