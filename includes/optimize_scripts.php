@@ -281,7 +281,7 @@ class flash_cache_optimize_scripts {
 
 	private static function get_excludedPlatforms(){
 		// Add more social media platforms here
-		return apply_filter('flash_cache_excluded_seo_platforms', array(
+		return apply_filters('flash_cache_excluded_seo_platforms', array(
 			'twitter',
 			'youtube',
 			'tiktok',
