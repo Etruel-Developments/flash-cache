@@ -279,9 +279,9 @@ class flash_cache_optimize_scripts {
 		return $tag;
 	}
 
-	function get_excludedPlatforms(){
+	private static function get_excludedPlatforms(){
 		// Add more social media platforms here
-		return apply_filter('flash_cache_excluded_seo_platforms', array(
+		return apply_filters('flash_cache_excluded_seo_platforms', array(
 			'twitter',
 			'youtube',
 			'tiktok',
@@ -295,7 +295,7 @@ class flash_cache_optimize_scripts {
 	
 	private static function excludeSocialScripts($tag) {
 		// Define the list of social media platforms to exclude
-		$excludedPlatforms = get_excludedPlatforms();
+		$excludedPlatforms = self::get_excludedPlatforms();
 				
 		// Check if the tag contains a URL
 		if (preg_match('/<script[^>]*src=("|\')([^>]*)("|\')/i', $tag, $matches)) {
