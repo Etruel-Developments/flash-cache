@@ -90,6 +90,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.1.2 Sep 05, 2023 =
+* Fixes error on uninstall plugin
+
 = 3.1.1 Aug 02, 2023 =
 * Fixes error on using new function to include SEO Platforms in optimized scripts.
 
