@@ -51,6 +51,7 @@ class flash_cache_optimize_scripts {
 							continue;
 						}
 						self::$js_tags_links[] = flash_cache_get_path($url);
+						$content = preg_replace('/<!--(.*?)-->/s', '', $content);
 					} else {
 						if (flash_cache_process::$advanced_settings['inline_scripts']) {
 							$tag = '';
@@ -58,6 +59,7 @@ class flash_cache_optimize_scripts {
 							if (preg_match('/<script[^>]*>(.*?)<\/script>/is', $tag, $script_content)) {
 								if (!empty($script_content[1])) {
 									self::$js_tags_inline[] = $script_content[1];
+									$content = preg_replace('/<!--(.*?)-->/s', '', $content);
 								}
 							}
 						}
