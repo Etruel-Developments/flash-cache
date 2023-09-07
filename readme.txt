@@ -90,6 +90,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+= 3.1.3 Sep 06, 2023 =
+* Added new feature to remove HTML comments
+
 = 3.1.2 Sep 05, 2023 =
 * Fixes error on uninstall plugin
 
