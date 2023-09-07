@@ -90,11 +90,13 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
-= 3.1.3 Sep 06, 2023 =
-* Added new feature to remove HTML comments
+= 3.1.3 Sep 11, 2023 =
+* Added new feature to remove HTML comments.
+* Fixes minor issues with translation strings.
+* Added Language files for Spanish-Argentina.
 
 = 3.1.2 Sep 05, 2023 =
-* Fixes error on uninstall plugin
+* Fixes error on uninstall plugin.
 
 = 3.1.1 Aug 02, 2023 =
 * Fixes error on using new function to include SEO Platforms in optimized scripts.
@@ -129,7 +131,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 = 3.0.2 Feb 28, 2023 =
 * Fixes a bug for WordPress based sites installed in subdirectories.
 * Fixes an issue with third party notices showing below the Flash Cache Settings title.
-* Fixes LinkeIn link in the icon at Settings.
+* Fixes LinkedIn link in the icon at Settings.
 * Fixes menu position for some third party plugins.
 
 = 3.0.1 Feb 21, 2023 =
