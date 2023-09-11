@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.3
+Tested up to: 6.3.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -90,10 +90,13 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+
 = 3.1.3 Sep 11, 2023 =
 * Added new feature to remove HTML comments.
 * Fixes minor issues with translation strings.
-* Added Language files for Spanish-Argentina.
+* Updated .pot language project file.
+* Started working on translations for Spanish-Argentina.
+* Waiting for editors on https://translate.wordpress.org/projects/wp-plugins/flash-cache/
 
 = 3.1.2 Sep 05, 2023 =
 * Fixes error on uninstall plugin.

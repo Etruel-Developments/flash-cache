@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Flash Cache\n"
-"POT-Creation-Date: 2022-12-30 18:46-0300\n"
+"POT-Creation-Date: 2023-09-11 15:27-0400\n"
 "PO-Revision-Date: 2022-12-30 18:46-0300\n"
 "Last-Translator: Esteban <etruel@etruel.com>\n"
 "Language-Team: Etruel Devs <dev@etruel.com>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_x;_e\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -19,89 +19,97 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: .git\n"
 "X-Poedit-SearchPathExcluded-1: *.js\n"
 
-#: includes/functions.php:36 includes/settings.php:130
+#: includes/functions.php:95 includes/settings.php:136
 msgid "Delete Cache"
 msgstr ""
 
-#: includes/functions.php:37
+#: includes/functions.php:96
 msgid "Delete cache of the current page"
 msgstr ""
 
-#: includes/functions.php:652
+#: includes/functions.php:741
 msgid "Hide/Show menu."
 msgstr ""
 
-#: includes/functions.php:652
+#: includes/functions.php:741
 msgid "MENU"
 msgstr ""
 
-#: includes/functions.php:653 includes/settings.php:98
+#: includes/functions.php:742 includes/settings.php:96
 msgid "General Settings"
 msgstr ""
 
-#: includes/functions.php:655 includes/patterns.php:47 includes/patterns.php:58
-#: includes/patterns.php:124 includes/patterns.php:125
+#: includes/functions.php:743 includes/settings.php:68 includes/settings.php:69
+msgid "Advanced options"
+msgstr ""
+
+#: includes/functions.php:744 includes/patterns.php:44 includes/patterns.php:55
+#: includes/patterns.php:121 includes/patterns.php:122
 msgid "Patterns"
 msgstr ""
 
-#: includes/functions.php:656 includes/patterns.php:50
+#: includes/functions.php:745 includes/patterns.php:47
 msgid "Add New Pattern"
 msgstr ""
 
-#: includes/functions.php:657 includes/preload.php:264 includes/preload.php:265
-#: includes/preload.php:316
+#: includes/functions.php:746 includes/preload.php:281 includes/preload.php:282
+#: includes/preload.php:334
 msgid "Preload"
 msgstr ""
 
-#: includes/patterns.php:48
+#: includes/functions.php:787
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr ""
+
+#: includes/patterns.php:45
 msgid "Pattern"
 msgstr ""
 
-#: includes/patterns.php:49
+#: includes/patterns.php:46
 msgid "Add New"
 msgstr ""
 
-#: includes/patterns.php:51
+#: includes/patterns.php:48
 msgid "Edit Pattern"
 msgstr ""
 
-#: includes/patterns.php:52
+#: includes/patterns.php:49
 msgid "New Pattern"
 msgstr ""
 
-#: includes/patterns.php:53
+#: includes/patterns.php:50
 msgid "View Pattern"
 msgstr ""
 
-#: includes/patterns.php:54
+#: includes/patterns.php:51
 msgid "Search Patterns"
 msgstr ""
 
-#: includes/patterns.php:55
+#: includes/patterns.php:52
 msgid "No Patterns found"
 msgstr ""
 
-#: includes/patterns.php:56
+#: includes/patterns.php:53
 msgid "No Patterns found in Trash"
 msgstr ""
 
-#: includes/patterns.php:57
+#: includes/patterns.php:54
 msgid "Parent Pattern:"
 msgstr ""
 
-#: includes/patterns.php:133 includes/patterns.php:134
+#: includes/patterns.php:130 includes/patterns.php:131
 msgid "Add New Patterns"
 msgstr ""
 
-#: includes/patterns.php:177
+#: includes/patterns.php:174
 msgid "Pattern Data"
 msgstr ""
 
-#: includes/patterns.php:197
+#: includes/patterns.php:194
 msgid "Page Types"
 msgstr ""
 
-#: includes/patterns.php:201
+#: includes/patterns.php:198
 msgid ""
 "The options of the kind of pages, are the different post types where it will be used "
 "other cache options. For example, if it only select Home ( is_home() ) the options "
@@ -109,75 +117,75 @@ msgid ""
 "create different patterns to draw on and better configure how the cache will be created."
 msgstr ""
 
-#: includes/patterns.php:220
+#: includes/patterns.php:219
 msgid ""
 "If you do not select any of the Post Type options, it will be interpreted as selecting "
 "all the options."
 msgstr ""
 
-#: includes/patterns.php:222
+#: includes/patterns.php:221
 msgid "Create cache on insert or update a post."
 msgstr ""
 
-#: includes/patterns.php:224
+#: includes/patterns.php:223
 msgid "Update home page on insert a new post."
 msgstr ""
 
-#: includes/patterns.php:226
+#: includes/patterns.php:225
 msgid "Update categories and tags on insert or update a post."
 msgstr ""
 
-#: includes/patterns.php:228
+#: includes/patterns.php:227
 msgid "Update cache on comments."
 msgstr ""
 
-#: includes/patterns.php:234
+#: includes/patterns.php:233
 msgid "Front Page (is_front_page)"
 msgstr ""
 
-#: includes/patterns.php:239
+#: includes/patterns.php:238
 msgid "Home (is_home)"
 msgstr ""
 
-#: includes/patterns.php:248
+#: includes/patterns.php:247
 msgid "Tags (is_tag)"
 msgstr ""
 
-#: includes/patterns.php:251
+#: includes/patterns.php:250
 msgid "Category (is_category)"
 msgstr ""
 
-#: includes/patterns.php:256
+#: includes/patterns.php:255
 msgid "Feeds (is_feed)"
 msgstr ""
 
-#: includes/patterns.php:259
+#: includes/patterns.php:258
 msgid "Search Pages (is_search)"
 msgstr ""
 
-#: includes/patterns.php:262
+#: includes/patterns.php:261
 msgid "Author Pages (is_author)"
 msgstr ""
 
-#: includes/patterns.php:271
+#: includes/patterns.php:270
 msgid "URL must contain"
 msgstr ""
 
-#: includes/patterns.php:274
+#: includes/patterns.php:273
 msgid ""
 "Allows use values which must contain the URLs of the pages so you can create a cache "
 "object of this one."
 msgstr ""
 
-#: includes/patterns.php:275 includes/patterns.php:283
+#: includes/patterns.php:274 includes/patterns.php:282
 msgid "Use each line for different values."
 msgstr ""
 
-#: includes/patterns.php:279
+#: includes/patterns.php:278
 msgid "URL should not contain"
 msgstr ""
 
-#: includes/patterns.php:282
+#: includes/patterns.php:281
 msgid ""
 "Allows establish the values which can’t contain in the URLs of the pages to create a "
 "cache object of it. You can assign many values in every line of the text field. For "
@@ -185,207 +193,218 @@ msgid ""
 "in the URL."
 msgstr ""
 
-#: includes/patterns.php:291
+#: includes/patterns.php:290
 msgid "Cache Type"
 msgstr ""
 
-#: includes/patterns.php:294
+#: includes/patterns.php:293
 msgid "HTML static (Ultra fast)"
 msgstr ""
 
-#: includes/patterns.php:295
+#: includes/patterns.php:294
 msgid ""
 "Create a cache in HTML format, in this way avoid the PHP execution in the front-end "
 "accelerating the load of the page, plus reducing the server CPU cost."
 msgstr ""
 
-#: includes/patterns.php:299
+#: includes/patterns.php:298
 msgid "PHP Files (Accept GET and POST params)"
 msgstr ""
 
-#: includes/patterns.php:300
+#: includes/patterns.php:299
 msgid ""
 "Create cache from pages which has parameters GET or POST like Feed or WordPress search; "
 "this option is less optimal than HTML static."
 msgstr ""
 
-#: includes/patterns.php:308
+#: includes/patterns.php:307
 msgid "Minimum TTL"
 msgstr ""
 
-#: includes/patterns.php:311
+#: includes/patterns.php:310
 msgid ""
 "Is the lifetime of the cache to be rebuilded or updated when is visited by the users that "
 "are navigating for the website."
 msgstr ""
 
-#: includes/patterns.php:315
+#: includes/patterns.php:314
 msgid "Maximum TTL"
 msgstr ""
 
-#: includes/patterns.php:318
+#: includes/patterns.php:317
 msgid ""
 "Is the lifetime of the cache objects to be rebuilded or updated from the preload process "
 "of the Flash Cache."
 msgstr ""
 
-#: includes/plugin_functions.php:42
+#: includes/plugin_functions.php:29
 msgid "Go to Flash Cache Settings Page"
 msgstr ""
 
-#: includes/plugin_functions.php:42
+#: includes/plugin_functions.php:29
 msgid "Settings"
 msgstr ""
 
-#: includes/plugin_functions.php:63
+#: includes/plugin_functions.php:48
 msgid "Support"
 msgstr ""
 
-#: includes/plugin_functions.php:64
+#: includes/plugin_functions.php:49
 msgid "Advanced Settings Page"
 msgstr ""
 
-#: includes/plugin_functions.php:64 includes/settings.php:235
+#: includes/plugin_functions.php:49 includes/settings.php:235
 msgid "Advanced Settings"
 msgstr ""
 
-#: includes/posts.php:83
+#: includes/posts.php:86
 msgid "A problem, please try again."
 msgstr ""
 
-#: includes/posts.php:90 includes/posts.php:96
-msgid "Invalid post id."
+#: includes/posts.php:94
+msgid "Invalid post_id."
 msgstr ""
 
-#: includes/posts.php:105
+#: includes/posts.php:100
+msgid "Invalid post."
+msgstr ""
+
+#: includes/posts.php:109
 msgid "The post has no cache."
 msgstr ""
 
-#: includes/posts.php:162
+#: includes/posts.php:167
 msgid "Clear Entry Cache"
 msgstr ""
 
-#: includes/preload.php:92
+#: includes/preload.php:73
 msgid "Flash Cache Preload"
 msgstr ""
 
-#: includes/preload.php:300
+#: includes/preload.php:318
 msgid "Execute Preload"
 msgstr ""
 
-#: includes/preload.php:317
+#: includes/preload.php:335
 msgid ""
 "Preload is a process that creates a cache of all public pages and taxonomies depending on "
 "your options and patterns."
 msgstr ""
 
-#: includes/preload.php:318
+#: includes/preload.php:336
 msgid "The preload process is divided into several executions to prevent server collapse."
 msgstr ""
 
-#: includes/preload.php:338
+#: includes/preload.php:361
 #, php-format
 msgid "Preload is executing now: %s - %s - %s"
 msgstr ""
 
-#: includes/preload.php:341
+#: includes/preload.php:364
 msgid "Preload is pending to execution."
 msgstr ""
 
-#: includes/preload.php:344
+#: includes/preload.php:367
 #, php-format
 msgid "Next run: %s"
 msgstr ""
 
-#: includes/preload.php:351
+#: includes/preload.php:374
 msgid "Enable Preload"
 msgstr ""
 
-#: includes/preload.php:365
+#: includes/preload.php:388
 msgid "Cache Taxonomies"
 msgstr ""
 
-#: includes/preload.php:376
+#: includes/preload.php:399
 msgid ""
 "By activating this option the preload process will create cache of every public "
 "taxonomies (Categories or Tags) which can be accessed by the users in the website."
 msgstr ""
 
-#: includes/preload.php:380
+#: includes/preload.php:403
 msgid "Number of pages per execution"
 msgstr ""
 
-#: includes/preload.php:383
+#: includes/preload.php:406
 msgid ""
 "The preload process is separated by different processes to avoid the collapse of the "
 "website. With this option you can set the number of pages which will create a cache "
 "object for every execution of the preload process."
 msgstr ""
 
-#: includes/preload.php:387
+#: includes/preload.php:410
 msgid "Time per Preload"
 msgstr ""
 
-#: includes/preload.php:390
+#: includes/preload.php:413
 msgid ""
-"Is the time in seconds for the next execution of the preload alter finishing the previous "
-"execution."
+"The time in seconds per page quantity until the next execution of the preload process. "
+"This value avoid timeouts. Increase it if you have timeouts PHP problems on executing the "
+"Preload."
 msgstr ""
 
-#: includes/preload.php:401 includes/settings.php:144 includes/settings.php:248
-#: includes/settings.php:364
+#: includes/preload.php:417
+msgid "Disable preload on finish"
+msgstr ""
+
+#: includes/preload.php:428
+msgid ""
+"By activating this option will turn off the preload cache process upon completion. This "
+"means that the cache will not be preloaded again after the initial load."
+msgstr ""
+
+#: includes/preload.php:439 includes/settings.php:150 includes/settings.php:248
+#: includes/settings.php:442
 msgid "Reset to default"
 msgstr ""
 
-#: includes/preload.php:411 includes/preload.php:426 includes/preload.php:438
-#: includes/settings.php:406 includes/settings.php:422 includes/settings.php:437
-#: includes/settings.php:447 includes/settings.php:458 includes/settings.php:477
+#: includes/preload.php:449 includes/preload.php:474 includes/preload.php:486
+#: includes/settings.php:481 includes/settings.php:508 includes/settings.php:533
+#: includes/settings.php:543 includes/settings.php:554 includes/settings.php:573
 msgid "Security check"
 msgstr ""
 
-#: includes/preload.php:419 includes/settings.php:415 includes/settings.php:430
+#: includes/preload.php:467 includes/settings.php:501 includes/settings.php:526
 msgid "Settings updated"
 msgstr ""
 
-#: includes/preload.php:431
+#: includes/preload.php:479
 msgid "Preload execution pending.."
 msgstr ""
 
-#: includes/preload.php:443 includes/settings.php:471 includes/settings.php:481
+#: includes/preload.php:491 includes/settings.php:567 includes/settings.php:577
 msgid "Defaults have been restored."
 msgstr ""
 
-#: includes/settings.php:61 includes/settings.php:62
+#: includes/settings.php:60 includes/settings.php:61
 msgid "Flash Cache"
 msgstr ""
 
-#: includes/settings.php:69 includes/settings.php:70
-msgid "Advanced options"
-msgstr ""
-
-#: includes/settings.php:112
+#: includes/settings.php:121
 msgid "Enable Cache"
 msgstr ""
 
-#: includes/settings.php:123
+#: includes/settings.php:129
 msgid "Deactivate this option to stop the creation of the new cache objects."
 msgstr ""
 
-#: includes/settings.php:128
+#: includes/settings.php:134
 msgid "Delete cache"
 msgstr ""
 
-#: includes/settings.php:131
+#: includes/settings.php:137
 msgid ""
 "Cached pages are stored on your server. If you need to clean all them, use this button to "
 "delete all the files and begin to create the cache from scratch."
 msgstr ""
 
-#: includes/settings.php:132
+#: includes/settings.php:138
 msgid "Current Disk Usage: "
 msgstr ""
 
-#: includes/settings.php:185
+#: includes/settings.php:194
 msgid "Patterns Settings"
 msgstr ""
 
@@ -395,8 +414,8 @@ msgstr ""
 
 #: includes/settings.php:255
 msgid ""
-"Specifies the path of the file system, where it will kept the cache objects of every "
-"page, this option can be changed to other customized path."
+"Specifies the file system path where the cache objects for each page will be placed, this "
+"option can be changed to another custom path."
 msgstr ""
 
 #: includes/settings.php:259
@@ -411,93 +430,134 @@ msgstr ""
 msgid "Keeps the cache in both protocols as in the HTTP and in HTTPS if it exists."
 msgstr ""
 
-#: includes/settings.php:267
+#: includes/settings.php:268
 msgid "Redirect HTTP to HTTPS"
 msgstr ""
 
-#: includes/settings.php:268
+#: includes/settings.php:269
 msgid ""
 "Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the "
 "certificate to improve the speed through the header Strict-Transport-Security."
 msgstr ""
 
-#: includes/settings.php:274
+#: includes/settings.php:277
 msgid "Default TTL"
 msgstr ""
 
-#: includes/settings.php:277
+#: includes/settings.php:280
 msgid ""
 "The time life by default is used in the whole website to specifies the lifetime of the "
 "cache objects but in the client-side rather the user browser is besieged the header Cache-"
 "Control with the value specified in the field."
 msgstr ""
 
-#: includes/settings.php:282
+#: includes/settings.php:285
 msgid "Do not cache users with cookies"
 msgstr ""
 
-#: includes/settings.php:287
+#: includes/settings.php:290
 msgid ""
 "This list allows add the users which have the part of the name of a Cookie, it won’t be "
 "showed in the objects in cache, as the users that have begun session in the WP-ADMIN, you "
 "can also add other cookies to websites which uses user roles at the theme system."
 msgstr ""
 
-#: includes/settings.php:304
+#: includes/settings.php:307
 msgid "Cache Process"
 msgstr ""
 
-#: includes/settings.php:306
+#: includes/settings.php:309
 msgid ""
 "This option is recommended by default because it uses OB (Output Buffer) to create the "
 "first cache of a page being faster and optimum, and in the next cache updates of the same "
 "object it will be used the cURL for its update."
 msgstr ""
 
-#: includes/settings.php:309
+#: includes/settings.php:312
 msgid ""
 "It is only used with cURL to get the content of the pages to be cached, that’s why it is "
 "usually slower, nules there are cases where there are conflicts on OB with others "
 "plugins, in these cases is recommended this option."
 msgstr ""
 
-#: includes/settings.php:315
+#: includes/settings.php:318
 msgid "Optimize styles"
 msgstr ""
 
-#: includes/settings.php:326
+#: includes/settings.php:329
 msgid ""
 "Optimize and combine all your Stylesheets files into one, this allows your site to "
 "request fewer files and get better page load performance."
 msgstr ""
 
-#: includes/settings.php:333
+#: includes/settings.php:336
 msgid "Optimize scripts"
 msgstr ""
 
-#: includes/settings.php:344
+#: includes/settings.php:347
 msgid ""
 "Optimize and combine all your JavaScript files into one, this allows your site to request "
 "fewer files and get better page load performance."
 msgstr ""
 
-#: includes/settings.php:350
+#: includes/settings.php:354
+msgid ""
+"If you find any problems with the optimizations, you can exclude the JS files by using "
+"these options to choose which ones are left in the original format."
+msgstr ""
+
+#: includes/settings.php:358
+msgid "Inline scripts"
+msgstr ""
+
+#: includes/settings.php:369
+msgid "Avoid optimizing inline JS scripts found in HTML DOM."
+msgstr ""
+
+#: includes/settings.php:373
+msgid "Theme JS files"
+msgstr ""
+
+#: includes/settings.php:384
+msgid "Avoid optimizing theme JavaScript files."
+msgstr ""
+
+#: includes/settings.php:388
+msgid "Plugins JS files"
+msgstr ""
+
+#: includes/settings.php:399
+msgid "Avoid optimizing plugins JavaScript files."
+msgstr ""
+
+#: includes/settings.php:405
+msgid "Include SEO &amp; Social scripts in optimized file"
+msgstr ""
+
+#: includes/settings.php:416
+msgid ""
+"By default these scripts are not included because there are already optimized, hosted on "
+"remote servers and load asyncroniously. But by activating this option you can try to "
+"optimize and host them in your server."
+msgstr ""
+
+#: includes/settings.php:428
 msgid "Lock Type"
 msgstr ""
 
-#: includes/settings.php:353
+#: includes/settings.php:431
 msgid ""
 "This option is recommended by default because it uses Files to prevent two processes from "
 "creating cache of the same page at the same time."
 msgstr ""
 
-#: includes/settings.php:356
+#: includes/settings.php:434
 msgid ""
 "This option uses DB to prevent two processes from creating cache of the same page at the "
 "same time."
 msgstr ""
 
-#: includes/settings.php:386
+#: includes/settings.php:462
 msgid ""
 "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash "
 "Cache rules has been found. This could be simple whitespace differences, but you should "
@@ -505,7 +565,7 @@ msgid ""
 "Update Rules&#8217; button to update the rules."
 msgstr ""
 
-#: includes/settings.php:388
+#: includes/settings.php:464
 msgid ""
 "A difference between the rules in your <strong>.htaccess</strong> file and the plugin "
 "rewrite rules has been found. This could be simple whitespace differences, but you should "
@@ -513,10 +573,10 @@ msgid ""
 "Update Rules&#8217; button to update the rules."
 msgstr ""
 
-#: includes/settings.php:440
+#: includes/settings.php:536
 msgid "Web server rules updated"
 msgstr ""
 
-#: includes/settings.php:452
+#: includes/settings.php:548
 msgid "The cache files have been deleted."
 msgstr ""
