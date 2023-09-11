@@ -96,7 +96,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Fixes minor issues with translation strings.
 * Updated .pot language project file.
 * Started working on translations for Spanish-Argentina.
-* Waiting for editors on https://translate.wordpress.org/projects/wp-plugins/flash-cache/
+* Waiting for editors' approval on https://translate.wordpress.org/projects/wp-plugins/flash-cache/
 
 = 3.1.2 Sep 05, 2023 =
 * Fixes error on uninstall plugin.
