@@ -272,7 +272,7 @@ class flash_cache_process {
 		if (is_search() && $wp_query->post_count > 0) {
 			file_put_contents($request_file_path, $request_url['response']);
 			file_put_contents($header_file_path, $request_url['content_type']);
-		}else{
+		}elseif(!is_search()){
 			file_put_contents($request_file_path, $request_url['response']);
 			file_put_contents($header_file_path, $request_url['content_type']);
 		}
@@ -721,7 +721,7 @@ class flash_cache_process {
 			// A search query has been performed.
 			file_put_contents($request_file_path, $response);
 			file_put_contents($header_file_path, $current_content_type);
-		}else{
+		}elseif(!is_search()){
 			file_put_contents($request_file_path, $response);
 			file_put_contents($header_file_path, $current_content_type);
 		}
