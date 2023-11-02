@@ -221,6 +221,7 @@ class flash_cache_process {
 	}
 
 	public static function create_cache_php() {
+		global  $wp_query;
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
@@ -268,8 +269,13 @@ class flash_cache_process {
 		$request_file_path	 = $cache_path . $request_path . $request . '.html';
 		$header_file_path	 = $cache_path . $request_path . $request . '.header';
 
-		file_put_contents($request_file_path, $request_url['response']);
-		file_put_contents($header_file_path, $request_url['content_type']);
+		if (is_search() && $wp_query->post_count > 0) {
+			file_put_contents($request_file_path, $request_url['response']);
+			file_put_contents($header_file_path, $request_url['content_type']);
+		}elseif(!is_search()){
+			file_put_contents($request_file_path, $request_url['response']);
+			file_put_contents($header_file_path, $request_url['content_type']);
+		}
 
 		flash_cache_increment_disk_usage(mb_strlen($request_url['response'], '8bit'));
 		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
@@ -657,6 +663,7 @@ class flash_cache_process {
 	}
 
 	public static function create_cache_ob_php($response, $use_curl) {
+		global  $wp_query;
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
@@ -710,8 +717,14 @@ class flash_cache_process {
 				break;
 			}
 		}
-		file_put_contents($request_file_path, $response);
-		file_put_contents($header_file_path, $current_content_type);
+		if (is_search() && $wp_query->post_count > 0) {
+			// A search query has been performed.
+			file_put_contents($request_file_path, $response);
+			file_put_contents($header_file_path, $current_content_type);
+		}elseif(!is_search()){
+			file_put_contents($request_file_path, $response);
+			file_put_contents($header_file_path, $current_content_type);
+		}
 		flash_cache_increment_disk_usage(mb_strlen($response, '8bit'));
 		flash_cache_increment_disk_usage(mb_strlen($current_content_type, '8bit'));
 
