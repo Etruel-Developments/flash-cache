@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.3.1
+Tested up to: 6.4
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -90,6 +90,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+
+= 3.1.4 Nov 02, 2023 =
+* Drastically improves the folder creation process by avoiding the cache of empty searches. This includes search accesses by bots.
+* Compatibility with WordPress 6.4
 
 = 3.1.3 Sep 11, 2023 =
 * Added new feature to remove HTML comments.
