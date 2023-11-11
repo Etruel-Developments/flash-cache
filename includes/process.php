@@ -55,34 +55,38 @@ class flash_cache_process {
 		 * */
 		return flock(self::$can_cache_handler, LOCK_EX | LOCK_NB);
 	}
-
+	
 	public static function get_db_lock($path_file) {
 		global $wpdb;
-
+	
 		$wpdb->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
 		$wpdb->query('START TRANSACTION');
-
-		$results = $wpdb->get_results(
-				$wpdb->prepare(
-						"SELECT * FROM $wpdb->options WHERE option_name = %s FOR UPDATE NOWAIT",
-						'flash_cache_' . base64_encode($path_file)
-				)
+	
+		$option_name = 'flash_cache_' . base64_encode($path_file);
+	
+		// Check if the option already exists without locking
+		$existing_option = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT option_name FROM $wpdb->options WHERE option_name = %s",
+				$option_name
+			)
 		);
-		if ($wpdb->last_error) {
+	
+		if ($existing_option === $option_name) {
+			// The value already exists; no need to insert it again
 			$wpdb->query('COMMIT');
-			return false;
+			return true;
 		}
-
-		if (empty($results)) {
-			$wpdb->query(
-					$wpdb->prepare(
-							"INSERT INTO $wpdb->options (option_name, option_value) VALUES(%s, 1)",
-							'flash_cache_' . base64_encode($path_file)
-					)
-			);
-		}
-		if ($wpdb->last_error) {
-			$wpdb->query('COMMIT');
+	
+		// If it doesn't exist, insert the new option
+		$query = $wpdb->prepare(
+			"INSERT INTO $wpdb->options (option_name, option_value) VALUES(%s, 1) ON DUPLICATE KEY UPDATE option_name = option_name",
+			$option_name
+		);
+		$result = $wpdb->query($query);
+	
+		if ($result === false) {
+			$wpdb->query('ROLLBACK');
 			return false;
 		}
 		$wpdb->query('COMMIT');
