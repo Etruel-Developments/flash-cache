@@ -626,6 +626,19 @@ function flash_cache_get_var_javascript($var, $string) {
 }
 
 function flash_cache_delete_dir($path, $delete_option = false) {
+	global $wpdb;
+
+	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
+
+	if($advanced_settings['lock_type'] == 'db'){
+		$results = $wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM $wpdb->options WHERE option_name LIKE 'flash_cache_db_lock_%'"
+			)
+		);
+	}
+	
+
 	if ($delete_option) {
 		delete_option('flash_cache_disk_usage');
 	}
