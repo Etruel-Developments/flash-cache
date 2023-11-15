@@ -27,18 +27,18 @@ class flash_cache_version {
 				self::install_patterns_default();
 			}
 
-			if(version_compare($current_version, '3.1.4', '<') && get_option('flash_cache_version_3.1.4') != 1){
+			if(version_compare($current_version, '3.1.5', '<') && get_option('flash_cache_version_3.1.4') != 1){
 				$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
 
 				if($advanced_settings['lock_type'] == 'db'){
 					//Method for delete the cache in the database
-					self::update_to_3_1_4();
+					self::update_to_3_1_5();
 				}
 			}
 		}
 	}
 
-	private static function update_to_3_1_4(){
+	private static function update_to_3_1_5(){
 		global $wpdb;
 
 		try {
