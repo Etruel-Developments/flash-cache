@@ -27,18 +27,21 @@ class flash_cache_version {
 				self::install_patterns_default();
 			}
 
-			if(version_compare($current_version, '3.1.5', '<') && get_option('flash_cache_version_3.1.4') != 1){
+			if(version_compare($current_version, '3.2', '<') && get_option('flash_cache_version_3.1.4') != 1){
 				$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
 
 				if($advanced_settings['lock_type'] == 'db'){
 					//Method for delete the cache in the database
-					self::update_to_3_1_5();
+					self::update_to_3_2();
+					//call to function for delete the cache
+					$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+					flash_cache_delete_dir($cache_dir, true);
 				}
 			}
 		}
 	}
 
-	private static function update_to_3_1_5(){
+	private static function update_to_3_2(){
 		global $wpdb;
 
 		try {
@@ -74,12 +77,10 @@ class flash_cache_version {
 				);
 	
 				$wpdb->query('COMMIT');
-				//call to function for delete the cache
-				flash_cache_delete_dir($cache_dir, true);
 				//update option for know if the delete of those registers in the database is already erased
 				update_option('flash_cache_version_' . FLASH_CACHE_VERSION , 1);
 			} else {
-				throw new Exception('Database query error');
+				throw new Exception('Skipping: Database query missing old format records');
 			}
 		} catch (Exception $e) {
 			// Handle the exception (e.g., log the error)
