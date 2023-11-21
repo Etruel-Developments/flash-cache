@@ -74,6 +74,8 @@ class flash_cache_version {
 				);
 	
 				$wpdb->query('COMMIT');
+				//call to function for delete the cache
+				flash_cache_delete_dir($cache_dir, true);
 				//update option for know if the delete of those registers in the database is already erased
 				update_option('flash_cache_version_' . FLASH_CACHE_VERSION , 1);
 			} else {
