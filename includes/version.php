@@ -27,9 +27,11 @@ class flash_cache_version {
 				self::install_patterns_default();
 			}
 
-			if(version_compare($current_version, '3.2', '<') && get_option('flash_cache_version_3.1.4') != 1){
+			/**
+			 * If updated to 3.2 and not executed before 
+			 */
+			if(version_compare($current_version, '3.2', '<') && get_option('flash_cache_updated_3_2') != 1){
 				$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
-
 				if($advanced_settings['lock_type'] == 'db'){
 					//Method for delete the cache in the database
 					self::update_to_3_2();
@@ -41,6 +43,9 @@ class flash_cache_version {
 		}
 	}
 
+	/**
+	 * Function to delete on 3.2 all old records from options db with prefix flash_cache_{hash}
+	 */	
 	private static function update_to_3_2(){
 		global $wpdb;
 
@@ -78,7 +83,7 @@ class flash_cache_version {
 	
 				$wpdb->query('COMMIT');
 				//update option for know if the delete of those registers in the database is already erased
-				update_option('flash_cache_version_' . FLASH_CACHE_VERSION , 1);
+				update_option('flash_cache_updated_3_2', 1);
 			} else {
 				throw new Exception('Skipping: Database query missing old format records');
 			}
