@@ -27,11 +27,33 @@ class flash_cache_patterns {
 		add_action('transition_post_status', array(__CLASS__, 'default_fields'), 10, 3);
 		add_filter('flash_cache_patterns_fields_clean', array(__CLASS__, 'clean_fields'), 100, 1);
 		add_action('save_post', array(__CLASS__, 'save'), 99, 2);
+		add_action('restrict_manage_posts', array(__CLASS__, 'add_reset_button'));
 		add_action('admin_print_scripts-edit.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_print_scripts-post.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_print_scripts-post-new.php', array(__CLASS__, 'patterns_edit_scripts'));
+		add_action('admin_post_reset_to_default_patterns_options', array(__CLASS__, 'reset_to_default_patterns_options'));
 	}
 
+	public static function reset_to_default_patterns_options(){
+		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_patterns_options')) {
+			wp_die(__('Security check', 'flash-cache'));
+		}
+
+		flash_cache_version::delete_all_patterns();
+		flash_cache_version::install_patterns_default();
+		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
+		wp_redirect(admin_url('edit.php?post_type=flash_cache_patterns'));
+	}
+	public static function add_reset_button() {
+		global $post_type;
+	
+		// Check if the current post type is your custom post type
+		if ($post_type == 'flash_cache_patterns') {
+			?>
+				<a href="<?php echo wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_patterns_options'), 'reset_to_default_patterns_options', '_wpnonce') ?>" class="button btn_reset_to_default reset-data-button" style="margin-left: 10px;"> <?php echo __('Reset to default', 'flash-cache') ?> </a>
+			<?php
+		}
+	}
 	/**
 	 * Static function setup
 	 * @access public
@@ -120,7 +142,7 @@ class flash_cache_patterns {
 				'flash_cache_setting',
 				__('Patterns', 'flash-cache'),
 				__('Patterns', 'flash-cache'),
-				'manage_options',
+				'manage_options',	
 				'edit.php?post_type=flash_cache_patterns'
 		);
 //			add_action('admin_print_styles-' . $page, array(__CLASS__, 'patterns_edit_scripts'));
