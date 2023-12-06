@@ -33,27 +33,7 @@ class flash_cache_patterns {
 		add_action('admin_print_scripts-post-new.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_post_reset_to_default_patterns_options', array(__CLASS__, 'reset_to_default_patterns_options'));
 	}
-
-	public static function reset_to_default_patterns_options(){
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_patterns_options')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-
-		flash_cache_version::delete_all_patterns();
-		flash_cache_version::install_patterns_default();
-		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_redirect(admin_url('edit.php?post_type=flash_cache_patterns'));
-	}
-	public static function add_reset_button() {
-		global $post_type;
 	
-		// Check if the current post type is your custom post type
-		if ($post_type == 'flash_cache_patterns') {
-			?>
-				<a href="<?php echo wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_patterns_options'), 'reset_to_default_patterns_options', '_wpnonce') ?>" class="button btn_reset_to_default reset-data-button" style="margin-left: 10px;"> <?php echo __('Reset to default', 'flash-cache') ?> </a>
-			<?php
-		}
-	}
 	/**
 	 * Static function setup
 	 * @access public
@@ -541,6 +521,26 @@ class flash_cache_patterns {
 		do_action('save_flash_cache_patterns', $post_id, $post);
 	}
 
+	public static function reset_to_default_patterns_options(){
+		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_patterns_options')) {
+			wp_die(__('Security check', 'flash-cache'));
+		}
+
+		flash_cache_version::delete_all_patterns();
+		flash_cache_version::install_patterns_default();
+		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
+		wp_redirect(admin_url('edit.php?post_type=flash_cache_patterns'));
+	}
+	public static function add_reset_button() {
+		global $post_type;
+	
+		// Check if the current post type is your custom post type
+		if ($post_type == 'flash_cache_patterns') {
+			?>
+				<a href="<?php echo wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_patterns_options'), 'reset_to_default_patterns_options', '_wpnonce') ?>" class="button btn_reset_to_default reset-data-button" style="margin-left: 10px;"> <?php echo __('Reset to default', 'flash-cache') ?> </a>
+			<?php
+		}
+	}
 }
 
 flash_cache_patterns::hooks();
