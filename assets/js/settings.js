@@ -4,6 +4,8 @@ function hooks_cookie() {
 	});
 }
 jQuery(document).ready(function ($) {
+	$('.reset-data-button').insertAfter('#search-submit');
+
 	hooks_cookie();
 	$("#add_new_dont_cache_cookie").click(function (e) {
 		$("#table_dont_cache_cookie").append(
@@ -16,7 +18,6 @@ jQuery(document).ready(function ($) {
 		$(".wpm_container").toggleClass("show_menu");
 		return false;
 	});
-
 	$(".btn_reset_to_default").click(function (e) {
 		if (!confirm("Are you sure you want to reset to defaults?")) {
 			e.preventDefault();
