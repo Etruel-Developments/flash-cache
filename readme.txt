@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.4.1
+Tested up to: 6.4.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -90,6 +90,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+
+= 3.2.1 Dec 9, 2023 =
+* Added Reset to Default button on Patterns Settings screen.
+* Tested up to WordPress 6.4.2
+* See more details about current release at [this link](https://flashcache.net/update-to-3-2-1-dec-9-2023/)
 
 = 3.2 Nov 21, 2023 =
 * Fixes and improves Lock by DB methods on creating Cache.
@@ -191,4 +196,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
  == Upgrade Notice ==
-* Major Release! See changelog notes.
+* Few improvements and bug fixes!
