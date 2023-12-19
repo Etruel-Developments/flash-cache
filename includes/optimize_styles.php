@@ -128,15 +128,6 @@ class flash_cache_optimize_styles {
 		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
 		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/styles/';
 
-		foreach (self::$css_tags['inline'] as $css_tag) {
-			$media	 = $css_tag[0];
-			$code	 = $css_tag[1];
-			if (!empty($code)) {
-				$all_css_code	 .= $code;
-				$basename_css	 = md5($basename_css . $code);
-			}
-		}
-		
 		$all_css_code = array_reduce(self::$css_tags['files'], function ($carry, $css_tag) use ($cache_dir, &$basename_css) {
 			$media = $css_tag[0];
 			$path = $css_tag[1];
@@ -152,6 +143,15 @@ class flash_cache_optimize_styles {
 
 			return $carry;
 		}, $all_css_code);
+
+		foreach (self::$css_tags['inline'] as $css_tag) {
+			$media	 = $css_tag[0];
+			$code	 = $css_tag[1];
+			if (!empty($code)) {
+				$all_css_code	 .= $code;
+				$basename_css	 = md5($basename_css . $code);
+			}
+		}
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
