@@ -808,5 +808,25 @@ function flash_cache_changes_permalinks($old_permalink_structure, $permalink_str
 		flash_cache_update_htaccess();
 	}
 }
+function flash_cache_get_option($option_name, $default = false) {
+	$options_advance = get_option('flash_cache_advanced_settings', array());
+	$options_general = get_option('flash_cache_settings', array());
+	$completeArray = array_merge($options_advance, $options_general);
+	return isset($completeArray[$option_name]) ? $completeArray[$option_name] : $default;
+}
 
+function flash_cache_set_option($option_name, $value = false) {
+	$advanced_settings = get_option('flash_cache_advanced_settings', array());
+	$general_settings = get_option('flash_cache_settings', array());
+
+	if (array_key_exists($option_name, $advanced_settings)) {
+		$advanced_settings[$option_name] = $value;
+		$updated = update_option('flash_cache_advanced_settings', $advanced_settings);
+	} elseif (array_key_exists($option_name, $general_settings)) {
+		$general_settings[$option_name] = $value;
+		$updated = update_option('flash_cache_settings', $general_settings);
+	}
+
+	return isset($updated) ? $updated : false;
+}
 ?>
