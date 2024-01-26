@@ -332,7 +332,7 @@ class flash_cache_process {
 			if (!empty($url_must_contain_array)) {
 				foreach ($url_must_contain_array as $km => $url_must_contain) {
 					if (stripos($current_url, $url_must_contain) === false) {
-						continue;
+						continue 2;
 					}
 				}
 			}
@@ -350,7 +350,7 @@ class flash_cache_process {
 			if (!empty($url_not_contain_array)) {
 				foreach ($url_not_contain_array as $kc => $url_not_contain) {
 					if (stripos($current_url, $url_not_contain) !== false) {
-						continue;
+						continue 2;
 					}
 				}
 			}
