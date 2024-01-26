@@ -91,6 +91,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 3.2.2 Dec 28, 2023 =
+* Fixes the CSS optimization process that could sometimes fail for responsive styles. 
+
 = 3.2.1 Dec 9, 2023 =
 * Added Reset to Default button on Patterns Settings screen.
 * Tested up to WordPress 6.4.2
