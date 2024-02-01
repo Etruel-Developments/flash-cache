@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -91,8 +91,13 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 3.2.3 Feb 1, 2024 =
+* Fixes two issues with the options Url must contain and not contain. 
+* See more details about current release at [this link](https://flashcache.net/update-to-3-2-3-feb-1-2024/)
+
 = 3.2.2 Dec 28, 2023 =
 * Fixes the CSS optimization process that could sometimes fail for responsive styles. 
+* See more details about current release at [this link](https://flashcache.net/update-to-3-2-2-dec-28-2023/)
 
 = 3.2.1 Dec 9, 2023 =
 * Added Reset to Default button on Patterns Settings screen.
