@@ -12,6 +12,8 @@ if (!defined('ABSPATH'))
 
 class flash_cache_settings {
 
+	public static $flash_cache_table = 'flash_lock';
+
 	/**
 	 * Static function hooks
 	 * @access public

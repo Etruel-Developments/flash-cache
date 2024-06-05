@@ -73,4 +73,30 @@ jQuery(document).ready(function ($) {
 			$('#textarea_avoid_optimize').hide();  // Hide the textarea if "Off" is selected
 		}
 	});
+
+	var lockTypeRadio = $('input[name="flash_cache_advanced[lock_type]"]');
+	var previousValue = lockTypeRadio.filter(':checked').val(); // Store the initially checked value
+
+	if (lockTypeRadio.length) {
+		lockTypeRadio.on('change', function(event) {
+			var confirmation = confirm('Changing this option will clear all the cache. Do you want to proceed?');
+			if (!confirmation) {
+				event.preventDefault();
+				// Reset to previous value
+				$(this).prop('checked', false);
+				lockTypeRadio.filter('[value="' + previousValue + '"]').prop('checked', true);
+			} else {
+				// Clear the cache
+				clearCache();
+			}
+		});
+	}
+
+	function clearCache() {
+		$.post(ajaxurl, {
+			action: 'clear_cache_action'
+		}, function(response) {
+			console.log(response.message);
+		});
+	}
 });

@@ -633,7 +633,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 	if($advanced_settings['lock_type'] == 'db'){
 		$results = $wpdb->query(
 			$wpdb->prepare(
-				"DELETE FROM $wpdb->options WHERE option_name LIKE 'flash_cache_db_lock_%'"
+				'TRUNCATE TABLE'. $wpdb->prefix . flash_cache_settings::$flash_cache_table
 			)
 		);
 	}
@@ -646,6 +646,22 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 			@unlink($path) :
 			array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
 }
+
+// Handle the AJAX request to clear the cache
+function clear_cache_action() {
+    // Clear your cache here
+    // For example, if you're using a transient-based cache:
+	$cache_dir = flash_cache_get_home_path() . flash_cache_get_option('cache_dir');
+	flash_cache_delete_dir($cache_dir, true);
+	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $_GET['path'])));
+	$cache_path			 = realpath($page_cache_dir) . '/';
+	if ($cache_path != '/') {
+
+		flash_cache_delete_cache_files($cache_dir, $cache_path);
+	}
+    wp_send_json_success(['message' => __('Cache cleared successfully.', 'flash_cache')]);
+}
+add_action('wp_ajax_clear_cache_action', 'clear_cache_action');
 
 function flash_cache_delete_cache_files($cache_dir, $cache_path) {
 	$html_file = $cache_path . 'index-cache.html';
@@ -702,8 +718,13 @@ function flash_cache_delete_all_options() {
 	$results = $wpdb->query(
 			$wpdb->prepare(
 					"DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'"
-			)
-	);
+			),
+	); 
+
+	// SQL query to drop the table
+	$sql = 'DROP TABLE IF EXISTS'. $wpdb->prefix . flash_cache_settings::$flash_cache_table;
+	// Execute the query
+	$result_flash_lock = $wpdb->query($sql);
 }
 
 /**

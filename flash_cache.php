@@ -20,7 +20,7 @@ if (!defined('ABSPATH'))
 
 // Plugin version
 if (!defined('FLASH_CACHE_VERSION')) {
-	define('FLASH_CACHE_VERSION', '3.2.3');
+	define('FLASH_CACHE_VERSION', '3.3');
 }
 
 /**
