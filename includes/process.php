@@ -66,7 +66,7 @@ class flash_cache_process {
 
 		$results = $wpdb->get_results(
 				$wpdb->prepare(
-						"SELECT * FROM ". $wpdb->prefix . flash_cache_settings::$flash_cache_table ." WHERE option_lock = %s  LIMIT 0, 25 FOR UPDATE NOWAIT",
+						"SELECT * FROM ". flash_cache_settings::$flash_cache_table ." WHERE option_lock = %s  LIMIT 0, 25 FOR UPDATE NOWAIT",
 						$option_lock
 				)
 		);
@@ -79,7 +79,7 @@ class flash_cache_process {
 		if (empty($results)) {
 			$wpdb->query(
 					$wpdb->prepare(
-							"INSERT INTO ". $wpdb->prefix . flash_cache_settings::$flash_cache_table ." (option_lock, option_value) VALUES(%s, 1)",
+							"INSERT INTO ". flash_cache_settings::$flash_cache_table ." (option_lock, option_value) VALUES(%s, 1)",
 							$option_lock
 					)
 			); 

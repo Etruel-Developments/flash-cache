@@ -12,7 +12,13 @@ if (!defined('ABSPATH'))
 
 class flash_cache_settings {
 
-	public static $flash_cache_table = 'flash_lock';
+	public static $flash_cache_table;
+
+	public function __construct() {
+		global $wpdb;
+		//set the complete name of the table
+		self::$flash_cache_table = $wpdb->prefix . 'flash_lock';
+	}
 
 	/**
 	 * Static function hooks

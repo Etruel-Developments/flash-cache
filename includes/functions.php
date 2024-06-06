@@ -632,7 +632,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 
 	if($advanced_settings['lock_type'] == 'db'){
 		$results = $wpdb->query(
-			'TRUNCATE TABLE '. $wpdb->prefix . flash_cache_settings::$flash_cache_table
+			'TRUNCATE TABLE '. flash_cache_settings::$flash_cache_table
 		);
 	}
 	
@@ -715,7 +715,7 @@ function flash_cache_delete_all_options() {
 	); 
 
 	// SQL query to drop the table
-	$sql = "DROP TABLE IF EXISTS ". $wpdb->prefix . flash_cache_settings::$flash_cache_table;
+	$sql = "DROP TABLE IF EXISTS ".  $wpdb->prefix . "flash_lock";
 
 	// Execute the query
 	$result_flash_lock = $wpdb->query($sql);
