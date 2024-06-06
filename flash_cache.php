@@ -3,7 +3,7 @@
  * Plugin Name: Flash Cache
  * Plugin URI: https://flashcache.net
  * Description: Flash Cache is a plugin to really improve performance of Wordpress Websites. If you like it, please rate it 5 stars to allow us to improve its development.
- * Version: 3.2.3
+ * Version: 3.3
  * Author: Etruel Developments LLC
  * Author URI: https://etruel.com/
  * Text Domain: flash-cache
@@ -180,6 +180,22 @@ class Flash_Cache {
 		delete_option('flash_cache_disk_usage');
 		flash_cache_delete_all_options();
 	}
+
+	public static function create_flash_lock_table() {
+		global $wpdb;
+	
+		$charset_collate = $wpdb->get_charset_collate();
+	
+		$sql = "CREATE TABLE IF NOT EXISTS ". $wpdb->prefix . "flash_lock (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			option_lock VARCHAR(191) NOT NULL DEFAULT '',
+			option_value LONGTEXT NOT NULL,
+			PRIMARY KEY  (id)
+		) $charset_collate;";
+	
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+	}
 }
 
 /**
@@ -197,6 +213,8 @@ class Flash_Cache {
 function Flash_Cache_load() {
 	return Flash_Cache::getInstance();
 }
+
+register_activation_hook( __FILE__, array('Flash_Cache', 'create_flash_lock_table'));
 
 add_action('plugins_loaded', 'Flash_Cache_load');
 ?>

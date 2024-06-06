@@ -104,6 +104,7 @@ class flash_cache_optimize_scripts {
 		foreach (self::$js_tags_inline as $tag) {
 			if (!empty($tag)) {
 				$all_js_code .= $tag;
+				$basename_js = md5($basename_js . $tag);
 			}
 		}
 

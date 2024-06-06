@@ -21,7 +21,7 @@ class flash_cache_version {
 		$current_version = get_option('flash_cache_version', 0.0);
 		if (version_compare($current_version, FLASH_CACHE_VERSION, '<')) {
 			// Update
-			create_flash_lock_table();
+			Flash_Cache::create_flash_lock_table();
 
 			update_option('flash_cache_version', FLASH_CACHE_VERSION);
 			if (version_compare($current_version, 0.0, '=')) {

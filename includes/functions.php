@@ -632,9 +632,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 
 	if($advanced_settings['lock_type'] == 'db'){
 		$results = $wpdb->query(
-			$wpdb->prepare(
-				'TRUNCATE TABLE'. $wpdb->prefix . flash_cache_settings::$flash_cache_table
-			)
+			'TRUNCATE TABLE '. $wpdb->prefix . flash_cache_settings::$flash_cache_table
 		);
 	}
 	
@@ -653,12 +651,7 @@ function clear_cache_action() {
     // For example, if you're using a transient-based cache:
 	$cache_dir = flash_cache_get_home_path() . flash_cache_get_option('cache_dir');
 	flash_cache_delete_dir($cache_dir, true);
-	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $_GET['path'])));
-	$cache_path			 = realpath($page_cache_dir) . '/';
-	if ($cache_path != '/') {
-
-		flash_cache_delete_cache_files($cache_dir, $cache_path);
-	}
+	
     wp_send_json_success(['message' => __('Cache cleared successfully.', 'flash_cache')]);
 }
 add_action('wp_ajax_clear_cache_action', 'clear_cache_action');
@@ -722,7 +715,8 @@ function flash_cache_delete_all_options() {
 	); 
 
 	// SQL query to drop the table
-	$sql = 'DROP TABLE IF EXISTS'. $wpdb->prefix . flash_cache_settings::$flash_cache_table;
+	$sql = "DROP TABLE IF EXISTS ". $wpdb->prefix . flash_cache_settings::$flash_cache_table;
+
 	// Execute the query
 	$result_flash_lock = $wpdb->query($sql);
 }
