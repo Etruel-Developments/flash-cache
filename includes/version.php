@@ -48,8 +48,6 @@ class flash_cache_version {
 				//call to function for delete the cache
 				update_option('flash_cache_updated_3_3', 1);
 			}
-				
-			}
 		}
 	}
 
