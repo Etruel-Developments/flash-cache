@@ -630,7 +630,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 
 	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
 
-	if($advanced_settings['lock_type'] == 'db'){
+	if(isset($advanced_settings['lock_type']) && $advanced_settings['lock_type'] == 'db'){
 		$results = $wpdb->query(
 			'TRUNCATE TABLE '. flash_cache_settings::$flash_cache_table
 		);
