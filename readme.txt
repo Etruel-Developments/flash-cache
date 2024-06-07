@@ -3,7 +3,7 @@ Contributors: sniuk, etruel, khaztiel, Gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litespeed, flashcache, seo, wordpress cache
 Requires at least: 3.6
-Tested up to: 6.4.3
+Tested up to: 6.6
 Requires PHP: 5.6
 Stable tag: 3.3
 License: GPLv2 or later
@@ -93,6 +93,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 = 3.3 Jun 7, 2024 =
 * We've made a very important change creating our own table to store the URl hashes of the cache, and avoid using the WordPress tables, losing a lot of performance in the process.
+* Bump to WP 6.6
 * Added new functions flash_cache_get_option and flash_cache_set_option.
 * Fixes PHP Warning: Undefined array key
 
