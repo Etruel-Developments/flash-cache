@@ -85,18 +85,7 @@ jQuery(document).ready(function ($) {
 				// Reset to previous value
 				$(this).prop('checked', false);
 				lockTypeRadio.filter('[value="' + previousValue + '"]').prop('checked', true);
-			} else {
-				// Clear the cache
-				clearCache();
 			}
-		});
-	}
-
-	function clearCache() {
-		$.post(ajaxurl, {
-			action: 'clear_cache_action'
-		}, function(response) {
-			console.log(response.message);
 		});
 	}
 });

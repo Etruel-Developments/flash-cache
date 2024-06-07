@@ -524,9 +524,18 @@ class flash_cache_settings {
 		}
 		/** Sanitize all inputs and only accept the valid settings */
 		$post_values = flash_cache_sanitize_settings_deep(self::default_advanced_options(), $post_values);
-
+		
 		$new_options = wp_parse_args($post_values, self::default_advanced_options());
 		$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
+		if($old_value_lock = flash_cache_get_option('lock_type')) {
+			if ($old_value_lock != $new_options['lock_type']) {
+				$cache_dir = flash_cache_get_option('cache_dir');
+				if(isset($cache_dir) && $cache_dir != '/'){
+					$cache_dir = flash_cache_get_home_path() . $cache_dir;
+					flash_cache_delete_dir($cache_dir, true);
+				}
+			}
+		}
 		update_option('flash_cache_advanced_settings', $new_options);
 		flash_cache_update_htaccess();
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
