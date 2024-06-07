@@ -630,11 +630,9 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 
 	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
 
-	if($advanced_settings['lock_type'] == 'db'){
+	if(isset($advanced_settings['lock_type']) && $advanced_settings['lock_type'] == 'db'){
 		$results = $wpdb->query(
-			$wpdb->prepare(
-				"DELETE FROM $wpdb->options WHERE option_name LIKE 'flash_cache_db_lock_%'"
-			)
+			'TRUNCATE TABLE '. flash_cache_settings::$flash_cache_table
 		);
 	}
 	
@@ -702,8 +700,14 @@ function flash_cache_delete_all_options() {
 	$results = $wpdb->query(
 			$wpdb->prepare(
 					"DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'"
-			)
-	);
+			),
+	); 
+
+	// SQL query to drop the table
+	$sql = "DROP TABLE IF EXISTS ".  $wpdb->prefix . "flash_lock";
+
+	// Execute the query
+	$result_flash_lock = $wpdb->query($sql);
 }
 
 /**

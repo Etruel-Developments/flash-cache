@@ -61,12 +61,13 @@ class flash_cache_process {
 		$wpdb->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
 		$wpdb->query('START TRANSACTION');
 	
-		$option_name = 'flash_cache_db_lock_' . hash('sha256', $path_file);
+		
+		$option_lock = 'flash_cache_db_lock_' . hash('sha256', $path_file);
 
 		$results = $wpdb->get_results(
 				$wpdb->prepare(
-						"SELECT * FROM $wpdb->options WHERE option_name = %s  LIMIT 0, 25 FOR UPDATE NOWAIT",
-						$option_name
+						"SELECT * FROM ". flash_cache_settings::$flash_cache_table ." WHERE option_lock = %s  LIMIT 0, 25 FOR UPDATE NOWAIT",
+						$option_lock
 				)
 		);
 
@@ -78,8 +79,8 @@ class flash_cache_process {
 		if (empty($results)) {
 			$wpdb->query(
 					$wpdb->prepare(
-							"INSERT INTO $wpdb->options (option_name, option_value) VALUES(%s, 1)",
-							$option_name
+							"INSERT INTO ". flash_cache_settings::$flash_cache_table ." (option_lock, option_value) VALUES(%s, 1)",
+							$option_lock
 					)
 			); 
 		}

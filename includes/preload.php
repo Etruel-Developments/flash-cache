@@ -70,7 +70,11 @@ class flash_cache_preaload {
 	 * @since 1.0.0
 	 */
 	public static function intervals($schedules) {
-		$schedules['flash_cache_preload_int'] = array('interval' => '60', 'display' => __('Flash Cache Preload', 'flash-cache'));
+		 // Add custom cron interval
+		 $schedules['flash_cache_preload_int'] = array(
+			'interval' => 60, // Interval in seconds
+			'display'  => __('Flash Cache Preload', 'flash-cache')
+		);
 		return $schedules;
 	}
 

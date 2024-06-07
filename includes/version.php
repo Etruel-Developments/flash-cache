@@ -21,6 +21,7 @@ class flash_cache_version {
 		$current_version = get_option('flash_cache_version', 0.0);
 		if (version_compare($current_version, FLASH_CACHE_VERSION, '<')) {
 			// Update
+
 			update_option('flash_cache_version', FLASH_CACHE_VERSION);
 			if (version_compare($current_version, 0.0, '=')) {
 				//first time
@@ -32,13 +33,20 @@ class flash_cache_version {
 			 */
 			if(version_compare($current_version, '3.2', '<') && get_option('flash_cache_updated_3_2') != 1){
 				$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
-				if($advanced_settings['lock_type'] == 'db'){
+				if(isset($advanced_settings['lock_type']) && $advanced_settings['lock_type'] == 'db'){
 					//Method for delete the cache in the database
 					self::update_to_3_2();
 					//call to function for delete the cache
 					$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 					flash_cache_delete_dir($cache_dir, true);
 				}
+			}
+
+			if (version_compare($current_version, '3.3', '<') && get_option('flash_cache_updated_3_3') != 1) {
+				//Method for delete the cache in the database
+				Flash_Cache::create_flash_lock_table();
+				//call to function for delete the cache
+				update_option('flash_cache_updated_3_3', 1);
 			}
 		}
 	}
