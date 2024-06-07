@@ -5,7 +5,7 @@ Tags: cache, performance, flash, automatically cache, seo, nginx, apache, litesp
 Requires at least: 3.6
 Tested up to: 6.4.3
 Requires PHP: 5.6
-Stable tag: trunk
+Stable tag: 3.3
 License: GPLv2 or later
 
 Flash Cache is a plugin to improve the performance of Wordpress Websites by making html versions of each post, pages or sections of your website.
@@ -90,6 +90,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+
+= 3.3 Jun 7, 2024 =
+* We've made a very important change creating our own table to store the URl hashes of the cache, and avoid using the WordPress tables, losing a lot of performance in the process.
+* Added new functions flash_cache_get_option and flash_cache_set_option.
+* Fixes PHP Warning: Undefined array key
 
 = 3.2.3 Feb 1, 2024 =
 * Fixes two issues with the options Url must contain and not contain. 
@@ -204,4 +209,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
  == Upgrade Notice ==
-* Few improvements and bug fixes!
+* We've made a very important change creating our own table to store the URl hashes of the cache, and avoid using the WordPress tables, losing a lot of performance in the process.
