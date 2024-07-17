@@ -319,7 +319,7 @@ class flash_cache_settings {
 							</div>
 						</td>
 					</tr>';
-		echo '
+			echo '
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Optimize styles', 'flash-cache') . '</th>
 						<td>
@@ -333,9 +333,12 @@ class flash_cache_settings {
 								</span>
 							</div>
 							<p class="description">' . __('Optimize and combine all your Stylesheets files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
-							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values) . ' 
+							<div id="advanced_settings_styles">
+							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values) . '
+							
+							' . apply_filters('flash_cache_optimize_fonts_extra_html', '', $values) . '
+							</div>  
 						</td>
-						
 					</tr>';
 		echo '
 					<tr valign="top" class="wrap-row">
@@ -425,7 +428,6 @@ class flash_cache_settings {
 									</tbody>
 								</table>
 							</div>';
-		
 							echo apply_filters('flash_cache_optimize_scripts_extra_html', '', $values) . ' 
 						</td>
 					</tr>';

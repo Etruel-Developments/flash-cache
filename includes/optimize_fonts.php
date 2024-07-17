@@ -13,13 +13,13 @@ if (!defined('ABSPATH'))
 
 class flash_cache_optimize_fonts
 {
-    public static function hooks()
-    {
+    public static function hooks() {
         add_filter('flash_cache_save_fonts', array(__CLASS__, 'flash_cache_link_fonts_from_url'), 1, 2);
     }
 
-    public static function flash_cache_link_fonts_from_url($url, $cache_dir)
-    {
+    public static function flash_cache_link_fonts_from_url($url, $cache_dir) {
+
+        //'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
         // Get CSS content from URL
         $all_css_code = wp_safe_remote_get($url, array('sslverify' => false));
         if (is_wp_error($all_css_code)) {
@@ -45,6 +45,8 @@ class flash_cache_optimize_fonts
             // Only continue if font is on the same WordPress instance
             $wordpress_host = parse_url(get_home_url(), PHP_URL_HOST);
             $font_host = parse_url($font_url, PHP_URL_HOST);
+            $font_externals = apply_filters('flash_cache_optimize_external_fonts', false, $font_url);
+
             if ($font_host === null || $font_host === $wordpress_host && $font_path) {
                 // Font is on same WordPress instance
                 $font_cached_path = '';
@@ -70,13 +72,14 @@ class flash_cache_optimize_fonts
                     $pattern = '/(?<=url\()[\'"]?' . preg_quote($font_url, '/') . '[\'"]?(?=\))/';
                     $all_css_code = preg_replace($pattern, $file_cached_url, $all_css_code);
                 }
+            }elseif($font_externals){
+                $all_css_code = apply_filters('flash_cache_save_external_fonts', $all_css_code, $font_url, $font_folder_path);
             }
         }
         return $all_css_code;
     }
 
-    public static function get_full_font_path($font_url, $url)
-    {
+    public static function get_full_font_path($font_url, $url) {
         // Determine the full path of the font
         $font_url = str_replace(['"', '\''], '', $font_url);
         $base_url_parts = wp_parse_url($url);

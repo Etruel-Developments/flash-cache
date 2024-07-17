@@ -69,14 +69,16 @@ class flash_cache_optimize_styles {
 						// Good link.
 						self::$css_tags['files'][] = array($media, $path);
 					} else {
-						// Link is dynamic (.php etc).
-						/*
-						  $new_tag = $this->optionally_defer_excluded( $tag, 'none' );
-						  if ( $new_tag !== '' && $new_tag !== $tag ) {
-						  $this->content = str_replace( $tag, $new_tag, $this->content );
-						  }
-						 */
-						$tag = '';
+
+						// Link is dynamic or external.
+						$headers = get_headers($source[2], 1);
+
+						// Verifica si el enlace devuelve un código de estado 200 (OK).
+						if (strpos($headers[0], '200') !== false) {
+							self::$css_tags['files'][] = array($media, $source[2]); // El enlace tiene contenido.
+						} else {
+							$tag = ''; // El enlace no tiene contenido o no es válido.
+						}
 					}
 				} else {
 					// Inline css in style tags can be wrapped in comment tags, so restore comments.
@@ -134,7 +136,7 @@ class flash_cache_optimize_styles {
 
 			if (!empty($path)) {
 				$code = apply_filters('flash_cache_save_fonts', $path, $cache_dir);
-				// Process font URLs
+				// Process font URLs and links to styles
 				if (!empty($code)) {
 					$carry .= $code;
 					$basename_css = md5($basename_css . $path);
