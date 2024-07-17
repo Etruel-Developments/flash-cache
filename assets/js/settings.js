@@ -29,20 +29,42 @@ jQuery(document).ready(function ($) {
 		$('.flash-wrap-notices').append($('.error, .success, .notice, .message, .fade, .updated'));
 	}
 
+	if ($('input[name="flash_cache_advanced[optimize_styles]"]:checked').val() == '1') {
+		$('#advanced_settings_styles').show();
+	} else {
+		$('#advanced_settings_styles').hide();
+	}
+
+	$('input[name="flash_cache_advanced[optimize_styles]"]').change(function () {
+		if ($(this).val() == '1') {
+			$('#advanced_settings_styles').show();
+		} else {
+			$('#advanced_settings_styles').hide();
+			$('input[name="flash_cache_advanced[minify_styles]"]').prop('checked', false);
+			$('input[name="flash_cache_advanced[optimize_google_fonts]"]').prop('checked', false);
+		}
+	});
+
 	if ($('input[name="flash_cache_advanced[optimize_scripts]"]:checked').val() == '1') {
 		$('.flash_cache_avoid_optimize').show();
 		$('.flash_cache_allow_optimize').show();
+		$('.advanced-minify-scripts').show();
 	} else {
 		$('.flash_cache_allow_optimize').hide();
+		$('.advanced-minify-scripts').hide();
+		$('input[name="flash_cache_advanced[minify_scripts]"]').prop('checked', false);
 	}
 
 	$('input[name="flash_cache_advanced[optimize_scripts]"]').change(function () {
 		if ($(this).val() == '1') {
 			$('.flash_cache_avoid_optimize').show();
 			$('.flash_cache_allow_optimize').show();
+			$('.advanced-minify-scripts').show();
 		} else {
 			$('.flash_cache_avoid_optimize').hide();
 			$('.flash_cache_allow_optimize').hide();
+			$('.advanced-minify-scripts').hide();
+			$('input[name="flash_cache_advanced[minify_scripts]"]').prop('checked', false);
 		}
 	});
 

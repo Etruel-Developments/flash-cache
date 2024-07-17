@@ -141,13 +141,19 @@ class flash_cache_process {
 		if (empty(self::$advanced_settings)) {
 			self::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 		}
-		$cache_dir	 = flash_cache_get_home_path() . self::$advanced_settings['cache_dir'];
-		$log_file	 = $cache_dir . flash_cache_get_server_name() . '/cache_debug.log';
+		$cache_dir = flash_cache_get_home_path() . self::$advanced_settings['cache_dir'];
+		$log_file = $cache_dir . flash_cache_get_server_name() . '/cache_debug.log';
 		if (!file_exists($cache_dir . flash_cache_get_server_name())) {
 			@mkdir($cache_dir . flash_cache_get_server_name(), 0777, true);
 		}
 		
 		$request_URI = sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
+		
+		// Convert arrays and objects to string
+		if (is_array($message) || is_object($message)) {
+			$message = print_r($message, true);
+		}
+		
 		$log_message = date('H:i:s') . " " . getmypid() . " {$request_URI} {$message}\n\r";
 		error_log($log_message, 3, $log_file);
 	}
