@@ -31,7 +31,7 @@ if (!defined('FLASH_CACHE_VERSION')) {
 class Flash_Cache {
 
 	/**
-	 * @var         Flash Cache $instance The one true Flash Cache
+	 * @var         Flash_Cache $instance The one true Flash Cache
 	 * @since       1.0.0
 	 */
 	private static $instance = null;
@@ -203,7 +203,7 @@ class Flash_Cache {
  * instance to functions everywhere
  *
  * @since       1.0.0
- * @return      \Flash Cache The one true Flash Cache
+ * @return      \Flash_Cache The one true Flash Cache
  *
  * @todo        Inclusion of the activation code below isn't mandatory, but
  *              can prevent any number of errors, including fatal errors, in
