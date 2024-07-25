@@ -3,7 +3,7 @@
  * Plugin Name: Flash Cache
  * Plugin URI: https://flashcache.net
  * Description: Flash Cache is a plugin to really improve performance of Wordpress Websites. If you like it, please rate it 5 stars to allow us to improve its development.
- * Version: 3.3
+ * Version: 3.4
  * Author: Etruel Developments LLC
  * Author URI: https://etruel.com/
  * Text Domain: flash-cache
@@ -20,7 +20,7 @@ if (!defined('ABSPATH'))
 
 // Plugin version
 if (!defined('FLASH_CACHE_VERSION')) {
-	define('FLASH_CACHE_VERSION', '3.3');
+	define('FLASH_CACHE_VERSION', '3.4');
 }
 
 /**
@@ -31,7 +31,7 @@ if (!defined('FLASH_CACHE_VERSION')) {
 class Flash_Cache {
 
 	/**
-	 * @var         Flash Cache $instance The one true Flash Cache
+	 * @var         Flash_Cache $instance The one true Flash Cache
 	 * @since       1.0.0
 	 */
 	private static $instance = null;
@@ -174,10 +174,6 @@ class Flash_Cache {
 			require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 		}
 		flash_cache_version::delete_all_patterns();
-		delete_option('flash_cache_version');
-		delete_option('flash_cache_settings');
-		delete_option('flash_cache_advanced_settings');
-		delete_option('flash_cache_disk_usage');
 		flash_cache_delete_all_options();
 	}
 
@@ -203,7 +199,7 @@ class Flash_Cache {
  * instance to functions everywhere
  *
  * @since       1.0.0
- * @return      \Flash Cache The one true Flash Cache
+ * @return      \Flash_Cache The one true Flash Cache
  *
  * @todo        Inclusion of the activation code below isn't mandatory, but
  *              can prevent any number of errors, including fatal errors, in
