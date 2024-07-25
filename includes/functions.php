@@ -698,10 +698,10 @@ function flash_cache_decrement_disk_usage($bytes) {
 function flash_cache_delete_all_options() {
 	global $wpdb;
 	$results = $wpdb->query(
-			$wpdb->prepare(
-					"DELETE FROM $wpdb->options WHERE option_name = 'flash_cache%'"
-			),
-	); 
+		$wpdb->prepare(
+			"DELETE FROM $wpdb->options WHERE option_name LIKE %s", 'flash_cache_%'
+		),
+	);
 
 	// SQL query to drop the table
 	$sql = "DROP TABLE IF EXISTS ".  $wpdb->prefix . "flash_lock";

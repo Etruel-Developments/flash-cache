@@ -174,10 +174,6 @@ class Flash_Cache {
 			require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 		}
 		flash_cache_version::delete_all_patterns();
-		delete_option('flash_cache_version');
-		delete_option('flash_cache_settings');
-		delete_option('flash_cache_advanced_settings');
-		delete_option('flash_cache_disk_usage');
 		flash_cache_delete_all_options();
 	}
 
