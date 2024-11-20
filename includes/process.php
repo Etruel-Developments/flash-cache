@@ -43,7 +43,6 @@ class flash_cache_process {
 	 * @since 1.0.0
 	 */
 	public static function get_file_lock($path_file) {
-
 		if (!file_exists($path_file)) {
 			@mkdir($path_file, 0777, true);
 			file_put_contents($path_file . 'can_create_cache.txt', 'Created by Flash Cache');
@@ -99,7 +98,6 @@ class flash_cache_process {
 	 * @since 1.0.0
 	 */
 	public static function start_create_cache($path_file) {
-
 		$advanced_settings = flash_cache_get_advanced_settings();
 		if (empty($advanced_settings)) {
 			return self::get_file_lock($path_file);
@@ -236,14 +234,18 @@ class flash_cache_process {
 		}
 		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-
 		$home_path	 = flash_cache_get_home_path();
 		$cache_dir	 = $home_path . $advanced_settings['cache_dir'];
+	
+		$parsed_url = parse_url(self::$url_to_cache);
+		
+        $relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
+
+        self::$url_to_cache = $relative_url;
 
 		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
-
 		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-
+	
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
@@ -440,7 +442,9 @@ class flash_cache_process {
 			
 
 			if ($create_cache) {
+				
 				if ($process_type == 'ob_with_curl_request') {
+					
 					ob_start(array(__CLASS__, 'ob_callback'));
 				} else {
 					if (self::$cache_type == 'html') {
@@ -522,7 +526,7 @@ class flash_cache_process {
 
 		self::debug('Procesing a new pattern from template_redirect:' . var_export($current_query, true));
 		$current_query = wp_parse_args($current_query, $default_query);
-
+			
 		self::process_cache_from_query($current_query, flash_cache_get_current_url());
 	}
 
