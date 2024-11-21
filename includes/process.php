@@ -194,10 +194,13 @@ class flash_cache_process {
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		
-		// Delete initial path
-		$path		 = str_replace(self::$origin_url, '', self::$url_to_cache);
-		$cache_path	 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		$parsed_url = parse_url(self::$url_to_cache);
 		
+        $relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
+
+
+		$path		 = str_replace(self::$origin_url, '', $relative_url);
+		$cache_path	 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -796,4 +799,3 @@ class flash_cache_process {
 }
 
 flash_cache_process::hooks();
-?>
