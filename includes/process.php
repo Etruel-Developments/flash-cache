@@ -194,14 +194,18 @@ class flash_cache_process {
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
 		
-		$parsed_url = parse_url(self::$url_to_cache);
-		
-        $relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
+		if (filter_var(self::$url_to_cache, FILTER_VALIDATE_URL)) {
+			$parsed_url = parse_url(self::$url_to_cache);
+			$host_to_remove = $parsed_url['host'] ?? '';
+			$relative_path = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
+		} else {
+			preg_match('~flash_cache/([^/]+)/~', self::$url_to_cache, $matches);
+			$host_to_remove = $matches[1] ?? '';
+			$relative_path = str_replace($host_to_remove, '', self::$url_to_cache);
+		}
 
-
-		$path		 = str_replace(self::$origin_url, '', $relative_url);
-		$cache_path	 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-		
+		$path		 = str_replace(self::$origin_url, '', $relative_path);
+		$cache_path	 = trailingslashit($cache_dir . '/' . $path);
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
