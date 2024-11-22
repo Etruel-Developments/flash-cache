@@ -215,11 +215,11 @@ class flash_cache_process {
         
         $parent_dir = $cache_dir . $server_name;
         if (!file_exists($parent_dir)) {
-            error_log("se se pudo");
+            
             @mkdir($parent_dir, 0777, true);
         }
         if (!file_exists($cache_path)) {
-            error_log("si se puede");
+            
             @mkdir($cache_path, 0777, true);
         }
 
@@ -264,9 +264,7 @@ class flash_cache_process {
 		
         $relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
 
-        self::$url_to_cache = $relative_url;
-
-		$path = str_replace(self::$origin_url, '', self::$url_to_cache);
+		$path = str_replace(self::$origin_url, '', $relative_url);
 		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 	
 		if (!file_exists($cache_path)) {
@@ -290,6 +288,7 @@ class flash_cache_process {
 			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
 		}
 		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
+
 		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));
 		} else {
@@ -315,6 +314,7 @@ class flash_cache_process {
 		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
 		self::end_create_cache();
 	}
+
 
 	public static function process_cache_from_query($current_query, $opcional_url = '') {
 		
@@ -692,7 +692,7 @@ class flash_cache_process {
 
 		$gzip_response = gzencode($response);
 		if (file_exists($cache_path.'index-cache.html') && file_exists($cache_path.'index-cache.html.gz')) {
-			return false;
+			return false; 
 		}
 		file_put_contents($cache_path . 'index-cache.html', $response);
 		file_put_contents($cache_path . 'index-cache.html.gz', $gzip_response);
