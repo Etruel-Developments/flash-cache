@@ -275,7 +275,7 @@ class flash_cache_process {
 			self::end_create_cache();
 			return false;
 		}
-
+       
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
 		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl');
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
@@ -283,22 +283,24 @@ class flash_cache_process {
 		$template_php	 = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php	 = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
 
-		if (!file_exists($cache_path . 'index-cache.php')) {
-			file_put_contents($cache_path . 'index-cache.php', $template_php);
-			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
-		}
 		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
-
+        
 		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
 			$request = hash('sha256', http_build_query(array()));
 		} else {
 			$request = hash('sha256', http_build_query($_REQUEST));
 		}
-
+        
 		$request_path = 'requests/';
 		if (!file_exists($cache_path . $request_path)) {
 			@mkdir($cache_path . $request_path, 0777, true);
 		}
+       
+        if (!file_exists($cache_path . 'index-cache.php')) {
+			file_put_contents($cache_path . 'index-cache.php', $template_php);
+			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
+		}
+        
 		$request_file_path	 = $cache_path . $request_path . $request . '.html';
 		$header_file_path	 = $cache_path . $request_path . $request . '.header';
 
@@ -309,7 +311,7 @@ class flash_cache_process {
 			file_put_contents($request_file_path, $request_url['response']);
 			file_put_contents($header_file_path, $request_url['content_type']);
 		}
-
+       
 		flash_cache_increment_disk_usage(mb_strlen($request_url['response'], '8bit'));
 		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
 		self::end_create_cache();
