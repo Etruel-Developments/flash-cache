@@ -182,6 +182,7 @@ class flash_cache_settings {
 			'avoid_optimize'		 => false,
 			'avoid_optimize_text'	 => '',
 			'lock_type'				 => 'file',
+			'disable_widget_cache'   => false,
 		);
 		$array	 = apply_filters('flash_cache_default_advanced_options', $array);
 		return $array;
@@ -340,6 +341,26 @@ class flash_cache_settings {
 							</div>  
 						</td>
 					</tr>';
+					echo '<tr valign="top" class="wrap-row">
+    <th scope="row">' . __('Disable Cache in Widgets', 'flash-cache') . '</th>
+    <td>';
+    
+if (class_exists('Flash_Cache_Pro')) {
+    echo '<div class="switch switch--horizontal switch--no-label">
+        <input type="radio" ' . checked($values['disable_widget_cache'], false, false) . ' name="flash_cache_advanced[disable_widget_cache]" value="0"/>
+        <label for="flash_cache_advanced[disable_widget_cache]">Off</label>
+        <input type="radio" ' . checked($values['disable_widget_cache'], true, false) . ' name="flash_cache_advanced[disable_widget_cache]" value="1"/>
+        <label for="flash_cache_advanced[disable_widget_cache]">On</label>
+        <span class="toggle-outside">
+            <span class="toggle-inside"></span>
+        </span>
+    </div>
+    <p class="description">' . __('Disable caching for widgets when this option is enabled.', 'flash-cache') . '</p>';
+} else {
+    echo '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
+}
+echo '</td>
+</tr>';
 		echo '
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Optimize scripts', 'flash-cache') . '</th>
@@ -543,6 +564,11 @@ class flash_cache_settings {
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
 		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
 		exit;
+	}
+
+	public static function is_widget_cache_disabled() {
+		$flash_cache_advanced = get_option('flash_cache_advanced_settings');
+		return isset($flash_cache_advanced['disable_widget_cache']) && $flash_cache_advanced['disable_widget_cache'];
 	}
 
 	public static function update_httacess() {
