@@ -1,6 +1,6 @@
 <?php
-require_once('C:/laragon/www/fakturo/wp-load.php');
 $home_path = {home_path};
+require_once($home_path . 'wp-load.php');
 $url_path = {url_path};
 $minimum_ttl = {minimum_ttl};
 $maximum_ttl = {maximum_ttl};
