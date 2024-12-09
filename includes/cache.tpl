@@ -8,6 +8,8 @@ $request = hash('sha256', http_build_query($_REQUEST));
 $cache_path = 'requests/';
 $file_path = $cache_path.$request.'.html';
 $header_path = $cache_path.$request.'.header';
+$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+
 function render_hora_actual_widget($widgetName) {
     
     $clean_widget_name = sanitize_title($widgetName);
@@ -99,7 +101,12 @@ if (file_exists($file_path)) {
     if (time()-filemtime($file_path) < $minimum_ttl) {
         header('Content-type:'.file_get_contents($header_path));
         $content = file_get_contents($file_path);
-        echo replace_footer_widgets($content);
+        if ($advanced_settings['disable_widget_cache'] == 1){
+            echo replace_footer_widgets($content);
+        } else{
+            echo $content;
+        }
+         
         exit();
     } else {
         run_site($request);
