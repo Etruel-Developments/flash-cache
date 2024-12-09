@@ -350,7 +350,7 @@ class flash_cache_settings {
 					$args		 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns	 = get_posts($args);
 
-$fields				 = flash_cache_patterns::get_data($patterns[0]->ID);
+$fields	 = flash_cache_patterns::get_data($patterns[0]->ID);
 
 
 					echo '<script type="text/javascript">
@@ -572,6 +572,7 @@ $fields				 = flash_cache_patterns::get_data($patterns[0]->ID);
 			wp_die(__('Security check', 'flash-cache'));
 		}
 
+
 		/** Validating user inputs  */
 		$post_values = array();
 		if (!empty($_POST['flash_cache_advanced'])) {
@@ -580,6 +581,7 @@ $fields				 = flash_cache_patterns::get_data($patterns[0]->ID);
 				$post_values = array();
 			}
 		}
+
 		/** Sanitize all inputs and only accept the valid settings */
 		$post_values = flash_cache_sanitize_settings_deep(self::default_advanced_options(), $post_values);
 		
@@ -594,6 +596,31 @@ $fields				 = flash_cache_patterns::get_data($patterns[0]->ID);
 				}
 			}
 		}
+
+		if (class_exists('Flash_Cache_Pro')) {
+
+			$args		 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
+	$patterns	 = get_posts($args);
+
+if (isset($post_values['disable_widget_cache'])) {
+	if ($post_values['disable_widget_cache'] == 1) {
+		$cache_type = 'php';
+	} elseif ($post_values['disable_widget_cache'] === '0') {
+		$cache_type = 'html';
+	} else {
+		$cache_type = null; 
+	}
+} else {
+	$cache_type = null; 
+}
+
+
+if ($cache_type) {
+	update_post_meta($patterns[0]->ID, 'cache_type', $cache_type); 
+}
+
+
+}
 		update_option('flash_cache_advanced_settings', $new_options);
 		flash_cache_update_htaccess();
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
