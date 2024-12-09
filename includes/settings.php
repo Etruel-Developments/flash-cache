@@ -389,7 +389,7 @@ $fields	 = flash_cache_patterns::get_data($patterns[0]->ID);
 							<span class="toggle-inside"></span>
 						</span>
 					</div>
-					<p class="description">' . __('Enabling this option allows you to disable the cache of blocks or legacy widgets individually on each widget. Note that not caching widgets forces Flash Cache to switch the cache from HTML mode to PHP mode, which has slightly lower performance than plain html.', 'flash-cache') . '</p>';
+					<p class="description">' . __('Enabling this option allows you to disable the cache of blocks or legacy widgets individually on each widget. Note that not caching widgets forces Flash Cache to switch the cache from HTML mode to PHP mode, which has slightly lower performance than plain html, so it will clear the cache.', 'flash-cache') . '</p>';
 				} else {
 					echo '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
 				}
@@ -561,6 +561,7 @@ $fields	 = flash_cache_patterns::get_data($patterns[0]->ID);
 
 		update_option('flash_cache_settings', $new_options);
 		flash_cache_update_htaccess();
+		
 
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
 		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
@@ -625,6 +626,9 @@ if ($cache_type) {
 		flash_cache_update_htaccess();
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
 		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
+		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+		$cache_dir			 = get_home_path() . $advanced_settings['cache_dir'];
+		flash_cache_delete_dir($cache_dir, true);
 		exit;
 	}
 
