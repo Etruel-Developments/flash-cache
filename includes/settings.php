@@ -350,7 +350,6 @@ class flash_cache_settings
 
 			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns = get_posts($args);
-
 			$fields = flash_cache_patterns::get_data($patterns[0]->ID);
 
 
@@ -626,7 +625,7 @@ class flash_cache_settings
 
 			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns = get_posts($args);
-
+			$cache_type = "";
 			if (isset($post_values['disable_widget_cache'])) {
 				if ($post_values['disable_widget_cache'] == 1) {
 					$cache_type = 'php';
@@ -636,7 +635,7 @@ class flash_cache_settings
 
 
 			if ($cache_type) {
-				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type);
+				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type );
 			}
 
 
