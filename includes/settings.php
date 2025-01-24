@@ -628,6 +628,11 @@ class flash_cache_settings
 			$cache_type = "";
 			if (isset($post_values['disable_widget_cache'])) {
 				if ($post_values['disable_widget_cache'] == 1) {
+
+					$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
+		$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
+		flash_cache_delete_dir($cache_dir, true);
+		wp_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
 					$cache_type = 'php';
 				}
 
@@ -668,7 +673,7 @@ class flash_cache_settings
 	}
 
 	public static function delete_cache()
-	{
+	{	
 		if (!wp_verify_nonce($_GET['_wpnonce'], 'delete_flash_cache')) {
 			wp_die(__('Security check', 'flash-cache'));
 		}
