@@ -266,6 +266,7 @@ class flash_cache_process {
 
 		$path = str_replace(self::$origin_url, '', $relative_url);
 		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		$cache_template      = 'cache_pro.tpl';
 	
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -275,14 +276,17 @@ class flash_cache_process {
 			self::end_create_cache();
 			return false;
 		}
-       
+		
+		if (class_exists('Flash_Cache_Pro') && $advanced_settings['disable_widget_cache'] == 1 ) {
+			$cache_template = "cache.tpl";
+		}
+
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl');
+		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/'.$cache_template);
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
 		$template_php	 = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
 		$template_php	 = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php	 = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
-
 		$request_url = flash_cache_get_content_to_php(self::$url_to_cache);
         
 		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
@@ -715,6 +719,7 @@ class flash_cache_process {
 		$cache_dir			 = $home_path . $advanced_settings['cache_dir'];
 		$path		 		 = self::get_path(self::$optional_post_id);
 		$cache_path			 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		$cache_template      = 'cache_pro.tpl';
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
@@ -724,12 +729,17 @@ class flash_cache_process {
 		}
 
 		self::debug('Creating OB PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl');
+
+		if (class_exists('Flash_Cache_Pro') && $advanced_settings['disable_widget_cache'] == 1 ) {
+			$cache_template = "cache.tpl";
+		}
+
+		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/'.$cache_template);
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
 		$template_php	 = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
 		$template_php	 = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
 		$template_php	 = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
-
+		
 		if (!file_exists($cache_path . 'index-cache.php')) {
 			file_put_contents($cache_path . 'index-cache.php', $template_php);
 			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
