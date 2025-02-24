@@ -12,6 +12,7 @@ if (!defined('ABSPATH'))
 	exit;
 
 class flash_cache_patterns {
+	
 
 	/**
 	 * Static function hooks
@@ -286,23 +287,32 @@ class flash_cache_patterns {
 					</tr>
 					
 				</table>';
-		echo '<table class="form-table">
-					
+				$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1) ? 'php' : $values['cache_type'];
+				echo '<table class="form-table">
 					<tr valign="top">
 						<th scope="row">' . __('Cache Type', 'flash-cache') . '</th>
 						<td>
 							<div class="radio-group">
-								<input type="radio" ' . checked($values['cache_type'], 'html', false) . ' name="cache_type" value="html"/>' . __('HTML static (Ultra fast)', 'flash-cache') . '
+								<input type="radio" ' . 
+									checked($values['cache_type'], 'html', false) . 
+									($advanced_settings['disable_widget_cache'] == 1 ? ' disabled' : '') . 
+									' name="cache_type" value="html"/>' . 
+									__('HTML static (Ultra fast)', 'flash-cache') . '
 								<p class="description">' . __('Create a cache in HTML format, in this way avoid the PHP execution in the front-end accelerating the load of the page, plus reducing the server CPU cost.', 'flash-cache') . '</p>
 							</div>
-
+				
 							<div class="radio-group">
-							<input type="radio" ' . checked($values['cache_type'], 'php', false) . ' name="cache_type" value="php"/>' . __('PHP Files (Accept GET and POST params)', 'flash-cache') . '
+								<input type="radio" ' . 
+									checked($values['cache_type'], 'php', false) . 
+									' name="cache_type" value="php"/>' . 
+									__('PHP Files (Accept GET and POST params)', 'flash-cache') . '
 								<p class="description">' . __('Create cache from pages which has parameters GET or POST like Feed or WordPress search; this option is less optimal than HTML static.', 'flash-cache') . '</p>
 							</div>
 						</td>
 					</tr>
 				</table>';
+				
 		echo '<table class="form-table">
 					
 					<tr valign="top">
@@ -322,6 +332,7 @@ class flash_cache_patterns {
 					
 				</table></div>';
 	}
+
 
 	/**
 	 * Static function default_fields_array
