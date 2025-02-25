@@ -91,6 +91,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 3.5 Feb 24, 2025 =
+* Fixed an issue to prevent wp-load.php from being loaded in caches generated with PHP mode.
+
 = 3.4 Jul 25, 2024 =
 * Added compatibility with pro version to cache external fonts. 
 * Added checking css files from links to sometimes avoid 404 errors.
