@@ -10,7 +10,7 @@ $file_path = $cache_path.$request.'.html';
 $header_path = $cache_path.$request.'.header';
 $advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 
-function render_hora_actual_widget($widgetName) {
+function render_widgets($widgetName) {
     
     $clean_widget_name = sanitize_title($widgetName);
     
@@ -83,7 +83,7 @@ function replace_footer_widgets($content) {
         
         foreach ($matching_ids as $old_widget_id) {
             
-            $widget_html = render_hora_actual_widget($widget_name_mapping[$old_widget_id]);
+            $widget_html = render_widgets($widget_name_mapping[$old_widget_id]);
             $temp_dom = new DOMDocument();
             @$temp_dom->loadHTML('<?xml encoding="utf-8"?>' . $widget_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             
