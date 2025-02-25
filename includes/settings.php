@@ -346,51 +346,9 @@ class flash_cache_settings
 					<th scope="row">' . __('Disable Cache in Widgets', 'flash-cache') . '</th>
 					<td>';
 
-		if (class_exists('Flash_Cache_Pro')) {
-
-			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-			$patterns = get_posts($args);
-			$fields = flash_cache_patterns::get_data($patterns[0]->ID);
-
-
-			echo '<script type="text/javascript">
-					document.addEventListener("DOMContentLoaded", function() {
-						var disableWidgetCacheInputs = document.querySelectorAll("input[name=\'flash_cache_advanced[disable_widget_cache]\']");
-						
-						disableWidgetCacheInputs.forEach(function(input) {
-							input.addEventListener("change", function(event) {
-								var cacheType = ' . json_encode($fields['cache_type']) . ';
-								var isDisabled = this.value === "1";
-								if (cacheType === "html") {
-									if (isDisabled) {
-										if (!confirm("' . __('Are you sure you want to change the cache from HTML mode to PHP mode? You can´t switch this back to HTML from the Patterns.', 'flash-cache') . '")) {
-											// Prevent the radio button from changing
-											event.preventDefault();
-											this.checked = false;
-											// Revert to the previous value
-											document.querySelector("input[name=\'flash_cache_advanced[disable_widget_cache]\'][value=\'0\']").checked = true;
-											return false;
-										}
-									} else {
-										alert("' . __('Changing back to HTML cache mode.', 'flash-cache') . '");
-									}
-								}
-							});
-						});
-					});
-					</script>';
-
-			echo '<div class="switch switch--horizontal switch--no-label">
-						<input type="radio" ' . checked($values['disable_widget_cache'], false, false) . ' name="flash_cache_advanced[disable_widget_cache]" value="0"/>
-						<label for="flash_cache_advanced[disable_widget_cache]">Off</label>
-						<input type="radio" ' . checked($values['disable_widget_cache'], true, false) . ' name="flash_cache_advanced[disable_widget_cache]" value="1"/>
-						<label for="flash_cache_advanced[disable_widget_cache]">On</label>
-						<span class="toggle-outside">
-							<span class="toggle-inside"></span>
-						</span>
-					</div>
-					<p class="description">' . __('Enabling this option allows you to disable the cache of blocks or legacy widgets individually on each widget. Note that not caching widgets forces Flash Cache to switch the cache from HTML mode to PHP mode, which has slightly lower performance than plain html, so it will clear the cache.', 'flash-cache') . '</p>';
-		} else {
+		if (flash_cache_extra_features()) {
+			echo apply_filters( 'flash_cache_extra_features_filter', $values);
+			} else {
 			echo '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
 		}
 		echo '</td>
@@ -621,8 +579,14 @@ class flash_cache_settings
 			}
 		}
 
-		if (class_exists('Flash_Cache_Pro')) {
+		if (flash_cache_extra_features()) {
 
+			$cache_type = apply_filters('flash_cache_disable_widget_cache', '', $post_values);
+    
+			if ($cache_type) {
+				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type);
+			}
+/*
 			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns = get_posts($args);
 			$cache_type = "";
@@ -642,7 +606,7 @@ class flash_cache_settings
 			if ($cache_type) {
 				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type );
 			}
-
+*/
 
 		}
 		update_option('flash_cache_advanced_settings', $new_options);

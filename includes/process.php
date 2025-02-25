@@ -277,7 +277,7 @@ class flash_cache_process {
 			return false;
 		}
 		
-		if (class_exists('Flash_Cache_Pro') && $advanced_settings['disable_widget_cache'] == 1 ) {
+		if (flash_cache_extra_features() && $advanced_settings['disable_widget_cache'] == 1 ) {
 			$cache_template = "cache.tpl";
 		}
 
@@ -730,7 +730,7 @@ class flash_cache_process {
 
 		self::debug('Creating OB PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
 
-		if (class_exists('Flash_Cache_Pro') && $advanced_settings['disable_widget_cache'] == 1 ) {
+		if (flash_cache_extra_features() && $advanced_settings['disable_widget_cache'] == 1 ) {
 			$cache_template = "cache.tpl";
 		}
 

@@ -1,5 +1,10 @@
 <?php
 
+
+function flash_cache_extra_features() {
+    return apply_filters('flash_cache_extra_settings', false);
+}
+
 function flash_cache_get_advanced_settings() {
 	static $advanced_settings = null;
 	if (empty($advanced_settings)) {
