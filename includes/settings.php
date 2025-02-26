@@ -346,11 +346,9 @@ class flash_cache_settings
 					<th scope="row">' . __('Disable Cache in Widgets', 'flash-cache') . '</th>
 					<td>';
 
-		if (flash_cache_extra_features()) {
-			echo apply_filters( 'flash_cache_extra_features_filter', $values);
-			} else {
-			echo '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
-		}
+			$nopro = '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
+			echo apply_filters( 'flash_cache_disable_cache_option', $nopro, $values);
+
 		echo '</td>
 				</tr>';
 		echo '
@@ -579,14 +577,21 @@ class flash_cache_settings
 			}
 		}
 
-		if (flash_cache_extra_features()) {
+		
+		$new_options = apply_filters('flash_cache_save_advanced_options', $new_options, $post_values);
 
-			$cache_type = apply_filters('flash_cache_disable_widget_cache', '', $post_values);
-    
-			if ($cache_type) {
-				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type);
-			}
-/*
+		$redirect_url = apply_filters('flash_cache_save_advanced_redirect_url', sanitize_url($_POST['_wp_http_referer']) );
+		
+//			$cache_type = apply_filters('flash_cache_save_advanced_cache_type', '', $post_values);
+//    
+//			if ($cache_type) {
+//				$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
+//				$patterns = get_posts($args);
+//				update_post_meta($patterns[0]->ID, 'cache_type', $cache_type);
+//			}
+//			
+			
+/*  SAMUEL 
 			$args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
 			$patterns = get_posts($args);
 			$cache_type = "";
@@ -608,11 +613,15 @@ class flash_cache_settings
 			}
 */
 
-		}
 		update_option('flash_cache_advanced_settings', $new_options);
+		// Update .htaccess file 
 		flash_cache_update_htaccess();
+		
+		// Adds new notice to notify the Saved Options.
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
+		wp_redirect($redirect_url);
+		
+		// Delete current cache by the new options 
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
 		$cache_dir = get_home_path() . $advanced_settings['cache_dir'];
 		flash_cache_delete_dir($cache_dir, true);
@@ -700,4 +709,3 @@ class flash_cache_settings
 }
 
 flash_cache_settings::hooks();
-?>

@@ -266,7 +266,6 @@ class flash_cache_process {
 
 		$path = str_replace(self::$origin_url, '', $relative_url);
 		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-		$cache_template      = 'cache_pro.tpl';
 	
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -277,9 +276,7 @@ class flash_cache_process {
 			return false;
 		}
 		
-		if (flash_cache_extra_features() && $advanced_settings['disable_widget_cache'] == 1 ) {
-			$cache_template = "cache.tpl";
-		}
+		$cache_template = apply_filters('flash_cache_template_file', 'cache.tpl', $advanced_settings);
 
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
 		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/'.$cache_template);
@@ -719,7 +716,7 @@ class flash_cache_process {
 		$cache_dir			 = $home_path . $advanced_settings['cache_dir'];
 		$path		 		 = self::get_path(self::$optional_post_id);
 		$cache_path			 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-		$cache_template      = 'cache_pro.tpl';
+		
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
@@ -730,9 +727,7 @@ class flash_cache_process {
 
 		self::debug('Creating OB PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
 
-		if (flash_cache_extra_features() && $advanced_settings['disable_widget_cache'] == 1 ) {
-			$cache_template = "cache.tpl";
-		}
+		$cache_template = apply_filters('flash_cache_template_file', 'cache.tpl', $advanced_settings);
 
 		$template_php	 = file_get_contents(FLASH_CACHE_PLUGIN_DIR . 'includes/'.$cache_template);
 		$template_php	 = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
