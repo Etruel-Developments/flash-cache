@@ -184,4 +184,3 @@ function run_site($request) {
     $_SERVER['SCRIPT_FILENAME'] = $home_path.'index.php';
     include $home_path.'index.php';
 }
-?>
