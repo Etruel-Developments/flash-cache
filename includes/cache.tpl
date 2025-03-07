@@ -34,7 +34,6 @@ function render_widgets($widgetName) {
         
         // Check if widget content is empty
         if (empty(trim($widget_content))) {
-            error_log("Flash Cache: Failed to render widget - {$widgetName}");
             return sprintf(
                 '<section id="%s" class="widget %s widget-rendering-error">%s</section>', 
                 $clean_widget_name, 
@@ -45,7 +44,6 @@ function render_widgets($widgetName) {
         
         return $widget_content;
     } catch (Exception $e) {
-        error_log("Flash Cache: Exception rendering widget - {$widgetName}: " . $e->getMessage());
         return sprintf(
             '<section id="%s" class="widget %s widget-rendering-error">%s</section>', 
             $clean_widget_name, 
@@ -56,7 +54,6 @@ function render_widgets($widgetName) {
 }
 
 function replace_disabled_elements($content) {
-    error_log('si pued');
     $widget_list_path = WP_CONTENT_DIR . '/widget_classes_disabled_cache.txt';
     $block_list_path = WP_CONTENT_DIR . '/block_types_disabled_cache.txt';
    
@@ -70,7 +67,7 @@ function replace_disabled_elements($content) {
     if (file_exists($block_list_path)) {
         $block_names = file($block_list_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
-    
+
     $dom = new DOMDocument();
     @$dom->loadHTML('<?xml encoding="utf-8"?>' . $content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     
@@ -128,11 +125,13 @@ function replace_disabled_elements($content) {
     
     // Replace Blocks
     $blocks_to_replace = $xpath->query('//*[contains(@class, "flash-cache-disabled")]');
-    
+
     foreach ($blocks_to_replace as $block_element) {
-        $block_param_element = $block_element->getElementsByTagName('span')->item(1);
+        // Buscar el elemento span con los parámetros
+        $param_elements = $xpath->query('.//span[contains(@class, "flash-cache-block-param")]', $block_element);
         
-        if ($block_param_element) {
+        if ($param_elements->length > 0) {
+            $block_param_element = $param_elements->item(0);
             $encoded_block_param = $block_param_element->textContent;
             $params_pieces = explode('.', $encoded_block_param);
             
@@ -141,22 +140,31 @@ function replace_disabled_elements($content) {
                 $block_parsed = json_decode($decoded, true);
                 
                 if ($block_parsed && isset($block_parsed['blockName'])) {
+// Eliminar solo el span de parámetros
+                    $block_element->removeChild($block_param_element);
+                    
+                    // Definir constante para evitar recursión
+                    if (!defined('FLASH_CACHE_RENDER_BLOCK')) {
+                        define('FLASH_CACHE_RENDER_BLOCK', true);
+                    }
+                    
                     // Usar el renderizador de bloques de WordPress
                     $block_html = render_block($block_parsed);
                     
-                    $temp_dom = new DOMDocument();
-                    @$temp_dom->loadHTML('<?xml encoding="utf-8"?>' . $block_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                    
-                    $block_node = $dom->importNode($temp_dom->documentElement, true);
-                    $block_element->parentNode->replaceChild($block_node, $block_element);
+                    if (!empty($block_html)) {
+                        $temp_dom = new DOMDocument();
+                        @$temp_dom->loadHTML('<?xml encoding="utf-8"?>' . $block_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        
+                        $block_node = $dom->importNode($temp_dom->documentElement, true);
+                        $block_element->parentNode->replaceChild($block_node, $block_element);
+                    }
                 }
             }
         }
     }
-    
+
     return $dom->saveHTML();
 }
-
 // Resto del código de caché sigue igual
 if (file_exists($file_path)) {
     if (time()-filemtime($file_path) < $minimum_ttl) {
@@ -184,3 +192,4 @@ function run_site($request) {
     $_SERVER['SCRIPT_FILENAME'] = $home_path.'index.php';
     include $home_path.'index.php';
 }
+?>
