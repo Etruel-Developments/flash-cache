@@ -98,27 +98,21 @@ function replace_disabled_elements($content) {
     $xpath = new DOMXPath($dom);
     
     // Reemplazar Widgets - SOLO los que tienen disableCache=true
-    $footer_widgets = $xpath->query('//div[contains(@class, "widget-area"))]');
+    $footer_widgets = $xpath->query('//aside[contains(@class, "widget-area")]//section');
     
     if ($footer_widgets->length > 0) {
-        $footer = $footer_widgets->item(0);
-        
-        $matching_widget_ids = [];
-        $widget_sections_to_remove = [];
-        $widget_name_mapping = []; 
-
-        foreach ($footer->getElementsByTagName('section') as $section) {
-            // Only process sections that have the disableCache attribute or class
-            // OR sections that are in the disabled widget list
+        $widget_replacements = [];
+    
+        foreach ($footer_widgets as $section) {
             $section_id = $section->hasAttribute('id') ? $section->getAttribute('id') : '';
             $should_process = false;
-            
-            // Check if widget has disableCache markers
+    
+            // Verificar si el widget tiene los marcadores de desactivación de caché
             if ($section->hasAttribute('data-disable-cache') || preg_match('/\bflash-cache-disabled\b/', $section->getAttribute('class'))) {
                 $should_process = true;
             }
-            
-            // Check if widget is in the disabled list (even without explicit markers)
+    
+            // Verificar si el widget está en la lista de deshabilitados
             if (!empty($section_id)) {
                 foreach ($widget_names as $widget_name) {
                     $similarity = 0;
@@ -129,41 +123,41 @@ function replace_disabled_elements($content) {
                     }
                 }
             }
-            
-            // Skip if widget shouldn't be processed
-            if (!$should_process) {
-                continue;
-            }
-            
-            if (!empty($section_id)) {
+    
+            if ($should_process && !empty($section_id)) {
                 foreach ($widget_names as $widget_name) {
                     $similarity = 0;
                     similar_text(strtolower($section_id), strtolower($widget_name), $similarity);
                     if ($similarity > 65) {
-                        $matching_widget_ids[] = $section_id;
-                        $widget_sections_to_remove[] = $section;
-                        $widget_name_mapping[$section_id] = $widget_name;
+                        $widget_replacements[] = [
+                            'old_section' => $section,
+                            'new_widget_html' => render_widgets($widget_name)
+                        ];
                         break;
                     }
                 }
             }
         }
-
-        // Add a flag to track if any widget replacements occurred
-        $widget_replacements_made = false;
-
-        foreach ($widget_sections_to_remove as $section) {
-            $section->parentNode->removeChild($section);
-            $widget_replacements_made = true;
-        }
-        
-        foreach ($matching_widget_ids as $old_widget_id) {
-            $widget_html = render_widgets($widget_name_mapping[$old_widget_id]);
+    
+        // Reemplazar widgets en su misma posición
+        foreach ($widget_replacements as $replacement) {
+            $old_section = $replacement['old_section'];
+            $new_widget_html = $replacement['new_widget_html'];
+    
+            if (empty(trim($new_widget_html))) {
+                continue; // Evita reemplazos con contenido vacío
+            }
+    
             $temp_dom = new DOMDocument();
-            @$temp_dom->loadHTML('<?xml encoding="utf-8"?>' . $widget_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            @$temp_dom->loadHTML('<?xml encoding="utf-8"?><div>' . $new_widget_html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             
-            $widget_node = $dom->importNode($temp_dom->documentElement, true);
-            $footer->appendChild($widget_node);
+            $new_widget_node = $temp_dom->getElementsByTagName('div')->item(0);
+            if ($new_widget_node) {
+                $imported_node = $old_section->ownerDocument->importNode($new_widget_node, true);
+    
+                // Reemplazar el viejo widget por el nuevo en la misma posición
+                $old_section->parentNode->replaceChild($imported_node, $old_section);
+            }
         }
     }
     
