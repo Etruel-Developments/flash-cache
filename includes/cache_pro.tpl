@@ -98,7 +98,9 @@ function replace_disabled_elements($content) {
     $xpath = new DOMXPath($dom);
     
     // Reemplazar Widgets - SOLO los que tienen disableCache=true
-    $footer_widgets = $xpath->query('//aside[contains(@class, "widget-area")]//section');
+    $widget_path= apply_filters(‘flashcache_widgets_xpath’, '//aside[contains(@class, "widget-area")]//section');
+
+    $footer_widgets = $xpath->query( $widget_path);
     
     if ($footer_widgets->length > 0) {
         $widget_replacements = [];
