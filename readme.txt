@@ -1,9 +1,9 @@
 === Flash Cache ===
-Contributors: sniuk, etruel, khaztiel, Gerarjos14
+Contributors: etruel, khaztiel, Gerarjos14, sniuk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, speed, optimize, wp cache
 Requires at least: 3.6
-Tested up to: 6.7
+Tested up to: 6.7.2
 Requires PHP: 5.6
 Stable tag: 3.5
 License: GPLv2 or later

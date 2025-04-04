@@ -565,28 +565,6 @@ class flash_cache_settings {
 
 		$redirect_url = apply_filters('flash_cache_save_advanced_redirect_url', sanitize_url($_POST['_wp_http_referer']));
 
-		/*  SAMUEL 
-		  $args = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-		  $patterns = get_posts($args);
-		  $cache_type = "";
-		  if (isset($post_values['disable_widget_cache'])) {
-		  if ($post_values['disable_widget_cache'] == 1) {
-
-		  $advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), self::default_advanced_options());
-		  $cache_dir = get_home_path() . $advanced_settings['cache_dir'];
-		  flash_cache_delete_dir($cache_dir, true);
-		  wp_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
-		  $cache_type = 'php';
-		  }
-
-		  }
-
-
-		  if ($cache_type) {
-		  update_post_meta($patterns[0]->ID, 'cache_type', $cache_type );
-		  }
-		 */
-
 		update_option('flash_cache_advanced_settings', $new_options);
 		// Update .htaccess file 
 		flash_cache_update_htaccess();
@@ -659,9 +637,8 @@ class flash_cache_settings {
 
 	public static function flash_cache_check_permalinks() {
 		global $current_screen;
-		if (
-				isset($current_screen->id) &&
-				($current_screen->id == 'toplevel_page_flash_cache_setting' || $current_screen->id == 'options-permalink')
+		if( isset($current_screen->id) &&
+			($current_screen->id == 'toplevel_page_flash_cache_setting' || $current_screen->id == 'options-permalink')
 		) {
 			if (get_option('permalink_structure') == '') {
 				if ($current_screen->id == 'options-permalink') {

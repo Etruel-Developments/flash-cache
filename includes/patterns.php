@@ -555,4 +555,3 @@ class flash_cache_patterns {
 }
 
 flash_cache_patterns::hooks();
-?>
