@@ -47,7 +47,6 @@ class Flash_Cache {
 		if (is_null(self::$instance)) {
 			self::$instance = new self();
 			self::$instance->constants();
-			self::$instance->load_text_domain();
 			self::$instance->hooks();
 			self::$instance->includes();
 		}
@@ -110,38 +109,22 @@ class Flash_Cache {
 		register_deactivation_hook(__FILE__, array(__CLASS__, 'deactivation'));
 		register_uninstall_hook(__FILE__, array(__CLASS__, 'uninstall'));
 		add_action('permalink_structure_changed', 'flash_cache_changes_permalinks', 10, 2);
+		add_action('init', [self::$instance, 'load_textdomain'] );
+
 	}
 
 	/**
-	 * Static function load_text_domain 
+	 * Static function load_textdomain 
 	 * Load the text domain.
 	 * @access public
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public static function load_text_domain() {
+	public static function load_textdomain() {
 		// Set filter for plugin's languages directory
 		$lang_dir	 = dirname(plugin_basename(__FILE__)) . '/languages/';
 		$lang_dir	 = apply_filters('flash_cache_languages_directory', $lang_dir);
-
-		// Traditional WordPress plugin locale filter
-		$locale	 = apply_filters('plugin_locale', get_locale(), 'flash-cache');
-		$mofile	 = sprintf('%1$s-%2$s.mo', 'flash-cache', $locale);
-
-		// Setup paths to current locale file
-		$mofile_local	 = $lang_dir . $mofile;
-		$mofile_global	 = WP_LANG_DIR . '/flash-cache/' . $mofile;
-
-		if (file_exists($mofile_global)) {
-			// Look in global /wp-content/languages/flash_cache/ folder
-			load_textdomain('flash-cache', $mofile_global);
-		} elseif (file_exists($mofile_local)) {
-			// Look in local /wp-content/plugins/flash_cache/languages/ folder
-			load_textdomain('flash-cache', $mofile_local);
-		} else {
-			// Load the default language files
-			load_plugin_textdomain('flash-cache', false, $lang_dir);
-		}
+		load_plugin_textdomain('flash-cache', false, $lang_dir);
 	}
 
 	/**
