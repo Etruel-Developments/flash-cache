@@ -196,7 +196,7 @@ class flash_cache_process {
 		$server_name	   = trim(flash_cache_get_server_name(), '/');
 
 		if (empty($server_name)) {
-			error_log('Error: flash_cache_get_server_name() devolvió un valor vacío.');
+			error_log('Error: flash_cache_get_server_name() returned an empty value.');
 			$server_name = 'default';
 		}
 
@@ -224,16 +224,17 @@ class flash_cache_process {
 			@mkdir($cache_path, 0777, true);
 		}
 
-
+		/**
+		 * If the file cannot be locked, another user is already creating the cache.
+		 */
 		if (!self::start_create_cache($cache_path)) {
 			self::end_create_cache();
 			return false;
 		}
 
-
-
-
-
+		/**
+		 * If a blank page was obtained it returns without caching.
+		 */
 		if (empty($response['response'])) {
 			return;
 		}

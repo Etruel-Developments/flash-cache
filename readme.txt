@@ -3,9 +3,9 @@ Contributors: etruel, khaztiel, Gerarjos14, sniuk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, speed, optimize, wp cache
 Requires at least: 3.6
-Tested up to: 6.7.2
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 3.5
+Stable tag: 3.6
 License: GPLv2 or later
 
 Flash Cache is a plugin to improve the performance of Wordpress Websites by making html versions of each post, pages or sections of your website.
@@ -90,6 +90,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 
 == Changelog ==
+
+= 3.6 Apr 15, 2025 =
+* This update features security improvements and is recommended for all users.
+* Bump to WP 6.8
 
 = 3.5 Apr 3, 2025 =
 * Improved many some filters to allow pro version to be more efficient by avoiding caching widgets.

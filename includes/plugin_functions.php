@@ -26,7 +26,7 @@ function flash_cache_init_action_links($data) {
 	return array_merge(
 			$data,
 			array(
-				'<a href="' . admin_url('admin.php?page=flash_cache_setting') . '" title="' . __('Go to Flash Cache Settings Page') . '">' . __('Settings') . '</a>',
+				'<a href="' . admin_url('admin.php?page=flash_cache_setting') . '" title="' . __('Go to Flash Cache Settings Page', 'flash-cache') . '">' . __('Settings', 'flash-cache') . '</a>',
 			)
 	);
 }
@@ -45,8 +45,8 @@ function flash_cache_init_row_meta($data, $page) {
 	return array_merge(
 			$data,
 			array(
-				'<a href="https://etruel.com/my-account/support/" target="_blank">' . __('Support') . '</a>',
-				'<a href="' . admin_url('admin.php?page=flash_cache_advanced_setting') . '" title="' . __('Advanced Settings Page') . '">' . __('Advanced Settings') . '</a>',
+				'<a href="https://etruel.com/my-account/support/" target="_blank">' . __('Support', 'flash-cache') . '</a>',
+				'<a href="' . admin_url('admin.php?page=flash_cache_advanced_setting') . '" title="' . __('Advanced Settings Page', 'flash-cache') . '">' . __('Advanced Settings', 'flash-cache') . '</a>',
 			)
 	);
 }
