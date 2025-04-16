@@ -228,4 +228,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
  == Upgrade Notice ==
-* We've made a some important changes. Recommended update
+* This update features security improvements and is recommended for all users.
