@@ -88,6 +88,12 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 * In this [FAQ](https://etruel.com/question/how-to-install-and-setup-flash-cache/) you will find a step to step tutorial on how to install and configure Flash Cache.
 
+= How many PHP workers does Flash Cache need? =
+
+* Cached pages are served by the web server alone, without PHP. Building a page in the background (after publishing, during the preload or when a cached page expires) requests that page from your own site, so it needs one free PHP worker besides the one doing the work.
+* We recommend at least 4 PHP workers (PHP-FPM `pm.max_children`). With 2, a long background task such as a large import can make uncached visits wait in line for a free worker.
+* On hosting with few workers, turn off the pattern options "Cache the post when it is published or updated", "Refresh the home page…" and "Refresh the first page of its categories and tags": publishing then clears those pages, and the next visitor caches them without any background request.
+
 
 == Changelog ==
 
