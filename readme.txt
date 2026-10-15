@@ -107,6 +107,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Safer cache folder setting: the folder is validated on save and must be a folder of its own inside the site, apart from the WordPress folders.
 * Cache maintenance works strictly inside the cache folder, removing hidden files too and leaving linked folders untouched.
 * Cache folders are named after the site's own address, and the server rules point to them directly.
+* Sites addressed by an IPv6 address, such as http://[2001:db8::1]/, get their own cache folder and rules too.
 * Settings, cache and preload actions are reserved to users with the matching permissions, with clear messages when an action is not allowed.
 * Leaner PHP mode: a compact cache file serves each stored page with a single lookup and hands over to WordPress cleanly when the page needs refreshing.
 * Smarter PHP-mode cache keys: visits with tracking parameters (utm_*, fbclid, gclid and similar) share the same cached page, and each page keeps a bounded number of variants (filter `flash_cache_max_request_files`).

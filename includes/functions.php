@@ -40,13 +40,26 @@ unset($flash_cache_option);
 function flash_cache_get_allowed_hosts() {
 	$hosts = array(strtolower((string) wp_parse_url(home_url(), PHP_URL_HOST)));
 	$hosts = apply_filters('flash_cache_allowed_hosts', $hosts);
-	$hosts = array_map(fn($host) => preg_replace('/[^a-z0-9.\-]/', '', strtolower((string) $host)), (array) $hosts);
+	$hosts = array_map('flash_cache_sanitize_host', (array) $hosts);
 	return array_values(array_unique(array_filter($hosts)));
+}
+
+/**
+ * A host as a cache folder name: letters, digits, dots and hyphens, or an IPv6 address in
+ * brackets, which is how the web servers report it (SERVER_NAME, $host).
+ */
+function flash_cache_sanitize_host($host) {
+	$host = strtolower(trim((string) $host));
+	$ip	  = trim($host, '[]');
+	if (str_contains($ip, ':') && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+		return '[' . $ip . ']';
+	}
+	return preg_replace('/[^a-z0-9.\-]/', '', $host);
 }
 
 function flash_cache_get_server_name() {
 	$hosts		  = flash_cache_get_allowed_hosts();
-	$request_host = isset($_SERVER['SERVER_NAME']) ? strtolower(sanitize_text_field(wp_unslash($_SERVER['SERVER_NAME']))) : '';
+	$request_host = isset($_SERVER['SERVER_NAME']) ? flash_cache_sanitize_host(wp_unslash($_SERVER['SERVER_NAME'])) : '';
 	if ($request_host !== '' && in_array($request_host, $hosts, true)) {
 		return $request_host;
 	}
