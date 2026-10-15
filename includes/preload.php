@@ -111,6 +111,11 @@ class flash_cache_preaload {
 			return false;
 		}
 
+		// "Run now" asks a running preload to stop; the run that takes the lock starts afresh.
+		if (get_option('flash_cache_preload_now')) {
+			update_option('flash_cache_preload_now', false);
+		}
+
 		$in_while	 = true;
 		$values_cron = wp_parse_args(get_option('flash_cache_preload_cron', array()), self::default_options_cron());
 
@@ -141,7 +146,7 @@ class flash_cache_preaload {
 		if ($values_settings['activate']) {
 			$values_cron = wp_parse_args(get_option('flash_cache_preload_cron', array()), self::default_options_cron());
 
-			if ($values_cron['next_run'] < time() && $values_cron['finished']) {
+			if ($values_cron['next_run'] <= time() && $values_cron['finished']) {
 				$values_cron['started']				 = true;
 				$values_cron['execution_offeset']	 = 0;
 				$values_cron['finished']			 = false;
@@ -443,7 +448,14 @@ class flash_cache_preaload {
 		flash_cache_verify_admin_request('save_flash_cache_preload_execution');
 		update_option('flash_cache_preload_cron', self::default_options_cron());
 		update_option('flash_cache_preload_now', true);
-		flash_cache_notices::add(__('Preload execution pending..', 'flash-cache'));
+		if (empty(wp_parse_args(get_option('flash_cache_preload', array()), self::default_options())['activate'])) {
+			flash_cache_notices::add(__('Turn on the preload first: it runs only while enabled.', 'flash-cache'));
+		} else {
+			wp_clear_scheduled_hook('flash_cache_cron');
+			wp_schedule_event(time(), 'flash_cache_preload_int', 'flash_cache_cron');
+			spawn_cron();
+			flash_cache_notices::add(__('The preload has started and runs in the background.', 'flash-cache'));
+		}
 		flash_cache_redirect_back(admin_url('admin.php?page=flash_cache_preload'));
 	}
 
