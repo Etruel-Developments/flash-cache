@@ -99,6 +99,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Settings, cache and preload actions are reserved to users with the matching permissions, with clear messages when an action is not allowed.
 * Leaner PHP mode: a compact cache file serves each stored page with a single lookup and hands over to WordPress cleanly when the page needs refreshing.
 * Smarter PHP-mode cache keys: visits with tracking parameters (utm_*, fbclid, gclid and similar) share the same cached page, and each page keeps a bounded number of variants (filter `flash_cache_max_request_files`).
+* Cached pages stay fully static: the browser checks the page's age itself and asks for a refresh only once its minimum TTL has passed, so visits to fresh pages never start WordPress.
+* One refresh per page at a time, however many visitors arrive when it expires, and on PHP-FPM servers the visitor's connection is released before the page is rebuilt.
+* New setting "Refresh expired pages": on visits (default) or from the preload only, for fully script-free cached pages.
 * Form submissions always reach WordPress live: only GET and HEAD requests are cached and served from cache.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.

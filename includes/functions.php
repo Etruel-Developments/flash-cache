@@ -747,6 +747,7 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 	}
 	if ($delete_option) {
 		delete_option('flash_cache_disk_usage');
+		$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_refresh_') . '%'));
 	}
 
 	if (is_link($path) || !is_dir($real_path)) {

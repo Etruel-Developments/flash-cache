@@ -247,7 +247,8 @@ class flash_cache_preaload {
 				$cache_file	 = $cache_path . 'index-cache.html';
 
 				if (file_exists($cache_file)) {
-					if (time() - filemtime($cache_file) < (int) $pattern['ttl_maximum']) {
+					$ttl = flash_cache_get_advanced_settings()['refresh_mode'] === 'cron' ? $pattern['ttl_minimum'] : $pattern['ttl_maximum'];
+					if (time() - filemtime($cache_file) < (int) $ttl) {
 						continue;
 					}
 				}

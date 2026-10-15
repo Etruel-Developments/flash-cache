@@ -175,6 +175,7 @@ class flash_cache_settings {
 				'wp-postpass_'
 			),
 			'process_type'			 => 'ob_with_curl_request',
+			'refresh_mode'			 => 'visitors',
 			'optimize_styles'		 => false,
 			'optimize_scripts'		 => false,
 			'inline_scripts'		 => false,
@@ -329,6 +330,17 @@ class flash_cache_settings {
 							</div>
 						</td>
 					</tr>';
+		echo '<tr valign="top" class="wrap-row">
+					<th scope="row">' . __('Refresh expired pages', 'flash-cache') . '</th>
+					<td>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['refresh_mode'], 'visitors', false) . ' name="flash_cache_advanced[refresh_mode]" value="visitors"/> ' . __('On visits (Recommended)', 'flash-cache') . '</label>
+							<p class="description">' . __('A visit to a page whose minimum TTL has passed asks the server to rebuild it in the background. Pages still within their TTL make no extra request.', 'flash-cache') . '</p>
+						</div>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['refresh_mode'], 'cron', false) . ' name="flash_cache_advanced[refresh_mode]" value="cron"/> ' . __('From the preload only', 'flash-cache') . '</label>
+							<p class="description">' . __('Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled.', 'flash-cache') . '</p>
+						</div>
+					</td>
+				</tr>';
 		echo '<tr valign="top" class="wrap-row">
 					<th scope="row">' . __('Disable Cache in Widgets', 'flash-cache') . '</th>
 					<td>';
@@ -544,6 +556,10 @@ class flash_cache_settings {
 			));
 		} else {
 			$new_options['cache_dir'] = $cache_dir;
+		}
+
+		if (!in_array($new_options['refresh_mode'], array('visitors', 'cron'), true)) {
+			$new_options['refresh_mode'] = 'visitors';
 		}
 
 		$old_options = flash_cache_get_advanced_settings();

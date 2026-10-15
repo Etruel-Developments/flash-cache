@@ -151,26 +151,28 @@ class flash_cache_process {
 	 * @return String $response with source code of a html object
 	 * @since 1.0.0
 	 */
+	/**
+	 * Adds the refresh script to a cached HTML page. The browser compares the generation time
+	 * with the pattern's minimum TTL and calls the server only once the page has expired.
+	 * onload_cache() reads pattern_minimum, current_query and flash_cache_optional_post_id
+	 * back from this markup, so their "name = value;" form must stay as it is.
+	 */
 	public static function cache_response_html($response, $url_to_cache) {
-		$defer_flash_cache_js = '<script type="text/javascript">
-		function flash_cache_onloadjs() {
-		var pattern_minimum = ' . absint(self::$pattern['ttl_minimum']) . ';
-		var current_query = " ' . base64_encode(json_encode(self::$current_query)) . '";
-		var flash_cache_optional_post_id = ' . absint(self::$optional_post_id) . ';
-		var element = document.createElement("script");
-		element.src = "' . admin_url('admin-post.php?action=onload_flash_cache&p=' . urlencode(base64_encode(self::$url_to_cache)) . '') . '&token=' . hash('sha256', base64_encode(self::$url_to_cache) . wp_salt('nonce')) . '";
-		document.body.appendChild(element);
+		if (flash_cache_get_advanced_settings()['refresh_mode'] === 'cron') {
+			return $response;
 		}
-		if (window.addEventListener) {
-			window.addEventListener("load", flash_cache_onloadjs, false);
-		} else if (window.attachEvent) {
-			window.attachEvent("onload", flash_cache_onloadjs);
-		} else {
-			window.onload = flash_cache_onloadjs;
-		}
-		</script>';
-		$response			  = str_replace('</body>', $defer_flash_cache_js . '</body>', $response);
-		return $response;
+		$p			 = base64_encode(self::$url_to_cache);
+		$refresh_url = admin_url('admin-post.php?action=onload_flash_cache&p=' . rawurlencode($p) . '&token=' . hash('sha256', $p . wp_salt('nonce')));
+
+		$script = '<script>(function () {
+var flash_cache_generated = ' . time() . ';
+var pattern_minimum = ' . absint(self::$pattern['ttl_minimum']) . ';
+var current_query = "' . base64_encode(wp_json_encode(self::$current_query)) . '";
+var flash_cache_optional_post_id = ' . absint(self::$optional_post_id) . ';
+if (Date.now() / 1000 - flash_cache_generated < pattern_minimum) { return; }
+window.addEventListener("load", function () { var s = document.createElement("script"); s.async = true; s.src = ' . wp_json_encode($refresh_url) . '; document.body.appendChild(s); });
+})();</script>';
+		return str_replace('</body>', $script . '</body>', $response);
 	}
 
 	public static function create_cache_html() {
@@ -561,6 +563,8 @@ class flash_cache_process {
 	}
 
 	public static function onload_cache() {
+		nocache_headers();
+		header('Content-Type: application/javascript; charset=UTF-8');
 		if (empty($_GET['p'])) {
 			exit;
 		}
@@ -613,6 +617,13 @@ class flash_cache_process {
 		if (time() - filemtime($cache_file) < (int) $minimum_ttl) {
 			exit;
 		} else {
+			if (!self::claim_refresh($url, min(300, max(30, (int) $minimum_ttl)))) {
+				exit;
+			}
+			if (function_exists('fastcgi_finish_request')) {
+				fastcgi_finish_request();
+			}
+
 			$opcional_url			  = self::$origin_url . $path;
 			$current_query			  = flash_cache_get_var_javascript('current_query', $cache_response);
 			$current_query			  = json_decode(base64_decode($current_query), true);
@@ -621,6 +632,26 @@ class flash_cache_process {
 			self::$optional_post_id	  = flash_cache_get_var_javascript('flash_cache_optional_post_id', $cache_response);
 			self::process_cache_from_query($current_query, $opcional_url);
 		}
+	}
+
+	/**
+	 * One refresh per page at a time: the first request inserts the claim row with INSERT
+	 * IGNORE (add_option() upserts, so it cannot arbitrate), later ones give up until the
+	 * claim is $window seconds old.
+	 */
+	public static function claim_refresh($url, $window) {
+		global $wpdb;
+		$name = 'flash_cache_refresh_' . md5($url);
+		if ($wpdb->query($wpdb->prepare("INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, 'no')", $name, time())) === 1) {
+			return true;
+		}
+		$claimed_at = (int) $wpdb->get_var($wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s", $name));
+		if (time() - $claimed_at < $window) {
+			return false;
+		}
+		$taken = $wpdb->update($wpdb->options, array('option_value' => time()), array('option_name' => $name, 'option_value' => $claimed_at));
+		wp_cache_delete($name, 'options');
+		return $taken === 1;
 	}
 
 	public static function ob_callback($buffer) {
