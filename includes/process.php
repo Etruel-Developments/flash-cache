@@ -352,18 +352,10 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 
 
 			if ($pattern['page_type']['single'] && ($current_query['is_single'] || $current_query['is_page']) && !$current_query['is_feed']) {
-				if (empty($pattern['page_type']['posts'])) {
+				if (empty($pattern['page_type']['posts']) || !empty($pattern['page_type']['posts'][$post?->post_type ?? ''])) {
 					$create_cache	  = true;
 					self::$cache_type = $pattern['cache_type'];
 					break;
-				} else {
-					foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-						if ($pcpt == $post?->post_type) {
-							$create_cache	  = true;
-							self::$cache_type = $pattern['cache_type'];
-							break;
-						}
-					}
 				}
 			}
 
@@ -408,6 +400,11 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 				self::$cache_type = $pattern['cache_type'];
 				break;
 			}
+		}
+
+		// The first pattern that applies decides, and "Don't cache" stops here.
+		if ($create_cache && self::$cache_type === 'none') {
+			$create_cache = false;
 		}
 
 		// A static HTML copy is served for the bare URL, so it must come from a request without a

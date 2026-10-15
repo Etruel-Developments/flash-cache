@@ -39,12 +39,20 @@ class flash_cache_patterns {
 			add_action($meta_hook, array(__CLASS__, 'flush_on_meta'), 10, 2);
 		}
 		foreach (array('deleted_post', 'trashed_post', 'untrashed_post') as $post_hook) {
-			add_action($post_hook, array(__CLASS__, 'flush_on_post'));
+			add_action($post_hook, array(__CLASS__, 'flush_on_post'), 10, 2);
 		}
 		add_action('transition_post_status', array(__CLASS__, 'flush_on_status'), 20, 3);
+
+		add_filter('manage_flash_cache_patterns_posts_columns', array(__CLASS__, 'list_columns'));
+		add_action('manage_flash_cache_patterns_posts_custom_column', array(__CLASS__, 'list_column'), 10, 2);
+		add_action('pre_get_posts', array(__CLASS__, 'list_order'));
+		add_filter('the_posts', array(__CLASS__, 'list_fallback_last'), 10, 2);
+		add_filter('post_class', array(__CLASS__, 'list_row_class'), 10, 3);
+		add_action('wp_ajax_flash_cache_pattern_order', array(__CLASS__, 'save_order'));
+		add_action('admin_enqueue_scripts', array(__CLASS__, 'list_scripts'));
 	}
 
-	/** Published patterns with their data, keyed by ID in ID order. */
+	/** Published patterns with their data, keyed by ID in list order, the fallback last. */
 	private static $all = null;
 
 	/**
@@ -60,12 +68,39 @@ class flash_cache_patterns {
 			return self::$all = $stored;
 		}
 		self::$all = array();
-		$patterns  = get_posts(array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1));
+		$fallback  = self::fallback_id();
+		$patterns  = get_posts(array('post_type' => 'flash_cache_patterns', 'orderby' => array('menu_order' => 'ASC', 'ID' => 'ASC'), 'numberposts' => -1));
 		foreach ($patterns as $pattern) {
-			self::$all[$pattern->ID] = self::get_data($pattern->ID);
+			if ($pattern->ID !== $fallback) {
+				self::$all[$pattern->ID] = self::get_data($pattern->ID);
+			}
+		}
+		if ($fallback && 'publish' === get_post_status($fallback)) {
+			self::$all[$fallback] = self::get_data($fallback);
 		}
 		update_option('flash_cache_patterns_data', self::$all, true);
 		return self::$all;
+	}
+
+	/**
+	 * The pattern that is always evaluated last and catches every page no other pattern takes:
+	 * the "Default" pattern, recorded on install and found on first use elsewhere. 0 when it
+	 * was deleted.
+	 */
+	public static function fallback_id() {
+		$fallback = get_option('flash_cache_fallback_pattern', false);
+		if (false === $fallback) {
+			$patterns = get_posts(array('post_type' => 'flash_cache_patterns', 'post_status' => 'publish', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1));
+			$fallback = 0;
+			foreach ($patterns as $pattern) {
+				if ('Default' === $pattern->post_title) {
+					$fallback = $pattern->ID;
+					break;
+				}
+			}
+			update_option('flash_cache_fallback_pattern', $fallback, true);
+		}
+		return (int) $fallback;
 	}
 
 	public static function flush() {
@@ -79,9 +114,14 @@ class flash_cache_patterns {
 		}
 	}
 
-	public static function flush_on_post($post_id) {
-		if (get_post_type($post_id) === 'flash_cache_patterns') {
+	public static function flush_on_post($post_id, $post = null) {
+		$post_type = $post instanceof WP_Post ? $post->post_type : get_post_type($post_id);
+		if ($post_type === 'flash_cache_patterns') {
+			if (doing_action('deleted_post') && (int) $post_id === self::fallback_id()) {
+				update_option('flash_cache_fallback_pattern', 0, true);
+			}
 			self::flush();
+			flash_cache_delete_dir(flash_cache_get_cache_root(), true);
 		}
 	}
 
@@ -251,6 +291,9 @@ class flash_cache_patterns {
 			'_builtin'	 => false
 		);
 
+		if ($post->ID === self::fallback_id()) {
+			echo '<p class="description" style="margin:12px 10px 0;"><span class="dashicons dashicons-lock" aria-hidden="true"></span> ' . esc_html__('This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes.', 'flash-cache') . '</p>';
+		}
 		echo '<div class="wrap wpm_container"><table class="form-table">
 					<tr valign="top">
 						<th scope="row">' .
@@ -258,7 +301,7 @@ class flash_cache_patterns {
 		'</th>
 						<td>
 						<p class="description">' .
-		__('The kinds of pages this pattern caches. A page is cached by the first pattern that matches it.', 'flash-cache') .
+		__('The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last.', 'flash-cache') .
 		'<div class="checkbox-group">
 								<input type="checkbox" value="1" name="page_type[single]" ' . checked(1, $values['page_type']['single'], false) . ' />' . __('Single posts and pages', 'flash-cache') . '
 							</div>';
@@ -348,7 +391,7 @@ class flash_cache_patterns {
 					
 				</table>';
 				$advanced_settings = flash_cache_get_advanced_settings();
-				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1) ? 'php' : $values['cache_type'];
+				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1 && 'none' !== $values['cache_type']) ? 'php' : $values['cache_type'];
 				echo '<table class="form-table">
 					<tr valign="top">
 						<th scope="row">' . __('Cache type', 'flash-cache') . '</th>
@@ -368,6 +411,14 @@ class flash_cache_patterns {
 									' name="cache_type" value="php"/>' . 
 									__('PHP (pages with query strings)', 'flash-cache') . '
 								<p class="description">' . __('A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress.', 'flash-cache') . '</p>
+							</div>
+
+							<div class="radio-group">
+								<input type="radio" ' .
+									checked($values['cache_type'], 'none', false) .
+									' name="cache_type" value="none"/>' .
+									__("Don't cache", 'flash-cache') . '
+								<p class="description">' . __('The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override.', 'flash-cache') . '</p>
 							</div>
 						</td>
 					</tr>
@@ -588,7 +639,14 @@ class flash_cache_patterns {
 				update_post_meta($post_id, $field, $new);
 			}
 		}
+		// A new pattern joins the list just above the fallback.
+		if (0 === (int) $post->menu_order && $post_id !== self::fallback_id()) {
+			$last = (int) $wpdb->get_var($wpdb->prepare("SELECT MAX(menu_order) FROM {$wpdb->posts} WHERE post_type = %s", 'flash_cache_patterns'));
+			$wpdb->update($wpdb->posts, array('menu_order' => $last + 1), array('ID' => $post_id));
+			clean_post_cache($post_id);
+		}
 		do_action('save_flash_cache_patterns', $post_id, $post);
+		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
 	}
 
 	/**
@@ -605,7 +663,7 @@ class flash_cache_patterns {
 					$fields[$field] = absint($value ?? $default);
 					break;
 				case 'cache_type':
-					$fields[$field] = in_array($value, array('html', 'php'), true) ? $value : 'html';
+					$fields[$field] = in_array($value, array('html', 'php', 'none'), true) ? $value : 'html';
 					break;
 				case 'url_must_contain':
 				case 'url_not_contain':
@@ -632,6 +690,147 @@ class flash_cache_patterns {
 			}
 		}
 		return $fields;
+	}
+
+	public static function list_columns($columns) {
+		return array(
+			'cb'				  => $columns['cb'],
+			'flash_cache_order'	  => '<span class="screen-reader-text">' . esc_html__('Order', 'flash-cache') . '</span>',
+			'title'				  => $columns['title'],
+			'flash_cache_applies' => esc_html__('Applies to', 'flash-cache'),
+			'flash_cache_cache'	  => esc_html__('Cache', 'flash-cache'),
+		);
+	}
+
+	public static function list_column($column, $post_id) {
+		$fallback = $post_id === self::fallback_id();
+		$values	  = self::get_data($post_id);
+		if ('flash_cache_order' === $column) {
+			echo $fallback ? '<span class="dashicons dashicons-lock" title="' . esc_attr__('Always last', 'flash-cache') . '"></span>' : '<span class="dashicons dashicons-menu flash-cache-pattern-handle" title="' . esc_attr__('Drag to change the order', 'flash-cache') . '"></span>';
+		} elseif ('flash_cache_applies' === $column) {
+			echo esc_html(self::applies_to_text($values));
+			if ($fallback) {
+				echo '<br/><span class="description">' . esc_html__('Fallback: always last, it caches every page no other pattern takes.', 'flash-cache') . '</span>';
+			}
+		} elseif ('flash_cache_cache' === $column) {
+			if ('none' === $values['cache_type']) {
+				esc_html_e("Don't cache", 'flash-cache');
+			} else {
+				/* translators: 1: Cache type (HTML or PHP), 2: Time span such as "1 day". */
+				echo esc_html(sprintf(__('%1$s, refresh after %2$s', 'flash-cache'), 'php' === $values['cache_type'] ? 'PHP' : 'HTML', human_time_diff(0, max(1, absint($values['ttl_minimum'])))));
+			}
+		}
+	}
+
+	/** A one-line summary of the page types and URL rules a pattern applies to. */
+	public static function applies_to_text($values) {
+		$types = array();
+		if (!empty($values['page_type']['single'])) {
+			$post_types = array_keys(array_filter((array) ($values['page_type']['posts'] ?? array())));
+			$labels		= array_map(fn($type) => get_post_type_object($type)->label ?? $type, array_filter($post_types, 'post_type_exists'));
+			$types[]	= $labels ? implode(', ', $labels) : __('All post types', 'flash-cache');
+		}
+		$names = array(
+			'frontpage' => __('Front page', 'flash-cache'),
+			'home'		=> __('Posts page', 'flash-cache'),
+			'archives'	=> __('Archives', 'flash-cache'),
+			'tag'		=> __('Tags', 'flash-cache'),
+			'category'	=> __('Categories', 'flash-cache'),
+			'feed'		=> __('Feeds', 'flash-cache'),
+			'search'	=> __('Search', 'flash-cache'),
+			'author'	=> __('Authors', 'flash-cache'),
+		);
+		foreach ($names as $type => $name) {
+			if (!empty($values['page_type'][$type])) {
+				$types[] = $name;
+			}
+		}
+		$text  = $types ? implode(', ', $types) : __('No page types', 'flash-cache');
+		$rules = array();
+		foreach (array('url_must_contain' => __('URL contains: %s', 'flash-cache'), 'url_not_contain' => __('URL does not contain: %s', 'flash-cache')) as $field => $format) {
+			$lines = array_filter(array_map('trim', explode("\n", (string) ($values[$field] ?? ''))), 'strlen');
+			if ($lines) {
+				$rules[] = sprintf($format, implode(', ', $lines));
+			}
+		}
+		return $rules ? $text . ' · ' . implode(' · ', $rules) : $text;
+	}
+
+	private static function is_list_query($query) {
+		return is_admin() && $query->is_main_query() && 'flash_cache_patterns' === $query->get('post_type') && function_exists('get_current_screen') && 'edit-flash_cache_patterns' === get_current_screen()?->id;
+	}
+
+	public static function list_order($query) {
+		if (self::is_list_query($query) && !$query->get('orderby')) {
+			$query->set('orderby', array('menu_order' => 'ASC', 'ID' => 'ASC'));
+		}
+	}
+
+	public static function list_fallback_last($posts, $query) {
+		if (!self::is_list_query($query) || isset($_GET['orderby'])) {
+			return $posts;
+		}
+		$fallback = self::fallback_id();
+		foreach ($posts as $index => $post) {
+			if ($post->ID === $fallback) {
+				unset($posts[$index]);
+				$posts[] = $post;
+				break;
+			}
+		}
+		return array_values($posts);
+	}
+
+	public static function list_row_class($classes, $class, $post_id) {
+		if (is_admin() && 'flash_cache_patterns' === get_post_type($post_id)) {
+			$classes[] = $post_id === self::fallback_id() ? 'flash-cache-fallback' : 'flash-cache-sortable';
+		}
+		return $classes;
+	}
+
+	/**
+	 * Stores the order dragged in the list. Which pattern caches a page may change, so the
+	 * whole cache is cleared.
+	 */
+	public static function save_order() {
+		check_ajax_referer('flash_cache_pattern_order');
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You are not allowed to do this.', 'flash-cache'), 403);
+		}
+		global $wpdb;
+		$order	  = 0;
+		$fallback = self::fallback_id();
+		foreach ((array) ($_POST['order'] ?? array()) as $pattern_id) {
+			$pattern_id = absint($pattern_id);
+			if ($pattern_id && $pattern_id !== $fallback && 'flash_cache_patterns' === get_post_type($pattern_id)) {
+				$wpdb->update($wpdb->posts, array('menu_order' => ++$order), array('ID' => $pattern_id));
+				clean_post_cache($pattern_id);
+			}
+		}
+		self::flush();
+		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		wp_send_json_success();
+	}
+
+	public static function list_scripts($hook_suffix) {
+		if ('edit.php' !== $hook_suffix || 'edit-flash_cache_patterns' !== get_current_screen()?->id) {
+			return;
+		}
+		wp_enqueue_script('jquery-ui-sortable');
+		wp_add_inline_script('jquery-ui-sortable', 'jQuery(function ($) {
+	var $list = $("#the-list");
+	$list.sortable({
+		items: "tr.flash-cache-sortable",
+		handle: ".flash-cache-pattern-handle",
+		axis: "y",
+		update: function () {
+			var order = $list.find("tr.flash-cache-sortable").map(function () { return this.id.replace("post-", ""); }).get();
+			$list.css("opacity", 0.6);
+			$.post(ajaxurl, {action: "flash_cache_pattern_order", _ajax_nonce: ' . wp_json_encode(wp_create_nonce('flash_cache_pattern_order')) . ', order: order}).always(function () { $list.css("opacity", 1); });
+		}
+	});
+});');
+		wp_add_inline_style('list-tables', '.column-flash_cache_order{width:2em}.flash-cache-pattern-handle{cursor:move;color:#787c82}.flash-cache-fallback .dashicons-lock{color:#a7aaad}');
 	}
 
 	public static function reset_to_default_patterns_options() {

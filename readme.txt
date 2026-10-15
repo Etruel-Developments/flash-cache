@@ -119,6 +119,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Bulk publishing, such as a WPeMatico fetch, rebuilds each new post's own page and refreshes the home page and each archive once per batch.
 * Approved comments refresh their post's cache in the background.
 * Faster uncached requests: patterns load from a single stored option instead of database queries.
+* Patterns follow the order you give them: drag them in the Patterns list, and the first pattern that applies to a page decides how it is cached. The Default pattern always comes last and caches every page no other pattern takes.
+* New pattern cache type "Don't cache", to keep the pages it applies to always served live.
+* A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches.
+* Saving, reordering or deleting a pattern clears the cache, so the new rules apply to the next visit.
+* New action `flash_cache_clear_url`: other plugins can refresh the cached copy of a page whose content they changed, with `do_action( 'flash_cache_clear_url', $url )`.
 * Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.
 * Rebuilt style and script optimization: the site's own files are read straight from disk, and each combined file is shared by every page that uses the same assets, written once, in its own folder apart from the cached pages.
 * Combined styles keep each stylesheet's media (print styles stay for print) and the cascade order, and relative image and font references keep working.

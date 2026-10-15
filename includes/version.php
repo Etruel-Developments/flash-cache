@@ -146,6 +146,7 @@ class flash_cache_version {
 		);
 
 		$pattern_id	 = wp_insert_post($default_html);
+		update_option('flash_cache_fallback_pattern', $pattern_id, true);
 		$fields		 = flash_cache_patterns::default_fields_array();
 
 		$fields['page_type']['feed']	 = 0;
@@ -160,6 +161,7 @@ class flash_cache_version {
 		$default_html = array(
 			'post_title'	 => 'Feed & Search',
 			'post_status'	 => 'publish',
+			'menu_order'	 => 1,
 			'post_type'		 => 'flash_cache_patterns',
 		);
 

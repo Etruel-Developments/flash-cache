@@ -26,6 +26,8 @@ class flash_cache_posts {
 		add_action('transition_comment_status', array(__CLASS__, 'comment_status_changed'), 99, 3);
 		add_action('flash_cache_rebuild_post', array(__CLASS__, 'rebuild_post'));
 		add_action('flash_cache_rebuild_comment_post', array(__CLASS__, 'rebuild_comment_post'));
+		// Public: other plugins refresh a page whose content they changed with do_action('flash_cache_clear_url', $url).
+		add_action('flash_cache_clear_url', 'flash_cache_delete_cache_from_url');
 		add_action('post_submitbox_minor_actions', array(__CLASS__, 'delete_cache_button'));
 		add_action('admin_post_flash_cache_delete_cache', array(__CLASS__, 'delete_cache_action'));
 		add_action('transition_post_status', array(__CLASS__, 'status_transition'), 10, 3);
@@ -63,22 +65,18 @@ class flash_cache_posts {
 	}
 
 	/**
-	 * What the patterns ask for when a post of this type is published or updated.
+	 * What the pattern that caches this post asks for when it is published, updated or commented.
 	 */
-	public static function rebuild_targets($post_type) {
+	public static function rebuild_targets($post) {
 		$targets = array('post' => false, 'home' => false, 'terms' => false, 'comment' => false);
-		foreach (flash_cache_patterns::get_all() as $pattern) {
-			if (empty($pattern['page_type']['single'])) {
-				continue;
-			}
-			if (!empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][$post_type])) {
-				continue;
-			}
-			$targets['post']	|= !empty($pattern['create_cache_on_insert_update']);
-			$targets['home']	|= !empty($pattern['update_home_on_insert_post']);
-			$targets['terms']	|= !empty($pattern['update_categories_on_post']);
-			$targets['comment'] |= !empty($pattern['update_on_comment']);
+		$pattern = flash_cache_preaload::matching_pattern(flash_cache_patterns::get_all(), get_permalink($post), $post->post_type);
+		if (null === $pattern || 'none' === $pattern['cache_type']) {
+			return $targets;
 		}
+		$targets['post']	= !empty($pattern['create_cache_on_insert_update']);
+		$targets['home']	= !empty($pattern['update_home_on_insert_post']);
+		$targets['terms']	= !empty($pattern['update_categories_on_post']);
+		$targets['comment'] = !empty($pattern['update_on_comment']);
 		return $targets;
 	}
 
@@ -87,7 +85,7 @@ class flash_cache_posts {
 		if (!$post || $post->post_status !== 'publish' || !flash_cache_get_general_settings()['activate']) {
 			return;
 		}
-		$targets = self::rebuild_targets($post->post_type);
+		$targets = self::rebuild_targets($post);
 		if ($targets['post']) {
 			self::create_cache_post_id($post_id);
 		}
@@ -138,7 +136,7 @@ class flash_cache_posts {
 		if (!$post || $post->post_status !== 'publish' || !flash_cache_get_general_settings()['activate']) {
 			return;
 		}
-		if (self::rebuild_targets($post->post_type)['comment']) {
+		if (self::rebuild_targets($post)['comment']) {
 			self::create_cache_post_id($post_id);
 		}
 	}

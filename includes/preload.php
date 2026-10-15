@@ -193,7 +193,7 @@ class flash_cache_preaload {
 				$current_url	 = get_permalink($post_id);
 				update_option('flash_cache_preload_current_post', $current_url);
 				$matched = self::matching_pattern($patterns, $current_url, $post->post_type);
-				if (null === $matched) {
+				if (null === $matched || 'none' === $matched['cache_type']) {
 					continue;
 				}
 
