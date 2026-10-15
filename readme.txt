@@ -2,9 +2,9 @@
 Contributors: etruel, khaztiel, Gerarjos14, sniuk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: cache, performance, speed, optimize, wp cache
-Requires at least: 3.6
-Tested up to: 6.8
-Requires PHP: 5.6
+Requires at least: 5.9
+Tested up to: 7.1
+Requires PHP: 8.1
 Stable tag: 3.6
 License: GPLv2 or later
 
@@ -28,7 +28,7 @@ Flash Cache is a powerful plugin which optimizes the websites speed thanks to pr
 == Some Features ==
 The most important characteristics that makes this add-on the first choice comparing to others are the next ones:
 
-> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and supports *PHP 5.6 to 8.2.*
+> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and runs on *PHP 8.1 or higher*.
 > * Flash Cache allows infinities configurations thanks to the patterns, these can be done with different cache patterns according the kind of page that will be cached.
 > * It avoid the PHP execution in foreground at time of serve the cache objects, improving significantly the performance and the overload of the server.
 > * Crawl Budget optimization, the majority of the search engines assigns a quantity of means to go over the websites, with Flash Cache a higher number of pages are indexes and is better positioned in the search engines.
@@ -91,7 +91,8 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
-= 3.8 Oct 15, 2026 =
+= 4.0-beta Oct 15, 2026 =
+* A new major version, built for PHP 8.1 or later and WordPress 5.9 or later.
 * Leaner requests: Flash Cache reads its settings once per page load.
 * Safer cache folder setting: the folder is validated on save and must be a folder of its own inside the site, apart from the WordPress folders.
 * Cache maintenance works strictly inside the cache folder, removing hidden files too and leaving linked folders untouched.

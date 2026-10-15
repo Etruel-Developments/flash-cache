@@ -45,8 +45,8 @@ class flash_cache_version {
 
 		}
 
-		if (get_option('flash_cache_updated_3_8') != 1) {
-			self::update_to_3_8();
+		if (get_option('flash_cache_updated_4_0') != 1) {
+			self::update_to_4_0();
 		}
 	}
 
@@ -55,7 +55,7 @@ class flash_cache_version {
 	 * existing cache files are dropped, the rules block of the first releases (marker
 	 * "FlashCache") is removed, and the current rules are written once.
 	 */
-	private static function update_to_3_8() {
+	private static function update_to_4_0() {
 		global $wpdb;
 		$advanced_settings = get_option('flash_cache_advanced_settings', array());
 		if (is_array($advanced_settings) && isset($advanced_settings['cache_dir']) && false === flash_cache_sanitize_cache_dir($advanced_settings['cache_dir'])) {
@@ -86,7 +86,7 @@ class flash_cache_version {
 				@unlink(FLASH_CACHE_PLUGIN_DIR . $legacy_lock);
 			}
 		}
-		update_option('flash_cache_updated_3_8', 1);
+		update_option('flash_cache_updated_4_0', 1);
 	}
 
 	/**

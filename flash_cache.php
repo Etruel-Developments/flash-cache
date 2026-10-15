@@ -3,7 +3,9 @@
  * Plugin Name: Flash Cache
  * Plugin URI: https://flashcache.net
  * Description: Flash Cache is a plugin to really improve performance of Wordpress Websites. If you like it, please rate it 5 stars to allow us to improve its development.
- * Version: 3.6
+ * Version: 4.0-beta
+ * Requires at least: 5.9
+ * Requires PHP: 8.1
  * Author: Etruel Developments LLC
  * Author URI: https://etruel.com/
  * Text Domain: flash-cache
@@ -21,7 +23,7 @@ if (!defined('ABSPATH'))
 
 // Plugin version
 if (!defined('FLASH_CACHE_VERSION')) {
-	define('FLASH_CACHE_VERSION', '3.6');
+	define('FLASH_CACHE_VERSION', '4.0-beta');
 }
 
 /**

@@ -19,7 +19,7 @@ Flash Cache is a powerful plugin which optimizes the websites speed thanks to pr
 
 The most important characteristics that makes this add-on the first choice comparing to others are the next ones:
 
-> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and supports *PHP 5.6 to 8.1.*
+> * The Flash Cache plugin is tested with the most important servers that can run WordPress, such as *Apache, nginx and LiteSpeed* and runs on *PHP 8.1 or higher*.
 > * Flash Cache allows infinities configurations thanks to the patterns, these can be done with different cache patterns according the kind of page that will be cached.
 > * It avoid the PHP execution in foreground at time of serve the cache objects, improving significantly the performance and the overload of the server.
 > * Crawl Budget optimization, the majority of the search engines assigns a quantity of means to go over the websites, with Flash Cache a higher number of pages are indexes and is better positioned in the search engines.
