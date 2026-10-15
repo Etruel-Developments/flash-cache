@@ -88,6 +88,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 * In this [FAQ](https://etruel.com/question/how-to-install-and-setup-flash-cache/) you will find a step to step tutorial on how to install and configure Flash Cache.
 
+= Does Flash Cache work on WordPress Multisite? =
+
+* No. Flash Cache writes its rules and cache folders for one site, and the sites of a network share the same server rules and home folder. It can only be activated on single WordPress sites.
+
 = How many PHP workers does Flash Cache need? =
 
 * Cached pages are served by the web server alone, without PHP. Building a page in the background (after publishing, during the preload or when a cached page expires) requests that page from your own site, so it needs one free PHP worker besides the one doing the work.
@@ -97,7 +101,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
-= 4.0-beta Oct 15, 2026 =
+= 4.0 Oct 15, 2026 =
 * A new major version, built for PHP 8.1 or later and WordPress 5.9 or later.
 * Leaner requests: Flash Cache reads its settings once per page load.
 * Safer cache folder setting: the folder is validated on save and must be a folder of its own inside the site, apart from the WordPress folders.
@@ -132,6 +136,8 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Preload times follow the site's date and time format.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.
+* Changing the cache folder, deactivating the plugin or deleting the cache leaves no empty folders behind.
+* Built for single WordPress sites: activating it on a Multisite network stops with a clear message.
 * After updating, the cache is rebuilt from scratch, the server rules are refreshed automatically and the database lock table is removed, since locks need no table.
 
 = 3.6 Apr 15, 2025 =
@@ -270,5 +276,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 = 1.0.0 Beta =
 First Release
 
- == Upgrade Notice ==
-* This update features security improvements and is recommended for all users.
+== Upgrade Notice ==
+
+= 4.0 =
+A major version: it requires PHP 8.1 and WordPress 5.9 or later, and it works on single sites only, not on Multisite networks. After updating, the cache is rebuilt from scratch and the server rules are refreshed automatically.

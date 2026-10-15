@@ -132,6 +132,16 @@ class Flash_Cache {
 	}
 
 	/**
+	 * A Multisite network shares one .htaccess and one home folder between its sites, and the
+	 * rules and cache folders here belong to a single site.
+	 */
+	public static function activation() {
+		if (is_multisite()) {
+			wp_die(esc_html__('Flash Cache works on single WordPress sites and cannot be activated on a Multisite network.', 'flash-cache'), esc_html__('Plugin not activated', 'flash-cache'), array('back_link' => true));
+		}
+	}
+
+	/**
 	 * Static function deactivation
 	 * Deactivation action hook
 	 * @access public
@@ -185,3 +195,4 @@ function Flash_Cache_load() {
 }
 
 add_action('plugins_loaded', 'Flash_Cache_load');
+register_activation_hook(__FILE__, array('Flash_Cache', 'activation'));

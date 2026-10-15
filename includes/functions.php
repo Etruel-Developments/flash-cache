@@ -779,7 +779,23 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 			@unlink($item->getPathname());
 		}
 	}
-	return @rmdir($real_path);
+	$removed = @rmdir($real_path);
+	if ($removed && trailingslashit($real_path) === $real_root) {
+		flash_cache_remove_empty_parents(dirname($real_path));
+	}
+	return $removed;
+}
+
+/**
+ * Removes the folders above a deleted cache root that are left empty, stopping at the home path
+ * or at the first folder that still holds anything.
+ */
+function flash_cache_remove_empty_parents($dir) {
+	$home = untrailingslashit(wp_normalize_path(realpath(flash_cache_get_home_path()) ?: flash_cache_get_home_path()));
+	$dir  = untrailingslashit(wp_normalize_path($dir));
+	while (str_starts_with($dir, $home . '/') && @rmdir($dir)) {
+		$dir = dirname($dir);
+	}
 }
 
 function flash_cache_delete_cache_files($cache_dir, $cache_path) {
