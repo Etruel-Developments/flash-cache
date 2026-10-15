@@ -403,9 +403,13 @@ function flash_cache_get_nginx_conf_info() {
 
 	$utils_rules = array();
 	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
-		# Force HTTPS connection. This rules is domain agnostic
-		$utils_rules[]	 = 'if ($scheme != "https") {';
-		$utils_rules[]	 = 'rewrite ^ https://$host$uri permanent;';
+		// Behind a proxy or CDN that ends HTTPS, the request arrives over HTTP with X-Forwarded-Proto.
+		$utils_rules[]	 = 'set $flash_cache_scheme $scheme;';
+		$utils_rules[]	 = 'if ($http_x_forwarded_proto = "https") {';
+		$utils_rules[]	 = 'set $flash_cache_scheme "https";';
+		$utils_rules[]	 = '}';
+		$utils_rules[]	 = 'if ($flash_cache_scheme != "https") {';
+		$utils_rules[]	 = 'return 301 https://$host$request_uri;';
 		$utils_rules[]	 = '}';
 		$utils_rules[]	 = 'add_header Strict-Transport-Security "' . esc_attr(flash_cache_hsts_header()) . '";';
 	}
@@ -541,7 +545,10 @@ function flash_cache_get_htaccess_info() {
 	$utils_rules = array();
 	if ($advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https') {
 		$utils_rules[]	 = '<IfModule mod_rewrite.c>';
+		// Behind a proxy or CDN that ends HTTPS, the request arrives over HTTP with X-Forwarded-Proto.
 		$utils_rules[]	 = 'RewriteCond %{HTTPS} off';
+		$utils_rules[]	 = 'RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]';
+		$utils_rules[]	 = 'RewriteCond %{ENV:HTTPS} !on [NC]';
 		$utils_rules[]	 = 'RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]';
 		$utils_rules[]	 = '</IfModule>';
 		$utils_rules[]	 = '<IfModule mod_headers.c>';
@@ -606,36 +613,34 @@ function flash_cache_get_logged_in_cookie() {
 	return $logged_in_cookie;
 }
 
+/**
+ * Writes the blocks in a fixed order: Utils first, so the HTTPS redirect runs before a page is
+ * rewritten to its cache file, then Page Cache, Optimizations and WordPress's own rules.
+ */
 function flash_cache_update_htaccess() {
 	if (flash_cache_enviroment::is_nginx()) {
 		extract(flash_cache_get_nginx_conf_info());
-		flash_cache_remove_marker($home_path . 'nginx.conf', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
-
-		$cache_inserted			 = insert_with_markers($home_path . 'nginx.conf', 'FlashCache Page Cache', explode("\n", $cache_rules));
-		$utils_inserted			 = insert_with_markers($home_path . 'nginx.conf', 'FlashCache Utils', explode("\n", $utils_rules));
-		$optimization_inserted	 = insert_with_markers($home_path . 'nginx.conf', 'FlashCache Optimizations', explode("\n", $optimization_rules));
-		$wp_inserted			 = insert_with_markers($home_path . 'nginx.conf', 'WordPress', explode("\n", $current_wp_rules));
-
-		if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
-			return flash_cache_remove_breakspaces($home_path . 'nginx.conf');
-		} else {
+		$file = $home_path . 'nginx.conf';
+	} else {
+		// By default process with apache webserver.
+		extract(flash_cache_get_htaccess_info());
+		$file = $home_path . '.htaccess';
+	}
+	$blocks = array(
+		'FlashCache Utils'		   => $utils_rules,
+		'FlashCache Page Cache'	   => $cache_rules,
+		'FlashCache Optimizations' => $optimization_rules,
+		'WordPress'				   => $current_wp_rules,
+	);
+	foreach (array_keys($blocks) as $marker) {
+		flash_cache_remove_marker($file, $marker);
+	}
+	foreach ($blocks as $marker => $rules) {
+		if (!insert_with_markers($file, $marker, explode("\n", $rules))) {
 			return false;
 		}
 	}
-	// By default process with apache webserver.
-	extract(flash_cache_get_htaccess_info());
-	flash_cache_remove_marker($home_path . '.htaccess', 'WordPress'); // remove original WP rules so Flash Cache rules go on top
-
-	$cache_inserted			 = insert_with_markers($home_path . '.htaccess', 'FlashCache Page Cache', explode("\n", $cache_rules));
-	$utils_inserted			 = insert_with_markers($home_path . '.htaccess', 'FlashCache Utils', explode("\n", $utils_rules));
-	$optimization_inserted	 = insert_with_markers($home_path . '.htaccess', 'FlashCache Optimizations', explode("\n", $optimization_rules));
-	$wp_inserted			 = insert_with_markers($home_path . '.htaccess', 'WordPress', explode("\n", $current_wp_rules));
-
-	if ($cache_inserted && $wp_inserted && $utils_inserted && $optimization_inserted) {
-		return flash_cache_remove_breakspaces($home_path . '.htaccess');
-	} else {
-		return false;
-	}
+	return flash_cache_remove_breakspaces($file);
 }
 
 function flash_cache_remove_rules() {

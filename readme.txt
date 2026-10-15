@@ -139,6 +139,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * The disk usage counter is saved once per request.
 * Clearer settings screens: short labels, plain-language descriptions, and every text ready for translation.
 * The script exclusion switches say what they do ("Leave theme scripts in place"), and "Scripts from other domains" names the switch that keeps analytics, ads and social scripts on their own servers.
+* "Redirect HTTP to HTTPS" works behind proxies, CDNs and hosts that end HTTPS before the web server, runs before any cached page is served, and keeps the query string.
 * "Redirect HTTP to HTTPS" sends a Strict-Transport-Security header for the site's own host, adjustable with the `flash_cache_hsts_header` filter; on a site opened over HTTP the screen explains when the option appears.
 * Preload times follow the site's date and time format.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
