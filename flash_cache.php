@@ -136,8 +136,8 @@ class Flash_Cache {
 	 * @since 1.0.0
 	 */
 	public static function deactivation() {
-		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir		 = get_home_path() . $advanced_settings['cache_dir'];
+		$advanced_settings	 = flash_cache_get_advanced_settings();
+		$cache_dir		 = flash_cache_get_cache_root();
 		flash_cache_remove_rules();
 		flash_cache_delete_dir($cache_dir, true);
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');

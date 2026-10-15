@@ -131,30 +131,18 @@ class flash_cache_process {
 	}
 
 	/**
-	 * Static function debug_log
-	 * @access public
-	 * @return void
-	 * @since 1.0.0
+	 * Writes to the PHP error log only when FLASH_CACHE_DEBUG is true, so a production request
+	 * costs nothing and no log file sits in a web-readable folder.
 	 */
 	public static function debug($message) {
-		if (empty(self::$advanced_settings)) {
-			self::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+		if (!defined('FLASH_CACHE_DEBUG') || !FLASH_CACHE_DEBUG) {
+			return;
 		}
-		$cache_dir = flash_cache_get_home_path() . self::$advanced_settings['cache_dir'];
-		$log_file  = $cache_dir . flash_cache_get_server_name() . '/cache_debug.log';
-		if (!file_exists($cache_dir . flash_cache_get_server_name())) {
-			@mkdir($cache_dir . flash_cache_get_server_name(), 0777, true);
-		}
-
-		$request_URI = sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
-
-		// Convert arrays and objects to string
 		if (is_array($message) || is_object($message)) {
 			$message = print_r($message, true);
 		}
-
-		$log_message = date('H:i:s') . " " . getmypid() . " {$request_URI} {$message}\n\r";
-		error_log($log_message, 3, $log_file);
+		$request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_url(wp_unslash($_SERVER['REQUEST_URI'])) : '';
+		error_log('Flash Cache [' . getmypid() . '] ' . $request_uri . ' ' . $message);
 	}
 
 	/**
@@ -192,7 +180,7 @@ class flash_cache_process {
 		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 
 		$advanced_settings = flash_cache_get_advanced_settings();
-		$cache_dir		   = rtrim(flash_cache_get_home_path() . $advanced_settings['cache_dir'], '/') . '/';
+		$cache_dir		   = flash_cache_get_cache_root();
 		$server_name	   = trim(flash_cache_get_server_name(), '/');
 
 		if (empty($server_name)) {
@@ -258,9 +246,9 @@ class flash_cache_process {
 			self::$origin_url = get_site_url(null, '/');
 		}
 		self::$origin_url  = flash_cache_sanitize_origin_url(self::$origin_url);
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+		$advanced_settings = flash_cache_get_advanced_settings();
 		$home_path		   = flash_cache_get_home_path();
-		$cache_dir		   = $home_path . $advanced_settings['cache_dir'];
+		$cache_dir		   = flash_cache_get_cache_root();
 
 		$parsed_url = parse_url(self::$url_to_cache);
 
@@ -323,7 +311,7 @@ class flash_cache_process {
 	public static function process_cache_from_query($current_query, $opcional_url = '') {
 
 		$current_url	   = '';
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+		$advanced_settings = flash_cache_get_advanced_settings();
 
 		self::$cache_type = 'html';
 		$create_cache	  = false;
@@ -494,8 +482,8 @@ class flash_cache_process {
 			return true;
 		}
 
-		$general_settings  = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+		$general_settings  = flash_cache_get_general_settings();
+		$advanced_settings = flash_cache_get_advanced_settings();
 		if (!$general_settings['activate']) {
 			return true;
 		}
@@ -545,7 +533,7 @@ class flash_cache_process {
 			$current_query['is_feed'] = 1;
 		}
 
-		self::debug('Procesing a new pattern from template_redirect:' . var_export($current_query, true));
+		self::debug(array('Processing a new pattern from template_redirect' => $current_query));
 		$current_query = wp_parse_args($current_query, $default_query);
 
 		self::process_cache_from_query($current_query, flash_cache_get_current_url());
@@ -585,8 +573,8 @@ class flash_cache_process {
 		}
 
 		do_action('onload_cache_file', $url);
-		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir		   = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+		$advanced_settings = flash_cache_get_advanced_settings();
+		$cache_dir		   = flash_cache_get_cache_root();
 		$path			   = str_replace(self::$origin_url, '', $url);
 		$cache_path		   = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		$cache_file		   = $cache_path . 'index-cache.html';
@@ -607,7 +595,7 @@ class flash_cache_process {
 			$opcional_url			  = self::$origin_url . $path;
 			$current_query			  = flash_cache_get_var_javascript('current_query', $cache_response);
 			$current_query			  = json_decode(base64_decode($current_query), true);
-			self::debug('Procesing a new pattern from onload_cache:' . var_export($current_query, true));
+			self::debug(array('Processing a new pattern from onload_cache' => $current_query));
 			self::$force_process_type = 'curl';
 			self::$optional_post_id	  = flash_cache_get_var_javascript('flash_cache_optional_post_id', $cache_response);
 			self::process_cache_from_query($current_query, $opcional_url);
@@ -663,7 +651,7 @@ class flash_cache_process {
 
 		$advanced_settings = flash_cache_get_advanced_settings();
 
-		$cache_dir	= flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+		$cache_dir	= flash_cache_get_cache_root();
 		$path		= self::get_path(self::$optional_post_id);
 		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 
@@ -708,7 +696,7 @@ class flash_cache_process {
 		self::$origin_url  = flash_cache_sanitize_origin_url(self::$origin_url);
 		$advanced_settings = flash_cache_get_advanced_settings();
 		$home_path		   = flash_cache_get_home_path();
-		$cache_dir		   = $home_path . $advanced_settings['cache_dir'];
+		$cache_dir		   = flash_cache_get_cache_root();
 		$path			   = self::get_path(self::$optional_post_id);
 		$cache_path		   = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 

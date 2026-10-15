@@ -91,6 +91,16 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 3.8 Oct 15, 2026 =
+* Leaner requests: Flash Cache reads its settings once per page load.
+* Safer cache folder setting: the folder is validated on save and must be a folder of its own inside the site, apart from the WordPress folders.
+* Cache maintenance works strictly inside the cache folder, removing hidden files too and leaving linked folders untouched.
+* Cache folders are named after the site's own address, and the server rules point to them directly.
+* Settings, cache and preload actions are reserved to users with the matching permissions, with clear messages when an action is not allowed.
+* Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
+* "Clear Entry Cache" takes you back to the post you were editing.
+* After updating, the cache is rebuilt from scratch and the server rules are refreshed automatically.
+
 = 3.6 Apr 15, 2025 =
 * This update features security improvements and is recommended for all users.
 * Bump to WP 6.8

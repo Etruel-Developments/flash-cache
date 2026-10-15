@@ -287,7 +287,7 @@ class flash_cache_patterns {
 					</tr>
 					
 				</table>';
-				$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+				$advanced_settings = flash_cache_get_advanced_settings();
 				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1) ? 'php' : $values['cache_type'];
 				echo '<table class="form-table">
 					<tr valign="top">
@@ -532,16 +532,15 @@ class flash_cache_patterns {
 		do_action('save_flash_cache_patterns', $post_id, $post);
 	}
 
-	public static function reset_to_default_patterns_options(){
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_patterns_options')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-
+	public static function reset_to_default_patterns_options() {
+		flash_cache_verify_admin_request('reset_to_default_patterns_options');
 		flash_cache_version::delete_all_patterns();
 		flash_cache_version::install_patterns_default();
 		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_redirect(admin_url('edit.php?post_type=flash_cache_patterns'));
+		wp_safe_redirect(admin_url('edit.php?post_type=flash_cache_patterns'));
+		exit;
 	}
+
 	public static function add_reset_button() {
 		global $post_type;
 	

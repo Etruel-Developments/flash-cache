@@ -1,31 +1,137 @@
 <?php
 
-function flash_cache_get_advanced_settings() {
+/**
+ * Settings are read once per request. Saving an option refreshes the copy, and nothing is kept
+ * before `init` so add-ons have registered their defaults filters.
+ */
+function flash_cache_get_advanced_settings($refresh = false) {
 	static $advanced_settings = null;
-	if (empty($advanced_settings)) {
+	if ($refresh || null === $advanced_settings || !did_action('init')) {
 		$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
 	}
 	return $advanced_settings;
 }
 
-function flash_cache_get_general_settings() {
+function flash_cache_get_general_settings($refresh = false) {
 	static $general_settings = null;
-	if (empty($general_settings)) {
+	if ($refresh || null === $general_settings || !did_action('init')) {
 		$general_settings = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
 	}
 	return $general_settings;
 }
 
-function flash_cache_get_server_name() {
-	if (!empty($_SERVER['SERVER_NAME'])) {
-		$server_name = sanitize_text_field($_SERVER['SERVER_NAME']);
-	} else {
-		$server_name = parse_url(get_bloginfo('url'));
-		$server_name = $server_name['host'];
-		$server_name = sanitize_text_field($server_name);
-	}
+function flash_cache_refresh_settings() {
+	flash_cache_get_advanced_settings(true);
+	flash_cache_get_general_settings(true);
+	flash_cache_process::$advanced_settings = null;
+}
 
-	return $server_name;
+foreach (array('flash_cache_advanced_settings', 'flash_cache_settings') as $flash_cache_option) {
+	add_action('add_option_' . $flash_cache_option, 'flash_cache_refresh_settings');
+	add_action('update_option_' . $flash_cache_option, 'flash_cache_refresh_settings');
+	add_action('delete_option_' . $flash_cache_option, 'flash_cache_refresh_settings');
+}
+unset($flash_cache_option);
+
+/**
+ * Hosts the cache may be written for. The request host is used only when it is one of them,
+ * so a client-supplied Host header never names a cache folder.
+ */
+function flash_cache_get_allowed_hosts() {
+	$hosts = array(strtolower((string) wp_parse_url(home_url(), PHP_URL_HOST)));
+	$hosts = apply_filters('flash_cache_allowed_hosts', $hosts);
+	$hosts = array_map(fn($host) => preg_replace('/[^a-z0-9.\-]/', '', strtolower((string) $host)), (array) $hosts);
+	return array_values(array_unique(array_filter($hosts)));
+}
+
+function flash_cache_get_server_name() {
+	$hosts		  = flash_cache_get_allowed_hosts();
+	$request_host = isset($_SERVER['SERVER_NAME']) ? strtolower(sanitize_text_field(wp_unslash($_SERVER['SERVER_NAME']))) : '';
+	if ($request_host !== '' && in_array($request_host, $hosts, true)) {
+		return $request_host;
+	}
+	return $hosts[0] ?? 'default';
+}
+
+/**
+ * The host as the rewrite rules must name it: the literal host on a single-host site, the
+ * server variable when several hosts share the cache.
+ */
+function flash_cache_get_rules_host($server_variable) {
+	$hosts = flash_cache_get_allowed_hosts();
+	return count($hosts) === 1 ? $hosts[0] : $server_variable;
+}
+
+/**
+ * Validates the cache folder relative to the home path. Returns it normalized with a trailing
+ * slash, or false when it is empty, climbs out of the home path, or is (or contains) a folder
+ * WordPress keeps its own files in.
+ */
+function flash_cache_sanitize_cache_dir($cache_dir) {
+	$cache_dir = trim(str_replace('\\', '/', (string) $cache_dir), "/ \t\n\r\0\x0B");
+	if ($cache_dir === '') {
+		return false;
+	}
+	foreach (explode('/', $cache_dir) as $segment) {
+		if ($segment === '' || $segment === '.' || $segment === '..' || !preg_match('/^[A-Za-z0-9._-]+$/', $segment)) {
+			return false;
+		}
+	}
+	$cache_dir = $cache_dir . '/';
+	$target	   = trailingslashit(wp_normalize_path(flash_cache_get_home_path())) . $cache_dir;
+	$uploads   = wp_get_upload_dir();
+
+	$wordpress_dirs = array(ABSPATH, WP_CONTENT_DIR, WP_PLUGIN_DIR, WPMU_PLUGIN_DIR, get_theme_root(), $uploads['basedir'], ABSPATH . 'wp-admin', ABSPATH . WPINC);
+	foreach ($wordpress_dirs as $wordpress_dir) {
+		$wordpress_dir = trailingslashit(wp_normalize_path($wordpress_dir));
+		if (str_starts_with($wordpress_dir, $target)) {
+			return false;
+		}
+		if ($wordpress_dir !== trailingslashit(wp_normalize_path(ABSPATH)) && $wordpress_dir !== trailingslashit(wp_normalize_path(WP_CONTENT_DIR)) && str_starts_with($target, $wordpress_dir)) {
+			return false;
+		}
+	}
+	return $cache_dir;
+}
+
+/**
+ * The cache folder relative to the home path, and its absolute path, both with a trailing
+ * slash. A stored value that does not validate falls back to the default folder.
+ */
+function flash_cache_get_cache_dir() {
+	static $cache_dirs = array();
+	$stored = flash_cache_get_advanced_settings()['cache_dir'];
+	if (!isset($cache_dirs[$stored])) {
+		$cache_dir = flash_cache_sanitize_cache_dir($stored);
+		if (false === $cache_dir) {
+			$cache_dir = flash_cache_settings::default_advanced_options()['cache_dir'];
+		}
+		$cache_dirs[$stored] = $cache_dir;
+	}
+	return $cache_dirs[$stored];
+}
+
+function flash_cache_get_cache_root() {
+	return trailingslashit(wp_normalize_path(flash_cache_get_home_path())) . flash_cache_get_cache_dir();
+}
+
+/**
+ * Checks the capability first and the nonce second, and stops the request when either fails.
+ */
+function flash_cache_verify_admin_request($nonce_action, $capability = 'manage_options', $object_id = null, $nonce_field = '_wpnonce') {
+	$allowed = null === $object_id ? current_user_can($capability) : current_user_can($capability, $object_id);
+	if (!$allowed) {
+		wp_die(esc_html__('You are not allowed to do this.', 'flash-cache'), '', array('response' => 403));
+	}
+	$nonce = isset($_REQUEST[$nonce_field]) ? sanitize_text_field(wp_unslash($_REQUEST[$nonce_field])) : '';
+	if (!wp_verify_nonce($nonce, $nonce_action)) {
+		wp_die(esc_html__('Invalid request.', 'flash-cache'), '', array('response' => 400));
+	}
+}
+
+function flash_cache_redirect_back($fallback) {
+	wp_safe_redirect(wp_get_referer() ?: $fallback);
+	exit;
 }
 
 function flash_cache_sanitize_origin_url($origin_url) {
@@ -81,10 +187,10 @@ function flash_cache_admin_bar_render() {
 	if (function_exists('current_user_can') && false == current_user_can('delete_others_posts')) {
 		return false;
 	}
-	$root_url			 = get_site_url(null, '/');
+	$root_url			 = home_url('/');
 	$path_cache			 = str_replace($root_url, '', flash_cache_get_current_url());
-	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-	$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+	$advanced_settings	 = flash_cache_get_advanced_settings();
+	$cache_dir			 = flash_cache_get_cache_root();
 	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path_cache)));
 	$cache_path			 = realpath($page_cache_dir) . '/';
 
@@ -102,27 +208,17 @@ function flash_cache_admin_bar_render() {
 add_action('wp_before_admin_bar_render', 'flash_cache_admin_bar_render');
 
 function flash_cache_delete_action() {
-	flash_cache_process::get_db_lock('/');
-	// Delete cache for a specific page
-	if (function_exists('current_user_can') && false == current_user_can('delete_others_posts')) {
-		wp_die('You are not authorized to do this action');
-	}
-	$nonce_verify = isset($_GET['_wpnonce']) ? wp_verify_nonce($_REQUEST['_wpnonce'], 'delete-cache') : false;
-	if ($nonce_verify && isset($_GET['path'])) {
+	flash_cache_verify_admin_request('delete-cache', 'delete_others_posts');
+	$path = isset($_GET['path']) ? sanitize_text_field(wp_unslash($_GET['path'])) : '';
 
-		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
-		$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $_GET['path'])));
-		$cache_path			 = realpath($page_cache_dir) . '/';
-		if ($cache_path != '/') {
-
-			flash_cache_delete_cache_files($cache_dir, $cache_path);
-		}
-		wp_redirect(get_site_url(null, '/') . preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $_GET['path']));
-		die();
-	} else {
-		wp_die('You are not authorized to do this action');
+	$cache_dir		= flash_cache_get_cache_root();
+	$page_cache_dir = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path)));
+	$cache_path		= realpath($page_cache_dir) . '/';
+	if ($cache_path != '/') {
+		flash_cache_delete_cache_files($cache_dir, $cache_path);
 	}
+	wp_safe_redirect(home_url('/') . ltrim(preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $path), '/'));
+	exit;
 }
 
 add_action('admin_post_flash_cache_delete', 'flash_cache_delete_action');
@@ -130,8 +226,8 @@ add_action('admin_post_flash_cache_delete', 'flash_cache_delete_action');
 function flash_cache_delete_cache_from_url($url) {
 	$path = str_ireplace(home_url(''), '', $url);
 
-	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-	$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+	$advanced_settings	 = flash_cache_get_advanced_settings();
+	$cache_dir			 = flash_cache_get_cache_root();
 	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path)));
 	$cache_path			 = realpath($page_cache_dir) . '/';
 
@@ -187,7 +283,7 @@ function flash_cache_get_content($url, $args = array()) {
 				$return['response']		 = $data;
 				$return['content_type']	 = (!empty($headers['content-type']) ? $headers['content-type'] : 'text/html; charset=UTF-8');
 			} else {
-				flash_cache_process::debug('Error with wp_remote_request:' . print_r($response, 1));
+				flash_cache_process::debug(array('Error with wp_remote_request' => $response));
 			}
 		} else {
 			flash_cache_process::debug('Error with wp_remote_request:' . $response->get_error_message());
@@ -199,9 +295,9 @@ function flash_cache_get_content($url, $args = array()) {
 
 function flash_cache_get_nginx_conf_info() {
 
-	$general_settings		 = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
-	$advanced_settings		 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-	$cache_dir				 = $advanced_settings['cache_dir'];
+	$general_settings		 = flash_cache_get_general_settings();
+	$advanced_settings		 = flash_cache_get_advanced_settings();
+	$cache_dir				 = flash_cache_get_cache_dir();
 	$wp_cache_disable_utf8	 = 0;
 
 	if (isset($_SERVER['PHP_DOCUMENT_ROOT'])) {
@@ -212,7 +308,7 @@ function flash_cache_get_nginx_conf_info() {
 		$apache_root	 = '%{DOCUMENT_ROOT}';
 	}
 
-	$server_name = flash_cache_get_server_name();
+	$server_name = flash_cache_get_rules_host('$host');
 
 	$advanced_settings['dont_cache_cookie'][]	 = 'flash_cache';
 	$content_dir_root							 = $document_root;
@@ -301,9 +397,10 @@ function flash_cache_get_nginx_conf_info() {
 }
 
 function flash_cache_get_htaccess_info() {
-	$general_settings		 = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
-	$advanced_settings		 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-	$cache_dir				 = $advanced_settings['cache_dir'];
+	$general_settings		 = flash_cache_get_general_settings();
+	$advanced_settings		 = flash_cache_get_advanced_settings();
+	$cache_dir				 = flash_cache_get_cache_dir();
+	$rules_host				 = esc_attr(flash_cache_get_rules_host('%{SERVER_NAME}'));
 	$wp_cache_disable_utf8	 = 0;
 	if (isset($_SERVER['PHP_DOCUMENT_ROOT'])) {
 		$document_root	 = sanitize_text_field($_SERVER['PHP_DOCUMENT_ROOT']);
@@ -364,8 +461,8 @@ function flash_cache_get_htaccess_info() {
 		$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Accept-Encoding} gzip';
-		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.html.gz -f';
-		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.html.gz" [L]';
+		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz -f';
+		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz" [L]';
 
 		/* Cache static pages with plain html */
 		if (substr($permalink_structure, -1) == '/') {
@@ -377,8 +474,8 @@ function flash_cache_get_htaccess_info() {
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Cookie} !^.*(' . implode('|', $dont_cache_cookies) . ').*$';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]';
-		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.html -f';
-		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.html" [L]';
+		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html -f';
+		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html" [L]';
 
 		/* Cache dynamic pages with PHP */
 		if (substr($permalink_structure, -1) == '/') {
@@ -389,8 +486,8 @@ function flash_cache_get_htaccess_info() {
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Cookie} !^.*(' . implode('|', $dont_cache_cookies) . ').*$';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]';
-		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.php -f';
-		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . '%{SERVER_NAME}/$1/index-cache.php" [L]';
+		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.php -f';
+		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.php" [L]';
 
 		/** Optimizations for page cached */
 		$cache_rules[]	 = '<IfModule mod_mime.c>';
@@ -523,36 +620,35 @@ function flash_cache_remove_rules() {
 	flash_cache_remove_marker($home_path . '.htaccess', 'FlashCache Optimizations');
 }
 
+/**
+ * Removes one marker block. The BEGIN and END lines must match the marker exactly, so
+ * "FlashCache" never takes "FlashCache Page Cache" with it.
+ */
 function flash_cache_remove_marker($filename, $marker) {
-	if (!file_exists($filename) || flash_cache_is_writeable_ACLSafe($filename)) {
-		if (!file_exists($filename)) {
-			return '';
-		} else {
-			$markerdata = explode("\n", implode('', file($filename)));
-		}
-
-		$f		 = fopen($filename, 'w');
-		$foundit = false;
-		if ($markerdata) {
-			$state = true;
-			foreach ($markerdata as $n => $markerline) {
-				if (strpos($markerline, '# BEGIN ' . $marker) !== false)
-					$state = false;
-				if ($state) {
-					if ($n + 1 < count($markerdata))
-						fwrite($f, "{$markerline}\n");
-					else
-						fwrite($f, "{$markerline}");
-				}
-				if (strpos($markerline, '# END ' . $marker) !== false) {
-					$state = true;
-				}
-			}
-		}
-		return true;
-	} else {
+	if (!file_exists($filename)) {
+		return '';
+	}
+	if (!flash_cache_is_writeable_ACLSafe($filename)) {
 		return false;
 	}
+	$lines	= explode("\n", (string) file_get_contents($filename));
+	$kept	= array();
+	$inside = false;
+	foreach ($lines as $line) {
+		$trimmed = trim($line);
+		if ($trimmed === '# BEGIN ' . $marker) {
+			$inside = true;
+			continue;
+		}
+		if ($inside) {
+			if ($trimmed === '# END ' . $marker) {
+				$inside = false;
+			}
+			continue;
+		}
+		$kept[] = $line;
+	}
+	return false !== file_put_contents($filename, implode("\n", $kept));
 }
 
 function flash_cache_is_writeable_ACLSafe($path) {
@@ -625,24 +721,47 @@ function flash_cache_get_var_javascript($var, $string) {
 	return $current_var;
 }
 
+/**
+ * Deletes a file or a folder tree, only when it lies inside the cache folder. Symbolic links
+ * are removed, never followed.
+ */
 function flash_cache_delete_dir($path, $delete_option = false) {
 	global $wpdb;
 
-	$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
-
-	if(isset($advanced_settings['lock_type']) && $advanced_settings['lock_type'] == 'db'){
-		$results = $wpdb->query(
-			'TRUNCATE TABLE '. flash_cache_settings::$flash_cache_table
-		);
+	$real_root = realpath(flash_cache_get_cache_root());
+	$real_path = realpath($path);
+	if (false === $real_root || false === $real_path) {
+		return false;
 	}
-	
+	$real_root = trailingslashit(wp_normalize_path($real_root));
+	$real_path = wp_normalize_path($real_path);
+	$checked   = is_dir($real_path) ? trailingslashit($real_path) : $real_path;
+	if (!str_starts_with($checked, $real_root)) {
+		return false;
+	}
 
+	if (flash_cache_get_advanced_settings()['lock_type'] == 'db') {
+		$wpdb->query('TRUNCATE TABLE ' . flash_cache_settings::$flash_cache_table);
+	}
 	if ($delete_option) {
 		delete_option('flash_cache_disk_usage');
 	}
-	return is_file($path) ?
-			@unlink($path) :
-			array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
+
+	if (is_link($path) || !is_dir($real_path)) {
+		return @unlink($path);
+	}
+	$items = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator($real_path, FilesystemIterator::SKIP_DOTS),
+			RecursiveIteratorIterator::CHILD_FIRST
+	);
+	foreach ($items as $item) {
+		if ($item->isDir() && !$item->isLink()) {
+			@rmdir($item->getPathname());
+		} else {
+			@unlink($item->getPathname());
+		}
+	}
+	return @rmdir($real_path);
 }
 
 function flash_cache_delete_cache_files($cache_dir, $cache_path) {
@@ -669,7 +788,8 @@ function flash_cache_delete_cache_files($cache_dir, $cache_path) {
 	if (file_exists($requests_folder)) {
 		flash_cache_delete_dir($requests_folder);
 	}
-	if (trailingslashit(realpath($cache_dir . flash_cache_get_server_name())) != $cache_path) {
+	$host_root = realpath($cache_dir . flash_cache_get_server_name());
+	if (false !== $host_root && trailingslashit(wp_normalize_path($host_root)) != trailingslashit(wp_normalize_path($cache_path))) {
 		flash_cache_delete_dir($cache_path);
 	}
 }
@@ -798,8 +918,8 @@ function flash_cache_get_menus_social_footer() {
 
 function flash_cache_changes_permalinks($old_permalink_structure, $permalink_structure) {
 	if ($old_permalink_structure != $permalink_structure) {
-		$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-		$cache_dir			 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+		$advanced_settings	 = flash_cache_get_advanced_settings();
+		$cache_dir			 = flash_cache_get_cache_root();
 		flash_cache_delete_dir($cache_dir, true);
 		flash_cache_notices::add(['text' => __('Cache files have been removed to fit the new permalinks structure.', 'flash-cache')]);
 	}

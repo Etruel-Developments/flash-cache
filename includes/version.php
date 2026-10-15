@@ -32,12 +32,12 @@ class flash_cache_version {
 			 * If updated to 3.2 and not executed before 
 			 */
 			if(version_compare($current_version, '3.2', '<') && get_option('flash_cache_updated_3_2') != 1){
-				$advanced_settings	 = wp_parse_args(get_option('flash_cache_advanced_settings', array()));
+				$advanced_settings	 = flash_cache_get_advanced_settings();
 				if(isset($advanced_settings['lock_type']) && $advanced_settings['lock_type'] == 'db'){
 					//Method for delete the cache in the database
 					self::update_to_3_2();
 					//call to function for delete the cache
-					$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+					$cache_dir = flash_cache_get_cache_root();
 					flash_cache_delete_dir($cache_dir, true);
 				}
 			}
@@ -49,6 +49,30 @@ class flash_cache_version {
 				update_option('flash_cache_updated_3_3', 1);
 			}
 		}
+
+		if (get_option('flash_cache_updated_3_8') != 1) {
+			self::update_to_3_8();
+		}
+	}
+
+	/**
+	 * Cache folders are named after the site host and the stored folder is validated, so the
+	 * existing cache files are dropped, the rules block of the first releases (marker
+	 * "FlashCache") is removed, and the current rules are written once.
+	 */
+	private static function update_to_3_8() {
+		$advanced_settings = get_option('flash_cache_advanced_settings', array());
+		if (is_array($advanced_settings) && isset($advanced_settings['cache_dir']) && false === flash_cache_sanitize_cache_dir($advanced_settings['cache_dir'])) {
+			$advanced_settings['cache_dir'] = flash_cache_settings::default_advanced_options()['cache_dir'];
+			update_option('flash_cache_advanced_settings', $advanced_settings);
+		}
+		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		$server_file = flash_cache_enviroment::is_nginx() ? 'nginx.conf' : '.htaccess';
+		flash_cache_remove_marker(get_home_path() . $server_file, 'FlashCache');
+		if (flash_cache_get_general_settings()['activate']) {
+			flash_cache_update_htaccess();
+		}
+		update_option('flash_cache_updated_3_8', 1);
 	}
 
 	/**
@@ -66,7 +90,7 @@ class flash_cache_version {
 			$origin_url = flash_cache_sanitize_origin_url($origin_url);
 	
 			$advanced_settings = flash_cache_get_advanced_settings();
-			$cache_dir = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+			$cache_dir = flash_cache_get_cache_root();
 	
 			// Delete initial path
 			$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name());

@@ -103,7 +103,7 @@ class flash_cache_preaload {
 	 */
 	public static function cron_callback() {
 
-		$values_general = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
+		$values_general = flash_cache_get_general_settings();
 		if (!$values_general['activate']) {
 			return true;
 		}
@@ -138,7 +138,7 @@ class flash_cache_preaload {
 	public static function execution_callback() {
 		global $wpdb;
 		
-		$values_general = wp_parse_args(get_option('flash_cache_settings', array()), flash_cache_settings::default_general_options());
+		$values_general = flash_cache_get_general_settings();
 
 		$values_settings = wp_parse_args(get_option('flash_cache_preload', array()), self::default_options());
 		if ($values_settings['activate']) {
@@ -164,8 +164,8 @@ class flash_cache_preaload {
 				flash_cache_process::$origin_url = get_site_url(null, '/');
 			}
 
-			$advanced_settings		 = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
-			$cache_dir				 = flash_cache_get_home_path() . $advanced_settings['cache_dir'];
+			$advanced_settings		 = flash_cache_get_advanced_settings();
+			$cache_dir				 = flash_cache_get_cache_root();
 			$default_posts_per_page	 = get_option('posts_per_page', 10);
 
 			/** Prepare WHERE statement like wp-admin\includes\export.php:111 */
@@ -451,51 +451,36 @@ class flash_cache_preaload {
 	}
 
 	public static function save() {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_preload')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-		/** Validating user inputs  */
+		flash_cache_verify_admin_request('save_flash_cache_preload');
+
 		$post_values = array();
-		if ( ! empty( $_POST['flash_cache_preload'] ) ) {
-			$post_values = $_POST['flash_cache_preload'];
-			if (  ! is_array( $post_values ) ) {
-				$post_values = array();
-			}
+		if (!empty($_POST['flash_cache_preload']) && is_array($_POST['flash_cache_preload'])) {
+			$post_values = wp_unslash($_POST['flash_cache_preload']);
 		}
-		
-		/** Sanitize all inputs and only accept the valid settings */
-		$post_values = flash_cache_sanitize_settings_deep( self::default_options(), $post_values);
-		
-		$new_options = wp_parse_args( $post_values , self::default_options());
+		$post_values = flash_cache_sanitize_settings_deep(self::default_options(), $post_values);
+
+		$new_options = wp_parse_args($post_values, self::default_options());
 		$new_options = apply_filters('flash_cache_check_preload_settings', $new_options);
 
 		update_option('flash_cache_preload', $new_options);
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
-		exit;
+		flash_cache_redirect_back(admin_url('admin.php?page=flash_cache_preload'));
 	}
 
 	public static function execute_preload() {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'save_flash_cache_preload_execution')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-		$values_cron = wp_parse_args(array(), self::default_options_cron());
-		update_option('flash_cache_preload_cron', $values_cron);
+		flash_cache_verify_admin_request('save_flash_cache_preload_execution');
+		update_option('flash_cache_preload_cron', self::default_options_cron());
 		update_option('flash_cache_preload_now', true);
 		flash_cache_notices::add(__('Preload execution pending..', 'flash-cache'));
-		wp_redirect(sanitize_url($_POST['_wp_http_referer']));
-		exit;
+		flash_cache_redirect_back(admin_url('admin.php?page=flash_cache_preload'));
 	}
 
 	public static function reset_to_default_preload() {
-		if (!wp_verify_nonce($_GET['_wpnonce'], 'reset_to_default_preload')) {
-			wp_die(__('Security check', 'flash-cache'));
-		}
-
+		flash_cache_verify_admin_request('reset_to_default_preload');
 		update_option('flash_cache_preload', self::default_options());
-
 		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_redirect(admin_url('admin.php?page=flash_cache_preload'));
+		wp_safe_redirect(admin_url('admin.php?page=flash_cache_preload'));
+		exit;
 	}
 
 }

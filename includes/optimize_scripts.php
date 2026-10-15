@@ -22,7 +22,7 @@ class flash_cache_optimize_scripts {
 
 	public static function init_process($content, $url_to_cache) {
 		if (empty(flash_cache_process::$advanced_settings)) {
-			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+			flash_cache_process::$advanced_settings = flash_cache_get_advanced_settings();
 		}
 		if (empty(flash_cache_process::$advanced_settings['optimize_scripts'])) {
 			return $content;
@@ -85,7 +85,7 @@ class flash_cache_optimize_scripts {
 		);
 
 		if (empty(flash_cache_process::$advanced_settings)) {
-			flash_cache_process::$advanced_settings = wp_parse_args(get_option('flash_cache_advanced_settings', array()), flash_cache_settings::default_advanced_options());
+			flash_cache_process::$advanced_settings = flash_cache_get_advanced_settings();
 		}
 		if (is_null(flash_cache_process::$origin_url)) {
 			flash_cache_process::$origin_url = get_site_url(null, '/');
@@ -109,7 +109,7 @@ class flash_cache_optimize_scripts {
 		}
 
 		$all_js_code = trim($all_js_code);
-		$cache_dir	 = flash_cache_get_home_path() . flash_cache_process::$advanced_settings['cache_dir'];
+		$cache_dir	 = flash_cache_get_cache_root();
 		$cache_path	 = $cache_dir . $server_name . '/scripts/';
 
 		if (!file_exists($cache_path)) {
