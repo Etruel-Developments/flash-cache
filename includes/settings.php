@@ -12,8 +12,6 @@ if (!defined('ABSPATH'))
 
 class flash_cache_settings {
 
-	public static $flash_cache_table;
-
 	/**
 	 * Static function hooks
 	 * @access public
@@ -21,10 +19,6 @@ class flash_cache_settings {
 	 * @since 1.0.0
 	 */
 	public static function hooks() {
-		global $wpdb;
-		//set the complete name of the table
-		self::$flash_cache_table = $wpdb->prefix . 'flash_lock';
-
 		add_action('admin_notices', array(__CLASS__, 'flash_cache_check_permalinks'));
 		add_action('admin_menu', array(__CLASS__, 'admin_menu'));
 		add_action('admin_print_styles', array(__CLASS__, 'all_WP_admin_styles'));

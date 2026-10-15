@@ -103,9 +103,14 @@ You can either install it automatically from the WordPress admin, or do it manua
 * One refresh per page at a time, however many visitors arrive when it expires, and on PHP-FPM servers the visitor's connection is released before the page is rebuilt.
 * New setting "Refresh expired pages": on visits (default) or from the preload only, for fully script-free cached pages.
 * Form submissions always reach WordPress live: only GET and HEAD requests are cached and served from cache.
+* Reliable page locks: the database lock uses MySQL named locks, so it works on every MySQL and MariaDB version and leaves the database session untouched; file locks live in one locks folder and step aside quietly where the folder cannot be written.
+* The pattern options "Create cache on insert/update", "Update home on insert post" and "Update categories on post" rebuild those pages in the background right after publishing, so saving a post stays instant.
+* Approved comments refresh their post's cache in the background.
+* Faster uncached requests: patterns load from a single stored option instead of database queries.
+* Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.
-* After updating, the cache is rebuilt from scratch and the server rules are refreshed automatically.
+* After updating, the cache is rebuilt from scratch, the server rules are refreshed automatically and the database lock table is removed, since locks need no table.
 
 = 3.6 Apr 15, 2025 =
 * This update features security improvements and is recommended for all users.

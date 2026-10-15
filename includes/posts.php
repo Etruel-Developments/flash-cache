@@ -15,14 +15,13 @@ class flash_cache_posts {
 
 	public static function hooks() {
 
-		add_action('pingback_post', array(__CLASS__, 'cache_from_comment'), 99);
-		add_action('comment_post', array(__CLASS__, 'cache_from_comment'), 99);
-		add_action('edit_comment', array(__CLASS__, 'cache_from_comment'), 99);
+		add_action('comment_post', array(__CLASS__, 'comment_posted'), 99, 2);
+		add_action('edit_comment', array(__CLASS__, 'comment_edited'), 99);
+		add_action('transition_comment_status', array(__CLASS__, 'comment_status_changed'), 99, 3);
+		add_action('flash_cache_rebuild_post', array(__CLASS__, 'rebuild_post'));
+		add_action('flash_cache_rebuild_comment_post', array(__CLASS__, 'rebuild_comment_post'));
 		add_action('post_submitbox_minor_actions', array(__CLASS__, 'delete_cache_button'));
 		add_action('admin_post_flash_cache_delete_cache', array(__CLASS__, 'delete_cache_action'));
-		/* add_action('pre_post_update', array(__CLASS__, 'before_data_is_saved_function'), 99); 
-		  add_action('save_post', array(__CLASS__, 'create_cache'), 999, 3 );
-		 */
 		add_action('transition_post_status', array(__CLASS__, 'status_transition'), 10, 3);
 	}
 
@@ -40,6 +39,113 @@ class flash_cache_posts {
 			flash_cache_delete_cache_from_url(home_url('/'));
 			flash_cache_delete_cache_from_url(home_url('/feed/'));
 			flash_cache_delete_cache_from_url(home_url('/page/'));
+		}
+		if ($new_status === 'publish' && is_post_type_viewable($post->post_type)) {
+			self::schedule('flash_cache_rebuild_post', $post->ID);
+		}
+	}
+
+	/**
+	 * Rebuilds run from WP-Cron, never inside the request that saves a post or a comment.
+	 * WP-Cron also drops an identical event scheduled again within ten minutes.
+	 */
+	public static function schedule($hook, $post_id) {
+		if (!flash_cache_get_general_settings()['activate'] || wp_next_scheduled($hook, array((int) $post_id))) {
+			return;
+		}
+		wp_schedule_single_event(time(), $hook, array((int) $post_id));
+	}
+
+	/**
+	 * What the patterns ask for when a post of this type is published or updated.
+	 */
+	public static function rebuild_targets($post_type) {
+		$targets = array('post' => false, 'home' => false, 'terms' => false, 'comment' => false);
+		foreach (flash_cache_patterns::get_all() as $pattern) {
+			if (empty($pattern['page_type']['single'])) {
+				continue;
+			}
+			if (!empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][$post_type])) {
+				continue;
+			}
+			$targets['post']	|= !empty($pattern['create_cache_on_insert_update']);
+			$targets['home']	|= !empty($pattern['update_home_on_insert_post']);
+			$targets['terms']	|= !empty($pattern['update_categories_on_post']);
+			$targets['comment'] |= !empty($pattern['update_on_comment']);
+		}
+		return $targets;
+	}
+
+	public static function rebuild_post($post_id) {
+		$post = get_post($post_id);
+		if (!$post || $post->post_status !== 'publish' || !flash_cache_get_general_settings()['activate']) {
+			return;
+		}
+		$targets = self::rebuild_targets($post->post_type);
+		if ($targets['post']) {
+			self::create_cache_post_id($post_id);
+		}
+		if ($targets['home']) {
+			self::create_cache_home();
+		}
+		if ($targets['terms']) {
+			self::rebuild_terms($post_id);
+		}
+	}
+
+	/**
+	 * The first archive page of each term of the post. Its other pages are deleted along with
+	 * the post's caches and rebuilt by visits, so a large category costs one request, not one
+	 * per archive page.
+	 */
+	public static function rebuild_terms($post_id) {
+		$current_query = wp_parse_args(array('is_tag' => 1, 'is_category' => 1, 'is_archive' => 1), flash_cache_default_query());
+		foreach (get_post_taxonomies($post_id) as $taxonomy) {
+			if (!is_taxonomy_viewable($taxonomy)) {
+				continue;
+			}
+			$terms = wp_get_post_terms($post_id, $taxonomy);
+			if (is_wp_error($terms)) {
+				continue;
+			}
+			foreach ($terms as $term) {
+				$term_url = get_term_link($term, $taxonomy);
+				if (is_wp_error($term_url) || strpos($term_url, '?') !== false) {
+					continue;
+				}
+				flash_cache_process::$force_process_type = 'curl';
+				flash_cache_process::process_cache_from_query($current_query, $term_url);
+			}
+		}
+	}
+
+	public static function rebuild_comment_post($post_id) {
+		$post = get_post($post_id);
+		if (!$post || $post->post_status !== 'publish' || !flash_cache_get_general_settings()['activate']) {
+			return;
+		}
+		if (self::rebuild_targets($post->post_type)['comment']) {
+			self::create_cache_post_id($post_id);
+		}
+	}
+
+	public static function comment_posted($comment_id, $approved) {
+		if ($approved === 1 || $approved === '1') {
+			$comment = get_comment($comment_id);
+			self::schedule('flash_cache_rebuild_comment_post', $comment->comment_post_ID);
+		}
+	}
+
+	public static function comment_edited($comment_id) {
+		$comment = get_comment($comment_id);
+		if ($comment && $comment->comment_approved === '1') {
+			self::schedule('flash_cache_rebuild_comment_post', $comment->comment_post_ID);
+		}
+	}
+
+	public static function comment_status_changed($new_status, $old_status, $comment) {
+		if ($new_status !== $old_status && ($new_status === 'approved' || $old_status === 'approved')) {
+			self::schedule('flash_cache_rebuild_comment_post', $comment->comment_post_ID);
 		}
 	}
 
@@ -68,9 +174,14 @@ class flash_cache_posts {
 		$taxonomy_names = get_post_taxonomies($post_id);
 		foreach ($taxonomy_names as $key => $tax) {
 			$term_list = wp_get_post_terms($post_id, $tax, array("fields" => "all"));
+			if (is_wp_error($term_list)) {
+				continue;
+			}
 			foreach ($term_list as $term) {
 				$term_url = get_term_link($term->term_id, $tax);
-				flash_cache_delete_cache_from_url($term_url);
+				if (!is_wp_error($term_url)) {
+					flash_cache_delete_cache_from_url($term_url);
+				}
 			}
 		}
 	}
@@ -144,158 +255,6 @@ class flash_cache_posts {
 		</div>';
 	}
 
-	public static function create_cache($post_id, $post, $update) {
-		if ($post->post_status != 'publish') {
-			return true;
-		}
-
-		$general_settings = flash_cache_get_general_settings();
-		if (!$general_settings['activate']) {
-			return true;
-		}
-		$args		 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-		$patterns	 = get_posts($args);
-
-		$create_cache			 = false;
-		$create_cache_home		 = false;
-		$create_cache_categories = false;
-		$is_new_post			 = false;
-		$modified_post			 = false;
-
-		if ($post->post_modified_gmt == $post->post_date_gmt) {
-			$is_new_post = true;
-		}
-
-		if ($post->post_modified_gmt > $post->post_date_gmt) {
-			$modified_post = true;
-		}
-
-		foreach ($patterns as $pt) {
-
-			$pattern = flash_cache_patterns::get_data($pt->ID);
-
-			// Just Default
-			$just_option_post_type_and_create_cache_on_insert_update = $pattern['page_type']['single'] && $pattern['create_cache_on_insert_update'];
-			$just_option_post_type_and_update_home_on_insert_post	 = $pattern['page_type']['single'] && $pattern['update_home_on_insert_post'];
-			$just_option_post_type_and_update_categories_on_post	 = $pattern['page_type']['single'] && $pattern['update_categories_on_post'];
-			//$just_option_search_and_create_cache_on_insert_update = $pattern['page_type']['search'] && $pattern['create_cache_on_insert_update'];
-
-
-			if ($just_option_post_type_and_create_cache_on_insert_update || $just_option_post_type_and_update_home_on_insert_post || $just_option_post_type_and_update_categories_on_post) {
-				//If you do not select any of the Post Type options
-				if (empty($pattern['page_type']['posts'])) {
-					if ($just_option_post_type_and_create_cache_on_insert_update) {
-						$create_cache = true;
-						break;
-					}
-					if ($just_option_post_type_and_update_home_on_insert_post) {
-						$create_cache_home = true;
-						break;
-					}
-					if ($just_option_post_type_and_update_categories_on_post) {
-						$create_cache_categories = true;
-						break;
-					}
-				} else {
-					if ($just_option_post_type_and_create_cache_on_insert_update) {
-						foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-
-							if ($pcpt == $post->post_type) {
-								$create_cache = true;
-								break;
-							}
-						}
-					}
-
-					if ($just_option_post_type_and_update_home_on_insert_post) {
-						foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-							if ($pcpt == $post->post_type && $pattern['update_home_on_insert_post']) {
-								$create_cache_home = true;
-								break;
-							}
-						}
-					}
-
-					if ($just_option_post_type_and_update_categories_on_post) {
-						foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-							if ($pcpt == $post->post_type && $pattern['update_categories_on_post']) {
-								$create_cache_categories = true;
-								break;
-							}
-						}
-					}
-					/*
-					  if($just_option_search_and_create_cache_on_insert_update){
-						foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-							if ($pcpt == $post->post_type && $pattern['create_cache_on_insert_update']) {
-								$create_cache_search = true;
-								break;
-							}
-						}
-					  } */
-				}
-			}
-		}
-
-		if ($create_cache) {
-			self::create_cache_post_id($post_id);
-		}
-		if ($create_cache_home) {
-			self::create_cache_home();
-		}
-		if ($create_cache_categories) {
-			$default_posts_per_page = get_option('posts_per_page', 10);
-			self::update_taxonomies(0, 0, $default_posts_per_page);
-		}
-		//if ($create_cache_search) {
-		//self::create_cache_search();
-		//}
-	}
-
-	public static function create_cache_publish($postid) {
-		return self::create_cache_post_id($postid);
-	}
-
-	public static function cache_from_comment($comment_id, $status = 'NA') {
-		$general_settings = flash_cache_get_general_settings();
-		if (!$general_settings['activate']) {
-			return true;
-		}
-		$comment = get_comment($comment_id, ARRAY_A);
-		if ($status != 'NA') {
-			$comment['old_comment_approved'] = $comment['comment_approved'];
-			$comment['comment_approved']	 = $status;
-		}
-
-		if (( $status == 'trash' || $status == 'spam' ) && $comment['old_comment_approved'] != 1) {
-			return -1;
-		}
-		$postid			 = $comment['comment_post_ID'];
-		$post			 = get_post($postid);
-		$args			 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-		$patterns		 = get_posts($args);
-		$create_cache	 = false;
-		foreach ($patterns as $pt) {
-			$pattern = flash_cache_patterns::get_data($pt->ID);
-			if ($pattern['page_type']['single'] && $pattern['update_on_comment']) {
-				if (empty($pattern['page_type']['posts'])) {
-					$create_cache = true;
-					break;
-				} else {
-					foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-						if ($pcpt == $post->post_type) {
-							$create_cache = true;
-							break;
-						}
-					}
-				}
-			}
-		}
-		if ($create_cache) {
-			self::create_cache_post_id($postid);
-		}
-	}
-
 	public static function create_cache_post_id($postid) {
 		$post = get_post($postid);
 		if ($post->post_status != 'publish') {
@@ -332,7 +291,7 @@ class flash_cache_posts {
 
 		flash_cache_process::$force_permalink	 = true;
 		flash_cache_process::$force_process_type = 'curl';
-		flash_cache_process::process_cache_from_query($current_query, get_site_url(null, '/'));
+		flash_cache_process::process_cache_from_query($current_query, home_url('/'));
 	}
 
 	public static function update_taxonomies($post_id, $ttl = 0, $default_posts_per_page = 10, $cache_dir = '', $update_current_page = false) {

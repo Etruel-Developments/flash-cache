@@ -3,7 +3,6 @@
 class flash_cache_preaload {
 
 	public static $start_time_callback	 = null;
-	public static $can_cron_handler		 = null;
 
 	/**
 	 * Static function hooks
@@ -26,18 +25,6 @@ class flash_cache_preaload {
 	}
 
 	
-
-	/**
-	 * Static function end_cron
-	 * @access public
-	 * @return void
-	 * @since 1.2.1
-	 */
-	public static function end_cron() {
-		fwrite(self::$can_cron_handler, '');
-		flock(self::$can_cron_handler, LOCK_UN);
-		fclose(self::$can_cron_handler);
-	}
 
 	/**
 	 * Static function check_time_exection
@@ -109,8 +96,7 @@ class flash_cache_preaload {
 		}
 
 		
-		if (!flash_cache_process::start_create_cache(FLASH_CACHE_PLUGIN_DIR)) {
-			flash_cache_process::end_create_cache();
+		if (!flash_cache_process::start_create_cache('preload')) {
 			return false;
 		}
 
@@ -126,7 +112,7 @@ class flash_cache_preaload {
 		}
 
 		update_option('flash_cache_preload_now', false);
-		flash_cache_process::end_create_cache();
+		flash_cache_process::end_create_cache('preload');
 	}
 
 	/**
@@ -157,8 +143,7 @@ class flash_cache_preaload {
 
 			$execution_offeset	 = absint($values_cron['execution_offeset']);
 
-			$args		 = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-			$patterns	 = get_posts($args);
+			$patterns	 = flash_cache_patterns::get_all();
 
 			if (is_null(flash_cache_process::$origin_url)) {
 				flash_cache_process::$origin_url = get_site_url(null, '/');
@@ -193,8 +178,7 @@ class flash_cache_preaload {
 				update_option('flash_cache_preload_current_post', $current_url);
 				$create_cache	 = false;
 
-				foreach ($patterns as $pt) {
-					$pattern				 = flash_cache_patterns::get_data($pt->ID);
+				foreach ($patterns as $pattern) {
 					$url_must_contain_array	 = array();
 					$line_arr				 = explode("\n", $pattern['url_must_contain']);
 

@@ -141,6 +141,9 @@ class Flash_Cache {
 		flash_cache_remove_rules();
 		flash_cache_delete_dir($cache_dir, true);
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
+		foreach (array('flash_cache_cron', 'flash_cache_rebuild_post', 'flash_cache_rebuild_comment_post') as $hook) {
+			wp_unschedule_hook($hook);
+		}
 	}
 
 	/**
@@ -160,22 +163,6 @@ class Flash_Cache {
 		flash_cache_version::delete_all_patterns();
 		flash_cache_delete_all_options();
 	}
-
-	public static function create_flash_lock_table() {
-		global $wpdb;
-	
-		$charset_collate = $wpdb->get_charset_collate();
-	
-		$sql = "CREATE TABLE IF NOT EXISTS ". $wpdb->prefix . "flash_lock (
-			id mediumint(9) NOT NULL AUTO_INCREMENT,
-			option_lock VARCHAR(191) NOT NULL DEFAULT '',
-			option_value LONGTEXT NOT NULL,
-			PRIMARY KEY  (id)
-		) $charset_collate;";
-	
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-		dbDelta($sql);
-	}
 }
 
 /**
@@ -193,7 +180,5 @@ class Flash_Cache {
 function Flash_Cache_load() {
 	return Flash_Cache::getInstance();
 }
-
-register_activation_hook( __FILE__, array('Flash_Cache', 'create_flash_lock_table'));
 
 add_action('plugins_loaded', 'Flash_Cache_load');

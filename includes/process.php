@@ -25,7 +25,9 @@ class flash_cache_process {
 	public static $force_process_type = null;
 	public static $force_permalink	  = false;
 	public static $advanced_settings  = null;
-	public static $can_cache_handler  = null;
+
+	/** Locks held by this request, newest last: key => file handle, or true for a DB lock. */
+	private static $held_locks = array();
 
 	/* Added for validation in optimize process. */
 	public static $current_pattern = array();
@@ -38,96 +40,80 @@ class flash_cache_process {
 	}
 
 	/**
-	 * Static function get_file_lock
-	 * @access public
-	 * @return void
-	 * @since 1.0.0
+	 * Takes the generation lock for a page (or any named job) without waiting. Returns false
+	 * when another request holds it or the lock cannot be taken; the caller then skips the work.
+	 * Every successful call must be paired with end_create_cache() on every return path.
 	 */
-	public static function get_file_lock($path_file) {
-		if (!file_exists($path_file)) {
-			@mkdir($path_file, 0777, true);
-			file_put_contents($path_file . 'can_create_cache.txt', 'Created by Flash Cache');
+	public static function start_create_cache($key) {
+		$key = md5(wp_normalize_path((string) $key));
+		if (isset(self::$held_locks[$key])) {
+			return false;
 		}
-		self::$can_cache_handler = fopen($path_file . 'can_create_cache.txt', 'a');
-		/**
-		 * bloquea exclusivamente el archivo (el archivo solo puede ser leído y escrito por el usuario), 
-		 * luego, si otros usuarios nuevos desean acceder al archivo, serán bloqueados hasta que el primero cierre el archivo (libera el bloqueo).
-		 * */
-		return flock(self::$can_cache_handler, LOCK_EX | LOCK_NB);
+		$taken = flash_cache_get_advanced_settings()['lock_type'] === 'db' ? self::get_db_lock($key) : self::get_file_lock($key);
+		if (false === $taken) {
+			return false;
+		}
+		self::$held_locks[$key] = $taken;
+		return true;
 	}
 
-	public static function get_db_lock($path_file) {
+	/**
+	 * Releases the lock taken for $key, or the newest one when no key is given.
+	 */
+	public static function end_create_cache($key = null) {
+		if (null === $key) {
+			end(self::$held_locks);
+			$key = key(self::$held_locks);
+		} else {
+			$key = md5(wp_normalize_path((string) $key));
+		}
+		if (null === $key || !isset(self::$held_locks[$key])) {
+			return false;
+		}
+		$lock = self::$held_locks[$key];
+		unset(self::$held_locks[$key]);
+		if (true === $lock) {
+			global $wpdb;
+			$wpdb->query($wpdb->prepare('SELECT RELEASE_LOCK(%s)', self::db_lock_name($key)));
+		} elseif (is_resource($lock)) {
+			flock($lock, LOCK_UN);
+			fclose($lock);
+		}
+		return true;
+	}
+
+	/**
+	 * A non-blocking flock() on a file under the cache folder's locks/ directory. Returns the
+	 * handle, or false when the folder is not writable or the lock is taken.
+	 */
+	private static function get_file_lock($key) {
+		$locks_dir = flash_cache_get_cache_root() . 'locks/';
+		if (!is_dir($locks_dir) && !@mkdir($locks_dir, 0777, true) && !is_dir($locks_dir)) {
+			return false;
+		}
+		$handle = @fopen($locks_dir . $key . '.lock', 'c');
+		if (false === $handle) {
+			return false;
+		}
+		if (!flock($handle, LOCK_EX | LOCK_NB)) {
+			fclose($handle);
+			return false;
+		}
+		return $handle;
+	}
+
+	/**
+	 * A MySQL named lock: atomic, released with the connection, and independent of the
+	 * transaction isolation level.
+	 */
+	private static function get_db_lock($key) {
 		global $wpdb;
-		$wpdb->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
-		$wpdb->query('START TRANSACTION');
-
-		$option_lock = 'flash_cache_db_lock_' . hash('sha256', $path_file);
-
-		$results = $wpdb->get_results(
-				$wpdb->prepare(
-						"SELECT * FROM " . flash_cache_settings::$flash_cache_table . " WHERE option_lock = %s  LIMIT 0, 25 FOR UPDATE NOWAIT",
-						$option_lock
-				)
-		);
-
-		if ($wpdb->last_error) {
-			$wpdb->query('COMMIT');
-			return false;
-		}
-
-		if (empty($results)) {
-			$wpdb->query(
-					$wpdb->prepare(
-							"INSERT INTO " . flash_cache_settings::$flash_cache_table . " (option_lock, option_value) VALUES(%s, 1)",
-							$option_lock
-					)
-			);
-		}
-
-		if ($wpdb->last_error) {
-			$wpdb->query('COMMIT');
-			return false;
-		}
-		$wpdb->query('COMMIT');
-		return true;
+		return '1' === (string) $wpdb->get_var($wpdb->prepare('SELECT GET_LOCK(%s, 0)', self::db_lock_name($key))) ? true : false;
 	}
 
-	/**
-	 * Static function can_create_cache
-	 * @access public
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public static function start_create_cache($path_file) {
-		$advanced_settings = flash_cache_get_advanced_settings();
-		if (empty($advanced_settings)) {
-			return self::get_file_lock($path_file);
-		}
-		if (empty($advanced_settings['lock_type'])) {
-			return self::get_file_lock($path_file);
-		}
-		if ($advanced_settings['lock_type'] == 'db') {
-			return self::get_db_lock($path_file);
-		}
-		return self::get_file_lock($path_file);
-	}
-
-	/**
-	 * Static function end_create_cache
-	 * @access public
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public static function end_create_cache() {
-		$advanced_settings = flash_cache_get_advanced_settings();
-		if (!empty($advanced_settings['lock_type'])) {
-			if ($advanced_settings['lock_type'] == 'db') {
-				return true;
-			}
-		}
-		flock(self::$can_cache_handler, LOCK_UN);
-		fclose(self::$can_cache_handler);
-		return true;
+	private static function db_lock_name($key) {
+		global $wpdb;
+		return 'flash_cache_' . md5($wpdb->prefix . $key);
 	}
 
 	/**
@@ -201,45 +187,28 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		}
 
 		$path		= trim(str_replace(self::$origin_url, '', $relative_path), '/');
-		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-		$response	= flash_cache_get_content(self::$url_to_cache);
-
-		$parent_dir = $cache_dir . $server_name;
-		if (!file_exists($parent_dir)) {
-
-			@mkdir($parent_dir, 0777, true);
-		}
+		$cache_path = trailingslashit($cache_dir . $server_name . '/' . $path);
 		if (!file_exists($cache_path)) {
-
 			@mkdir($cache_path, 0777, true);
 		}
 
-		/**
-		 * If the file cannot be locked, another user is already creating the cache.
-		 */
+		// Another request is building this page; it will write the same content.
 		if (!self::start_create_cache($cache_path)) {
-			self::end_create_cache();
 			return false;
 		}
-
-		/**
-		 * If a blank page was obtained it returns without caching.
-		 */
-		if (empty($response['response'])) {
-			return;
+		$response = flash_cache_get_content(self::$url_to_cache);
+		if (!empty($response['response'])) {
+			self::debug('Creating HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
+			self::write_html_cache($cache_path, apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache));
 		}
+		self::end_create_cache($cache_path);
+	}
 
-		self::debug('Creating HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-
-		$response['response'] = apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache);
-
-		$gzip_html = gzencode($response['response']);
-		file_put_contents($cache_path . 'index-cache.html', $response['response']);
+	public static function write_html_cache($cache_path, $html) {
+		$gzip_html = gzencode($html);
+		file_put_contents($cache_path . 'index-cache.html', $html);
 		file_put_contents($cache_path . 'index-cache.html.gz', $gzip_html);
-		flash_cache_increment_disk_usage(mb_strlen($response['response'], '8bit'));
-		flash_cache_increment_disk_usage(mb_strlen($gzip_html, '8bit'));
-
-		self::end_create_cache();
+		flash_cache_increment_disk_usage(mb_strlen($html, '8bit') + mb_strlen($gzip_html, '8bit'));
 	}
 
 	public static function create_cache_php() {
@@ -258,7 +227,6 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			@mkdir($cache_path, 0777, true);
 		}
 		if (!self::start_create_cache($cache_path)) {
-			self::end_create_cache();
 			return false;
 		}
 
@@ -267,7 +235,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		if (!empty($response['response'])) {
 			self::write_php_cache($cache_path, $response['response'], $response['content_type']);
 		}
-		self::end_create_cache();
+		self::end_create_cache($cache_path);
 	}
 
 	/**
@@ -341,8 +309,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 
 		self::$cache_type = 'html';
 		$create_cache	  = false;
-		$args			  = array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1);
-		$patterns		  = get_posts($args);
+		$patterns		  = flash_cache_patterns::get_all();
 		$is_post		  = false;
 
 		// We validate if it is post
@@ -366,8 +333,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			$current_url = get_permalink($post->ID);
 		}
 
-		foreach ($patterns as $pt) {
-			$pattern = flash_cache_patterns::get_data($pt->ID);
+		foreach ($patterns as $pattern) {
 
 			$url_must_contain_array = array();
 			$line_arr				= explode("\n", $pattern['url_must_contain']);
@@ -700,44 +666,30 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 	 * @since 1.0.0
 	 */
 	public static function create_cache_ob_html($response, $use_curl) {
-
-		$advanced_settings = flash_cache_get_advanced_settings();
-
-		$cache_dir	= flash_cache_get_cache_root();
+		if (is_null(self::$origin_url)) {
+			self::$origin_url = get_site_url(null, '/');
+		}
 		$path		= self::get_path(self::$optional_post_id);
-		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
-
+		$cache_path = trailingslashit(flash_cache_get_cache_root() . flash_cache_get_server_name() . '/' . $path);
+		if (file_exists($cache_path . 'index-cache.html') && file_exists($cache_path . 'index-cache.html.gz')) {
+			return false;
+		}
+		if (!file_exists($cache_path)) {
+			@mkdir($cache_path, 0777, true);
+		}
 		if (!self::start_create_cache($cache_path)) {
-			self::end_create_cache();
 			return false;
 		}
 
 		if ($use_curl) {
 			$response = flash_cache_get_content(self::$url_to_cache);
+			$response = $response['response'] ?? '';
 		}
-		if (is_null(self::$origin_url)) {
-			self::$origin_url = get_site_url(null, '/');
+		if (!empty($response)) {
+			self::debug('Creating OB HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
+			self::write_html_cache($cache_path, apply_filters('flash_cache_response_html', $response, self::$url_to_cache));
 		}
-
-
-		if (!file_exists($cache_path)) {
-			@mkdir($cache_path, 0777, true);
-		}
-
-
-		self::debug('Creating OB HTML cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$response = apply_filters('flash_cache_response_html', $response, self::$url_to_cache);
-
-		$gzip_response = gzencode($response);
-		if (file_exists($cache_path . 'index-cache.html') && file_exists($cache_path . 'index-cache.html.gz')) {
-			return false;
-		}
-		file_put_contents($cache_path . 'index-cache.html', $response);
-		file_put_contents($cache_path . 'index-cache.html.gz', $gzip_response);
-
-		flash_cache_increment_disk_usage(mb_strlen($response, '8bit'));
-		flash_cache_increment_disk_usage(mb_strlen($gzip_response, '8bit'));
-		self::end_create_cache();
+		self::end_create_cache($cache_path);
 	}
 
 	public static function create_cache_ob_php($response, $use_curl) {
@@ -752,7 +704,6 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			@mkdir($cache_path, 0777, true);
 		}
 		if (!self::start_create_cache($cache_path)) {
-			self::end_create_cache();
 			return false;
 		}
 
@@ -772,7 +723,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		if (!empty($response)) {
 			self::write_php_cache($cache_path, $response, $content_type);
 		}
-		self::end_create_cache();
+		self::end_create_cache($cache_path);
 	}
 
 	/**

@@ -33,6 +33,62 @@ class flash_cache_patterns {
 		add_action('admin_print_scripts-post.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_print_scripts-post-new.php', array(__CLASS__, 'patterns_edit_scripts'));
 		add_action('admin_post_reset_to_default_patterns_options', array(__CLASS__, 'reset_to_default_patterns_options'));
+
+		add_action('save_flash_cache_patterns', array(__CLASS__, 'flush'));
+		foreach (array('added_post_meta', 'updated_post_meta', 'deleted_post_meta') as $meta_hook) {
+			add_action($meta_hook, array(__CLASS__, 'flush_on_meta'), 10, 2);
+		}
+		foreach (array('deleted_post', 'trashed_post', 'untrashed_post') as $post_hook) {
+			add_action($post_hook, array(__CLASS__, 'flush_on_post'));
+		}
+		add_action('transition_post_status', array(__CLASS__, 'flush_on_status'), 20, 3);
+	}
+
+	/** Published patterns with their data, keyed by ID in ID order. */
+	private static $all = null;
+
+	/**
+	 * Every published pattern with its data, read from one autoloaded option that is rebuilt
+	 * whenever a pattern or its meta changes, so front-end requests run no pattern queries.
+	 */
+	public static function get_all() {
+		if (null !== self::$all) {
+			return self::$all;
+		}
+		$stored = get_option('flash_cache_patterns_data', false);
+		if (is_array($stored)) {
+			return self::$all = $stored;
+		}
+		self::$all = array();
+		$patterns  = get_posts(array('post_type' => 'flash_cache_patterns', 'orderby' => 'ID', 'order' => 'ASC', 'numberposts' => -1));
+		foreach ($patterns as $pattern) {
+			self::$all[$pattern->ID] = self::get_data($pattern->ID);
+		}
+		update_option('flash_cache_patterns_data', self::$all, true);
+		return self::$all;
+	}
+
+	public static function flush() {
+		self::$all = null;
+		delete_option('flash_cache_patterns_data');
+	}
+
+	public static function flush_on_meta($meta_ids, $object_id) {
+		if (get_post_type($object_id) === 'flash_cache_patterns') {
+			self::flush();
+		}
+	}
+
+	public static function flush_on_post($post_id) {
+		if (get_post_type($post_id) === 'flash_cache_patterns') {
+			self::flush();
+		}
+	}
+
+	public static function flush_on_status($new_status, $old_status, $post) {
+		if ($post->post_type === 'flash_cache_patterns' && $new_status !== $old_status) {
+			self::flush();
+		}
 	}
 	
 	/**
@@ -519,17 +575,59 @@ class flash_cache_patterns {
 			return false;
 		}
 
-		$fields	 = apply_filters('flash_cache_patterns_fields_clean', $_POST);
+		$fields	 = apply_filters('flash_cache_patterns_fields_clean', self::fields_from_request(wp_unslash($_POST)));
 		$fields	 = apply_filters('flash_cache_patterns_save', $fields);
 
 		foreach ($fields as $field => $value) {
-
 			if (!is_null($value)) {
 				$new = apply_filters('flash_cache_pattern_save_' . $field, $value);
 				update_post_meta($post_id, $field, $new);
 			}
 		}
 		do_action('save_flash_cache_patterns', $post_id, $post);
+	}
+
+	/**
+	 * Only the pattern fields, each cast to its type. A field the form did not send keeps
+	 * the shape clean_fields() expects (an unchecked box arrives as 0).
+	 */
+	public static function fields_from_request($request) {
+		$fields = array();
+		foreach (self::default_fields_array() as $field => $default) {
+			$value = $request[$field] ?? null;
+			switch ($field) {
+				case 'ttl_minimum':
+				case 'ttl_maximum':
+					$fields[$field] = absint($value ?? $default);
+					break;
+				case 'cache_type':
+					$fields[$field] = in_array($value, array('html', 'php'), true) ? $value : 'html';
+					break;
+				case 'url_must_contain':
+				case 'url_not_contain':
+					$fields[$field] = sanitize_textarea_field((string) $value);
+					break;
+				case 'page_type':
+					$page_type = array();
+					foreach ($default as $type => $type_default) {
+						if ($type === 'posts') {
+							$page_type['posts'] = array();
+							foreach ((array) ($value['posts'] ?? array()) as $post_type => $on) {
+								if (!empty($on) && post_type_exists($post_type)) {
+									$page_type['posts'][sanitize_key($post_type)] = 1;
+								}
+							}
+						} else {
+							$page_type[$type] = empty($value[$type]) ? 0 : 1;
+						}
+					}
+					$fields[$field] = $page_type;
+					break;
+				default:
+					$fields[$field] = is_array($default) ? array_map('sanitize_text_field', (array) $value) : (empty($value) ? 0 : (is_numeric($default) ? 1 : sanitize_text_field((string) $value)));
+			}
+		}
+		return $fields;
 	}
 
 	public static function reset_to_default_patterns_options() {

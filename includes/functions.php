@@ -742,9 +742,6 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 		return false;
 	}
 
-	if (flash_cache_get_advanced_settings()['lock_type'] == 'db') {
-		$wpdb->query('TRUNCATE TABLE ' . flash_cache_settings::$flash_cache_table);
-	}
 	if ($delete_option) {
 		delete_option('flash_cache_disk_usage');
 		$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_refresh_') . '%'));

@@ -42,12 +42,7 @@ class flash_cache_version {
 				}
 			}
 
-			if (version_compare($current_version, '3.3', '<') && get_option('flash_cache_updated_3_3') != 1) {
-				//Method for delete the cache in the database
-				Flash_Cache::create_flash_lock_table();
-				//call to function for delete the cache
-				update_option('flash_cache_updated_3_3', 1);
-			}
+
 		}
 
 		if (get_option('flash_cache_updated_3_8') != 1) {
@@ -61,6 +56,7 @@ class flash_cache_version {
 	 * "FlashCache") is removed, and the current rules are written once.
 	 */
 	private static function update_to_3_8() {
+		global $wpdb;
 		$advanced_settings = get_option('flash_cache_advanced_settings', array());
 		if (is_array($advanced_settings) && isset($advanced_settings['cache_dir']) && false === flash_cache_sanitize_cache_dir($advanced_settings['cache_dir'])) {
 			$advanced_settings['cache_dir'] = flash_cache_settings::default_advanced_options()['cache_dir'];
@@ -72,6 +68,24 @@ class flash_cache_version {
 		if (flash_cache_get_general_settings()['activate']) {
 			flash_cache_update_htaccess();
 		}
+		$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'flash_lock');
+
+		// A pattern keeps only its own fields as meta, plus WordPress's internal keys.
+		$pattern_fields = array_keys(flash_cache_patterns::default_fields_array());
+		foreach (get_posts(array('post_type' => 'flash_cache_patterns', 'post_status' => 'any', 'numberposts' => -1)) as $pattern) {
+			foreach (array_keys(get_post_custom($pattern->ID)) as $meta_key) {
+				$form_field = in_array($meta_key, array('_wpnonce', '_wp_http_referer', '_wp_original_http_referer'), true);
+				if (($form_field || $meta_key[0] !== '_') && !in_array($meta_key, $pattern_fields, true)) {
+					delete_post_meta($pattern->ID, $meta_key);
+				}
+			}
+		}
+		flash_cache_patterns::flush();
+		foreach (array('can_create_cache.txt', 'can_cron.txt') as $legacy_lock) {
+			if (file_exists(FLASH_CACHE_PLUGIN_DIR . $legacy_lock)) {
+				@unlink(FLASH_CACHE_PLUGIN_DIR . $legacy_lock);
+			}
+		}
 		update_option('flash_cache_updated_3_8', 1);
 	}
 
@@ -82,7 +96,6 @@ class flash_cache_version {
 		global $wpdb;
 
 		try {
-			$wpdb->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
 			$wpdb->query('START TRANSACTION');
 	
 			// Your existing code
@@ -173,7 +186,7 @@ class flash_cache_version {
 	}
 
 	public static function delete_all_patterns() {
-		$patterns = get_posts(array('post_type' => 'flash_cache_patterns'));
+		$patterns = get_posts(array('post_type' => 'flash_cache_patterns', 'post_status' => 'any', 'numberposts' => -1));
 
 		foreach ($patterns as $pattern) {
 			wp_delete_post($pattern->ID, true);
