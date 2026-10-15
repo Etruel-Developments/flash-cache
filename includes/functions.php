@@ -385,7 +385,7 @@ function flash_cache_get_nginx_conf_info() {
 		$utils_rules[]	 = 'if ($scheme != "https") {';
 		$utils_rules[]	 = 'rewrite ^ https://$host$uri permanent;';
 		$utils_rules[]	 = '}';
-		$utils_rules[]	 = 'add_header Strict-Transport-Security "max-age=' . absint(esc_attr($advanced_settings['ttl_default'])) . '; includeSubDomains; preload env=HTTPS";';
+		$utils_rules[]	 = 'add_header Strict-Transport-Security "' . esc_attr(flash_cache_hsts_header()) . '";';
 	}
 	$utils_rules		 = apply_filters('flash_cache_nginx_utils_rules', $utils_rules);
 	$final_utils_rules	 = apply_filters('flash_cache_nginx_final_utils_rules', implode("\n", $utils_rules));
@@ -522,9 +522,9 @@ function flash_cache_get_htaccess_info() {
 		$utils_rules[]	 = 'RewriteCond %{HTTPS} off';
 		$utils_rules[]	 = 'RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]';
 		$utils_rules[]	 = '</IfModule>';
-		$utils_rules[]	 = '<IfModule mod_expires.c>';
-		$utils_rules[]	 = 'Header set Strict-Transport-Security "max-age=' . absint($advanced_settings['ttl_default']) . '; includeSubDomains; preload" env=HTTPS';
-		$utils_rules[]	 = "</IfModule>";
+		$utils_rules[]	 = '<IfModule mod_headers.c>';
+		$utils_rules[]	 = 'Header set Strict-Transport-Security "' . esc_attr(flash_cache_hsts_header()) . '" env=HTTPS';
+		$utils_rules[]	 = '</IfModule>';
 	}
 	$utils_rules		 = apply_filters('flash_cache_apache_utils_rules', $utils_rules);
 	$final_utils_rules	 = apply_filters('flash_cache_apache_final_utils_rules', implode("\n", $utils_rules));
@@ -534,6 +534,15 @@ function flash_cache_get_htaccess_info() {
 	$final_optimization_rules	 = apply_filters('flash_cache_apache_final_optimization_rules', implode("\n", $optimization_rules));
 
 	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules, "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules);
+}
+
+/**
+ * Value of the Strict-Transport-Security header sent with "Redirect HTTP to HTTPS". It covers this
+ * host only; includeSubDomains or preload commit every subdomain to HTTPS for the whole max-age,
+ * so they are added only through the flash_cache_hsts_header filter.
+ */
+function flash_cache_hsts_header() {
+	return (string) apply_filters('flash_cache_hsts_header', 'max-age=' . absint(flash_cache_get_advanced_settings()['ttl_default']));
 }
 
 function flash_cache_seconds_2_time($seconds) {

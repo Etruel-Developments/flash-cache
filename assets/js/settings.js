@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 	$(".btn_reset_to_default").click(function (e) {
-		if (!confirm("Are you sure you want to reset to defaults?")) {
+		if (!confirm(flash_cache_settings_i18n.reset_defaults)) {
 			e.preventDefault();
 		}
 	});
@@ -101,7 +101,7 @@ jQuery(document).ready(function ($) {
 
 	if (lockTypeRadio.length) {
 		lockTypeRadio.on('change', function(event) {
-			var confirmation = confirm('Changing this option will clear all the cache. Do you want to proceed?');
+			var confirmation = confirm(flash_cache_settings_i18n.clear_cache);
 			if (!confirmation) {
 				event.preventDefault();
 				// Reset to previous value

@@ -43,6 +43,10 @@ class flash_cache_settings {
 			return false;
 		}
 		wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION, true);
+		wp_localize_script('flash_cache-settings', 'flash_cache_settings_i18n', array(
+			'clear_cache'	 => __('Changing this option clears the whole cache. Continue?', 'flash-cache'),
+			'reset_defaults' => __('Restore the default settings?', 'flash-cache'),
+		));
 	}
 
 	public static function styles() {
@@ -109,19 +113,19 @@ class flash_cache_settings {
 		wp_nonce_field('save_flash_cache_general');
 		//Option for do and show a message in case that permalinks will be "Plain".
 		if (get_option('permalink_structure') == '') {
-			$activation = '<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="0" disabled/>
-			<label for="flash_cache_general[activate]">Off</label>
-			<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="1" disabled/>
-			<label for="flash_cache_general[activate]">On</label>';
+			$activation = '<input type="radio" checked="checked" name="flash_cache_general[activate]" value="0" disabled/>
+			<label for="flash_cache_general[activate]">' . __('Off', 'flash-cache') . '</label>
+			<input type="radio" name="flash_cache_general[activate]" value="1" disabled/>
+			<label for="flash_cache_general[activate]">' . __('On', 'flash-cache') . '</label>';
 		} else {
 			$activation = '<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_general[activate]" value="0" />
-			<label for="flash_cache_general[activate]">Off</label>
+			<label for="flash_cache_general[activate]">' . __('Off', 'flash-cache') . '</label>
 			<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_general[activate]" value="1" />
-			<label for="flash_cache_general[activate]">On</label>';
+			<label for="flash_cache_general[activate]">' . __('On', 'flash-cache') . '</label>';
 		}
 		echo '<table class="form-table mh-250">
 					<tr valign="top">
-						<th scope="row">' . __('Enable Cache', 'flash-cache') . '</th>
+						<th scope="row">' . __('Enable cache', 'flash-cache') . '</th>
 						<td>
 							<div class="switch switch--horizontal switch--no-label">
 								' . $activation . '
@@ -129,7 +133,7 @@ class flash_cache_settings {
 									<span class="toggle-inside"></span>
 								</span>
 							</div>
-						<p class="description">' . __('Deactivate this option to stop the creation of the new cache objects.', 'flash-cache') . '</p>
+						<p class="description">' . __('Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below.', 'flash-cache') . '</p>
 
 						</td>
 					</tr>
@@ -137,8 +141,8 @@ class flash_cache_settings {
 						<th scope="row">' . __('Delete cache', 'flash-cache') . '</th>
 						<td>
 							<a href="' . wp_nonce_url(admin_url('admin-post.php?action=delete_flash_cache'), 'delete_flash_cache', '_wpnonce') . '" class="button">' . __('Delete Cache', 'flash-cache') . '</a>
-							<p class="description">' . __('Cached pages are stored on your server. If you need to clean all them, use this button to delete all the files and begin to create the cache from scratch.', 'flash-cache') . '</p>
-							<p class="description">' . __('Current Disk Usage: ', 'flash-cache') . '<code>' . size_format(get_option('flash_cache_disk_usage', 0)) . '</code></p>
+							<p class="description">' . __('Removes every cached page and combined file. Pages are cached again as they are visited or preloaded.', 'flash-cache') . '</p>
+							<p class="description">' . __('Disk usage: ', 'flash-cache') . '<code>' . size_format(get_option('flash_cache_disk_usage', 0)) . '</code></p>
 						</td>
 					</tr>
 					
@@ -259,46 +263,48 @@ class flash_cache_settings {
 		echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a></div></div>';
 		echo '<table class="form-table">
 					<tr valign="top" class="wrap-row">
-						<th scope="row">' . __('Cache Location', 'flash-cache') . '</th>
+						<th scope="row">' . __('Cache folder', 'flash-cache') . '</th>
 						<td>
 							<input type="text" name="flash_cache_advanced[cache_dir]" id="flash_cache_advanced_cache_dir" value="' . esc_attr($values['cache_dir']) . '"/>
 							<code>' . flash_cache_get_home_path() . '</code><br/>
-							<p class="description">' . __('Specifies the file system path where the cache objects for each page will be placed, this option can be changed to another custom path.', 'flash-cache') . '</p>
+							<p class="description">' . __('Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row">' . __('Viewer Protocol Policy', 'flash-cache') . '</th>
-						<td>
-							<div class="radio-group">
-								<input type="radio" ' . checked($values['viewer_protocol_policy'], 'http_and_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/> ' . __('HTTP and HTTPS (If this protocol is enabled)', 'flash-cache') . '
-								<p class="description">' . __('Keeps the cache in both protocols as in the HTTP and in HTTPS if it exists.', 'flash-cache') . '</p>
-							</div> ';
+						<th scope="row">' . __('HTTPS', 'flash-cache') . '</th>
+						<td>';
 		if (is_ssl()) {
 			echo '
-								<div class="radio-group">
-									<input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . ' 
-									<p class="description">' . __('Redirect the users from HTTP to HTTPS, and other advantages as create a cache of the certificate to improve the speed through the header Strict-Transport-Security.', 'flash-cache') . '</p> 
-								</div>';
+							<div class="radio-group">
+								<label><input type="radio" ' . checked($values['viewer_protocol_policy'], 'http_and_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/> ' . __('Serve HTTP and HTTPS', 'flash-cache') . '</label>
+								<p class="description">' . __('Cached pages are served on both protocols.', 'flash-cache') . '</p>
+							</div>
+							<div class="radio-group">
+								<label><input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . '</label>
+								<p class="description">' . __('Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header).', 'flash-cache') . '</p>
+							</div>';
+		} else {
+			echo '<input type="hidden" name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/>
+							<p class="description">' . __('This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS.', 'flash-cache') . '</p>';
 		}
-
 		echo '</td>
 					</tr>
 
 					<tr valign="top" class="wrap-row">
-						<th scope="row">' . __('Default TTL', 'flash-cache') . '</th>
+						<th scope="row">' . __('Browser cache time', 'flash-cache') . '</th>
 						<td>
 							<input type="text" name="flash_cache_advanced[ttl_default]" id="flash_cache_advanced_ttl_default" value="' . esc_attr(absint($values['ttl_default'])) . '"/>
-							<p class="description">' . __('The time life by default is used in the whole website to specifies the lifetime of the cache objects but in the client-side rather the user browser is besieged the header Cache-Control with the value specified in the field.', 'flash-cache') . '</p>
+							<p class="description">' . __('Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					
 					<tr valign="top" class="wrap-row">
-						<th scope="row">' . __('Do not cache users with cookies', 'flash-cache') . '</th>
+						<th scope="row">' . __('Skip visitors with cookies', 'flash-cache') . '</th>
 						<td>';
 
 		echo '<table class="form-table" id="table_dont_cache_cookie">';
 
-		echo '	<p class="description">' . __('This list allows add the users which have the part of the name of a Cookie, it won’t be showed in the objects in cache, as the users that have begun session in the WP-ADMIN, you can also add other cookies to websites which uses user roles at the theme system.', 'flash-cache') . '</p>';
+		echo '	<p class="description">' . __('Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default.', 'flash-cache') . '</p>';
 
 		foreach ($values['dont_cache_cookie'] as $value) {
 			echo '<tr valign="top" class="tr_item_dont_cache_cookie">
@@ -310,17 +316,17 @@ class flash_cache_settings {
 
 		echo '</table>';
 		echo '<div class="add-cookie form-table">
-						<input type="button" name="add_new_dont_cache_cookie" id="add_new_dont_cache_cookie" class="button" value="Add"/>
+						<input type="button" name="add_new_dont_cache_cookie" id="add_new_dont_cache_cookie" class="button" value="' . esc_attr__('Add', 'flash-cache') . '"/>
 				</div>';
 		echo '</td>
 					</tr>
 					<tr valign="top" class="wrap-row">
-						<th scope="row">' . __('Cache Process', 'flash-cache') . '</th>
+						<th scope="row">' . __('Cache creation', 'flash-cache') . '</th>
 						<td>
-							<div class="radio-group"><input type="radio" ' . checked($values['process_type'], 'ob_with_curl_request', false) . ' name="flash_cache_advanced[process_type]" value="ob_with_curl_request"/> OB with cURL requests (Recommended) <p class="description">' . __('This option is recommended by default because it uses OB (Output Buffer) to create the first cache of a page being faster and optimum, and in the next cache updates of the same object it will be used the cURL for its update.', 'flash-cache') . '</p>
+							<div class="radio-group"><input type="radio" ' . checked($values['process_type'], 'ob_with_curl_request', false) . ' name="flash_cache_advanced[process_type]" value="ob_with_curl_request"/> ' . __('Capture the visited page (Recommended)', 'flash-cache') . ' <p class="description">' . __('The page a visitor receives is stored as it is sent; later refreshes request the page again in the background.', 'flash-cache') . '</p>
 							</div>
-							<div class="radio-group"><input type="radio" ' . checked($values['process_type'], 'only_curl', false) . ' name="flash_cache_advanced[process_type]" value="only_curl"/> Only with cURL requests
-							<p class="description">' . __('It is only used with cURL to get the content of the pages to be cached, that’s why it is usually slower, nules there are cases where there are conflicts on OB with others plugins, in these cases is recommended this option.', 'flash-cache') . '</p>
+							<div class="radio-group"><input type="radio" ' . checked($values['process_type'], 'only_curl', false) . ' name="flash_cache_advanced[process_type]" value="only_curl"/> ' . __('Request the page separately', 'flash-cache') . '
+							<p class="description">' . __('Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering.', 'flash-cache') . '</p>
 							</div>
 						</td>
 					</tr>';
@@ -328,7 +334,7 @@ class flash_cache_settings {
 					<th scope="row">' . __('Refresh expired pages', 'flash-cache') . '</th>
 					<td>
 						<div class="radio-group"><label><input type="radio" ' . checked($values['refresh_mode'], 'visitors', false) . ' name="flash_cache_advanced[refresh_mode]" value="visitors"/> ' . __('On visits (Recommended)', 'flash-cache') . '</label>
-							<p class="description">' . __('A visit to a page whose minimum TTL has passed asks the server to rebuild it in the background. Pages still within their TTL make no extra request.', 'flash-cache') . '</p>
+							<p class="description">' . __('A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request.', 'flash-cache') . '</p>
 						</div>
 						<div class="radio-group"><label><input type="radio" ' . checked($values['refresh_mode'], 'cron', false) . ' name="flash_cache_advanced[refresh_mode]" value="cron"/> ' . __('From the preload only', 'flash-cache') . '</label>
 							<p class="description">' . __('Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled.', 'flash-cache') . '</p>
@@ -336,7 +342,7 @@ class flash_cache_settings {
 					</td>
 				</tr>';
 		echo '<tr valign="top" class="wrap-row">
-					<th scope="row">' . __('Disable Cache in Widgets', 'flash-cache') . '</th>
+					<th scope="row">' . __('Widgets and blocks without cache', 'flash-cache') . '</th>
 					<td>';
 
 		$nopro = '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
@@ -350,14 +356,14 @@ class flash_cache_settings {
 						<td>
 							<div class="switch switch--horizontal switch--no-label">
 								<input type="radio" ' . checked($values['optimize_styles'], false, false) . ' name="flash_cache_advanced[optimize_styles]" value="0"/>
-								<label for="flash_cache_advanced[optimize_styles]">Off</label>
+								<label for="flash_cache_advanced[optimize_styles]">' . __('Off', 'flash-cache') . '</label>
 								<input type="radio" ' . checked($values['optimize_styles'], true, false) . ' name="flash_cache_advanced[optimize_styles]" value="1"/>
-								<label for="flash_cache_advanced[optimize_styles]">On</label>
+								<label for="flash_cache_advanced[optimize_styles]">' . __('On', 'flash-cache') . '</label>
 								<span class="toggle-outside">
 									<span class="toggle-inside"></span>
 								</span>
 							</div>
-							<p class="description">' . __('Optimize and combine all your Stylesheets files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>
+							<p class="description">' . __('Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files.', 'flash-cache') . '</p>
 							<div id="advanced_settings_styles">
 							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values) . '
 							
@@ -371,82 +377,80 @@ class flash_cache_settings {
 						<td>
 							<div class="switch switch--horizontal switch--no-label">
 								<input type="radio" ' . checked($values['optimize_scripts'], false, false) . ' name="flash_cache_advanced[optimize_scripts]" value="0"/>
-								<label for="flash_cache_advanced[optimize_scripts]">Off</label>
+								<label for="flash_cache_advanced[optimize_scripts]">' . __('Off', 'flash-cache') . '</label>
 								<input type="radio" ' . checked($values['optimize_scripts'], true, false) . ' name="flash_cache_advanced[optimize_scripts]" value="1"/>
-								<label for="flash_cache_advanced[optimize_scripts]">On</label>
+								<label for="flash_cache_advanced[optimize_scripts]">' . __('On', 'flash-cache') . '</label>
 								<span class="toggle-outside">
 									<span class="toggle-inside"></span>
 								</span>
 							</div>
-							<p class="description">' . __('Optimize and combine all your JavaScript files into one, this allows your site to request fewer files and get better page load performance.', 'flash-cache') . '</p>';
+							<p class="description">' . __('Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files.', 'flash-cache') . '</p>';
 
-		// new advanced options for javascripts 
-		// since 3.1 version
 		echo '
 							<div class="flash_cache_avoid_optimize" style="display:none">
-								<p class="description"><b>' . __('If you find any problems with the optimizations, you can exclude the JS files by using these options to choose which ones are left in the original format.', 'flash-cache') . '</b></p>
+								<p class="description"><b>' . __('If something stops working with optimized scripts, leave the scripts involved in place:', 'flash-cache') . '</b></p>
 								<table class="form-table">
 									<tbody>
 										<tr valign="top" class="wrap-row">
-											<th scope="row">' . __('Inline scripts', 'flash-cache') . '</th>
+											<th scope="row">' . __('Leave inline scripts in place', 'flash-cache') . '</th>
 											<td>
 												<div class="switch switch--horizontal switch--no-label">
 													<input type="radio" checked="checked" name="flash_cache_advanced[inline_scripts]"' . checked($values["inline_scripts"], false, false) . ' value="0">
-													<label for="flash_cache_advanced[inline_scripts]">Off</label>
+													<label for="flash_cache_advanced[inline_scripts]">' . __('Off', 'flash-cache') . '</label>
 													<input type="radio" name="flash_cache_advanced[inline_scripts]"' . checked($values["inline_scripts"], true, false) . ' value="1">
-													<label for="flash_cache_advanced[inline_scripts]">On</label>
+													<label for="flash_cache_advanced[inline_scripts]">' . __('On', 'flash-cache') . '</label>
 													<span class="toggle-outside">
 														<span class="toggle-inside"></span>
 													</span>
 												</div>
-												<p class="description">' . __('Avoid optimizing inline JS scripts found in HTML DOM.', 'flash-cache') . '</p>
+												<p class="description">' . __('Scripts written inside the page stay where they are.', 'flash-cache') . '</p>
 											</td>
 										</tr>
 										<tr valign="top" class="wrap-row">
-											<th scope="row">' . __('Theme JS files', 'flash-cache') . '</th>
+											<th scope="row">' . __('Leave theme scripts in place', 'flash-cache') . '</th>
 											<td>
 												<div class="switch switch--horizontal switch--no-label">
 													<input type="radio" checked="checked" name="flash_cache_advanced[theme_files]"' . checked($values["theme_files"], false, false) . ' value="0">
-													<label for="flash_cache_advanced[theme_files]">Off</label>
+													<label for="flash_cache_advanced[theme_files]">' . __('Off', 'flash-cache') . '</label>
 													<input type="radio" name="flash_cache_advanced[theme_files]"' . checked($values["theme_files"], true, false) . ' value="1">
-													<label for="flash_cache_advanced[theme_files]">On</label>
+													<label for="flash_cache_advanced[theme_files]">' . __('On', 'flash-cache') . '</label>
 													<span class="toggle-outside">
 														<span class="toggle-inside"></span>
 													</span>
 												</div>
-												<p class="description">' . __('Avoid optimizing theme JavaScript files.', 'flash-cache') . '</p>
+												<p class="description">' . __('Scripts of the active theme, and of its parent theme, stay as separate files.', 'flash-cache') . '</p>
 											</td>
 										</tr>
 										 <tr valign="top" class="wrap-row">
-											<th scope="row">' . __('Plugins JS files', 'flash-cache') . '</th>
+											<th scope="row">' . __('Leave plugin scripts in place', 'flash-cache') . '</th>
 											<td>
 												<div class="switch switch--horizontal switch--no-label">
 													<input type="radio" checked="checked" name="flash_cache_advanced[plugins_files]"' . checked($values["plugins_files"], false, false) . ' value="0">
-													<label for="flash_cache_advanced[plugins_files]">Off</label>
+													<label for="flash_cache_advanced[plugins_files]">' . __('Off', 'flash-cache') . '</label>
 													<input type="radio" name="flash_cache_advanced[plugins_files]"' . checked($values["plugins_files"], true, false) . ' value="1">
-													<label for="flash_cache_advanced[plugins_files]">On</label>
+													<label for="flash_cache_advanced[plugins_files]">' . __('On', 'flash-cache') . '</label>
 													<span class="toggle-outside">
 														<span class="toggle-inside"></span>
 													</span>
 												</div>
-												<p class="description">' . __('Avoid optimizing plugins JavaScript files.', 'flash-cache') . '</p>
+												<p class="description">' . __('Scripts of plugins stay as separate files.', 'flash-cache') . '</p>
 												' . apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) . '
 											</td>
 										</tr>
 
 									<tr valign="top" class="wrap-row">
-										<th scope="row">' . __('Include SEO &amp; Social scripts in optimized file', 'flash-cache') . '</th>
+										<th scope="row">' . __('Scripts from other domains', 'flash-cache') . '</th>
 										<td>
 										<div class="switch switch--horizontal switch--no-label">
 											<input type="radio" checked="checked" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], false, false) . ' value="0">
-											<label for="flash_cache_advanced[social_scripts]">Off</label>
+											<label for="flash_cache_advanced[social_scripts]">' . __('Off', 'flash-cache') . '</label>
 											<input type="radio" name="flash_cache_advanced[social_scripts]"' . checked($values["social_scripts"], true, false) . ' value="1">
-											<label for="flash_cache_advanced[social_scripts]">On</label>
+											<label for="flash_cache_advanced[social_scripts]">' . __('On', 'flash-cache') . '</label>
 											<span class="toggle-outside">
 												<span class="toggle-inside"></span>
 											</span>
 										</div>
-										<p class="description">' . __('By default these scripts are not included because there are already optimized, hosted on remote servers and load asyncroniously. But by activating this option you can try to optimize and host them in your server.', 'flash-cache') . '</p>
+										<p class="description">' . __('Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files.', 'flash-cache') . '</p>
 										</td>
 									</tr>
 									</tbody>
@@ -459,13 +463,13 @@ class flash_cache_settings {
 					</tr>';
 
 		echo '<tr valign="top" class="wrap-row">
-					<th scope="row">' . __('Lock Type', 'flash-cache') . '</th>
+					<th scope="row">' . __('Lock', 'flash-cache') . '</th>
 					<td>
-						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> Lock with files
-							<p class="description">' . __('This option is recommended by default because it uses Files to prevent two processes from creating cache of the same page at the same time.', 'flash-cache') . '</p>
+						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> ' . __('Files (Recommended)', 'flash-cache') . '
+							<p class="description">' . __('A lock file per page keeps two visitors from building the same page at the same time.', 'flash-cache') . '</p>
 						</div>
-						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'db', false) . ' name="flash_cache_advanced[lock_type]" value="db"/> Lock with DB
-							<p class="description">' . __('This option uses DB to prevent two processes from creating cache of the same page at the same time.', 'flash-cache') . '</p>
+						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'db', false) . ' name="flash_cache_advanced[lock_type]" value="db"/> ' . __('Database', 'flash-cache') . '
+							<p class="description">' . __('A MySQL lock does the same. Useful when several servers share the database but not the disk.', 'flash-cache') . '</p>
 						</div>
 					</td>
 				</tr>';
@@ -505,7 +509,7 @@ class flash_cache_settings {
 			echo '<form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_update_httacess" method="post">
 				<input type="hidden" name="action" value="update_flash_cache_httacess"/>';
 			wp_nonce_field('update_flash_cache_httacess');
-			submit_button('Update Rules');
+			submit_button(__('Update Rules', 'flash-cache'));
 			echo '<hr/></form>';
 		}
 	}

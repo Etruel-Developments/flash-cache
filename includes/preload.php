@@ -321,8 +321,8 @@ class flash_cache_preaload {
 		echo '<div class="wrap wpm_container show_menu"><h1></h1>
 				<div class="wpm_header">
 				<h1>' . __('Preload', 'flash-cache') . '</h1>
-				<p class="description">' . __('Preload is a process that creates a cache of all public pages and taxonomies depending on your options and patterns.', 'flash-cache') . '</p>
-				<p class="description">' . __('The preload process is divided into several executions to prevent server collapse.', 'flash-cache') . '</p>
+				<p class="description">' . __('Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached.', 'flash-cache') . '</p>
+				<p class="description">' . __('It runs in small batches in the background to keep the server load low.', 'flash-cache') . '</p>
 				</div>
 				<div class="postbox">';
 
@@ -355,20 +355,20 @@ class flash_cache_preaload {
 				} else {
 					if ($next_run > time() && $values_cron['finished'] && !$values_cron['started']) {
 						// translators: %s: Date of next run cron preload
-						echo '<div class="preload_info"><code>' . sprintf(__('Next run: %s', 'flash-cache'), esc_attr(date('Y-m-d H:i:s', $next_run))) . '</code></div>';
+						echo '<div class="preload_info"><code>' . sprintf(__('Next run: %s', 'flash-cache'), esc_html(wp_date(get_option('date_format') . ' ' . get_option('time_format'), $next_run))) . '</code></div>';
 					}
 				}
 			}
 		}
 		echo '<table class="form-table">
 				<tr valign="top">
-					<th scope="row">' . __('Enable Preload', 'flash-cache') . '</th>
+					<th scope="row">' . __('Enable preload', 'flash-cache') . '</th>
 					<td>
 						<div class="switch switch--horizontal switch--no-label">
 							<input type="radio" ' . checked($values['activate'], false, false) . ' name="flash_cache_preload[activate]" value="0"/> Off
-							<label for="flash_cache_preload[activate]">Off</label>
+							<label for="flash_cache_preload[activate]">' . __('Off', 'flash-cache') . '</label>
 							<input type="radio" ' . checked($values['activate'], true, false) . ' name="flash_cache_preload[activate]" value="1"/> On
-							<label for="flash_cache_preload[activate]">On</label>
+							<label for="flash_cache_preload[activate]">' . __('On', 'flash-cache') . '</label>
 							<span class="toggle-outside">
 								<span class="toggle-inside"></span>
 							</span>
@@ -376,47 +376,47 @@ class flash_cache_preaload {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row">' . __('Cache Taxonomies', 'flash-cache') . '</th>
+					<th scope="row">' . __('Include categories and tags', 'flash-cache') . '</th>
 					<td>
 						<div class="switch switch--horizontal switch--no-label">
 							<input type="radio" ' . checked($values['cache_taxonomies'], false, false) . ' name="flash_cache_preload[cache_taxonomies]" value="0"/> Off 
-							<label for="flash_cache_preload[cache_taxonomies]">Off</label>
+							<label for="flash_cache_preload[cache_taxonomies]">' . __('Off', 'flash-cache') . '</label>
 							<input type="radio" ' . checked($values['cache_taxonomies'], true, false) . ' name="flash_cache_preload[cache_taxonomies]" value="1"/> On 
-							<label for="flash_cache_preload[cache_taxonomies]">On</label>
+							<label for="flash_cache_preload[cache_taxonomies]">' . __('On', 'flash-cache') . '</label>
 							<span class="toggle-outside">
 								<span class="toggle-inside"></span>
 							</span>
 						</div>
-						<p class="description">' . __('By activating this option the preload process will create cache of every public taxonomies (Categories or Tags) which can be accessed by the users in the website.', 'flash-cache') . '</p>
+						<p class="description">' . __('Also caches the archive pages of the categories and tags of each preloaded post.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 				<tr class="wrap-row" valign="top">
-					<th scope="row">' . __('Number of pages per execution', 'flash-cache') . '</th>
+					<th scope="row">' . __('Pages per batch', 'flash-cache') . '</th>
 					<td>
 						<input type="text" name="flash_cache_preload[pages_per_execution]" id="pages_per_execution" value="' . esc_attr(absint($values['pages_per_execution'])) . '">
-						<p class="description">' . __('The preload process is separated by different processes to avoid the collapse of the website. With this option you can set the number of pages which will create a cache object for every execution of the preload process.', 'flash-cache') . '</p>
+						<p class="description">' . __('How many pages each batch caches. Lower it if the server struggles while preloading.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 				<tr class="wrap-row" valign="top">
-					<th scope="row">' . __('Time per Preload', 'flash-cache') . '</th>
+					<th scope="row">' . __('Pause between batches', 'flash-cache') . '</th>
 					<td>
 						<input type="text" name="flash_cache_preload[time_per_preload]" id="time_per_preload" value="' . esc_attr(absint($values['time_per_preload'])) . '">
-						<p class="description">' . __('The time in seconds per page quantity until the next execution of the preload process. This value avoid timeouts. Increase it if you have timeouts PHP problems on executing the Preload.', 'flash-cache') . '</p>
+						<p class="description">' . __('Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row">' . __('Disable preload on finish', 'flash-cache') . '</th>
+					<th scope="row">' . __('Stop after one full pass', 'flash-cache') . '</th>
 					<td>
 						<div class="switch switch--horizontal switch--no-label">
 							<input type="radio" ' . checked($values['disable_preload_finish'], false, false) . ' name="flash_cache_preload[disable_preload_finish]" value="0"/> Off 
-							<label for="flash_cache_preload[disable_preload_finish]">Off</label>
+							<label for="flash_cache_preload[disable_preload_finish]">' . __('Off', 'flash-cache') . '</label>
 							<input type="radio" ' . checked($values['disable_preload_finish'], true, false) . ' name="flash_cache_preload[disable_preload_finish]" value="1"/> On 
-							<label for="flash_cache_preload[disable_preload_finish]">On</label>
+							<label for="flash_cache_preload[disable_preload_finish]">' . __('On', 'flash-cache') . '</label>
 							<span class="toggle-outside">
 								<span class="toggle-inside"></span>
 							</span>
 						</div>
-						<p class="description">' . __('By activating this option will turn off the preload cache process upon completion. This means that the cache will not be preloaded again after the initial load.', 'flash-cache') . '</p>
+						<p class="description">' . __('Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously.', 'flash-cache') . '</p>
 					</td>
 				</tr>
 			</table>';

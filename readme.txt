@@ -113,6 +113,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Combined scripts keep their place and order: consecutive scripts are joined where the last of them stood, and async, deferred and module scripts stay as they are.
 * Third-party stylesheets load from their own servers; Flash Cache Pro can still host Google Fonts locally.
 * Feeds, sitemaps and other non-HTML responses are cached exactly as WordPress sends them, and HTML comments are kept.
+* Clearer settings screens: short labels, plain-language descriptions, and every text ready for translation.
+* The script exclusion switches say what they do ("Leave theme scripts in place"), and "Scripts from other domains" names the switch that keeps analytics, ads and social scripts on their own servers.
+* "Redirect HTTP to HTTPS" sends a Strict-Transport-Security header for the site's own host, adjustable with the `flash_cache_hsts_header` filter; on a site opened over HTTP the screen explains when the option appears.
+* Preload times follow the site's date and time format.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.
 * After updating, the cache is rebuilt from scratch, the server rules are refreshed automatically and the database lock table is removed, since locks need no table.

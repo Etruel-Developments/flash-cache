@@ -165,6 +165,10 @@ class flash_cache_patterns {
 			return isset($post->ID) ? $post->ID : false;
 		wp_dequeue_script('autosave');
 		wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION, true);
+		wp_localize_script('flash_cache-settings', 'flash_cache_settings_i18n', array(
+			'clear_cache'	 => __('Changing this option clears the whole cache. Continue?', 'flash-cache'),
+			'reset_defaults' => __('Restore the default settings?', 'flash-cache'),
+		));
 	}
 
 	/**
@@ -250,13 +254,13 @@ class flash_cache_patterns {
 		echo '<div class="wrap wpm_container"><table class="form-table">
 					<tr valign="top">
 						<th scope="row">' .
-		__('Page Types', 'flash-cache') .
+		__('Page types', 'flash-cache') .
 		'</th>
 						<td>
 						<p class="description">' .
-		__('The options of the kind of pages, are the different post types where it will be used other cache options. For example, if it only select Home ( is_home() ) the options configured in that pattern only affects to the homepage in the website. This way, you can create different patterns to draw on and better configure how the cache will be created.', 'flash-cache') .
+		__('The kinds of pages this pattern caches. A page is cached by the first pattern that matches it.', 'flash-cache') .
 		'<div class="checkbox-group">
-								<input type="checkbox" value="1" name="page_type[single]" ' . checked(1, $values['page_type']['single'], false) . ' />Post Type
+								<input type="checkbox" value="1" name="page_type[single]" ' . checked(1, $values['page_type']['single'], false) . ' />' . __('Single posts and pages', 'flash-cache') . '
 							</div>';
 
 		$args		 = array('public' => true);
@@ -275,15 +279,15 @@ class flash_cache_patterns {
 		}
 
 		echo '<p class="description">' .
-		__('If you do not select any of the Post Type options, it will be interpreted as selecting all the options.', 'flash-cache') . '</p><br/>' .
+		__('With no post type selected, every post type is included.', 'flash-cache') . '</p><br/>' .
 		'</p>
-				<div class="checkbox-group"><input type="checkbox" value="1" name="create_cache_on_insert_update" ' . checked(1, $values['create_cache_on_insert_update'], false) . ' />' . __('Create cache on insert or update a post.', 'flash-cache') . '
+				<div class="checkbox-group"><input type="checkbox" value="1" name="create_cache_on_insert_update" ' . checked(1, $values['create_cache_on_insert_update'], false) . ' />' . __('Cache the post when it is published or updated', 'flash-cache') . '
 				</div>
-				<div class="checkbox-group"><input type="checkbox" value="1" name="update_home_on_insert_post" ' . checked(1, $values['update_home_on_insert_post'], false) . ' />' . __('Update home page on insert a new post.', 'flash-cache') . '
+				<div class="checkbox-group"><input type="checkbox" value="1" name="update_home_on_insert_post" ' . checked(1, $values['update_home_on_insert_post'], false) . ' />' . __('Refresh the home page when a post is published or updated', 'flash-cache') . '
 				</div>
-				<div class="checkbox-group"><input type="checkbox" value="1" name="update_categories_on_post" ' . checked(1, $values['update_categories_on_post'], false) . ' />' . __('Update categories and tags on insert or update a post.', 'flash-cache') . '
+				<div class="checkbox-group"><input type="checkbox" value="1" name="update_categories_on_post" ' . checked(1, $values['update_categories_on_post'], false) . ' />' . __('Refresh the first page of its categories and tags', 'flash-cache') . '
 				</div>
-				<div class="checkbox-group"><input type="checkbox" value="1" name="update_on_comment" ' . checked(1, $values['update_on_comment'], false) . ' />' . __('Update cache on comments.', 'flash-cache') . '
+				<div class="checkbox-group"><input type="checkbox" value="1" name="update_on_comment" ' . checked(1, $values['update_on_comment'], false) . ' />' . __('Refresh the post when a comment is approved', 'flash-cache') . '
 				</div>
 			</div>';
 		echo '
@@ -299,7 +303,7 @@ class flash_cache_patterns {
 				</div>
 				<br/>
 				<div class="checkbox-group">
-					<input type="checkbox" value="1" name="page_type[archives]" ' . checked(1, $values['page_type']['archives'], false) . ' />Archives (is_archive)
+					<input type="checkbox" value="1" name="page_type[archives]" ' . checked(1, $values['page_type']['archives'], false) . ' />' . __('Archives (is_archive)', 'flash-cache') . '
 				</div>
 				<div style="margin-left:20px">
 					<div class="checkbox-group">
@@ -329,16 +333,16 @@ class flash_cache_patterns {
 						<th scope="row">' . __('URL must contain', 'flash-cache') . '</th>
 						<td>
 							<textarea style="min-height: 100px;" id="url_must_contain" name="url_must_contain">' . esc_textarea($values['url_must_contain']) . '</textarea>
-							<p class="description">' . __('Allows use values which must contain the URLs of the pages so you can create a cache object of this one.', 'flash-cache') . '</p>
-							<p class="description">' . __('Use each line for different values.', 'flash-cache') . '</p>
+							<p class="description">' . __('Only pages whose URL contains every one of these texts use this pattern.', 'flash-cache') . '</p>
+							<p class="description">' . __('One text per line.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">' . __('URL should not contain', 'flash-cache') . '</th>
 						<td>
 							<textarea style="min-height: 100px;" id="url_not_contain" name="url_not_contain">' . esc_textarea($values['url_not_contain']) . '</textarea>
-							<p class="description">' . __('Allows establish the values which can’t contain in the URLs of the pages to create a cache object of it. You can assign many values in every line of the text field. For example, add “login” in the text field to avoid a cache of a page which contents “login” in the URL.', 'flash-cache') . '</p>
-							<p class="description">' . __('Use each line for different values.', 'flash-cache') . '</p>
+							<p class="description">' . __('Pages whose URL contains any of these texts skip this pattern, for example “login”.', 'flash-cache') . '</p>
+							<p class="description">' . __('One text per line.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					
@@ -347,23 +351,23 @@ class flash_cache_patterns {
 				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1) ? 'php' : $values['cache_type'];
 				echo '<table class="form-table">
 					<tr valign="top">
-						<th scope="row">' . __('Cache Type', 'flash-cache') . '</th>
+						<th scope="row">' . __('Cache type', 'flash-cache') . '</th>
 						<td>
 							<div class="radio-group">
 								<input type="radio" ' . 
 									checked($values['cache_type'], 'html', false) . 
 									($advanced_settings['disable_widget_cache'] == 1 ? ' disabled' : '') . 
 									' name="cache_type" value="html"/>' . 
-									__('HTML static (Ultra fast)', 'flash-cache') . '
-								<p class="description">' . __('Create a cache in HTML format, in this way avoid the PHP execution in the front-end accelerating the load of the page, plus reducing the server CPU cost.', 'flash-cache') . '</p>
+									__('Static HTML (fastest)', 'flash-cache') . '
+								<p class="description">' . __('The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache.', 'flash-cache') . '</p>
 							</div>
 				
 							<div class="radio-group">
 								<input type="radio" ' . 
 									checked($values['cache_type'], 'php', false) . 
 									' name="cache_type" value="php"/>' . 
-									__('PHP Files (Accept GET and POST params)', 'flash-cache') . '
-								<p class="description">' . __('Create cache from pages which has parameters GET or POST like Feed or WordPress search; this option is less optimal than HTML static.', 'flash-cache') . '</p>
+									__('PHP (pages with query strings)', 'flash-cache') . '
+								<p class="description">' . __('A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress.', 'flash-cache') . '</p>
 							</div>
 						</td>
 					</tr>
@@ -372,17 +376,17 @@ class flash_cache_patterns {
 		echo '<table class="form-table">
 					
 					<tr valign="top">
-						<th scope="row">' . __('Minimum TTL', 'flash-cache') . '</th>
+						<th scope="row">' . __('Refresh after', 'flash-cache') . '</th>
 						<td>
 							<input type="text" name="ttl_minimum" id="ttl_minimum" value="' . esc_attr(absint($values['ttl_minimum'])) . '"/>
-							<p class="description">' . __('Is the lifetime of the cache to be rebuilded or updated when is visited by the users that are navigating for the website.', 'flash-cache') . '</p>
+							<p class="description">' . __('Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row">' . __('Maximum TTL', 'flash-cache') . '</th>
+						<th scope="row">' . __('Preload refresh after', 'flash-cache') . '</th>
 						<td>
 							<input type="text" name="ttl_maximum" id="ttl_maximum" value="' . esc_attr(absint($values['ttl_maximum'])) . '"/>
-							<p class="description">' . __('Is the lifetime of the cache objects to be rebuilded or updated from the preload process of the Flash Cache.', 'flash-cache') . '</p>
+							<p class="description">' . __('Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					
