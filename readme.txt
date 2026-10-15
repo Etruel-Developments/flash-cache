@@ -106,6 +106,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Form submissions always reach WordPress live: only GET and HEAD requests are cached and served from cache.
 * Reliable page locks: the database lock uses MySQL named locks, so it works on every MySQL and MariaDB version and leaves the database session untouched; file locks live in one locks folder and step aside quietly where the folder cannot be written.
 * The pattern options "Create cache on insert/update", "Update home on insert post" and "Update categories on post" rebuild those pages in the background right after publishing, so saving a post stays instant.
+* Bulk publishing, such as a WPeMatico fetch, rebuilds each new post's own page and refreshes the home page and each archive once per batch.
 * Approved comments refresh their post's cache in the background.
 * Faster uncached requests: patterns load from a single stored option instead of database queries.
 * Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.

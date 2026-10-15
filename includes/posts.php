@@ -13,6 +13,12 @@ if (!defined('ABSPATH'))
 
 class flash_cache_posts {
 
+	/**
+	 * Listing URLs (home, term archives) already rebuilt by this process. A WP-Cron run holds
+	 * only posts published before it started, so one rebuild per URL already shows them all.
+	 */
+	private static $rebuilt_listings = array();
+
 	public static function hooks() {
 
 		add_action('comment_post', array(__CLASS__, 'comment_posted'), 99, 2);
@@ -85,7 +91,7 @@ class flash_cache_posts {
 		if ($targets['post']) {
 			self::create_cache_post_id($post_id);
 		}
-		if ($targets['home']) {
+		if ($targets['home'] && self::claim_listing(home_url('/'))) {
 			self::create_cache_home();
 		}
 		if ($targets['terms']) {
@@ -110,13 +116,21 @@ class flash_cache_posts {
 			}
 			foreach ($terms as $term) {
 				$term_url = get_term_link($term, $taxonomy);
-				if (is_wp_error($term_url) || strpos($term_url, '?') !== false) {
+				if (is_wp_error($term_url) || strpos($term_url, '?') !== false || !self::claim_listing($term_url)) {
 					continue;
 				}
 				flash_cache_process::$force_process_type = 'curl';
 				flash_cache_process::process_cache_from_query($current_query, $term_url);
 			}
 		}
+	}
+
+	private static function claim_listing($url) {
+		if (isset(self::$rebuilt_listings[$url])) {
+			return false;
+		}
+		self::$rebuilt_listings[$url] = true;
+		return true;
 	}
 
 	public static function rebuild_comment_post($post_id) {

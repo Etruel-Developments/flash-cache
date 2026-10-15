@@ -293,13 +293,10 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		$patterns		  = flash_cache_patterns::get_all();
 		$is_post		  = false;
 
-		// We validate if it is post
+		// A rebuild names its post in $optional_post_id (one process may rebuild many); a visit uses the queried post.
 		if ($current_query['is_single'] || $current_query['is_page']) {
-			global $post;
-			if (!isset($post)) {
-				$post = get_post(self::$optional_post_id);
-			}
-			if (isset($post)) {
+			$post = self::$optional_post_id ? get_post(self::$optional_post_id) : get_post();
+			if ($post) {
 				self::$optional_post_id = $post->ID;
 			}
 			$is_post = true;
@@ -310,7 +307,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			$current_url = $opcional_url;
 		}
 
-		if ($is_post && empty($current_url)) {
+		if ($is_post && empty($current_url) && $post) {
 			$current_url = get_permalink($post->ID);
 		}
 
@@ -361,7 +358,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 					break;
 				} else {
 					foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-						if ($pcpt == $post->post_type) {
+						if ($pcpt == $post?->post_type) {
 							$create_cache	  = true;
 							self::$cache_type = $pattern['cache_type'];
 							break;
