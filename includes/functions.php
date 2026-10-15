@@ -356,15 +356,23 @@ function flash_cache_get_nginx_conf_info() {
 	$cache_rules = array();
 	if ($general_settings['activate']) {
 
-		$cache_rules[]	 = 'set $cache_uri $request_uri;';
-		$cache_rules[]	 = 'set $cache_uri_php $request_uri;';
+		// $uri is decoded and has no query string, as the cache folders are named; the part
+		// after the home path names the folder. A named capture stays decoded, $1 would not.
+		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
+		$cache_rules[]	 = 'set $cache_uri_php \'null cache\';';
+		$cache_rules[]	 = 'if ($uri ~ "^' . esc_attr(preg_quote($inst_root, '"')) . '(?<flash_cache_path>.*)$") {';
+		$cache_rules[]	 = 'set $cache_uri $flash_cache_path;';
+		$cache_rules[]	 = 'set $cache_uri_php $flash_cache_path;';
+		$cache_rules[]	 = '}';
+		if (substr((string) get_option('permalink_structure'), -1) == '/') {
+			$cache_rules[]	 = 'if ($uri !~ "/$") {';
+			$cache_rules[]	 = 'set $cache_uri \'null cache\';';
+			$cache_rules[]	 = 'set $cache_uri_php \'null cache\';';
+			$cache_rules[]	 = '}';
+		}
 
 		$cache_rules[]	 = 'if ($query_string != "") {';
 		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
-		$cache_rules[]	 = '}';
-
-		$cache_rules[]	 = 'if ($request_uri ~ "([^\?]*)\?(.*)") {';
-		$cache_rules[]	 = 'set $cache_uri_php $1;';
 		$cache_rules[]	 = '}';
 
 		$cache_rules[]	 = 'if ($request_method !~ "^(GET|HEAD)$") {';
@@ -377,25 +385,20 @@ function flash_cache_get_nginx_conf_info() {
 		$cache_rules[]	 = 'set $cache_uri_php \'null cache\';';
 		$cache_rules[]	 = '}';
 
-		$cache_rules[]	 = 'set $fc_enc "";';
-		$cache_rules[]	 = 'if ($http_accept_encoding ~ gzip) {';
-		$cache_rules[]	 = 'set $fc_enc .gz;';
-		$cache_rules[]	 = '}';
-
-		$cache_rules[]	 = 'if (!-f "$document_root/' . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri}/index-cache.html") {';
+		$cache_rules[]	 = 'if (!-f "$document_root' . esc_attr($inst_root) . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri}/index-cache.html") {';
 		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
 		$cache_rules[]	 = '}';
 
 		$cache_rules[]	 = 'if ($cache_uri != "null cache") {';
-		$cache_rules[]	 = 'rewrite .* "/' . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri}/index-cache.html" last;';
+		$cache_rules[]	 = 'rewrite .* "' . esc_attr($inst_root) . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri}/index-cache.html" last;';
 		$cache_rules[]	 = '}';
 
-		$cache_rules[]	 = 'if (!-f "$document_root/' . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri_php}/index-cache.php") {';
+		$cache_rules[]	 = 'if (!-f "$document_root' . esc_attr($inst_root) . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri_php}/index-cache.php") {';
 		$cache_rules[]	 = 'set $cache_uri_php \'null cache\';';
 		$cache_rules[]	 = '}';
 
 		$cache_rules[]	 = 'if ($cache_uri_php != "null cache") {';
-		$cache_rules[]	 = 'rewrite .* "/' . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri_php}/index-cache.php" last;';
+		$cache_rules[]	 = 'rewrite .* "' . esc_attr($inst_root) . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri_php}/index-cache.php" last;';
 		$cache_rules[]	 = '}';
 	}
 	$cache_rules		 = apply_filters('flash_cache_nginx_cache_rules', $cache_rules);

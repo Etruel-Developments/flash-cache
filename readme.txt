@@ -133,6 +133,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Third-party stylesheets load from their own servers; Flash Cache Pro can still host Google Fonts locally.
 * Feeds, sitemaps and other non-HTML responses are cached exactly as WordPress sends them, and HTML comments are kept.
 * One rule maps every URL to its cache folder: paths relative to the home address, decoded as the web server reads them and with their original letter case, also for sites installed in a subfolder.
+* nginx rules serve cached copies of pages with accented or non-Latin addresses, follow sites installed in a subfolder, and match the site's trailing-slash permalinks.
 * Static HTML copies come only from requests without a query string (tracking parameters aside), so a language or cart parameter never shapes the page everyone else gets.
 * Only successful responses are cached: error pages and other non-200 answers are always served live.
 * "Execute Preload" starts right away and caches every published page in turn.
