@@ -178,6 +178,20 @@ function flash_cache_sanitize_querystring_cache($get_queries_vars) {
 	return $new_queries_vars;
 }
 
+/**
+ * The cache folder of a URL, relative to the host folder: its path after the home URL's path,
+ * decoded as the web server matches it, without leading or trailing slashes. "" is the home page.
+ */
+function flash_cache_url_to_path($url) {
+	$path = trailingslashit('/' . ltrim((string) wp_parse_url((string) $url, PHP_URL_PATH), '/'));
+	$base = trailingslashit('/' . ltrim((string) wp_parse_url(home_url('/'), PHP_URL_PATH), '/'));
+	if (str_starts_with($path, $base)) {
+		$path = substr($path, strlen($base));
+	}
+	$segments = array_filter(explode('/', rawurldecode($path)), fn($segment) => $segment !== '' && $segment !== '.' && $segment !== '..');
+	return implode('/', $segments);
+}
+
 function flash_cache_admin_bar_render() {
 	global $wp_admin_bar;
 	if (!is_user_logged_in() || is_admin()) {
@@ -187,11 +201,8 @@ function flash_cache_admin_bar_render() {
 	if (function_exists('current_user_can') && false == current_user_can('delete_others_posts')) {
 		return false;
 	}
-	$root_url			 = home_url('/');
-	$path_cache			 = str_replace($root_url, '', flash_cache_get_current_url());
-	$advanced_settings	 = flash_cache_get_advanced_settings();
-	$cache_dir			 = flash_cache_get_cache_root();
-	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path_cache)));
+	$path_cache		= flash_cache_url_to_path(flash_cache_get_current_url());
+	$page_cache_dir = trailingslashit(flash_cache_get_cache_root() . flash_cache_get_server_name() . '/' . $path_cache);
 	$cache_path			 = realpath($page_cache_dir) . '/';
 
 	if ($cache_path != '/') {
@@ -211,24 +222,22 @@ function flash_cache_delete_action() {
 	flash_cache_verify_admin_request('delete-cache', 'delete_others_posts');
 	$path = isset($_GET['path']) ? sanitize_text_field(wp_unslash($_GET['path'])) : '';
 
+	$path			= flash_cache_url_to_path(home_url('/' . ltrim($path, '/')));
 	$cache_dir		= flash_cache_get_cache_root();
-	$page_cache_dir = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path)));
+	$page_cache_dir = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 	$cache_path		= realpath($page_cache_dir) . '/';
 	if ($cache_path != '/') {
 		flash_cache_delete_cache_files($cache_dir, $cache_path);
 	}
-	wp_safe_redirect(home_url('/') . ltrim(preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $path), '/'));
+	wp_safe_redirect(home_url('/' . implode('/', array_map('rawurlencode', explode('/', $path))) . ($path === '' ? '' : '/')));
 	exit;
 }
 
 add_action('admin_post_flash_cache_delete', 'flash_cache_delete_action');
 
 function flash_cache_delete_cache_from_url($url) {
-	$path = str_ireplace(home_url(''), '', $url);
-
-	$advanced_settings	 = flash_cache_get_advanced_settings();
-	$cache_dir			 = flash_cache_get_cache_root();
-	$page_cache_dir		 = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . str_replace('..', '', preg_replace('/:.*$/', '', $path)));
+	$cache_dir		= flash_cache_get_cache_root();
+	$page_cache_dir = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . flash_cache_url_to_path($url));
 	$cache_path			 = realpath($page_cache_dir) . '/';
 
 	if ($cache_path != '/') {
@@ -814,23 +823,40 @@ function flash_cache_get_path($url) {
 	return $url;
 }
 
+/**
+ * The disk usage counter changes in memory and reaches the database once per request, as one
+ * atomic UPDATE, however many files the request writes.
+ */
 function flash_cache_increment_disk_usage($bytes) {
-	$disk_usage = get_option('flash_cache_disk_usage', 0);
-	update_option('flash_cache_disk_usage', (int) $disk_usage + $bytes);
+	static $hooked = false;
+	$GLOBALS['flash_cache_disk_usage_delta'] = ($GLOBALS['flash_cache_disk_usage_delta'] ?? 0) + (int) $bytes;
+	if (!$hooked) {
+		$hooked = true;
+		add_action('shutdown', 'flash_cache_save_disk_usage', 1);
+	}
 }
 
 function flash_cache_decrement_disk_usage($bytes) {
-	$disk_usage = get_option('flash_cache_disk_usage', 0);
-	update_option('flash_cache_disk_usage', (int) $disk_usage - $bytes);
+	flash_cache_increment_disk_usage(-(int) $bytes);
+}
+
+function flash_cache_save_disk_usage() {
+	global $wpdb;
+	$delta = (int) ($GLOBALS['flash_cache_disk_usage_delta'] ?? 0);
+	$GLOBALS['flash_cache_disk_usage_delta'] = 0;
+	if (0 === $delta) {
+		return;
+	}
+	$updated = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->options} SET option_value = GREATEST(0, CAST(option_value AS SIGNED) + %d) WHERE option_name = 'flash_cache_disk_usage'", $delta));
+	if (!$updated) {
+		add_option('flash_cache_disk_usage', max(0, $delta), '', false);
+	}
+	wp_cache_delete('flash_cache_disk_usage', 'options');
 }
 
 function flash_cache_delete_all_options() {
 	global $wpdb;
-	$results = $wpdb->query(
-		$wpdb->prepare(
-			"DELETE FROM $wpdb->options WHERE option_name LIKE %s", 'flash_cache_%'
-		),
-	);
+	$wpdb->query($wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_') . '%'));
 
 	// SQL query to drop the table
 	$sql = "DROP TABLE IF EXISTS ".  $wpdb->prefix . "flash_lock";

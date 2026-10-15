@@ -15,16 +15,27 @@ class flash_cache_preaload {
 		add_action('admin_post_save_flash_cache_preload', array(__CLASS__, 'save'));
 		add_filter('cron_schedules', array(__CLASS__, 'intervals')); //add cron intervals
 		add_action('flash_cache_cron', array(__CLASS__, 'cron_callback'));  //Actions for Cron job
-		//test if cron active
-		if (!wp_next_scheduled('flash_cache_cron')) {
-			wp_schedule_event(time(), 'flash_cache_preload_int', 'flash_cache_cron');
-		}
+		add_action('init', array(__CLASS__, 'sync_schedule'));
 		// It's reset values on preload options to execute without wait.
 		add_action('admin_post_save_flash_cache_preload_execution', array(__CLASS__, 'execute_preload'));
 		add_action('admin_post_reset_to_default_preload', array(__CLASS__, 'reset_to_default_preload'));
 	}
 
 	
+
+	/**
+	 * The preload event exists only while the preload is enabled, so a site without it runs no
+	 * Flash Cache cron every minute.
+	 */
+	public static function sync_schedule() {
+		$active	   = !empty(wp_parse_args(get_option('flash_cache_preload', array()), self::default_options())['activate']);
+		$scheduled = wp_next_scheduled('flash_cache_cron');
+		if ($active && !$scheduled) {
+			wp_schedule_event(time(), 'flash_cache_preload_int', 'flash_cache_cron');
+		} elseif (!$active && $scheduled) {
+			wp_clear_scheduled_hook('flash_cache_cron');
+		}
+	}
 
 	/**
 	 * Static function check_time_exection
@@ -176,74 +187,21 @@ class flash_cache_preaload {
 				$post = get_post( $post_id );
 				$current_url	 = get_permalink($post_id);
 				update_option('flash_cache_preload_current_post', $current_url);
-				$create_cache	 = false;
-
-				foreach ($patterns as $pattern) {
-					$url_must_contain_array	 = array();
-					$line_arr				 = explode("\n", $pattern['url_must_contain']);
-
-					foreach ($line_arr as $key => $value) {
-						$value = trim($value);
-						if (!empty($value)) {
-							$ramdom_rewrites_array[] = $value;
-						}
-					}
-
-					foreach ($url_must_contain_array as $km => $url_must_contain) {
-						if (stripos($current_url, $url_must_contain) === false) {
-							continue;
-						}
-					}
-
-					$url_not_contain_array	 = array();
-					$line_arr				 = explode("\n", $pattern['url_not_contain']);
-
-					foreach ($line_arr as $key => $value) {
-						$value = trim($value);
-						if (!empty($value)) {
-							$url_not_contain_array[] = $value;
-						}
-					}
-
-					foreach ($url_not_contain_array as $kc => $url_not_contain) {
-						if (stripos($current_url, $url_not_contain) !== false) {
-							continue;
-						}
-					}
-
-					if ($pattern['page_type']['single']) {
-						if (empty($pattern['page_type']['posts'])) {
-							$create_cache = true;
-							break;
-						} else {
-							foreach ($pattern['page_type']['posts'] as $pcpt => $pp) {
-								if ($pcpt == $post->post_type) {
-									$create_cache = true;
-									break;
-								}
-							}
-						}
-					}
+				$matched = self::matching_pattern($patterns, $current_url, $post->post_type);
+				if (null === $matched) {
+					continue;
 				}
 
-				$path		 = str_replace(flash_cache_process::$origin_url, '', $current_url);
-				$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/' . $path;
-				$cache_file	 = $cache_path . 'index-cache.html';
-
-				if (file_exists($cache_file)) {
-					$ttl = flash_cache_get_advanced_settings()['refresh_mode'] === 'cron' ? $pattern['ttl_minimum'] : $pattern['ttl_maximum'];
-					if (time() - filemtime($cache_file) < (int) $ttl) {
-						continue;
-					}
+				$cache_path = $cache_dir . flash_cache_get_server_name() . '/' . flash_cache_url_to_path($current_url) . '/';
+				$cache_file = is_file($cache_path . 'index-cache.html') ? $cache_path . 'index-cache.html' : $cache_path . 'requests/' . flash_cache_process::request_key(array()) . '.html';
+				$ttl		= flash_cache_get_advanced_settings()['refresh_mode'] === 'cron' ? $matched['ttl_minimum'] : $matched['ttl_maximum'];
+				if (is_file($cache_file) && time() - filemtime($cache_file) < (int) $ttl) {
+					continue;
 				}
-				if ($create_cache) {
-					$post = null;
-					flash_cache_posts::create_cache_post_id($post_id);
-					if ($values_settings['cache_taxonomies']) {
-						flash_cache_posts::update_taxonomies($post_id, $pattern['ttl_maximum'], $default_posts_per_page, $cache_dir, true);
-					}
+				flash_cache_posts::create_cache_post_id($post_id);
+				if ($values_settings['cache_taxonomies']) {
+					flash_cache_posts::update_taxonomies($post_id, $ttl, $default_posts_per_page, $cache_dir, true);
 				}
-				
 			}
 			
 
@@ -261,6 +219,35 @@ class flash_cache_preaload {
 
 			update_option('flash_cache_preload_cron', $values_cron);
 		}
+	}
+
+	/**
+	 * The first pattern that caches single posts of this type and whose URL rules accept the
+	 * URL, or null.
+	 */
+	public static function matching_pattern($patterns, $url, $post_type) {
+		foreach ($patterns as $pattern) {
+			if (empty($pattern['page_type']['single'])) {
+				continue;
+			}
+			if (!empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][$post_type])) {
+				continue;
+			}
+			$must	  = array_filter(array_map('trim', explode("\n", (string) $pattern['url_must_contain'])), 'strlen');
+			$must_not = array_filter(array_map('trim', explode("\n", (string) $pattern['url_not_contain'])), 'strlen');
+			foreach ($must as $text) {
+				if (stripos($url, $text) === false) {
+					continue 2;
+				}
+			}
+			foreach ($must_not as $text) {
+				if (stripos($url, $text) !== false) {
+					continue 2;
+				}
+			}
+			return $pattern;
+		}
+		return null;
 	}
 
 	public static function admin_menu() {

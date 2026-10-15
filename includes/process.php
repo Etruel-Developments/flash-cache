@@ -152,7 +152,7 @@ class flash_cache_process {
 
 		$script = '<script>(function () {
 var flash_cache_generated = ' . time() . ';
-var pattern_minimum = ' . absint(self::$pattern['ttl_minimum']) . ';
+var pattern_minimum = ' . absint(self::$pattern['ttl_minimum'] ?? 0) . ';
 var current_query = "' . base64_encode(wp_json_encode(self::$current_query)) . '";
 var flash_cache_optional_post_id = ' . absint(self::$optional_post_id) . ';
 if (Date.now() / 1000 - flash_cache_generated < pattern_minimum) { return; }
@@ -167,26 +167,9 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		}
 		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 
-		$advanced_settings = flash_cache_get_advanced_settings();
-		$cache_dir		   = flash_cache_get_cache_root();
-		$server_name	   = trim(flash_cache_get_server_name(), '/');
-
-		if (empty($server_name)) {
-			error_log('Error: flash_cache_get_server_name() returned an empty value.');
-			$server_name = 'default';
-		}
-
-		if (filter_var(self::$url_to_cache, FILTER_VALIDATE_URL)) {
-			$parsed_url		= parse_url(self::$url_to_cache);
-			$host_to_remove = $parsed_url['host'] ?? '';
-			$relative_path	= str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
-		} else {
-			preg_match('~flash_cache/([^/]+)/~', self::$url_to_cache, $matches);
-			$host_to_remove = $matches[1] ?? '';
-			$relative_path	= str_replace($host_to_remove, '', self::$url_to_cache);
-		}
-
-		$path		= trim(str_replace(self::$origin_url, '', $relative_path), '/');
+		$cache_dir	 = flash_cache_get_cache_root();
+		$server_name = flash_cache_get_server_name();
+		$path		 = flash_cache_url_to_path(self::$url_to_cache);
 		$cache_path = trailingslashit($cache_dir . $server_name . '/' . $path);
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -218,10 +201,8 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
 		$cache_dir		  = flash_cache_get_cache_root();
 
-		$parsed_url	  = parse_url(self::$url_to_cache);
-		$relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
-		$path		  = str_replace(self::$origin_url, '', $relative_url);
-		$cache_path	  = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		$path		= flash_cache_url_to_path(self::$url_to_cache);
+		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -432,6 +413,12 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			}
 		}
 
+		// A static HTML copy is served for the bare URL, so it must come from a request without a
+		// query string (tracking parameters aside); PHP mode keeps one copy per query instead.
+		if ($create_cache && self::$cache_type === 'html' && self::$template_redirect && self::request_key(wp_unslash($_GET)) !== self::request_key(array())) {
+			$create_cache = false;
+		}
+
 		if ($create_cache) {
 
 			self::$current_query = $current_query;
@@ -566,7 +553,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		do_action('onload_cache_file', $url);
 		$advanced_settings = flash_cache_get_advanced_settings();
 		$cache_dir		   = flash_cache_get_cache_root();
-		$path			   = str_replace(self::$origin_url, '', $url);
+		$path			   = flash_cache_url_to_path($url);
 		$cache_path		   = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 		$cache_file		   = $cache_path . 'index-cache.html';
 		if (file_exists($cache_file)) {
@@ -590,7 +577,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 				fastcgi_finish_request();
 			}
 
-			$opcional_url			  = self::$origin_url . $path;
+			$opcional_url			  = $url;
 			$current_query			  = flash_cache_get_var_javascript('current_query', $cache_response);
 			$current_query			  = json_decode(base64_decode($current_query), true);
 			self::debug(array('Processing a new pattern from onload_cache' => $current_query));
@@ -645,7 +632,11 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		}
 
 		if (strpos($_SERVER['REQUEST_URI'], 'robots.txt') !== false) {
-			// robots.txt detected. Not caching.
+			$new_cache = false;
+		}
+		// Error pages, redirects and other non-200 responses are never stored.
+		$status = http_response_code();
+		if (false !== $status && 200 !== $status) {
 			$new_cache = false;
 		}
 
@@ -727,51 +718,17 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 	}
 
 	/**
-	 * Static function get_path
-	 * @access public
-	 * @return void
-	 * @since 1.0.0
+	 * The cache folder of the page being cached, relative to the host folder: the post's
+	 * permalink when a post is given, the URL being cached otherwise.
 	 */
 	public static function get_path($post_id = 0, $process_type = 'ob_with_curl_request') {
-		$uri = '';
 		if ($post_id != 0) {
-			$site_url  = site_url();
-			$permalink = get_permalink($post_id);
-			if (false === strpos($permalink, $site_url)) {
-
-				self::debug("flash_cache_get_path: warning! site_url ($site_url) not found in permalink ($permalink).");
-				if (false === strpos($permalink, htmlentities($_SERVER['HTTP_HOST']))) {
-					wp_cache_debug("flash_cache_get_path: WARNING! SERVER_NAME ({$WPSC_HTTP_HOST}) not found in permalink ($permalink). ");
-					$p = parse_url($permalink);
-					if (is_array($p)) {
-						$uri = $p['path'];
-						self::debug("flash_cache_get_path: WARNING! Using $uri as permalink. Used parse_url.");
-					} else {
-						self::debug("flash_cache_get_path: WARNING! Permalink ($permalink) could not be understood by parse_url. Using front page.");
-						$uri = '';
-					}
-				} else {
-					self::debug("flash_cache_get_path: Removing SERVER_NAME ({$WPSC_HTTP_HOST}) from permalink ($permalink). Is the url right?");
-					$uri = str_replace(htmlentities($_SERVER['HTTP_HOST']), '', $permalink);
-					$uri = str_replace('http://', '', $uri);
-					$uri = str_replace('https://', '', $uri);
-				}
-			} else {
-				$uri = str_replace($site_url, '', $permalink);
-			}
-		} else {
-			if (is_null(self::$origin_url)) {
-				self::$origin_url = get_site_url(null, '/');
-			}
-			self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
-			if ($process_type == 'ob_with_curl_request' && false === strpos(self::$url_to_cache, self::$origin_url)) {
-				$request_URI = sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
-				$uri		 = strtolower($request_URI);
-			} else {
-				$uri = str_replace(self::$origin_url, '', self::$url_to_cache);
-			}
+			return flash_cache_url_to_path(get_permalink($post_id));
 		}
-		return $uri;
+		if (self::$url_to_cache !== '') {
+			return flash_cache_url_to_path(self::$url_to_cache);
+		}
+		return flash_cache_url_to_path(isset($_SERVER['REQUEST_URI']) ? sanitize_url(wp_unslash($_SERVER['REQUEST_URI'])) : '/');
 	}
 }
 

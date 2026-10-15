@@ -206,7 +206,7 @@ class flash_cache_posts {
 			exit;
 		}
 		$cache_dir	= flash_cache_get_cache_root();
-		$cache_path = realpath($cache_dir . flash_cache_get_server_name() . flash_cache_process::get_path($post->ID, 'cURL'));
+		$cache_path = realpath($cache_dir . flash_cache_get_server_name() . '/' . flash_cache_process::get_path($post->ID, 'cURL'));
 		if (false === $cache_path) {
 			flash_cache_notices::add(__('The post has no cache.', 'flash-cache'));
 			wp_safe_redirect($back);
@@ -241,7 +241,7 @@ class flash_cache_posts {
 		if ($post->post_status != 'publish') {
 			return false;
 		}
-		$post_path			 = flash_cache_process::get_path($post->ID, 'cURL');
+		$post_path			 = '/' . flash_cache_process::get_path($post->ID, 'cURL');
 		$advanced_settings	 = flash_cache_get_advanced_settings();
 		$cache_dir			 = flash_cache_get_cache_root();
 		$cache_path			 = $cache_dir . flash_cache_get_server_name() . $post_path;
@@ -312,7 +312,7 @@ class flash_cache_posts {
 
 			$url_def	 = array();
 			$url_def_tag = array();
-			$url_feed	 = flash_cache_process::$origin_url . 'feed/';
+			$url_feed	 = home_url('/feed/');
 			//$url_feed[] = flash_cache_process::$origin_url.'feed/';
 			//$url_feed_tag[] = flash_cache_process::$origin_url.'feed/';
 
@@ -341,8 +341,8 @@ class flash_cache_posts {
 						$pages_url_term_array[] = $term_url . 'page/' . $paged . '/';
 					}
 					foreach ($pages_url_term_array as $page_term_url) {
-						$path = str_replace(flash_cache_process::$origin_url, '', $page_term_url);
-						if (stripos($path, '?') !== false) { //Not create cache of taxonomies if have query strings.
+						$path = flash_cache_url_to_path($page_term_url) . '/';
+						if (strpos($page_term_url, '?') !== false) {
 							continue;
 						}
 						$cache_path	 = $cache_dir . $server_name . '/' . $path;
