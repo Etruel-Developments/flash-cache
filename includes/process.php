@@ -241,71 +241,95 @@ class flash_cache_process {
 	}
 
 	public static function create_cache_php() {
-		global $wp_query;
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
-		self::$origin_url  = flash_cache_sanitize_origin_url(self::$origin_url);
-		$advanced_settings = flash_cache_get_advanced_settings();
-		$home_path		   = flash_cache_get_home_path();
-		$cache_dir		   = flash_cache_get_cache_root();
+		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
+		$cache_dir		  = flash_cache_get_cache_root();
 
-		$parsed_url = parse_url(self::$url_to_cache);
-
+		$parsed_url	  = parse_url(self::$url_to_cache);
 		$relative_url = str_replace($parsed_url['scheme'] . '://' . $parsed_url['host'] . (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''), '', self::$url_to_cache);
-
-		$path		= str_replace(self::$origin_url, '', $relative_url);
-		$cache_path = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		$path		  = str_replace(self::$origin_url, '', $relative_url);
+		$cache_path	  = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
 		}
-
 		if (!self::start_create_cache($cache_path)) {
 			self::end_create_cache();
 			return false;
 		}
 
-		$cache_template = apply_filters('flash_cache_template_file', FLASH_CACHE_PLUGIN_DIR . 'includes/' . 'cache.tpl', $advanced_settings);
-
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-		$template_php = file_get_contents($cache_template);
-		$template_php = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
-		$template_php = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
-		$template_php = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
-		$template_php = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
-		$request_url  = flash_cache_get_content_to_php(self::$url_to_cache);
+		$response = flash_cache_get_content_to_php(self::$url_to_cache);
+		if (!empty($response['response'])) {
+			self::write_php_cache($cache_path, $response['response'], $response['content_type']);
+		}
+		self::end_create_cache();
+	}
 
-		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
-			$request = hash('sha256', http_build_query(array()));
-		} else {
-			$request = hash('sha256', http_build_query($_REQUEST));
+	/**
+	 * The generated index-cache.php. Every value is written as a PHP literal, never as raw text.
+	 */
+	public static function php_cache_template() {
+		$cache_template = apply_filters('flash_cache_template_file', FLASH_CACHE_PLUGIN_DIR . 'includes/cache.tpl', flash_cache_get_advanced_settings());
+		return strtr((string) file_get_contents($cache_template), array(
+			'{home_path}'	=> var_export((string) flash_cache_get_home_path(), true),
+			'{url_path}'	=> var_export((string) self::$url_to_cache, true),
+			'{minimum_ttl}' => (string) absint(self::$pattern['ttl_minimum']),
+			'{maximum_ttl}' => (string) absint(self::$pattern['ttl_maximum']),
+		));
+	}
+
+	/**
+	 * Cache key of a request in PHP mode: the query string without tracking parameters, in a
+	 * stable order. includes/cache.tpl computes the same key; both must change together.
+	 */
+	public static function request_key(array $query) {
+		foreach (array_keys($query) as $name) {
+			if (preg_match('/^(utm_[a-z]+|fbclid|gclid|gclsrc|dclid|msclkid|mc_cid|mc_eid|_ga|_gl)$/i', (string) $name)) {
+				unset($query[$name]);
+			}
+		}
+		ksort($query);
+		return hash('sha256', http_build_query($query));
+	}
+
+	/**
+	 * Writes the PHP-mode files of one page: index-cache.php once, and the response of this
+	 * request under requests/. A page keeps at most flash_cache_max_request_files variants.
+	 */
+	public static function write_php_cache($cache_path, $html, $content_type) {
+		global $wp_query;
+		if (is_search() && (empty($wp_query) || $wp_query->post_count == 0)) {
+			return false;
 		}
 
-		$request_path = 'requests/';
-		if (!file_exists($cache_path . $request_path)) {
-			@mkdir($cache_path . $request_path, 0777, true);
-		}
-
-		if (!file_exists($cache_path . 'index-cache.php')) {
-			file_put_contents($cache_path . 'index-cache.php', $template_php);
+		$template_file = $cache_path . 'index-cache.php';
+		if (!file_exists($template_file)) {
+			$template_php = self::php_cache_template();
+			file_put_contents($template_file, $template_php);
 			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
 		}
 
-		$request_file_path = $cache_path . $request_path . $request . '.html';
-		$header_file_path  = $cache_path . $request_path . $request . '.header';
-
-		if (is_search() && $wp_query->post_count > 0) {
-			file_put_contents($request_file_path, $request_url['response']);
-			file_put_contents($header_file_path, $request_url['content_type']);
-		} elseif (!is_search()) {
-			file_put_contents($request_file_path, $request_url['response']);
-			file_put_contents($header_file_path, $request_url['content_type']);
+		$requests_path = $cache_path . 'requests/';
+		if (!file_exists($requests_path)) {
+			@mkdir($requests_path, 0777, true);
+		}
+		$key		  = defined('FLASH_CACHE_NOT_USE_THIS_REQUEST') ? self::request_key(array()) : self::request_key(wp_unslash($_GET));
+		$request_file = $requests_path . $key . '.html';
+		if (!file_exists($request_file)) {
+			$max_files = (int) apply_filters('flash_cache_max_request_files', 100, $cache_path);
+			$existing  = glob($requests_path . '*.html');
+			if (is_array($existing) && count($existing) >= $max_files) {
+				return false;
+			}
 		}
 
-		flash_cache_increment_disk_usage(mb_strlen($request_url['response'], '8bit'));
-		flash_cache_increment_disk_usage(mb_strlen($request_url['content_type'], '8bit'));
-		self::end_create_cache();
+		file_put_contents($request_file, $html);
+		file_put_contents($requests_path . $key . '.header', $content_type);
+		flash_cache_increment_disk_usage(mb_strlen($html, '8bit') + mb_strlen($content_type, '8bit'));
+		return true;
 	}
 
 	public static function process_cache_from_query($current_query, $opcional_url = '') {
@@ -472,10 +496,7 @@ class flash_cache_process {
 		if (isset($_COOKIE["flash_cache"]) || isset($_COOKIE["flash_cache_backend"])) {
 			return true;
 		}
-		if ($_SERVER["REQUEST_METHOD"] == 'PUT') {
-			return true;
-		}
-		if ($_SERVER["REQUEST_METHOD"] == 'DELETE') {
+		if (!in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', array('GET', 'HEAD'), true)) {
 			return true;
 		}
 		if (isset($_GET['preview'])) {
@@ -689,16 +710,12 @@ class flash_cache_process {
 	}
 
 	public static function create_cache_ob_php($response, $use_curl) {
-		global $wp_query;
 		if (is_null(self::$origin_url)) {
 			self::$origin_url = get_site_url(null, '/');
 		}
-		self::$origin_url  = flash_cache_sanitize_origin_url(self::$origin_url);
-		$advanced_settings = flash_cache_get_advanced_settings();
-		$home_path		   = flash_cache_get_home_path();
-		$cache_dir		   = flash_cache_get_cache_root();
-		$path			   = self::get_path(self::$optional_post_id);
-		$cache_path		   = trailingslashit($cache_dir . flash_cache_get_server_name() . '/' . $path);
+		self::$origin_url = flash_cache_sanitize_origin_url(self::$origin_url);
+		$path			  = self::get_path(self::$optional_post_id);
+		$cache_path		  = trailingslashit(flash_cache_get_cache_root() . flash_cache_get_server_name() . '/' . $path);
 
 		if (!file_exists($cache_path)) {
 			@mkdir($cache_path, 0777, true);
@@ -709,55 +726,21 @@ class flash_cache_process {
 		}
 
 		self::debug('Creating OB PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
-
-		$cache_template = apply_filters('flash_cache_template_file', FLASH_CACHE_PLUGIN_DIR . 'includes/' . 'cache.tpl', $advanced_settings);
-
-		$template_php = file_get_contents($cache_template);
-		$template_php = str_replace('{home_path}', "'" . $home_path . "'", $template_php);
-		$template_php = str_replace('{url_path}', "'" . self::$url_to_cache . "'", $template_php);
-		$template_php = str_replace('{minimum_ttl}', self::$pattern['ttl_minimum'], $template_php);
-		$template_php = str_replace('{maximum_ttl}', self::$pattern['ttl_maximum'], $template_php);
-
-		if (!file_exists($cache_path . 'index-cache.php')) {
-			file_put_contents($cache_path . 'index-cache.php', $template_php);
-			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
-		}
-
 		if ($use_curl) {
 			$response = flash_cache_get_content(self::$url_to_cache);
-		}
-		if (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST')) {
-			$request = hash('sha256', http_build_query(array()));
-		} else {
-			$request = hash('sha256', http_build_query($_REQUEST));
+			$response = $response['response'] ?? '';
 		}
 
-		$request_path = 'requests/';
-		if (!file_exists($cache_path . $request_path)) {
-			@mkdir($cache_path . $request_path, 0777, true);
-		}
-		$request_file_path	  = $cache_path . $request_path . $request . '.html';
-		$header_file_path	  = $cache_path . $request_path . $request . '.header';
-		$current_content_type = 'text/html; charset=UTF-8';
-		$headers			  = headers_list();
-		foreach ($headers as $header) {
-			if (stripos($header, 'Content-Type') !== FALSE) {
-				$headerParts		  = explode(':', $header);
-				$current_content_type = trim($headerParts[1]);
+		$content_type = 'text/html; charset=UTF-8';
+		foreach (headers_list() as $header) {
+			if (stripos($header, 'Content-Type:') === 0) {
+				$content_type = trim(substr($header, strlen('Content-Type:')));
 				break;
 			}
 		}
-		if (is_search() && $wp_query->post_count > 0) {
-			// A search query has been performed.
-			file_put_contents($request_file_path, $response);
-			file_put_contents($header_file_path, $current_content_type);
-		} elseif (!is_search()) {
-			file_put_contents($request_file_path, $response);
-			file_put_contents($header_file_path, $current_content_type);
+		if (!empty($response)) {
+			self::write_php_cache($cache_path, $response, $content_type);
 		}
-		flash_cache_increment_disk_usage(mb_strlen($response, '8bit'));
-		flash_cache_increment_disk_usage(mb_strlen($current_content_type, '8bit'));
-
 		self::end_create_cache();
 	}
 

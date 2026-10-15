@@ -97,6 +97,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Cache maintenance works strictly inside the cache folder, removing hidden files too and leaving linked folders untouched.
 * Cache folders are named after the site's own address, and the server rules point to them directly.
 * Settings, cache and preload actions are reserved to users with the matching permissions, with clear messages when an action is not allowed.
+* Leaner PHP mode: a compact cache file serves each stored page with a single lookup and hands over to WordPress cleanly when the page needs refreshing.
+* Smarter PHP-mode cache keys: visits with tracking parameters (utm_*, fbclid, gclid and similar) share the same cached page, and each page keeps a bounded number of variants (filter `flash_cache_max_request_files`).
+* Form submissions always reach WordPress live: only GET and HEAD requests are cached and served from cache.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.
 * After updating, the cache is rebuilt from scratch and the server rules are refreshed automatically.

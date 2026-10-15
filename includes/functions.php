@@ -337,16 +337,17 @@ function flash_cache_get_nginx_conf_info() {
 		$cache_rules[]	 = 'set $cache_uri $request_uri;';
 		$cache_rules[]	 = 'set $cache_uri_php $request_uri;';
 
-		$cache_rules[]	 = 'if ($request_method = POST) {';
-		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
-		$cache_rules[]	 = '}';
-
 		$cache_rules[]	 = 'if ($query_string != "") {';
 		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
 		$cache_rules[]	 = '}';
 
 		$cache_rules[]	 = 'if ($request_uri ~ "([^\?]*)\?(.*)") {';
 		$cache_rules[]	 = 'set $cache_uri_php $1;';
+		$cache_rules[]	 = '}';
+
+		$cache_rules[]	 = 'if ($request_method !~ "^(GET|HEAD)$") {';
+		$cache_rules[]	 = 'set $cache_uri \'null cache\';';
+		$cache_rules[]	 = 'set $cache_uri_php \'null cache\';';
 		$cache_rules[]	 = '}';
 
 		$cache_rules[]	 = 'if ($http_cookie ~* "' . implode('|', $dont_cache_cookies) . '") {';
@@ -482,6 +483,7 @@ function flash_cache_get_htaccess_info() {
 			$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*[^/]$';
 			$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*//.*$';
 		}
+		$cache_rules[]	 = 'RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$';
 
 		$cache_rules[]	 = 'RewriteCond %{HTTP:Cookie} !^.*(' . implode('|', $dont_cache_cookies) . ').*$';
 		$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
