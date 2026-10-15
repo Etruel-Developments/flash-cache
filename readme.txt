@@ -121,6 +121,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Approved comments refresh their post's cache in the background.
 * Faster uncached requests: patterns load from a single stored option instead of database queries.
 * Patterns follow the order you give them: drag them in the Patterns list, and the first pattern that applies to a page decides how it is cached. The Default pattern always comes last and caches every page no other pattern takes.
+* Each Page types box decides for its own pages: categories, tags and author pages follow their own boxes, "Other archives" covers date, custom taxonomy and post type archives, and "Posts page" is the list of latest posts when the front page is a static page.
 * New pattern cache type "Don't cache", to keep the pages it applies to always served live.
 * A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches.
 * Saving, reordering or deleting a pattern clears the cache, so the new rules apply to the next visit.

@@ -103,8 +103,8 @@ class flash_cache_posts {
 	 * per archive page.
 	 */
 	public static function rebuild_terms($post_id) {
-		$current_query = wp_parse_args(array('is_tag' => 1, 'is_category' => 1, 'is_archive' => 1), flash_cache_default_query());
 		foreach (get_post_taxonomies($post_id) as $taxonomy) {
+			$current_query = flash_cache_patterns::term_query($taxonomy);
 			if (!is_taxonomy_viewable($taxonomy)) {
 				continue;
 			}
@@ -297,8 +297,8 @@ class flash_cache_posts {
 	public static function create_cache_home() {
 
 		$default_query				 = flash_cache_default_query();
-		$current_query				 = array();
-		$current_query['is_home']	 = 1;
+		$current_query				 = array('is_front_page' => 1);
+		$current_query['page' === get_option('show_on_front') ? 'is_page' : 'is_home'] = 1;
 		$current_query				 = wp_parse_args($current_query, $default_query);
 
 		flash_cache_process::$force_permalink	 = true;
@@ -365,13 +365,8 @@ class flash_cache_posts {
 							}
 						}
 
-						$default_query							 = flash_cache_default_query();
-						$current_query							 = array();
-						$current_query['is_tag']				 = 1;
-						$current_query['is_category']			 = 1;
-						$current_query							 = wp_parse_args($current_query, $default_query);
 						flash_cache_process::$force_process_type = 'curl';
-						flash_cache_process::process_cache_from_query($current_query, $page_term_url);
+						flash_cache_process::process_cache_from_query(flash_cache_patterns::term_query($tax), $page_term_url);
 						if ($update_current_page) {
 							update_option('flash_cache_preload_current_post', $page_term_url);
 						}

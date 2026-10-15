@@ -292,6 +292,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		$create_cache	  = false;
 		$patterns		  = flash_cache_patterns::get_all();
 		$is_post		  = false;
+		$post			  = null;
 
 		// A rebuild names its post in $optional_post_id (one process may rebuild many); a visit uses the queried post.
 		if ($current_query['is_single'] || $current_query['is_page']) {
@@ -311,91 +312,9 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			$current_url = get_permalink($post->ID);
 		}
 
+		$kind = flash_cache_patterns::page_kind($current_query);
 		foreach ($patterns as $pattern) {
-
-			$url_must_contain_array = array();
-			$line_arr				= explode("\n", $pattern['url_must_contain']);
-
-			foreach ($line_arr as $key => $value) {
-				$value = trim($value);
-				if (!empty($value)) {
-					$url_must_contain_array[] = $value;
-				}
-			}
-
-
-			if (!empty($url_must_contain_array)) {
-				foreach ($url_must_contain_array as $km => $url_must_contain) {
-					if (stripos($current_url, $url_must_contain) === false) {
-						continue 2;
-					}
-				}
-			}
-
-			$url_not_contain_array = array();
-			$line_arr			   = explode("\n", $pattern['url_not_contain']);
-
-			foreach ($line_arr as $key => $value) {
-				$value = trim($value);
-				if (!empty($value)) {
-					$url_not_contain_array[] = $value;
-				}
-			}
-
-			if (!empty($url_not_contain_array)) {
-				foreach ($url_not_contain_array as $kc => $url_not_contain) {
-					if (stripos($current_url, $url_not_contain) !== false) {
-						continue 2;
-					}
-				}
-			}
-
-
-			if ($pattern['page_type']['single'] && ($current_query['is_single'] || $current_query['is_page']) && !$current_query['is_feed']) {
-				if (empty($pattern['page_type']['posts']) || !empty($pattern['page_type']['posts'][$post?->post_type ?? ''])) {
-					$create_cache	  = true;
-					self::$cache_type = $pattern['cache_type'];
-					break;
-				}
-			}
-
-
-			if ($pattern['page_type']['search'] && $current_query['is_search'] && !$current_query['is_feed']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['archives'] && $current_query['is_archive'] && !$current_query['is_feed']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['category'] && $current_query['is_category'] && !$current_query['is_feed']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['tag'] && $current_query['is_tag'] && !$current_query['is_feed']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['frontpage'] && $current_query['is_front_page']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['home'] && $current_query['is_home']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['author'] && $current_query['is_author'] && !$current_query['is_feed']) {
-				$create_cache	  = true;
-				self::$cache_type = $pattern['cache_type'];
-				break;
-			}
-			if ($pattern['page_type']['feed'] && $current_query['is_feed']) {
+			if (flash_cache_patterns::applies($pattern, $kind, $post?->post_type ?? '', $current_url)) {
 				$create_cache	  = true;
 				self::$cache_type = $pattern['cache_type'];
 				break;

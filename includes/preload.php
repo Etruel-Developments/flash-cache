@@ -232,25 +232,9 @@ class flash_cache_preaload {
 	 */
 	public static function matching_pattern($patterns, $url, $post_type) {
 		foreach ($patterns as $pattern) {
-			if (empty($pattern['page_type']['single'])) {
-				continue;
+			if (flash_cache_patterns::applies($pattern, 'single', $post_type, $url)) {
+				return $pattern;
 			}
-			if (!empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][$post_type])) {
-				continue;
-			}
-			$must	  = array_filter(array_map('trim', explode("\n", (string) $pattern['url_must_contain'])), 'strlen');
-			$must_not = array_filter(array_map('trim', explode("\n", (string) $pattern['url_not_contain'])), 'strlen');
-			foreach ($must as $text) {
-				if (stripos($url, $text) === false) {
-					continue 2;
-				}
-			}
-			foreach ($must_not as $text) {
-				if (stripos($url, $text) !== false) {
-					continue 2;
-				}
-			}
-			return $pattern;
 		}
 		return null;
 	}

@@ -83,6 +83,55 @@ class flash_cache_patterns {
 	}
 
 	/**
+	 * The one page type a request counts as, most specific first, so each Page types box
+	 * governs its own pages: a category page follows "Category", not "Archives".
+	 */
+	public static function page_kind($query) {
+		foreach (array('is_feed' => 'feed', 'is_search' => 'search', 'is_front_page' => 'frontpage', 'is_home' => 'home', 'is_single' => 'single', 'is_page' => 'single', 'is_category' => 'category', 'is_tag' => 'tag', 'is_author' => 'author', 'is_archive' => 'archives') as $flag => $kind) {
+			if (!empty($query[$flag])) {
+				return $kind;
+			}
+		}
+		return '';
+	}
+
+	/**
+	 * Whether a pattern applies to a page of this kind, post type and URL.
+	 */
+	public static function applies($pattern, $kind, $post_type, $url) {
+		if ('' === $kind || empty($pattern['page_type'][$kind])) {
+			return false;
+		}
+		if ('single' === $kind && !empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][(string) $post_type])) {
+			return false;
+		}
+		foreach (array_filter(array_map('trim', explode("\n", (string) ($pattern['url_must_contain'] ?? ''))), 'strlen') as $text) {
+			if (stripos($url, $text) === false) {
+				return false;
+			}
+		}
+		foreach (array_filter(array_map('trim', explode("\n", (string) ($pattern['url_not_contain'] ?? ''))), 'strlen') as $text) {
+			if (stripos($url, $text) !== false) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * The query flags of a term archive, for rebuilds that request it outside a visit.
+	 */
+	public static function term_query($taxonomy) {
+		$flags = array('is_archive' => 1);
+		if ('category' === $taxonomy) {
+			$flags['is_category'] = 1;
+		} elseif ('post_tag' === $taxonomy) {
+			$flags['is_tag'] = 1;
+		}
+		return wp_parse_args($flags, flash_cache_default_query());
+	}
+
+	/**
 	 * The pattern that is always evaluated last and catches every page no other pattern takes:
 	 * the "Default" pattern, recorded on install and found on first use elsewhere. 0 when it
 	 * was deleted.
@@ -336,35 +385,30 @@ class flash_cache_patterns {
 		echo '
 				<br/>
 				<div class="checkbox-group">
-					<input type="checkbox" value="1" name="page_type[frontpage]" ' . checked(1, $values['page_type']['frontpage'], false) . ' />' . __('Front Page (is_front_page)', 'flash-cache') . '
+					<input type="checkbox" value="1" name="page_type[frontpage]" ' . checked(1, $values['page_type']['frontpage'], false) . ' />' . __('Front page (is_front_page)', 'flash-cache') . '
 				</div>
-				<div style="margin-left:20px">
-					<div class="checkbox-group">
-						<input type="checkbox" value="1" name="page_type[home]" ' . checked(1, $values['page_type']['home'], false) . ' />
-					' . __('Home (is_home)', 'flash-cache') . '
-					</div>
-				</div>
-				<br/>
 				<div class="checkbox-group">
-					<input type="checkbox" value="1" name="page_type[archives]" ' . checked(1, $values['page_type']['archives'], false) . ' />' . __('Archives (is_archive)', 'flash-cache') . '
+					<input type="checkbox" value="1" name="page_type[home]" ' . checked(1, $values['page_type']['home'], false) . ' />' . __('Posts page (is_home)', 'flash-cache') . '
+					<p class="description" style="margin-left:24px">' . __('The list of latest posts when the front page is a static page.', 'flash-cache') . '</p>
 				</div>
-				<div style="margin-left:20px">
-					<div class="checkbox-group">
-						<input type="checkbox" value="1" name="page_type[tag]" ' . checked(1, $values['page_type']['tag'], false) . ' />' . __('Tags (is_tag)', 'flash-cache') . '
-					</div>
-					<div class="checkbox-group">
-						<input type="checkbox" value="1" name="page_type[category]"' . checked(1, $values['page_type']['category'], false) . ' />' . __('Category (is_category)', 'flash-cache') . '
-					</div>
+				<div class="checkbox-group">
+					<input type="checkbox" value="1" name="page_type[category]" ' . checked(1, $values['page_type']['category'], false) . ' />' . __('Categories (is_category)', 'flash-cache') . '
 				</div>
-				<br/>
+				<div class="checkbox-group">
+					<input type="checkbox" value="1" name="page_type[tag]" ' . checked(1, $values['page_type']['tag'], false) . ' />' . __('Tags (is_tag)', 'flash-cache') . '
+				</div>
+				<div class="checkbox-group">
+					<input type="checkbox" value="1" name="page_type[author]" ' . checked(1, $values['page_type']['author'], false) . ' />' . __('Author pages (is_author)', 'flash-cache') . '
+				</div>
+				<div class="checkbox-group">
+					<input type="checkbox" value="1" name="page_type[archives]" ' . checked(1, $values['page_type']['archives'], false) . ' />' . __('Other archives (is_archive)', 'flash-cache') . '
+					<p class="description" style="margin-left:24px">' . __('Date archives, custom taxonomies and post type archives.', 'flash-cache') . '</p>
+				</div>
 				<div class="checkbox-group">
 					<input type="checkbox" value="1" name="page_type[feed]" ' . checked(1, $values['page_type']['feed'], false) . ' />' . __('Feeds (is_feed)', 'flash-cache') . '
 				</div>
 				<div class="checkbox-group">
-					<input type="checkbox" value="1" name="page_type[search]" ' . checked(1, $values['page_type']['search'], false) . ' />' . __('Search Pages (is_search)', 'flash-cache') . '
-				</div>
-				<div class="checkbox-group">
-					<input type="checkbox" value="1" name="page_type[author]" ' . checked(1, $values['page_type']['author'], false) . ' />' . __('Author Pages (is_author)', 'flash-cache') . '
+					<input type="checkbox" value="1" name="page_type[search]" ' . checked(1, $values['page_type']['search'], false) . ' />' . __('Search results (is_search)', 'flash-cache') . '
 				</div>
 			</td>
 		</tr>
@@ -471,7 +515,6 @@ class flash_cache_patterns {
 			'create_cache_on_insert_update'	 => 1,
 			'update_home_on_insert_post'	 => 1,
 			'update_categories_on_post'		 => 1,
-			'update_tax_on_comment'			 => 1,
 			'cache_type'					 => 'html',
 			'url_must_contain'				 => '',
 			'url_not_contain'				 => '',
