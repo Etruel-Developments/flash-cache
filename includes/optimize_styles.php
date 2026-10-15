@@ -11,180 +11,118 @@
 if (!defined('ABSPATH'))
 	exit;
 
+/**
+ * Combines the page's stylesheets and <style> blocks, in their order, into shared files under
+ * the cache folder's assets/. A stylesheet that cannot be combined ends a run, so the cascade
+ * keeps its order; each run of two or more becomes one <link> where the run started.
+ */
 class flash_cache_optimize_styles {
-
-	public static $css_tags			 = array();
-	public static $include_inline	 = true;
 
 	public static function hooks() {
 		add_filter('flash_cache_response_html', array(__CLASS__, 'init_process'), 1, 2);
 	}
 
 	public static function init_process($content, $url_to_cache) {
-		if (empty(flash_cache_process::$advanced_settings)) {
-			flash_cache_process::$advanced_settings = flash_cache_get_advanced_settings();
+		$settings = flash_cache_get_advanced_settings();
+		if (empty($settings['optimize_styles']) || !flash_cache_assets::is_html_document($content)) {
+			return $content;
 		}
-		if (empty(flash_cache_process::$advanced_settings['optimize_styles'])) {
+		if (apply_filters('flash_cache_css_noptimize', false, $content, $url_to_cache)) {
 			return $content;
 		}
 
-		$noptimize_css = apply_filters('flash_cache_css_noptimize', false, $content, $url_to_cache);
-		if ($noptimize_css) {
+		list($masked, $map) = flash_cache_assets::mask($content, true);
+		if (!preg_match_all('#<link\b[^>]*>|<style\b[^>]*>.*?</style>#is', $masked, $matches, PREG_OFFSET_CAPTURE)) {
 			return $content;
 		}
 
-		// Get <style> and <link>.
-		$matches		 = array();
-		self::$css_tags	 = array('files' => array(), 'inline' => array());
-		
-		if (preg_match_all('#(<style[^>]*>.*</style>)|(<link[^>]*stylesheet[^>]*>)#Usmi', $content, $matches)) {
-			//$content = print_r($matches, true);
-			// $content = '';
-			foreach ($matches[0] as $tag) {
-
-				// Get the media.
-				if (false !== strpos($tag, 'media=')) {
-					preg_match('#media=(?:"|\')([^>]*)(?:"|\')#Ui', $tag, $medias);
-					$medias	 = explode(',', $medias[1]);
-					$media	 = array();
-					foreach ($medias as $elem) {
-						/* $media[] = current(explode(' ',trim($elem),2)); */
-						if (empty($elem)) {
-							$elem = 'all';
-						}
-
-						$media[] = $elem;
-					}
-				} else {
-					// No media specified - applies to all.
-					$media = array('all');
-				}
-
-				if (preg_match('#<link.*href=("|\')(.*)("|\')#Usmi', $tag, $source)) {
-					// <link>.
-					$url	 = current(explode('?', $source[2], 2));
-					$path	 = flash_cache_get_path($url);
-
-					if (false !== $path && preg_match('#\.css$#', $path)) {
-						// Good link.
-						self::$css_tags['files'][] = array($media, $path);
-					} else {
-
-						// Link is dynamic or external.
-						$headers = get_headers($source[2], 1);
-
-						// Verifica si el enlace devuelve un código de estado 200 (OK).
-						if (strpos($headers[0], '200') !== false) {
-							self::$css_tags['files'][] = array($media, $source[2]); // El enlace tiene contenido.
-						} else {
-							$tag = ''; // El enlace no tiene contenido o no es válido.
-						}
-					}
-				} else {
-					// Inline css in style tags can be wrapped in comment tags, so restore comments.
-					//$tag = $this->restore_comments( $tag );
-					preg_match('#<style.*>(.*)</style>#Usmi', $tag, $code);
-
-					// And re-hide them to be able to to the removal based on tag.
-					//$tag = $this->hide_comments( $tag );
-
-					if (self::$include_inline) {
-						$code						 = preg_replace('#^.*<!\[CDATA\[(?:\s*\*/)?(.*)(?://|/\*)\s*?\]\]>.*$#sm', '$1', $code[1]);
-						self::$css_tags['inline'][]	 = array($media, $code);
-					} else {
-						$tag = '';
-					}
-				}
-
-				// Remove the original style tag.
-				$content = str_replace($tag, '', $content);
+		$runs = array(array());
+		foreach ($matches[0] as $match) {
+			$item = self::prepare($match[0], $url_to_cache);
+			if (null === $item) {
+				continue;
 			}
-			
-		}
-		//$content .= print_r($matches[0], true);
-
-		$content = self::end_process($content);
-
-		return $content;
-	}
-
-	public static function end_process($content) {
-
-		$arrContextOptions = array(
-			"ssl" => array(
-				"verify_peer"		 => false,
-				"verify_peer_name"	 => false,
-			),
-		);
-
-		if (empty(flash_cache_process::$advanced_settings)) {
-			flash_cache_process::$advanced_settings = flash_cache_get_advanced_settings();
-		}
-		if (is_null(flash_cache_process::$origin_url)) {
-			flash_cache_process::$origin_url = get_site_url(null, '/');
-		}
-		
-		$basename_css	 = '';
-		$all_css_code	 = '';
-
-		$cache_dir	 = flash_cache_get_cache_root();
-		$cache_path	 = $cache_dir . flash_cache_get_server_name() . '/styles/';
-
-		$all_css_code = array_reduce(self::$css_tags['files'], function ($carry, $css_tag) use ($cache_dir, &$basename_css) {
-			$media = $css_tag[0];
-			$path = $css_tag[1];
-
-			if (!empty($path)) {
-				$code = apply_filters('flash_cache_save_fonts', $path, $cache_dir);
-				// Process font URLs and links to styles
-				if (!empty($code)) {
-					$carry .= $code;
-					$basename_css = md5($basename_css . $path);
-				}
+			if (false === $item) {
+				$runs[] = array();
+				continue;
 			}
+			$item['offset']				 = $match[1];
+			$item['length']				 = strlen($match[0]);
+			$runs[count($runs) - 1][]	 = $item;
+		}
 
-			return $carry;
-		}, $all_css_code);
-
-		foreach (self::$css_tags['inline'] as $css_tag) {
-			$media	 = $css_tag[0];
-			$code	 = $css_tag[1];
-			if (!empty($code)) {
-				$all_css_code	 .= $code;
-				$basename_css	 = md5($basename_css . $code);
+		$replacements = array();
+		foreach ($runs as $run) {
+			if (count($run) < 2) {
+				continue;
+			}
+			$file = flash_cache_assets::write_once('css', array_merge(array_column($run, 'id'), array(md5(wp_json_encode($settings)))), 'css', function ($path) use ($run, $settings) {
+				return apply_filters('flash_cache_css_code_before_join', implode("\n", array_column($run, 'code')), $path, $settings);
+			});
+			if (false === $file) {
+				continue;
+			}
+			foreach ($run as $index => $item) {
+				$replacements[$item['offset']] = array($item['length'], 0 === $index ? '<link rel="stylesheet" href="' . esc_url(flash_cache_assets::url($file)) . '" media="all" />' : '');
 			}
 		}
 
-		if (!file_exists($cache_path)) {
-			@mkdir($cache_path, 0777, true);
+		krsort($replacements);
+		foreach ($replacements as $offset => $replacement) {
+			$masked = substr_replace($masked, $replacement[1], $offset, $replacement[0]);
 		}
-
-		$full_path_file_css	 = $cache_path . $basename_css . '.css';
-		$url_file_css		 = str_replace(flash_cache_get_home_path(), get_home_url(null, '/'), $full_path_file_css);
-		$all_css_code = apply_filters('flash_cache_css_code_before_join', $all_css_code, $full_path_file_css, flash_cache_process::$advanced_settings );
-		
-		file_put_contents($full_path_file_css, $all_css_code);
-
-		//Call the function insert_html_before_element for change the actual html by the new with styles and scripts
-		$content = self::insert_html_before_element($content, '<title>', '<link media="all" rel="stylesheet" href="' . $url_file_css . '" />');
-
-		return $content;
+		return flash_cache_assets::unmask($masked, $map);
 	}
 
-	public static function insert_html_before_element( $html, $element_selector, $new_html)
-	{
-		// Find the position of the element in the HTML
-		$pos = strpos($html, $element_selector);
-
-		if ($pos !== false) {
-			// Insert the new HTML before the element
-			$html = substr_replace($html, $new_html . PHP_EOL, $pos, 0);
+	/**
+	 * One stylesheet ready to combine (code, id), false when it must stay where it is, or null
+	 * when the tag is not a stylesheet at all.
+	 */
+	private static function prepare($tag, $page_url) {
+		$is_link = stripos($tag, '<link') === 0;
+		if ($is_link) {
+			$rel = strtolower((string) flash_cache_assets::get_attribute($tag, 'rel'));
+			if (!in_array('stylesheet', preg_split('/\s+/', $rel), true) || str_contains($rel, 'alternate')) {
+				return null;
+			}
+		} else {
+			$type = flash_cache_assets::get_attribute($tag, 'type');
+			if (null !== $type && stripos($type, 'text/css') === false) {
+				return null;
+			}
+		}
+		foreach (array('integrity', 'data-noptimize', 'disabled') as $attribute) {
+			if (flash_cache_assets::has_attribute($tag, $attribute)) {
+				return false;
+			}
 		}
 
-		// Return the modified HTML code
-		return $html;
-	}
+		if ($is_link) {
+			$href = flash_cache_assets::absolute_url((string) flash_cache_assets::get_attribute($tag, 'href'));
+			if (!flash_cache_assets::is_local_url($href) && !apply_filters('flash_cache_optimize_external_fonts', false, $href)) {
+				return false;
+			}
+			$code = (string) apply_filters('flash_cache_save_fonts', $href, flash_cache_get_cache_root());
+			if ($code === '' || $code === $href) {
+				return false;
+			}
+			$source = $href;
+		} else {
+			$code	= (string) preg_replace('#^<style\b[^>]*>|</style>$#i', '', $tag);
+			$code	= flash_cache_assets::absolutize_css_urls($code, $page_url);
+			$source = 'inline';
+		}
 
+		if (stripos($code, '@import') !== false) {
+			return false;
+		}
+		$code  = preg_replace('/@charset\s+[^;]+;/i', '', $code);
+		$media = trim((string) flash_cache_assets::get_attribute($tag, 'media'));
+		if ($media !== '' && strtolower($media) !== 'all') {
+			$code = '@media ' . $media . " {\n" . $code . "\n}";
+		}
+		return array('code' => $code, 'id' => $source . '|' . md5($code));
+	}
 }
 
 flash_cache_optimize_styles::hooks();

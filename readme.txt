@@ -108,6 +108,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Approved comments refresh their post's cache in the background.
 * Faster uncached requests: patterns load from a single stored option instead of database queries.
 * Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.
+* Rebuilt style and script optimization: the site's own files are read straight from disk, and each combined file is shared by every page that uses the same assets, written once, in its own folder apart from the cached pages.
+* Combined styles keep each stylesheet's media (print styles stay for print) and the cascade order, and relative image and font references keep working.
+* Combined scripts keep their place and order: consecutive scripts are joined where the last of them stood, and async, deferred and module scripts stay as they are.
+* Third-party stylesheets load from their own servers; Flash Cache Pro can still host Google Fonts locally.
+* Feeds, sitemaps and other non-HTML responses are cached exactly as WordPress sends them, and HTML comments are kept.
 * Debug logging is off by default; define FLASH_CACHE_DEBUG as true to send it to the PHP error log.
 * "Clear Entry Cache" takes you back to the post you were editing.
 * After updating, the cache is rebuilt from scratch, the server rules are refreshed automatically and the database lock table is removed, since locks need no table.
