@@ -661,3 +661,7 @@
 		margin-top: 0;
 	}
 }
+
+/* Options of Flash Cache Pro, in the brand blue. */
+.wpm_container .flash-cache-pro-option{ color: #0e9fd2; }
+.flash-cache-pro-badge{ display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 3px; background: #12aee0; color: #fff; font-size: 11px; font-style: normal; font-weight: 600; line-height: 16px; letter-spacing: .5px; vertical-align: middle; }

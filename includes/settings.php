@@ -318,6 +318,7 @@ class flash_cache_settings {
 		call_user_func(array(__CLASS__, $section . '_rows'), $values);
 		echo '</table>';
 		echo '<div class="wpm_footer">';
+		echo flash_cache_get_menus_social_footer();
 		echo '<div class="wpm_buttons">';
 		submit_button();
 		echo '<a href="' . $reset . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a>
@@ -447,11 +448,12 @@ class flash_cache_settings {
 						<p class="description">' . __('Applies when widgets, menus, Customizer settings or block theme templates are saved. Switching themes always deletes the whole cache.', 'flash-cache') . '</p>
 					</td>
 				</tr>';
+		$pro = has_filter('flash_cache_disable_cache_option');
 		echo '<tr valign="top" class="wrap-row">
-					<th scope="row">' . __('Widgets and blocks without cache', 'flash-cache') . '</th>
+					<th scope="row"' . ($pro ? ' class="flash-cache-pro-option"' : '') . '>' . __('Widgets/blocks without cache', 'flash-cache') . '</th>
 					<td>';
 
-		$nopro = '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . '</p>';
+		$nopro = '<p class="description">' . __('Widget cache disabling is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p>';
 		echo apply_filters('flash_cache_disable_cache_option', $nopro, $values);
 
 		echo '</td>
