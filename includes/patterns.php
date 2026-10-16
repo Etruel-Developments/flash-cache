@@ -170,7 +170,7 @@ class flash_cache_patterns {
 				update_option('flash_cache_fallback_pattern', 0, true);
 			}
 			self::flush();
-			flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+			flash_cache_purge_all();
 		}
 	}
 
@@ -689,7 +689,7 @@ class flash_cache_patterns {
 			clean_post_cache($post_id);
 		}
 		do_action('save_flash_cache_patterns', $post_id, $post);
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 	}
 
 	/**
@@ -851,7 +851,7 @@ class flash_cache_patterns {
 			}
 		}
 		self::flush();
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 		wp_send_json_success();
 	}
 

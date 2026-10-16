@@ -129,6 +129,8 @@ You can either install it automatically from the WordPress admin, or do it manua
 * New pattern cache type "Don't cache", to keep the pages it applies to always served live.
 * A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches.
 * Saving, reordering or deleting a pattern clears the cache, so the new rules apply to the next visit.
+* New setting "After design changes": saving widgets, menus, Customizer settings or block theme templates refreshes the cache by itself. Automatic (default) deletes it on sites with up to 2,000 published posts and replaces pages a few at a time on larger ones, so visitors never meet an empty cache. Switching themes always starts a fresh cache.
+* Emptying the cache is instant at any size: the files are set aside at once and removed in the background, so large sites never wait or time out.
 * New action `flash_cache_clear_url`: other plugins can refresh the cached copy of a page whose content they changed, with `do_action( 'flash_cache_clear_url', $url )`.
 * Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.
 * Rebuilt style and script optimization: the site's own files are read straight from disk, and each combined file is shared by every page that uses the same assets, written once, in its own folder apart from the cached pages.

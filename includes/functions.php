@@ -841,6 +841,85 @@ function flash_cache_remove_empty_parents($dir) {
 	}
 }
 
+/**
+ * Empties the whole cache at once for visitors, whatever its size: the cache folders move into
+ * .trash/ (a rename) and WP-Cron deletes them in batches. The lock folder stays in place.
+ */
+function flash_cache_purge_all() {
+	global $wpdb;
+	delete_option('flash_cache_disk_usage');
+	delete_option('flash_cache_stale_before');
+	$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_refresh_') . '%'));
+
+	$root = flash_cache_get_cache_root();
+	if (!is_dir($root) || is_link(untrailingslashit($root))) {
+		return;
+	}
+	$trash = $root . '.trash/' . uniqid('', true) . '/';
+	if (!wp_mkdir_p($trash)) {
+		flash_cache_delete_dir($root, true);
+		return;
+	}
+	foreach (array_diff((array) scandir($root), array('.', '..', '.trash', 'locks')) as $name) {
+		if (!@rename($root . $name, $trash . $name)) {
+			flash_cache_delete_dir($root . $name);
+		}
+	}
+	flash_cache_empty_trash(5);
+}
+
+/**
+ * Deletes the trash for up to $seconds and schedules the rest a minute later.
+ */
+function flash_cache_empty_trash($seconds = 20) {
+	$trash = flash_cache_get_cache_root() . '.trash';
+	if (!is_dir($trash) || is_link($trash)) {
+		return;
+	}
+	$deadline = microtime(true) + (float) $seconds;
+	$items	  = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator($trash, FilesystemIterator::SKIP_DOTS),
+			RecursiveIteratorIterator::CHILD_FIRST
+	);
+	foreach ($items as $item) {
+		if ($item->isDir() && !$item->isLink()) {
+			@rmdir($item->getPathname());
+		} else {
+			@unlink($item->getPathname());
+		}
+		if (microtime(true) > $deadline) {
+			if (!wp_next_scheduled('flash_cache_empty_trash')) {
+				wp_schedule_single_event(time() + 60, 'flash_cache_empty_trash');
+			}
+			return;
+		}
+	}
+	@rmdir($trash);
+}
+add_action('flash_cache_empty_trash', 'flash_cache_empty_trash', 10, 0);
+
+/**
+ * Picks up a trash left behind by a deactivation.
+ */
+function flash_cache_schedule_leftover_trash() {
+	if (is_dir(flash_cache_get_cache_root() . '.trash') && !wp_next_scheduled('flash_cache_empty_trash')) {
+		wp_schedule_single_event(time() + 60, 'flash_cache_empty_trash');
+	}
+}
+add_action('admin_init', 'flash_cache_schedule_leftover_trash');
+
+/**
+ * Whether a cached file still counts as current: younger than $ttl seconds and written after
+ * the last design change that asked for a gradual refresh.
+ */
+function flash_cache_is_fresh($file, $ttl) {
+	if (!is_file($file)) {
+		return false;
+	}
+	$mtime = filemtime($file);
+	return time() - $mtime < (int) $ttl && $mtime >= (int) get_option('flash_cache_stale_before', 0);
+}
+
 function flash_cache_delete_cache_files($cache_dir, $cache_path) {
 	$html_file = $cache_path . 'index-cache.html';
 
@@ -1012,9 +1091,7 @@ function flash_cache_get_menus_social_footer() {
 
 function flash_cache_changes_permalinks($old_permalink_structure, $permalink_structure) {
 	if ($old_permalink_structure != $permalink_structure) {
-		$advanced_settings	 = flash_cache_get_advanced_settings();
-		$cache_dir			 = flash_cache_get_cache_root();
-		flash_cache_delete_dir($cache_dir, true);
+		flash_cache_purge_all();
 		flash_cache_notices::add(['text' => __('Cache files have been removed to fit the new permalinks structure.', 'flash-cache')]);
 	}
 	if ($permalink_structure == '') {

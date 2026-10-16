@@ -359,10 +359,8 @@ class flash_cache_posts {
 						}
 						$cache_path	 = $cache_dir . $server_name . '/' . $path;
 						$cache_file	 = $cache_path . 'index-cache.html';
-						if (file_exists($cache_file)) {
-							if (time() - filemtime($cache_file) < (int) $ttl) {
-								continue;
-							}
+						if (flash_cache_is_fresh($cache_file, $ttl)) {
+							continue;
 						}
 
 						flash_cache_process::$force_process_type = 'curl';

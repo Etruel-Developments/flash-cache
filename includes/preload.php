@@ -200,7 +200,7 @@ class flash_cache_preaload {
 				$cache_path = $cache_dir . flash_cache_get_server_name() . '/' . flash_cache_url_to_path($current_url) . '/';
 				$cache_file = is_file($cache_path . 'index-cache.html') ? $cache_path . 'index-cache.html' : $cache_path . 'requests/' . flash_cache_process::request_key(array()) . '.html';
 				$ttl		= flash_cache_get_advanced_settings()['refresh_mode'] === 'cron' ? $matched['ttl_minimum'] : $matched['ttl_maximum'];
-				if (is_file($cache_file) && time() - filemtime($cache_file) < (int) $ttl) {
+				if (flash_cache_is_fresh($cache_file, $ttl)) {
 					continue;
 				}
 				flash_cache_posts::create_cache_post_id($post_id);

@@ -173,6 +173,7 @@ class flash_cache_settings {
 			),
 			'process_type'			 => 'ob_with_curl_request',
 			'refresh_mode'			 => 'visitors',
+			'design_changes'		 => 'auto',
 			'optimize_styles'		 => false,
 			'optimize_scripts'		 => false,
 			'inline_scripts'		 => false,
@@ -338,6 +339,30 @@ class flash_cache_settings {
 						<div class="radio-group"><label><input type="radio" ' . checked($values['refresh_mode'], 'cron', false) . ' name="flash_cache_advanced[refresh_mode]" value="cron"/> ' . __('From the preload only', 'flash-cache') . '</label>
 							<p class="description">' . __('Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled.', 'flash-cache') . '</p>
 						</div>
+					</td>
+				</tr>';
+		$published = flash_cache_design::published_posts();
+		$threshold = (int) apply_filters('flash_cache_gradual_refresh_threshold', flash_cache_design::AUTOMATIC_THRESHOLD);
+		$this_site = $published > $threshold
+				? sprintf(_n('This site has %s published post, so its cache is refreshed gradually.', 'This site has %s published posts, so its cache is refreshed gradually.', $published, 'flash-cache'), number_format_i18n($published))
+				: sprintf(_n('This site has %s published post, so its whole cache is deleted.', 'This site has %s published posts, so its whole cache is deleted.', $published, 'flash-cache'), number_format_i18n($published));
+		echo '<tr valign="top" class="wrap-row">
+					<th scope="row">' . __('After design changes', 'flash-cache') . '</th>
+					<td>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['design_changes'], 'auto', false) . ' name="flash_cache_advanced[design_changes]" value="auto"/> ' . __('Automatic (Recommended)', 'flash-cache') . '</label>
+							<p class="description">' . sprintf(__('Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones.', 'flash-cache'), number_format_i18n($threshold)) . '</p>
+							<p class="description">' . $this_site . '</p>
+						</div>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['design_changes'], 'delete', false) . ' name="flash_cache_advanced[design_changes]" value="delete"/> ' . __('Delete the whole cache', 'flash-cache') . '</label>
+							<p class="description">' . __('Pages are cached again as they are visited or preloaded. Best for small and medium sites.', 'flash-cache') . '</p>
+						</div>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['design_changes'], 'gradual', false) . ' name="flash_cache_advanced[design_changes]" value="gradual"/> ' . __('Refresh gradually', 'flash-cache') . '</label>
+							<p class="description">' . __('Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites.', 'flash-cache') . '</p>
+						</div>
+						<div class="radio-group"><label><input type="radio" ' . checked($values['design_changes'], 'none', false) . ' name="flash_cache_advanced[design_changes]" value="none"/> ' . __('Do nothing', 'flash-cache') . '</label>
+							<p class="description">' . __('Delete the cache yourself after each change.', 'flash-cache') . '</p>
+						</div>
+						<p class="description">' . __('Applies when widgets, menus, Customizer settings or block theme templates are saved. Switching themes always deletes the whole cache.', 'flash-cache') . '</p>
 					</td>
 				</tr>';
 		echo '<tr valign="top" class="wrap-row">
@@ -584,6 +609,9 @@ class flash_cache_settings {
 		if (!in_array($new_options['refresh_mode'], array('visitors', 'cron'), true)) {
 			$new_options['refresh_mode'] = 'visitors';
 		}
+		if (!in_array($new_options['design_changes'], array('auto', 'delete', 'gradual', 'none'), true)) {
+			$new_options['design_changes'] = 'auto';
+		}
 
 		$old_options = flash_cache_get_advanced_settings();
 		if ($old_options['lock_type'] != $new_options['lock_type'] || flash_cache_get_cache_dir() != $new_options['cache_dir']) {
@@ -595,7 +623,7 @@ class flash_cache_settings {
 
 		update_option('flash_cache_advanced_settings', $new_options);
 		flash_cache_update_htaccess();
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 
 		flash_cache_notices::add(__('Settings updated', 'flash-cache'));
 		wp_safe_redirect($redirect_url);
@@ -615,7 +643,7 @@ class flash_cache_settings {
 
 	public static function delete_cache() {
 		flash_cache_verify_admin_request('delete_flash_cache');
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 		flash_cache_notices::add(__('The cache files have been deleted.', 'flash-cache'));
 		wp_safe_redirect(admin_url('admin.php?page=flash_cache_setting'));
 		exit;
@@ -629,7 +657,7 @@ class flash_cache_settings {
 
 		update_option('flash_cache_settings', $new_options);
 		flash_cache_update_htaccess();
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 
 		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
 		wp_safe_redirect(admin_url('admin.php?page=flash_cache_setting'));
@@ -639,7 +667,7 @@ class flash_cache_settings {
 	public static function reset_to_default_advanced_options() {
 		flash_cache_verify_admin_request('reset_to_default_advanced_options');
 
-		flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		flash_cache_purge_all();
 		update_option('flash_cache_advanced_settings', self::default_advanced_options());
 		flash_cache_update_htaccess();
 

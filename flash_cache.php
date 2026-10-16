@@ -90,6 +90,7 @@ class Flash_Cache {
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/functions.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/process.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/posts.php';
+		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/design.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/settings.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/notices.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/patterns.php';
@@ -149,12 +150,15 @@ class Flash_Cache {
 	 * @since 1.0.0
 	 */
 	public static function deactivation() {
-		$advanced_settings	 = flash_cache_get_advanced_settings();
-		$cache_dir		 = flash_cache_get_cache_root();
 		flash_cache_remove_rules();
-		flash_cache_delete_dir($cache_dir, true);
+		// A cache too large to delete now is left in .trash/ and deleted after the next activation.
+		flash_cache_purge_all();
+		flash_cache_empty_trash(20);
+		if (!is_dir(flash_cache_get_cache_root() . '.trash')) {
+			flash_cache_delete_dir(flash_cache_get_cache_root(), true);
+		}
 		flash_cache_remove_breakspaces(get_home_path() . '.htaccess');
-		foreach (array('flash_cache_cron', 'flash_cache_rebuild_post', 'flash_cache_rebuild_comment_post') as $hook) {
+		foreach (array('flash_cache_cron', 'flash_cache_rebuild_post', 'flash_cache_rebuild_comment_post', 'flash_cache_empty_trash', 'flash_cache_expire_stale') as $hook) {
 			wp_unschedule_hook($hook);
 		}
 	}
