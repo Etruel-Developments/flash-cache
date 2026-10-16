@@ -232,11 +232,11 @@ class flash_cache_patterns {
 			'menu_icon'				 => 'dashicons-images-alt2',
 			'show_in_nav_menus'		 => false,
 			'publicly_queryable'	 => false,
-			'exclude_from_search'	 => false,
+			'exclude_from_search'	 => true,
 			'has_archive'			 => false,
-			'query_var'				 => true,
+			'query_var'				 => false,
 			'can_export'			 => true,
-			'rewrite'				 => true,
+			'rewrite'				 => false,
 		);
 
 		register_post_type($slug, $args);
