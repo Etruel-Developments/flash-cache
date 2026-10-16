@@ -125,7 +125,7 @@ class flash_cache_design {
 			if ($name === 'index-cache.html') {
 				$related = array($file->getPathname() . '.gz');
 			} elseif (str_ends_with($name, '.html') && basename($file->getPath()) === 'requests') {
-				$related = array(substr($file->getPathname(), 0, -5) . '.header');
+				$related = array(substr($file->getPathname(), 0, -5) . '.header', substr($file->getPathname(), 0, -5) . '.php');
 			} else {
 				continue;
 			}

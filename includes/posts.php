@@ -358,8 +358,7 @@ class flash_cache_posts {
 							continue;
 						}
 						$cache_path	 = $cache_dir . $server_name . '/' . $path;
-						$cache_file	 = $cache_path . 'index-cache.html';
-						if (flash_cache_is_fresh($cache_file, $ttl)) {
+						if (flash_cache_is_fresh(flash_cache_page_file($cache_path), $ttl)) {
 							continue;
 						}
 

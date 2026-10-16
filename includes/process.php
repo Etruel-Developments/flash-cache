@@ -187,7 +187,14 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		self::end_create_cache($cache_path);
 	}
 
+	/**
+	 * Writes a page as static HTML, or in PHP mode when an extension needs PHP to serve it
+	 * (flash_cache_page_needs_php), so one page can leave HTML mode without changing its pattern.
+	 */
 	public static function write_html_cache($cache_path, $html) {
+		if (apply_filters('flash_cache_page_needs_php', false, $html)) {
+			return self::write_php_cache($cache_path, $html, 'text/html; charset=UTF-8', self::request_key(array()));
+		}
 		$gzip_html = gzencode($html);
 		file_put_contents($cache_path . 'index-cache.html', $html);
 		file_put_contents($cache_path . 'index-cache.html.gz', $gzip_html);
@@ -249,8 +256,9 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 	/**
 	 * Writes the PHP-mode files of one page: index-cache.php once, and the response of this
 	 * request under requests/. A page keeps at most flash_cache_max_request_files variants.
+	 * $key defaults to this request's query string.
 	 */
-	public static function write_php_cache($cache_path, $html, $content_type) {
+	public static function write_php_cache($cache_path, $html, $content_type, $key = null) {
 		global $wp_query;
 		if (is_search() && (empty($wp_query) || $wp_query->post_count == 0)) {
 			return false;
@@ -267,7 +275,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		if (!file_exists($requests_path)) {
 			@mkdir($requests_path, 0777, true);
 		}
-		$key		  = defined('FLASH_CACHE_NOT_USE_THIS_REQUEST') ? self::request_key(array()) : self::request_key(wp_unslash($_GET));
+		$key		  ??= defined('FLASH_CACHE_NOT_USE_THIS_REQUEST') ? self::request_key(array()) : self::request_key(wp_unslash($_GET));
 		$request_file = $requests_path . $key . '.html';
 		if (!file_exists($request_file)) {
 			$max_files = (int) apply_filters('flash_cache_max_request_files', 100, $cache_path);
@@ -275,6 +283,24 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			if (is_array($existing) && count($existing) >= $max_files) {
 				return false;
 			}
+		}
+
+		/**
+		 * Lets an extension serve this response through a handler: 'handler' is the PHP code of
+		 * requests/<key>.php, which index-cache.php includes instead of sending the stored HTML.
+		 */
+		$response	  = apply_filters('flash_cache_php_response', array('html' => $html, 'handler' => ''), $requests_path . $key);
+		$html		  = (string) $response['html'];
+		$handler_file = $requests_path . $key . '.php';
+		if ('' !== (string) $response['handler']) {
+			file_put_contents($handler_file . '.tmp', $response['handler']);
+			rename($handler_file . '.tmp', $handler_file);
+			if (function_exists('opcache_invalidate')) {
+				@opcache_invalidate($handler_file, true);
+			}
+			flash_cache_increment_disk_usage(strlen($response['handler']));
+		} elseif (is_file($handler_file)) {
+			@unlink($handler_file);
 		}
 
 		file_put_contents($request_file, $html);

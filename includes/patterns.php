@@ -434,8 +434,6 @@ class flash_cache_patterns {
 					</tr>
 					
 				</table>';
-				$advanced_settings = flash_cache_get_advanced_settings();
-				$values['cache_type'] = ($advanced_settings['disable_widget_cache'] == 1 && 'none' !== $values['cache_type']) ? 'php' : $values['cache_type'];
 				echo '<table class="form-table">
 					<tr valign="top">
 						<th scope="row">' . __('Cache type', 'flash-cache') . '</th>
@@ -443,7 +441,6 @@ class flash_cache_patterns {
 							<div class="radio-group">
 								<input type="radio" ' . 
 									checked($values['cache_type'], 'html', false) . 
-									($advanced_settings['disable_widget_cache'] == 1 ? ' disabled' : '') . 
 									' name="cache_type" value="html"/>' . 
 									__('Static HTML (fastest)', 'flash-cache') . '
 								<p class="description">' . __('The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache.', 'flash-cache') . '</p>

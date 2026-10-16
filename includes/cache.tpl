@@ -18,10 +18,15 @@ if (in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', array('GET', 'HEAD'), true)) {
 	$flash_cache_file = __DIR__ . '/requests/' . hash('sha256', http_build_query($flash_cache_query));
 
 	if (is_file($flash_cache_file . '.html') && time() - filemtime($flash_cache_file . '.html') < $flash_cache_minimum_ttl) {
-		$flash_cache_type = @file_get_contents($flash_cache_file . '.header');
-		header('Content-Type: ' . ($flash_cache_type ? $flash_cache_type : 'text/html; charset=UTF-8'));
-		readfile($flash_cache_file . '.html');
-		exit;
+		if (is_file($flash_cache_file . '.php')) {
+			// A handler stored with the response serves it and exits, or returns to let WordPress build it.
+			include $flash_cache_file . '.php';
+		} else {
+			$flash_cache_type = @file_get_contents($flash_cache_file . '.header');
+			header('Content-Type: ' . ($flash_cache_type ? $flash_cache_type : 'text/html; charset=UTF-8'));
+			readfile($flash_cache_file . '.html');
+			exit;
+		}
 	}
 }
 

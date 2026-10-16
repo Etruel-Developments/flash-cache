@@ -912,6 +912,13 @@ add_action('admin_init', 'flash_cache_schedule_leftover_trash');
  * Whether a cached file still counts as current: younger than $ttl seconds and written after
  * the last design change that asked for a gradual refresh.
  */
+/**
+ * The stored copy of a page without query string: the static HTML, or the PHP-mode response.
+ */
+function flash_cache_page_file($cache_path) {
+	return is_file($cache_path . 'index-cache.html') ? $cache_path . 'index-cache.html' : $cache_path . 'requests/' . flash_cache_process::request_key(array()) . '.html';
+}
+
 function flash_cache_is_fresh($file, $ttl) {
 	if (!is_file($file)) {
 		return false;
