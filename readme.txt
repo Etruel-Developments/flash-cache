@@ -88,6 +88,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 * In this [FAQ](https://etruel.com/question/how-to-install-and-setup-flash-cache/) you will find a step to step tutorial on how to install and configure Flash Cache.
 
+= Does Flash Cache work with nginx? =
+
+* Yes. nginx reads rules only from its own configuration, so Flash Cache writes them to nginx.conf in the site's folder and you include that file once in the site's server block. The General settings screen shows the exact line and tells you when nginx needs a reload to pick up changed settings.
+
 = Does Flash Cache work on WordPress Multisite? =
 
 * No. Flash Cache writes its rules and cache folders for one site, and the sites of a network share the same server rules and home folder. It can only be activated on single WordPress sites.
@@ -133,6 +137,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Third-party stylesheets load from their own servers; Flash Cache Pro can still host Google Fonts locally.
 * Feeds, sitemaps and other non-HTML responses are cached exactly as WordPress sends them, and HTML comments are kept.
 * One rule maps every URL to its cache folder: paths relative to the home address, decoded as the web server reads them and with their original letter case, also for sites installed in a subfolder.
+* On nginx, the General settings screen shows whether nginx is running the current Flash Cache rules and, when it is not, the exact line to add to the server configuration or the reminder to reload nginx.
 * nginx rules serve cached copies of pages with accented or non-Latin addresses, follow sites installed in a subfolder, and match the site's trailing-slash permalinks.
 * Static HTML copies come only from requests without a query string (tracking parameters aside), so a language or cart parameter never shapes the page everyone else gets.
 * Only successful responses are cached: error pages and other non-200 answers are always served live.

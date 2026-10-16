@@ -423,7 +423,12 @@ function flash_cache_get_nginx_conf_info() {
 	$optimization_rules			 = apply_filters('flash_cache_nginx_optimization_rules', $optimization_rules);
 	$final_optimization_rules	 = apply_filters('flash_cache_nginx_final_optimization_rules', implode("\n", $optimization_rules));
 
-	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules, "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules);
+	// nginx only reads the file when it is included and reloaded: this address answers with
+	// the version of the rules it is running, for the settings screen to compare.
+	$rules_hash		   = md5($final_cache_rules . $final_utils_rules . $final_optimization_rules);
+	$final_utils_rules = ltrim($final_utils_rules . "\n" . 'location = ' . esc_attr($inst_root) . 'flash-cache-rules { add_header X-Flash-Cache-Rules "' . $rules_hash . '"; return 204; }');
+
+	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules, "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules, "rules_hash" => $rules_hash);
 }
 
 function flash_cache_get_htaccess_info() {
@@ -614,6 +619,23 @@ function flash_cache_get_logged_in_cookie() {
 	if (defined('LOGGED_IN_COOKIE') && substr(constant('LOGGED_IN_COOKIE'), 0, 19) != 'wordpress_logged_in')
 		$logged_in_cookie	 = constant('LOGGED_IN_COOKIE');
 	return $logged_in_cookie;
+}
+
+/**
+ * Whether nginx runs the current Flash Cache rules: 'ok', 'outdated' (included, not reloaded since
+ * the last change), 'missing' (not included) or 'unknown' (the site could not be reached). One
+ * request to the site, made only from the settings screen.
+ */
+function flash_cache_nginx_rules_status() {
+	$info	  = flash_cache_get_nginx_conf_info();
+	$response = wp_remote_get(home_url('flash-cache-rules'), array('timeout' => 5, 'redirection' => 3, 'sslverify' => apply_filters('https_local_ssl_verify', false)));
+	if (is_wp_error($response)) {
+		return 'unknown';
+	}
+	if (204 !== wp_remote_retrieve_response_code($response)) {
+		return 'missing';
+	}
+	return wp_remote_retrieve_header($response, 'x-flash-cache-rules') === $info['rules_hash'] ? 'ok' : 'outdated';
 }
 
 /**

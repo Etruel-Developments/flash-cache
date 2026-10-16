@@ -144,8 +144,7 @@ class flash_cache_settings {
 							<p class="description">' . __('Removes every cached page and combined file. Pages are cached again as they are visited or preloaded.', 'flash-cache') . '</p>
 							<p class="description">' . __('Disk usage: ', 'flash-cache') . '<code>' . size_format(get_option('flash_cache_disk_usage', 0)) . '</code></p>
 						</td>
-					</tr>
-					
+					</tr>' . (flash_cache_enviroment::is_nginx() ? self::nginx_rules_row() : '') . '
 				</table>';
 
 		echo '<div class="wpm_footer">';
@@ -484,6 +483,32 @@ class flash_cache_settings {
 		echo '</form></div></div>';
 
 		echo ' </div>';
+	}
+
+	/**
+	 * nginx reads the rules only from its own configuration: the row says whether it runs the
+	 * current ones and, when it does not, which line to add.
+	 */
+	private static function nginx_rules_row() {
+		$status	 = flash_cache_nginx_rules_status();
+		$include = 'include "' . get_home_path() . 'nginx.conf";';
+		$check	 = '<a href="' . esc_url(admin_url('admin.php?page=flash_cache_setting')) . '" class="button">' . esc_html__('Check again', 'flash-cache') . '</a>';
+		$html	 = '<tr valign="top"><th scope="row">' . esc_html__('Server rules', 'flash-cache') . '</th><td>';
+		if ('ok' === $status) {
+			$html .= '<p><span class="dashicons dashicons-yes-alt" style="color:#00a32a" aria-hidden="true"></span> ' . esc_html__('nginx is serving cached pages with the current rules.', 'flash-cache') . '</p>';
+			$html .= '<p class="description">' . esc_html__('After changing settings, reload nginx so it reads the updated rules.', 'flash-cache') . '</p>';
+			return $html . '</td></tr>';
+		}
+		if ('outdated' === $status) {
+			$html .= '<p><span class="dashicons dashicons-warning" style="color:#dba617" aria-hidden="true"></span> ' . esc_html__('nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings.', 'flash-cache') . '</p>';
+			return $html . '<p>' . $check . '</p></td></tr>';
+		}
+		$html .= '<p><span class="dashicons dashicons-warning" style="color:#dba617" aria-hidden="true"></span> ' . ('unknown' === $status ? esc_html__('The site could not be reached to check whether nginx reads the Flash Cache rules.', 'flash-cache') : esc_html__('nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP.', 'flash-cache')) . '</p>';
+		$html .= '<p class="description">' . esc_html__('Add this line inside the server { } block of your site, before its location rules, and reload nginx:', 'flash-cache') . '</p>';
+		$html .= '<p><input type="text" class="large-text code" style="width:100%;max-width:100%" id="flash_cache_nginx_include" readonly value="' . esc_attr($include) . '" onfocus="this.select()"/></p>';
+		$html .= '<p><button type="button" class="button" onclick="navigator.clipboard && navigator.clipboard.writeText(document.getElementById(\'flash_cache_nginx_include\').value); this.textContent = ' . esc_attr(wp_json_encode(__('Copied', 'flash-cache'))) . ';">' . esc_html__('Copy', 'flash-cache') . '</button> ' . $check . '</p>';
+		$html .= '<p class="description">' . esc_html__('Flash Cache keeps that file up to date; reload nginx after changing settings.', 'flash-cache') . '</p>';
+		return $html . '</td></tr>';
 	}
 
 	public static function get_changes_httacess() {
