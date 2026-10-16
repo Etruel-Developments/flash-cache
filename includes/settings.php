@@ -458,6 +458,15 @@ class flash_cache_settings {
 
 		echo '</td>
 				</tr>';
+
+		$pro = has_filter('flash_cache_shared_widget_cache_option');
+		echo '<tr valign="top" class="wrap-row">
+					<th scope="row"' . ($pro ? ' class="flash-cache-pro-option"' : '') . '>' . __('Shared widget cache', 'flash-cache') . '</th>
+					<td>';
+		$nopro = '<p class="description">' . __('Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p>';
+		echo apply_filters('flash_cache_shared_widget_cache_option', $nopro, $values);
+		echo '</td>
+				</tr>';
 	}
 
 	private static function optimization_rows($values) {

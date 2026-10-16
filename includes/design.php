@@ -17,6 +17,9 @@ class flash_cache_design {
 
 	private static $pending = null;
 
+	/** What changed in this request: 'option:<name>', 'menu', 'customizer', 'post:<type>' or 'theme'. */
+	private static $changes = array();
+
 	public static function hooks() {
 		add_action('updated_option', array(__CLASS__, 'option_changed'), 10, 1);
 		add_action('added_option', array(__CLASS__, 'option_changed'), 10, 1);
@@ -35,25 +38,26 @@ class flash_cache_design {
 	 */
 	public static function option_changed($option) {
 		if (($option === 'sidebars_widgets' || str_starts_with($option, 'widget_') || str_starts_with($option, 'theme_mods_')) && function_exists('wp_get_current_user') && current_user_can('edit_theme_options')) {
-			self::changed();
+			self::queue('design', 'option:' . $option);
 		}
 	}
 
 	public static function post_saved($post_id, $post = null) {
 		if ($post instanceof WP_Post && in_array($post->post_type, array('wp_template', 'wp_template_part', 'wp_global_styles', 'wp_navigation'), true)) {
-			self::changed();
+			self::queue('design', 'post:' . $post->post_type);
 		}
 	}
 
 	public static function changed() {
-		self::queue('design');
+		self::queue('design', 'customize_save_after' === current_action() ? 'customizer' : 'menu');
 	}
 
 	public static function theme_switched() {
-		self::queue('theme');
+		self::queue('theme', 'theme');
 	}
 
-	private static function queue($kind) {
+	private static function queue($kind, $change) {
+		self::$changes[] = $change;
 		if (null === self::$pending) {
 			add_action('shutdown', array(__CLASS__, 'apply'), 0);
 		}
@@ -63,8 +67,18 @@ class flash_cache_design {
 	}
 
 	public static function apply() {
-		$mode = 'theme' === self::$pending ? 'delete' : self::mode();
+		$theme		   = 'theme' === self::$pending;
+		$mode		   = $theme ? 'delete' : self::mode();
+		$changes	   = array_values(array_unique(self::$changes));
 		self::$pending = false;
+		self::$changes = array();
+		/**
+		 * Lets an extension update the cached pages itself, for example by replacing a changed
+		 * widget inside them. Return true when it took care of every change listed.
+		 */
+		if (!$theme && 'none' !== $mode && apply_filters('flash_cache_design_change_handled', false, $changes, $mode)) {
+			return;
+		}
 		if ('delete' === $mode) {
 			flash_cache_purge_all();
 		} elseif ('gradual' === $mode) {
