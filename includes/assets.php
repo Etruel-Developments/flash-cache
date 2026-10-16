@@ -164,9 +164,7 @@ class flash_cache_assets {
 			if (!is_dir($dir) && !@mkdir($dir, 0777, true) && !is_dir($dir)) {
 				return false;
 			}
-			$temporary = $file . '.' . uniqid('', true) . '.tmp';
-			if (false === file_put_contents($temporary, $build($file)) || !@rename($temporary, $file)) {
-				@unlink($temporary);
+			if (!flash_cache_write_file($file, (string) $build($file))) {
 				return false;
 			}
 		}

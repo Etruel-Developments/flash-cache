@@ -88,6 +88,7 @@ class Flash_Cache {
 	public static function includes() {
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/plugin_functions.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/functions.php';
+		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/stats.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/process.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/posts.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/design.php';

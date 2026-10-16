@@ -804,12 +804,12 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 	}
 
 	if ($delete_option) {
-		delete_option('flash_cache_disk_usage');
+		flash_cache_stats::reset();
 		$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_refresh_') . '%'));
 	}
 
 	if (is_link($path) || !is_dir($real_path)) {
-		return @unlink($path);
+		return flash_cache_delete_file($path);
 	}
 	$items = new RecursiveIteratorIterator(
 			new RecursiveDirectoryIterator($real_path, FilesystemIterator::SKIP_DOTS),
@@ -818,8 +818,10 @@ function flash_cache_delete_dir($path, $delete_option = false) {
 	foreach ($items as $item) {
 		if ($item->isDir() && !$item->isLink()) {
 			@rmdir($item->getPathname());
-		} else {
+		} elseif ($delete_option) {
 			@unlink($item->getPathname());
+		} else {
+			flash_cache_delete_file($item->getPathname());
 		}
 	}
 	$removed = @rmdir($real_path);
@@ -847,7 +849,7 @@ function flash_cache_remove_empty_parents($dir) {
  */
 function flash_cache_purge_all() {
 	global $wpdb;
-	delete_option('flash_cache_disk_usage');
+	flash_cache_stats::reset();
 	delete_option('flash_cache_stale_before');
 	$wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like('flash_cache_refresh_') . '%'));
 
@@ -928,24 +930,8 @@ function flash_cache_is_fresh($file, $ttl) {
 }
 
 function flash_cache_delete_cache_files($cache_dir, $cache_path) {
-	$html_file = $cache_path . 'index-cache.html';
-
-	if (file_exists($html_file)) {
-		$size_file = mb_strlen(file_get_contents($html_file), '8bit');
-		flash_cache_decrement_disk_usage($size_file);
-		@unlink($html_file);
-	}
-	$gzip_file = $cache_path . 'index-cache.html.gz';
-	if (file_exists($gzip_file)) {
-		$size_file = mb_strlen(file_get_contents($gzip_file), '8bit');
-		flash_cache_decrement_disk_usage($size_file);
-		@unlink($gzip_file);
-	}
-	$php_file = $cache_path . 'index-cache.php';
-	if (file_exists($php_file)) {
-		$size_file = mb_strlen(file_get_contents($php_file), '8bit');
-		flash_cache_decrement_disk_usage($size_file);
-		@unlink($php_file);
+	foreach (array('index-cache.html', 'index-cache.html.gz', 'index-cache.php') as $name) {
+		flash_cache_delete_file($cache_path . $name);
 	}
 	$requests_folder = $cache_path . 'requests/';
 	if (file_exists($requests_folder)) {
@@ -966,37 +952,6 @@ function flash_cache_get_path($url) {
 	}
 
 	return $url;
-}
-
-/**
- * The disk usage counter changes in memory and reaches the database once per request, as one
- * atomic UPDATE, however many files the request writes.
- */
-function flash_cache_increment_disk_usage($bytes) {
-	static $hooked = false;
-	$GLOBALS['flash_cache_disk_usage_delta'] = ($GLOBALS['flash_cache_disk_usage_delta'] ?? 0) + (int) $bytes;
-	if (!$hooked) {
-		$hooked = true;
-		add_action('shutdown', 'flash_cache_save_disk_usage', 1);
-	}
-}
-
-function flash_cache_decrement_disk_usage($bytes) {
-	flash_cache_increment_disk_usage(-(int) $bytes);
-}
-
-function flash_cache_save_disk_usage() {
-	global $wpdb;
-	$delta = (int) ($GLOBALS['flash_cache_disk_usage_delta'] ?? 0);
-	$GLOBALS['flash_cache_disk_usage_delta'] = 0;
-	if (0 === $delta) {
-		return;
-	}
-	$updated = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->options} SET option_value = GREATEST(0, CAST(option_value AS SIGNED) + %d) WHERE option_name = 'flash_cache_disk_usage'", $delta));
-	if (!$updated) {
-		add_option('flash_cache_disk_usage', max(0, $delta), '', false);
-	}
-	wp_cache_delete('flash_cache_disk_usage', 'options');
 }
 
 function flash_cache_delete_all_options() {

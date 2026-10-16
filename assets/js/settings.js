@@ -24,6 +24,35 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	// Cache statistics: recounted in short steps while the screen is open, when stale or on request.
+	function recount(restart) {
+		var $box = $('.flash-cache-stats');
+		if (!$box.length || $box.hasClass('is-counting')) {
+			return;
+		}
+		$box.addClass('is-counting').find('.flash-cache-stats-when').text(flash_cache_settings_i18n.counting);
+		(function step(first) {
+			$.post(ajaxurl, {action: 'flash_cache_recount', _ajax_nonce: $box.data('nonce'), restart: first && restart ? 1 : 0}).done(function (response) {
+				if (response && response.success && response.data.done) {
+					$box.replaceWith(response.data.html);
+				} else if (response && response.success) {
+					step(false);
+				} else {
+					$box.removeClass('is-counting');
+				}
+			}).fail(function () {
+				$box.removeClass('is-counting');
+			});
+		})(true);
+	}
+	$(document).on('click', '.flash-cache-recount', function (e) {
+		e.preventDefault();
+		recount(true);
+	});
+	if ($('.flash-cache-stats').data('stale') == 1) {
+		recount(false);
+	}
+
 	$(init);
 	function init() {
 		$('.flash-wrap-notices').append($('.error, .success, .notice, .message, .fade, .updated'));

@@ -195,10 +195,8 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		if (apply_filters('flash_cache_page_needs_php', false, $html)) {
 			return self::write_php_cache($cache_path, $html, 'text/html; charset=UTF-8', self::request_key(array()));
 		}
-		$gzip_html = gzencode($html);
-		file_put_contents($cache_path . 'index-cache.html', $html);
-		file_put_contents($cache_path . 'index-cache.html.gz', $gzip_html);
-		flash_cache_increment_disk_usage(mb_strlen($html, '8bit') + mb_strlen($gzip_html, '8bit'));
+		flash_cache_write_file($cache_path . 'index-cache.html', $html);
+		flash_cache_write_file($cache_path . 'index-cache.html.gz', gzencode($html));
 	}
 
 	public static function create_cache_php() {
@@ -266,9 +264,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 
 		$template_file = $cache_path . 'index-cache.php';
 		if (!file_exists($template_file)) {
-			$template_php = self::php_cache_template();
-			file_put_contents($template_file, $template_php);
-			flash_cache_increment_disk_usage(mb_strlen($template_php, '8bit'));
+			flash_cache_write_file($template_file, self::php_cache_template());
 		}
 
 		$requests_path = $cache_path . 'requests/';
@@ -293,19 +289,16 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		$html		  = (string) $response['html'];
 		$handler_file = $requests_path . $key . '.php';
 		if ('' !== (string) $response['handler']) {
-			file_put_contents($handler_file . '.tmp', $response['handler']);
-			rename($handler_file . '.tmp', $handler_file);
+			flash_cache_write_file($handler_file, $response['handler']);
 			if (function_exists('opcache_invalidate')) {
 				@opcache_invalidate($handler_file, true);
 			}
-			flash_cache_increment_disk_usage(strlen($response['handler']));
 		} elseif (is_file($handler_file)) {
-			@unlink($handler_file);
+			flash_cache_delete_file($handler_file);
 		}
 
-		file_put_contents($request_file, $html);
-		file_put_contents($requests_path . $key . '.header', $content_type);
-		flash_cache_increment_disk_usage(mb_strlen($html, '8bit') + mb_strlen($content_type, '8bit'));
+		flash_cache_write_file($request_file, $html);
+		flash_cache_write_file($requests_path . $key . '.header', $content_type);
 		return true;
 	}
 

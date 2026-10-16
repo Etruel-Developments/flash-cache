@@ -42,10 +42,11 @@ class flash_cache_settings {
 		if (strpos($current_screen->id, 'flash_cache') === false) {
 			return false;
 		}
-		wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION, true);
+		wp_enqueue_script('flash_cache-settings', FLASH_CACHE_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), FLASH_CACHE_VERSION . '.' . filemtime(FLASH_CACHE_PLUGIN_DIR . 'assets/js/settings.js'), true);
 		wp_localize_script('flash_cache-settings', 'flash_cache_settings_i18n', array(
 			'clear_cache'	 => __('Changing this option clears the whole cache. Continue?', 'flash-cache'),
 			'reset_defaults' => __('Restore the default settings?', 'flash-cache'),
+			'counting'		 => __('Counting…', 'flash-cache'),
 		));
 	}
 
@@ -167,12 +168,14 @@ class flash_cache_settings {
 
 						</td>
 					</tr>
+					<tr valign="top" class="wrap-row flash-cache-stats-row">
+						<td colspan="2">' . flash_cache_stats::cards() . '</td>
+					</tr>
 					<tr valign="top">
 						<th scope="row">' . __('Delete cache', 'flash-cache') . '</th>
 						<td>
 							<a href="' . wp_nonce_url(admin_url('admin-post.php?action=delete_flash_cache'), 'delete_flash_cache', '_wpnonce') . '" class="button">' . __('Delete Cache', 'flash-cache') . '</a>
 							<p class="description">' . __('Removes every cached page and combined file. Pages are cached again as they are visited or preloaded.', 'flash-cache') . '</p>
-							<p class="description">' . __('Disk usage: ', 'flash-cache') . '<code>' . size_format(get_option('flash_cache_disk_usage', 0)) . '</code></p>
 						</td>
 					</tr>' . (flash_cache_enviroment::is_nginx() ? self::nginx_rules_row() : '') . '
 				</table>';
@@ -445,7 +448,7 @@ class flash_cache_settings {
 						<div class="radio-group"><label><input type="radio" ' . checked($values['design_changes'], 'none', false) . ' name="flash_cache_advanced[design_changes]" value="none"/> ' . __('Do nothing', 'flash-cache') . '</label>
 							<p class="description">' . __('Delete the cache yourself after each change.', 'flash-cache') . '</p>
 						</div>
-						<p class="description">' . __('Applies when widgets, menus, Customizer settings or block theme templates are saved. Switching themes always deletes the whole cache.', 'flash-cache') . '</p>
+						<p class="description">' . __('Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache.', 'flash-cache') . '</p>
 					</td>
 				</tr>';
 		$pro = has_filter('flash_cache_disable_cache_option');
@@ -469,6 +472,14 @@ class flash_cache_settings {
 				</tr>';
 	}
 
+	/**
+	 * A Pro option shown in the free plugin: its label, what it does and the PRO badge.
+	 * $close = false leaves the cell open, for the free markup that follows to close it.
+	 */
+	private static function pro_row($label, $description, $close = true) {
+		return '<tr valign="top" class="wrap-row"><th scope="row">' . esc_html($label) . '</th><td><p class="description">' . esc_html($description) . ' <span class="flash-cache-pro-badge">PRO</span></p>' . ($close ? '</td></tr>' : '');
+	}
+
 	private static function optimization_rows($values) {
 		echo '
 					<tr valign="top" class="wrap-row">
@@ -485,9 +496,9 @@ class flash_cache_settings {
 							</div>
 							<p class="description">' . __('Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files.', 'flash-cache') . '</p>
 							<div id="advanced_settings_styles">
-							' . apply_filters('flash_cache_optimize_styles_extra_html', '', $values) . '
+							' . (has_filter('flash_cache_optimize_styles_extra_html') ? apply_filters('flash_cache_optimize_styles_extra_html', '', $values) : '<table class="form-table">' . self::pro_row(__('Minify styles', 'flash-cache'), __('Removes spaces and comments from the combined stylesheets, so they weigh less.', 'flash-cache')) . '</table>') . '
 							
-							' . apply_filters('flash_cache_optimize_fonts_extra_html', '', $values) . '
+							' . (has_filter('flash_cache_optimize_fonts_extra_html') ? apply_filters('flash_cache_optimize_fonts_extra_html', '', $values) : '<table class="form-table">' . self::pro_row(__('Cache Google fonts', 'flash-cache'), __('Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites.', 'flash-cache')) . '</table>') . '
 							</div>  
 						</td>
 					</tr>';
@@ -554,7 +565,7 @@ class flash_cache_settings {
 													</span>
 												</div>
 												<p class="description">' . __('Scripts of plugins stay as separate files.', 'flash-cache') . '</p>
-												' . apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) . '
+												' . (has_filter('flash_cache_exclude_scripts_extra_html') ? apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) : '<p class="description">' . __('Choosing which plugins keep their scripts in place is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p></td></tr>' . self::pro_row(__('Avoid optimize javascript by file', 'flash-cache'), __('Leaves specific script files in place, by name or path.', 'flash-cache'), false)) . '
 											</td>
 										</tr>
 
@@ -577,7 +588,7 @@ class flash_cache_settings {
 								</table>
 							</div>';
 		
-		echo apply_filters('flash_cache_optimize_scripts_extra_html', '', $values) . ' 
+		echo (has_filter('flash_cache_optimize_scripts_extra_html') ? apply_filters('flash_cache_optimize_scripts_extra_html', '', $values) : '<table class="form-table advanced-minify-scripts">' . self::pro_row(__('Minify scripts', 'flash-cache'), __('Removes spaces and comments from the combined scripts, so they weigh less.', 'flash-cache')) . '</table>') . ' 
 			
 						</td>
 					</tr>';

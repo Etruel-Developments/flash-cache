@@ -671,3 +671,22 @@
 .wpm_container .postbox .wpm_main > form{ flex: 1 0 auto; display: flex; flex-direction: column; }
 .wpm_container .postbox .wpm_main > form > .wpm_footer{ margin-top: auto; }
 .wpm_container .postbox .wpm_main > form > :has(+ .wpm_footer){ margin-bottom: 30px; }
+
+/* Cache statistics on General Settings. */
+.wpm_container .form-table tr.flash-cache-stats-row > td{ width: 100%; padding-bottom: 25px; }
+.flash-cache-stats-head{ display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.flash-cache-stats-head h3{ margin: 0; font-size: 14px; }
+.flash-cache-stats-when{ color: #646970; font-size: 13px; font-style: italic; }
+.flash-cache-stats-cards{ display: flex; flex-wrap: wrap; margin: 15px 0 5px; }
+.flash-cache-stats-card{ flex: 1 1 110px; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 6px; text-align: center; border-left: 1px solid #dcdcde; }
+.flash-cache-stats-card:first-child{ border-left: 0; }
+.flash-cache-stats-card .dashicons{ width: 40px; height: 40px; font-size: 40px; color: #00E065; margin-bottom: 6px; }
+.flash-cache-stats-card strong{ font-size: 13px; }
+.flash-cache-stats-size{ font-size: 18px; font-weight: 600; color: #1d2327; }
+.flash-cache-stats-card span:last-child{ color: #646970; font-size: 12px; }
+.flash-cache-stats-total{ margin: 10px 0 0; text-align: center; }
+.flash-cache-stats.is-counting .flash-cache-stats-cards{ opacity: .55; }
+@media (max-width: 600px){
+	.flash-cache-stats-card{ flex-basis: 45%; border-left: 0; }
+}
+

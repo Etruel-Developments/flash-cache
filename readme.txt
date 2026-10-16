@@ -129,7 +129,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * New pattern cache type "Don't cache", to keep the pages it applies to always served live.
 * A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches.
 * Saving, reordering or deleting a pattern clears the cache, so the new rules apply to the next visit.
-* New setting "After design changes": saving widgets, menus, Customizer settings or block theme templates refreshes the cache by itself. Automatic (default) deletes it on sites with up to 2,000 published posts and replaces pages a few at a time on larger ones, so visitors never meet an empty cache. Switching themes always starts a fresh cache.
+* New setting "After design changes": saving widgets, menus, Customizer settings, block theme templates or synced patterns refreshes the cache by itself. Automatic (default) deletes it on sites with up to 2,000 published posts and replaces pages a few at a time on larger ones, so visitors never meet an empty cache. Switching themes always starts a fresh cache.
 * Emptying the cache is instant at any size: the files are set aside at once and removed in the background, so large sites never wait or time out.
 * New action `flash_cache_clear_url`: other plugins can refresh the cached copy of a page whose content they changed, with `do_action( 'flash_cache_clear_url', $url )`.
 * Pattern settings are stored clean, each field validated by type, and "Reset to default" restores exactly the default patterns.
@@ -145,7 +145,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Only successful responses are cached: error pages and other non-200 answers are always served live.
 * "Execute Preload" starts right away and caches every published page in turn.
 * The preload follows each pattern's "URL must contain" and "URL should not contain" rules and its own refresh times, and its background task exists only while the preload is enabled.
-* The disk usage counter is saved once per request.
+* Cache statistics on General Settings: static pages, PHP pages, styles, scripts and fonts, with their size and count. They load instantly, follow every page cached or deleted, and recount themselves in short steps while the screen is open, however large the cache.
 * Clearer settings screens: short labels, plain-language descriptions, and every text ready for translation.
 * Settings grouped by topic in three screens, Cache updates, Advanced options and Optimization, each saving and resetting only its own options.
 * The script exclusion switches say what they do ("Leave theme scripts in place"), and "Scripts from other domains" names the switch that keeps analytics, ads and social scripts on their own servers.

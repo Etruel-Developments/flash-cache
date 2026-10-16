@@ -43,7 +43,7 @@ class flash_cache_design {
 	}
 
 	public static function post_saved($post_id, $post = null) {
-		if ($post instanceof WP_Post && in_array($post->post_type, array('wp_template', 'wp_template_part', 'wp_global_styles', 'wp_navigation'), true)) {
+		if ($post instanceof WP_Post && in_array($post->post_type, array('wp_template', 'wp_template_part', 'wp_global_styles', 'wp_navigation', 'wp_block'), true)) {
 			self::queue('design', 'post:' . $post->post_type);
 		}
 	}
@@ -127,7 +127,6 @@ class flash_cache_design {
 		$batch	  = max(1, (int) apply_filters('flash_cache_gradual_refresh_batch', 200));
 		$deadline = microtime(true) + 20;
 		$deleted  = 0;
-		$freed	  = 0;
 		$hosts	  = new RecursiveCallbackFilterIterator(
 				new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS),
 				function ($item, $key, $iterator) use ($root) {
@@ -147,18 +146,13 @@ class flash_cache_design {
 				continue;
 			}
 			foreach (array_merge(array($file->getPathname()), $related) as $path) {
-				if (is_file($path)) {
-					$freed += (int) filesize($path);
-					@unlink($path);
-				}
+				flash_cache_delete_file($path);
 			}
 			if (++$deleted >= $batch || microtime(true) > $deadline) {
-				flash_cache_decrement_disk_usage($freed);
 				wp_schedule_single_event(time() + 60, 'flash_cache_expire_stale');
 				return;
 			}
 		}
-		flash_cache_decrement_disk_usage($freed);
 		delete_option('flash_cache_stale_before');
 	}
 }
