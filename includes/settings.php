@@ -21,7 +21,6 @@ class flash_cache_settings {
 	public static function hooks() {
 		add_action('admin_notices', array(__CLASS__, 'flash_cache_check_permalinks'));
 		add_action('admin_menu', array(__CLASS__, 'admin_menu'));
-		add_action('admin_menu', array(__CLASS__, 'admin_submenus'), 11);
 		add_action('admin_print_styles', array(__CLASS__, 'all_WP_admin_styles'));
 		add_action('admin_post_save_flash_cache_general', array(__CLASS__, 'save_general'));
 		add_action('admin_post_save_flash_cache_advanced', array(__CLASS__, 'save_advanced'));
@@ -70,10 +69,11 @@ class flash_cache_settings {
 				FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-icon.png',
 				29
 		);
+		self::admin_submenus();
 	}
 
 	/**
-	 * Registered after Patterns and Preload, which use the default priority.
+	 * Registered with the main menu, so they come before Patterns and Preload.
 	 */
 	public static function admin_submenus() {
 		foreach (self::advanced_pages() as $section => $page) {
@@ -86,9 +86,9 @@ class flash_cache_settings {
 	 */
 	public static function advanced_pages() {
 		return array(
-			'optimization' => array('slug' => 'flash_cache_optimization', 'title' => __('Optimization', 'flash-cache')),
 			'updates'	   => array('slug' => 'flash_cache_updates', 'title' => __('Cache updates', 'flash-cache')),
 			'advanced'	   => array('slug' => 'flash_cache_advanced_setting', 'title' => __('Advanced options', 'flash-cache')),
+			'optimization' => array('slug' => 'flash_cache_optimization', 'title' => __('Optimization', 'flash-cache')),
 		);
 	}
 
