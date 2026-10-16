@@ -21,6 +21,7 @@ class flash_cache_settings {
 	public static function hooks() {
 		add_action('admin_notices', array(__CLASS__, 'flash_cache_check_permalinks'));
 		add_action('admin_menu', array(__CLASS__, 'admin_menu'));
+		add_action('admin_menu', array(__CLASS__, 'admin_submenus'), 11);
 		add_action('admin_print_styles', array(__CLASS__, 'all_WP_admin_styles'));
 		add_action('admin_post_save_flash_cache_general', array(__CLASS__, 'save_general'));
 		add_action('admin_post_save_flash_cache_advanced', array(__CLASS__, 'save_advanced'));
@@ -54,7 +55,7 @@ class flash_cache_settings {
 		if (strpos($current_screen->id, 'flash_cache') === false) {
 			return false;
 		}
-		wp_enqueue_style('flash_cache-style', FLASH_CACHE_PLUGIN_URL . 'assets/css/style.css');
+		wp_enqueue_style('flash_cache-style', FLASH_CACHE_PLUGIN_URL . 'assets/css/style.css', array(), FLASH_CACHE_VERSION . '.' . filemtime(FLASH_CACHE_PLUGIN_DIR . 'assets/css/style.css'));
 
 		wp_enqueue_style('flash_cache-icons', FLASH_CACHE_PLUGIN_URL . 'assets/css/icons.css');
 	}
@@ -69,14 +70,43 @@ class flash_cache_settings {
 				FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-icon.png',
 				29
 		);
-		$page = add_submenu_page(
-				'flash_cache_setting',
-				__('Advanced options', 'flash-cache'),
-				__('Advanced options', 'flash-cache'),
-				'manage_options',
-				'flash_cache_advanced_setting',
-				array(__CLASS__, 'advanced_settings_page')
+	}
+
+	/**
+	 * Registered after Patterns and Preload, which use the default priority.
+	 */
+	public static function admin_submenus() {
+		foreach (self::advanced_pages() as $section => $page) {
+			add_submenu_page('flash_cache_setting', $page['title'], $page['title'], 'manage_options', $page['slug'], array(__CLASS__, $section . '_page'));
+		}
+	}
+
+	/**
+	 * The screens of the flash_cache_advanced_settings option, in menu order.
+	 */
+	public static function advanced_pages() {
+		return array(
+			'optimization' => array('slug' => 'flash_cache_optimization', 'title' => __('Optimization', 'flash-cache')),
+			'updates'	   => array('slug' => 'flash_cache_updates', 'title' => __('Cache updates', 'flash-cache')),
+			'advanced'	   => array('slug' => 'flash_cache_advanced_setting', 'title' => __('Advanced options', 'flash-cache')),
 		);
+	}
+
+	/**
+	 * The option keys each screen saves and resets. A key of another plugin that is not listed
+	 * keeps its stored value unless its screen posts it.
+	 */
+	public static function advanced_sections() {
+		return apply_filters('flash_cache_advanced_sections', array(
+			'optimization' => array('optimize_styles', 'optimize_scripts', 'inline_scripts', 'social_scripts', 'theme_files', 'plugins_files', 'plugins_exclude', 'avoid_optimize', 'avoid_optimize_text'),
+			'updates'	   => array('process_type', 'refresh_mode', 'design_changes', 'disable_widget_cache'),
+			'advanced'	   => array('cache_dir', 'viewer_protocol_policy', 'ttl_default', 'dont_cache_cookie', 'lock_type'),
+		));
+	}
+
+	public static function requested_section() {
+		$section = isset($_REQUEST['flash_cache_section']) ? sanitize_key(wp_unslash($_REQUEST['flash_cache_section'])) : 'advanced';
+		return isset(self::advanced_pages()[$section]) ? $section : 'advanced';
 	}
 
 	public static function all_WP_admin_styles() {
@@ -195,7 +225,7 @@ class flash_cache_settings {
 
 		if ($typenow == 'flash_cache_patterns') {
 
-			wp_enqueue_style('flash_cache-style', FLASH_CACHE_PLUGIN_URL . 'assets/css/style.css');
+			wp_enqueue_style('flash_cache-style', FLASH_CACHE_PLUGIN_URL . 'assets/css/style.css', array(), FLASH_CACHE_VERSION . '.' . filemtime(FLASH_CACHE_PLUGIN_DIR . 'assets/css/style.css'));
 			wp_enqueue_style('flash_cache-icons', FLASH_CACHE_PLUGIN_URL . 'assets/css/icons.css');
 
 			echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
@@ -242,12 +272,34 @@ class flash_cache_settings {
 		}
 	}
 
-	public static function advanced_settings_page() {
+	public static function optimization_page() {
+		self::settings_page('optimization');
+	}
+
+	public static function updates_page() {
+		self::settings_page('updates');
+	}
+
+	public static function advanced_page() {
+		self::settings_page('advanced');
+	}
+
+	/**
+	 * One screen of the advanced option: the form posts its section, and saving or resetting it
+	 * touches only that section's keys.
+	 */
+	private static function settings_page($section) {
 		$values = flash_cache_get_advanced_settings();
+		$titles = array(
+			'optimization' => __('Optimization', 'flash-cache'),
+			'updates'	   => __('Cache Updates', 'flash-cache'),
+			'advanced'	   => __('Advanced Settings', 'flash-cache'),
+		);
+		$reset	= wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options&flash_cache_section=' . $section), 'reset_to_default_advanced_options', '_wpnonce');
 
 		echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
 			<div class="wpm_header">
-			<h1>' . __('Advanced Settings', 'flash-cache') . '</h1>
+			<h1>' . $titles[$section] . '</h1>
 			</div>
 			<div class="postbox">';
 		self::get_changes_httacess();
@@ -256,13 +308,29 @@ class flash_cache_settings {
 		echo flash_cache_get_menus();
 
 		echo '<div class="wpm_main"><form action="' . admin_url('admin-post.php') . '" id="form_flash_cache_settings" method="post">
-				<input type="hidden" name="action" value="save_flash_cache_advanced"/>';
+				<input type="hidden" name="action" value="save_flash_cache_advanced"/>
+				<input type="hidden" name="flash_cache_section" value="' . esc_attr($section) . '"/>';
 		wp_nonce_field('save_flash_cache_advanced');
 		echo '<div class="wpm_head"><div class="wpm_buttons">';
 		submit_button();
-		echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a></div></div>';
-		echo '<table class="form-table">
-					<tr valign="top" class="wrap-row">
+		echo '<a href="' . $reset . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a></div></div>';
+		echo '<table class="form-table">';
+		call_user_func(array(__CLASS__, $section . '_rows'), $values);
+		echo '</table>';
+		echo '<div class="wpm_footer">';
+		echo '<div class="wpm_buttons">';
+		submit_button();
+		echo '<a href="' . $reset . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a>
+			</div> <!-- wpm_buttons -->
+		</div>'; // wpm_footer
+
+		echo '</form></div></div>';
+
+		echo ' </div>';
+	}
+
+	private static function advanced_rows($values) {
+		echo '<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Cache folder', 'flash-cache') . '</th>
 						<td>
 							<input type="text" name="flash_cache_advanced[cache_dir]" id="flash_cache_advanced_cache_dir" value="' . esc_attr($values['cache_dir']) . '"/>
@@ -319,8 +387,22 @@ class flash_cache_settings {
 						<input type="button" name="add_new_dont_cache_cookie" id="add_new_dont_cache_cookie" class="button" value="' . esc_attr__('Add', 'flash-cache') . '"/>
 				</div>';
 		echo '</td>
-					</tr>
-					<tr valign="top" class="wrap-row">
+					</tr>';
+		echo '<tr valign="top" class="wrap-row">
+					<th scope="row">' . __('Lock', 'flash-cache') . '</th>
+					<td>
+						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> ' . __('Files (Recommended)', 'flash-cache') . '
+							<p class="description">' . __('A lock file per page keeps two visitors from building the same page at the same time.', 'flash-cache') . '</p>
+						</div>
+						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'db', false) . ' name="flash_cache_advanced[lock_type]" value="db"/> ' . __('Database', 'flash-cache') . '
+							<p class="description">' . __('A MySQL lock does the same. Useful when several servers share the database but not the disk.', 'flash-cache') . '</p>
+						</div>
+					</td>
+				</tr>';
+	}
+
+	private static function updates_rows($values) {
+		echo '<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Cache creation', 'flash-cache') . '</th>
 						<td>
 							<div class="radio-group"><input type="radio" ' . checked($values['process_type'], 'ob_with_curl_request', false) . ' name="flash_cache_advanced[process_type]" value="ob_with_curl_request"/> ' . __('Capture the visited page (Recommended)', 'flash-cache') . ' <p class="description">' . __('The page a visitor receives is stored as it is sent; later refreshes request the page again in the background.', 'flash-cache') . '</p>
@@ -374,6 +456,9 @@ class flash_cache_settings {
 
 		echo '</td>
 				</tr>';
+	}
+
+	private static function optimization_rows($values) {
 		echo '
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Optimize styles', 'flash-cache') . '</th>
@@ -486,28 +571,6 @@ class flash_cache_settings {
 						</td>
 					</tr>';
 
-		echo '<tr valign="top" class="wrap-row">
-					<th scope="row">' . __('Lock', 'flash-cache') . '</th>
-					<td>
-						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'file', false) . ' name="flash_cache_advanced[lock_type]" value="file"/> ' . __('Files (Recommended)', 'flash-cache') . '
-							<p class="description">' . __('A lock file per page keeps two visitors from building the same page at the same time.', 'flash-cache') . '</p>
-						</div>
-						<div class="radio-group"><input type="radio" ' . checked($values['lock_type'], 'db', false) . ' name="flash_cache_advanced[lock_type]" value="db"/> ' . __('Database', 'flash-cache') . '
-							<p class="description">' . __('A MySQL lock does the same. Useful when several servers share the database but not the disk.', 'flash-cache') . '</p>
-						</div>
-					</td>
-				</tr>';
-		echo '</table>';
-		echo '<div class="wpm_footer">';
-		echo '<div class="wpm_buttons">';
-		submit_button();
-		echo '<a href="' . wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options'), 'reset_to_default_advanced_options', '_wpnonce') . '" class="button btn_reset_to_default">' . __('Reset to default', 'flash-cache') . '</a>
-			</div> <!-- wpm_buttons -->
-		</div>'; // wpm_footer
-
-		echo '</form></div></div>';
-
-		echo ' </div>';
 	}
 
 	/**
@@ -590,9 +653,15 @@ class flash_cache_settings {
 		if (!empty($_POST['flash_cache_advanced']) && is_array($_POST['flash_cache_advanced'])) {
 			$post_values = wp_unslash($_POST['flash_cache_advanced']);
 		}
-		$post_values = flash_cache_sanitize_settings_deep(self::default_advanced_options(), $post_values);
+		$defaults	 = self::default_advanced_options();
+		$post_values = flash_cache_sanitize_settings_deep($defaults, $post_values);
 
-		$new_options = wp_parse_args($post_values, self::default_advanced_options());
+		$new_options = array_merge(flash_cache_get_advanced_settings(), $post_values);
+		foreach (self::advanced_sections()[self::requested_section()] as $key) {
+			if (!array_key_exists($key, $post_values) && array_key_exists($key, $defaults)) {
+				$new_options[$key] = is_array($defaults[$key]) ? array() : $defaults[$key];
+			}
+		}
 		$new_options = apply_filters('flash_cache_check_advanced_settings', $new_options);
 
 		$cache_dir = flash_cache_sanitize_cache_dir($new_options['cache_dir']);
@@ -619,7 +688,7 @@ class flash_cache_settings {
 		}
 
 		$new_options  = apply_filters('flash_cache_save_advanced_options', $new_options, $post_values);
-		$redirect_url = apply_filters('flash_cache_save_advanced_redirect_url', wp_get_referer() ?: admin_url('admin.php?page=flash_cache_advanced_setting'));
+		$redirect_url = apply_filters('flash_cache_save_advanced_redirect_url', wp_get_referer() ?: admin_url('admin.php?page=' . self::advanced_pages()[self::requested_section()]['slug']));
 
 		update_option('flash_cache_advanced_settings', $new_options);
 		flash_cache_update_htaccess();
@@ -667,12 +736,20 @@ class flash_cache_settings {
 	public static function reset_to_default_advanced_options() {
 		flash_cache_verify_admin_request('reset_to_default_advanced_options');
 
+		$section  = self::requested_section();
+		$defaults = self::default_advanced_options();
+		$options  = flash_cache_get_advanced_settings();
+		foreach (self::advanced_sections()[$section] as $key) {
+			if (array_key_exists($key, $defaults)) {
+				$options[$key] = $defaults[$key];
+			}
+		}
 		flash_cache_purge_all();
-		update_option('flash_cache_advanced_settings', self::default_advanced_options());
+		update_option('flash_cache_advanced_settings', $options);
 		flash_cache_update_htaccess();
 
 		flash_cache_notices::add(__('Defaults have been restored.', 'flash-cache'));
-		wp_safe_redirect(admin_url('admin.php?page=flash_cache_advanced_setting'));
+		wp_safe_redirect(admin_url('admin.php?page=' . self::advanced_pages()[$section]['slug']));
 		exit;
 	}
 

@@ -321,6 +321,10 @@
 	padding-top: 10px;
 	color: #7f868d;
 }
+.wpm_container .form-table .description{
+	font-size: 13px;
+	font-style: italic;
+}
 .wpm_container .form-table code{
 	display: inline-block;
 	margin-top: 5px;
