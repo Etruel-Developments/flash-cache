@@ -271,7 +271,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		if (!file_exists($requests_path)) {
 			@mkdir($requests_path, 0777, true);
 		}
-		$key		  ??= defined('FLASH_CACHE_NOT_USE_THIS_REQUEST') ? self::request_key(array()) : self::request_key(wp_unslash($_GET));
+		$key		  = $key ?? (defined('FLASH_CACHE_NOT_USE_THIS_REQUEST') ? self::request_key(array()) : self::request_key(wp_unslash($_GET)));
 		$request_file = $requests_path . $key . '.html';
 		if (!file_exists($request_file)) {
 			$max_files = (int) apply_filters('flash_cache_max_request_files', 100, $cache_path);
@@ -333,7 +333,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 
 		$kind = flash_cache_patterns::page_kind($current_query);
 		foreach ($patterns as $pattern) {
-			if (flash_cache_patterns::applies($pattern, $kind, $post?->post_type ?? '', $current_url)) {
+			if (flash_cache_patterns::applies($pattern, $kind, $post ? $post->post_type : '', $current_url)) {
 				$create_cache	  = true;
 				self::$cache_type = $pattern['cache_type'];
 				break;

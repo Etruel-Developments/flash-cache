@@ -201,7 +201,9 @@ function flash_cache_url_to_path($url) {
 	if (str_starts_with($path, $base)) {
 		$path = substr($path, strlen($base));
 	}
-	$segments = array_filter(explode('/', rawurldecode($path)), fn($segment) => $segment !== '' && $segment !== '.' && $segment !== '..');
+	$segments = array_filter(explode('/', rawurldecode($path)), function ($segment) {
+		return $segment !== '' && $segment !== '.' && $segment !== '..';
+	});
 	return implode('/', $segments);
 }
 

@@ -767,7 +767,9 @@ class flash_cache_patterns {
 		$types = array();
 		if (!empty($values['page_type']['single'])) {
 			$post_types = array_keys(array_filter((array) ($values['page_type']['posts'] ?? array())));
-			$labels		= array_map(fn($type) => get_post_type_object($type)->label ?? $type, array_filter($post_types, 'post_type_exists'));
+			$labels		= array_map(function ($type) {
+				return get_post_type_object($type)->label ?? $type;
+			}, array_filter($post_types, 'post_type_exists'));
 			$types[]	= $labels ? implode(', ', $labels) : __('All post types', 'flash-cache');
 		}
 		$names = array(
@@ -797,7 +799,7 @@ class flash_cache_patterns {
 	}
 
 	private static function is_list_query($query) {
-		return is_admin() && $query->is_main_query() && 'flash_cache_patterns' === $query->get('post_type') && function_exists('get_current_screen') && 'edit-flash_cache_patterns' === get_current_screen()?->id;
+		return is_admin() && $query->is_main_query() && 'flash_cache_patterns' === $query->get('post_type') && function_exists('get_current_screen') && get_current_screen() && 'edit-flash_cache_patterns' === get_current_screen()->id;
 	}
 
 	public static function list_order($query) {
@@ -853,7 +855,7 @@ class flash_cache_patterns {
 	}
 
 	public static function list_scripts($hook_suffix) {
-		if ('edit.php' !== $hook_suffix || 'edit-flash_cache_patterns' !== get_current_screen()?->id) {
+		if ('edit.php' !== $hook_suffix || !get_current_screen() || 'edit-flash_cache_patterns' !== get_current_screen()->id) {
 			return;
 		}
 		wp_enqueue_script('jquery-ui-sortable');

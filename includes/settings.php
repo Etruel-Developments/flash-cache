@@ -565,7 +565,7 @@ class flash_cache_settings {
 													</span>
 												</div>
 												<p class="description">' . __('Scripts of plugins stay as separate files.', 'flash-cache') . '</p>
-												' . (has_filter('flash_cache_exclude_scripts_extra_html') ? apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) : '<p class="description">' . __('Choosing which plugins keep their scripts in place is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p></td></tr>' . self::pro_row(__('Avoid optimize javascript by file', 'flash-cache'), __('Leaves specific script files in place, by name or path.', 'flash-cache'), false)) . '
+												' . (has_filter('flash_cache_exclude_scripts_extra_html') ? apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) : '<p class="description">' . __('Choosing each plugin individually is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p></td></tr>' . self::pro_row(__('Avoid optimize javascript by file', 'flash-cache'), __('Leaves specific script files in place, by name or path.', 'flash-cache'), false)) . '
 											</td>
 										</tr>
 
