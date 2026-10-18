@@ -141,6 +141,11 @@ class Flash_Cache {
 		if (is_multisite()) {
 			wp_die(esc_html__('Flash Cache works on single WordPress sites and cannot be activated on a Multisite network.', 'flash-cache'), esc_html__('Plugin not activated', 'flash-cache'), array('back_link' => true));
 		}
+		// The cache comes back as it was left: deactivation removed its rules, not the "Enable cache" setting.
+		self::getInstance();
+		if (flash_cache_get_general_settings()['activate']) {
+			flash_cache_update_htaccess();
+		}
 	}
 
 	/**
