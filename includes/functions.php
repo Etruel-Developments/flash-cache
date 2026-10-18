@@ -574,7 +574,14 @@ function flash_cache_get_htaccess_info() {
 	$optimization_rules			 = apply_filters('flash_cache_apache_optimization_rules', $optimization_rules);
 	$final_optimization_rules	 = apply_filters('flash_cache_apache_final_optimization_rules', implode("\n", $optimization_rules));
 
-	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules, "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules);
+	// OpenLiteSpeed reads .htaccess only when it restarts: this URL answers 403 once the current rules are loaded.
+	$rules_hash = '';
+	if (flash_cache_enviroment::is_openlitespeed() && '' !== $final_cache_rules) {
+		$rules_hash		   = md5($final_cache_rules . $final_utils_rules . $final_optimization_rules);
+		$final_cache_rules .= "\n" . '<IfModule mod_rewrite.c>' . "\n" . 'RewriteRule ^flash-cache-rules-' . $rules_hash . '$ - [F,L]' . "\n" . '</IfModule>';
+	}
+
+	return array("home_path" => $home_path, "current_wp_rules" => $current_wp_rules, "current_cache_rules" => $current_cache_rules, "current_utils_rules" => $current_utils_rules, "current_optimization_rules" => $current_optimization_rules, "cache_rules" => $final_cache_rules, "utils_rules" => $final_utils_rules, "optimization_rules" => $final_optimization_rules, "rules_hash" => $rules_hash);
 }
 
 /**
@@ -640,6 +647,23 @@ function flash_cache_nginx_rules_status() {
 		return 'missing';
 	}
 	return wp_remote_retrieve_header($response, 'x-flash-cache-rules') === $info['rules_hash'] ? 'ok' : 'outdated';
+}
+
+/**
+ * Whether OpenLiteSpeed runs the current Flash Cache rules: 'ok', 'outdated' (not restarted since
+ * the rules were written) or 'unknown' (the site could not be reached). One request to the site,
+ * made only from the settings screen.
+ */
+function flash_cache_openlitespeed_rules_status() {
+	$info = flash_cache_get_htaccess_info();
+	if ('' === $info['rules_hash']) {
+		return 'unknown';
+	}
+	$response = wp_remote_get(home_url('flash-cache-rules-' . $info['rules_hash']), array('timeout' => 5, 'redirection' => 3, 'sslverify' => apply_filters('https_local_ssl_verify', false)));
+	if (is_wp_error($response)) {
+		return 'unknown';
+	}
+	return 403 === wp_remote_retrieve_response_code($response) ? 'ok' : 'outdated';
 }
 
 /**

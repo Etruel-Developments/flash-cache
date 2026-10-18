@@ -26,6 +26,7 @@ class flash_cache_settings {
 		add_action('admin_post_save_flash_cache_advanced', array(__CLASS__, 'save_advanced'));
 		add_action('admin_post_update_flash_cache_httacess', array(__CLASS__, 'update_httacess'));
 		add_action('admin_post_delete_flash_cache', array(__CLASS__, 'delete_cache'));
+		add_action('admin_post_flash_cache_dismiss_ols_headers', array(__CLASS__, 'dismiss_ols_headers'));
 		add_action('admin_post_reset_to_default_general_settings', array(__CLASS__, 'reset_to_default_general_settings'));
 		add_action('admin_post_reset_to_default_advanced_options', array(__CLASS__, 'reset_to_default_advanced_options'));
 		add_action('admin_print_scripts', array(__CLASS__, 'scripts'));
@@ -177,7 +178,7 @@ class flash_cache_settings {
 							<a href="' . wp_nonce_url(admin_url('admin-post.php?action=delete_flash_cache'), 'delete_flash_cache', '_wpnonce') . '" class="button">' . __('Delete Cache', 'flash-cache') . '</a>
 							<p class="description">' . __('Removes every cached page and combined file. Pages are cached again as they are visited or preloaded.', 'flash-cache') . '</p>
 						</td>
-					</tr>' . (flash_cache_enviroment::is_nginx() ? self::nginx_rules_row() : '') . '
+					</tr>' . (flash_cache_enviroment::is_nginx() ? self::nginx_rules_row() : '') . (flash_cache_enviroment::is_openlitespeed() ? self::openlitespeed_rules_row() : '') . '
 				</table>';
 
 		echo '<div class="wpm_footer">';
@@ -619,6 +620,45 @@ class flash_cache_settings {
 		$html .= '<p><button type="button" class="button" onclick="navigator.clipboard && navigator.clipboard.writeText(document.getElementById(\'flash_cache_nginx_include\').value); this.textContent = ' . esc_attr(wp_json_encode(__('Copied', 'flash-cache'))) . ';">' . esc_html__('Copy', 'flash-cache') . '</button> ' . $check . '</p>';
 		$html .= '<p class="description">' . esc_html__('Flash Cache keeps that file up to date; reload nginx after changing settings.', 'flash-cache') . '</p>';
 		return $html . '</td></tr>';
+	}
+
+	private static function openlitespeed_rules_row() {
+		$html = '<tr valign="top"><th scope="row">' . esc_html__('Server rules', 'flash-cache') . '</th><td>';
+		if (flash_cache_get_general_settings()['activate']) {
+			$status = flash_cache_openlitespeed_rules_status();
+			if ('ok' === $status) {
+				$html .= '<p><span class="dashicons dashicons-yes-alt" style="color:#00a32a" aria-hidden="true"></span> ' . esc_html__('OpenLiteSpeed is serving cached pages with the current rules.', 'flash-cache') . '</p>';
+				$html .= '<p class="description">' . esc_html__('OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings.', 'flash-cache') . '</p>';
+			} else {
+				$html .= '<p><span class="dashicons dashicons-warning" style="color:#dba617" aria-hidden="true"></span> ' . ('unknown' === $status ? esc_html__('The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules.', 'flash-cache') : esc_html__('OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel.', 'flash-cache')) . '</p>';
+				$html .= '<p class="description">' . esc_html__('Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP.', 'flash-cache') . '</p>';
+				$html .= '<p><a href="' . esc_url(admin_url('admin.php?page=flash_cache_setting')) . '" class="button">' . esc_html__('Check again', 'flash-cache') . '</a></p>';
+			}
+		}
+		if (get_option('flash_cache_ols_headers_dismissed') !== FLASH_CACHE_VERSION) {
+			$home_root = parse_url(get_bloginfo('url'), PHP_URL_PATH);
+			$uri	   = trailingslashit(is_string($home_root) ? $home_root : '/') . flash_cache_get_cache_dir();
+			$ttl	   = absint(flash_cache_get_advanced_settings()['ttl_default']);
+			$context   = 'context ' . $uri . " {\n  location                \$DOC_ROOT" . $uri . "\n  allowBrowse             1\n  extraHeaders            <<<END_extraHeaders\nset Cache-Control \"max-age=" . $ttl . ", public\"\nset Cached-By \"Flash Cache\"\n  END_extraHeaders\n}";
+			$html	  .= '<div class="flash-cache-ols-headers" style="margin-top:12px;padding:1px 12px;background:#fff;border:1px solid #c3c4c7;border-left:4px solid #72aee6"><p><strong>' . esc_html__('Optional: browser cache headers', 'flash-cache') . '</strong></p>';
+			/* translators: %s: browser cache time, such as "1 day". */
+			$html	  .= '<p>' . esc_html(sprintf(__('Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:', 'flash-cache'), flash_cache_seconds_2_time($ttl))) . '</p>';
+			$html	  .= '<p><textarea class="large-text code" rows="8" id="flash_cache_ols_context" readonly onfocus="this.select()">' . esc_textarea($context) . '</textarea></p>';
+			if (flash_cache_get_advanced_settings()['viewer_protocol_policy'] == 'redirect_http_to_https') {
+				/* translators: %s: a header line for the OpenLiteSpeed configuration. */
+				$html .= '<p class="description">' . sprintf(esc_html__('For "Redirect HTTP to HTTPS", also add %s to the Header Operations of the / context.', 'flash-cache'), '<code>' . esc_html('set Strict-Transport-Security "' . flash_cache_hsts_header() . '"') . '</code>') . '</p>';
+			}
+			$html .= '<p><button type="button" class="button" onclick="navigator.clipboard && navigator.clipboard.writeText(document.getElementById(\'flash_cache_ols_context\').value); this.textContent = ' . esc_attr(wp_json_encode(__('Copied', 'flash-cache'))) . ';">' . esc_html__('Copy', 'flash-cache') . '</button> ';
+			$html .= '<a href="' . esc_url(wp_nonce_url(admin_url('admin-post.php?action=flash_cache_dismiss_ols_headers'), 'flash_cache_dismiss_ols_headers')) . '" class="button-link">' . esc_html__('Dismiss until the next update', 'flash-cache') . '</a></p></div>';
+		}
+		return $html . '</td></tr>';
+	}
+
+	public static function dismiss_ols_headers() {
+		flash_cache_verify_admin_request('flash_cache_dismiss_ols_headers');
+		update_option('flash_cache_ols_headers_dismissed', FLASH_CACHE_VERSION, false);
+		wp_safe_redirect(admin_url('admin.php?page=flash_cache_setting'));
+		exit;
 	}
 
 	public static function get_changes_httacess() {
