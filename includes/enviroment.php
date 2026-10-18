@@ -39,6 +39,18 @@ class flash_cache_enviroment {
 	}
 
 	/**
+	 * Whether the server is OpenLiteSpeed, which reports the same SERVER_SOFTWARE as LiteSpeed
+	 * Enterprise and applies only the rewrite rules of .htaccess.
+	 *
+	 * @static
+	 *
+	 * @return bool
+	 */
+	public static function is_openlitespeed() {
+		return isset($_SERVER['LSWS_EDITION']) && stripos((string) $_SERVER['LSWS_EDITION'], 'Openlitespeed') === 0;
+	}
+
+	/**
 	 * Returns true if server is nginx.
 	 *
 	 * @static

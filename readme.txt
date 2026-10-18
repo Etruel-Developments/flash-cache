@@ -128,6 +128,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Approved comments refresh their post's cache in the background.
 * Settings grouped by topic in three screens, Cache updates, Advanced options and Optimization, each saving and resetting only its own options.
 * On nginx, the General settings screen shows whether nginx is running the current Flash Cache rules and, when it is not, the exact line to add to the server configuration or the reminder to reload nginx.
+* Ready for OpenLiteSpeed: cached pages are served straight from disk and compressed by the server itself.
 * "Redirect HTTP to HTTPS" sends a Strict-Transport-Security header for the site's own host, adjustable with the `flash_cache_hsts_header` filter; on a site opened over HTTP the screen explains when the option appears.
 * New action `flash_cache_clear_url`: other plugins can refresh the cached copy of a page whose content they changed, with `do_action( 'flash_cache_clear_url', $url )`.
 * Clearer settings screens: short labels, plain-language descriptions, and every text ready for translation.

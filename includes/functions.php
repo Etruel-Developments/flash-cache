@@ -488,18 +488,20 @@ function flash_cache_get_htaccess_info() {
 
 
 		/* Cache static pages with gzip */
-		if (substr($permalink_structure, -1) == '/') {
-			$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*[^/]$';
-			$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*//.*$';
+		if (flash_cache_process::writes_gzip_copy()) {
+			if (substr($permalink_structure, -1) == '/') {
+				$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*[^/]$';
+				$cache_rules[]	 = 'RewriteCond %{REQUEST_URI} !^.*//.*$';
+			}
+			$cache_rules[]	 = 'RewriteCond %{REQUEST_METHOD} !POST';
+			$cache_rules[]	 = 'RewriteCond %{QUERY_STRING} !.*=.*';
+			$cache_rules[]	 = 'RewriteCond %{HTTP:Cookie} !^.*(' . implode('|', $dont_cache_cookies) . ').*$';
+			$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
+			$cache_rules[]	 = 'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]';
+			$cache_rules[]	 = 'RewriteCond %{HTTP:Accept-Encoding} gzip';
+			$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz -f';
+			$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz" [L]';
 		}
-		$cache_rules[]	 = 'RewriteCond %{REQUEST_METHOD} !POST';
-		$cache_rules[]	 = 'RewriteCond %{QUERY_STRING} !.*=.*';
-		$cache_rules[]	 = 'RewriteCond %{HTTP:Cookie} !^.*(' . implode('|', $dont_cache_cookies) . ').*$';
-		$cache_rules[]	 = 'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]';
-		$cache_rules[]	 = 'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]';
-		$cache_rules[]	 = 'RewriteCond %{HTTP:Accept-Encoding} gzip';
-		$cache_rules[]	 = 'RewriteCond ' . esc_attr($apache_root) . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz -f';
-		$cache_rules[]	 = 'RewriteRule ^(.*) "' . esc_attr($inst_root) . esc_attr($cache_dir) . $rules_host . '/$1/index-cache.html.gz" [L]';
 
 		/* Cache static pages with plain html */
 		if (substr($permalink_structure, -1) == '/') {

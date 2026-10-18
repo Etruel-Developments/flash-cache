@@ -197,7 +197,17 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			return self::write_php_cache($cache_path, $html, 'text/html; charset=UTF-8', self::request_key(array()));
 		}
 		flash_cache_write_file($cache_path . 'index-cache.html', $html);
-		flash_cache_write_file($cache_path . 'index-cache.html.gz', gzencode($html));
+		if (self::writes_gzip_copy()) {
+			flash_cache_write_file($cache_path . 'index-cache.html.gz', gzencode($html));
+		}
+	}
+
+	/**
+	 * OpenLiteSpeed serves a .gz file without its Content-Encoding and reads .htaccess changes
+	 * only on restart, so it gets no .gz copy: a gzip rule still loaded falls through to the plain file.
+	 */
+	public static function writes_gzip_copy() {
+		return !flash_cache_enviroment::is_openlitespeed();
 	}
 
 	public static function create_cache_php() {
@@ -595,7 +605,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		}
 		$path		= self::get_path(self::$optional_post_id);
 		$cache_path = trailingslashit(flash_cache_get_cache_root() . flash_cache_get_server_name() . '/' . $path);
-		if (file_exists($cache_path . 'index-cache.html') && file_exists($cache_path . 'index-cache.html.gz')) {
+		if (file_exists($cache_path . 'index-cache.html') && (!self::writes_gzip_copy() || file_exists($cache_path . 'index-cache.html.gz'))) {
 			return false;
 		}
 		if (!file_exists($cache_path)) {
