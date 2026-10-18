@@ -114,10 +114,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Rebuilt style and script optimization: the site's own files are read straight from disk, and each combined file is shared by every page that uses the same assets, written once, in its own folder apart from the cached pages.
 * Patterns follow the order you give them: drag them in the Patterns list, and the first pattern that applies to a page decides how it is cached. The Default pattern always comes last and caches every page no other pattern takes.
 * New pattern cache type "Don't cache", to keep the pages it applies to always served live.
-* A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches.
+* A pattern limited to some post types takes those posts ahead of the patterns below it, and the Patterns list shows what each pattern applies to and how it caches. Checking a post type is enough: "Single posts and pages" is checked with it.
 * Each Page types box decides for its own pages: categories, tags and author pages follow their own boxes, "Other archives" covers date, custom taxonomy and post type archives, and "Posts page" is the list of latest posts when the front page is a static page.
 * New setting "Refresh expired pages": on visits (default) or from the preload only, for fully script-free cached pages.
 * Smarter PHP-mode cache keys: visits with tracking parameters (utm_*, fbclid, gclid and similar) share the same cached page, and each page keeps a bounded number of variants (filter `flash_cache_max_request_files`).
+* Pages cached in PHP mode get the same style and script optimization as static pages.
 * Leaner PHP mode: a compact cache file serves each stored page with a single lookup and hands over to WordPress cleanly when the page needs refreshing.
 * Faster uncached requests: patterns load from a single stored option instead of database queries.
 * Leaner requests: Flash Cache reads its settings once per page load.

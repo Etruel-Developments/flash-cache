@@ -144,7 +144,8 @@ class flash_cache_process {
 	 * back from this markup, so their "name = value;" form must stay as it is.
 	 */
 	public static function cache_response_html($response, $url_to_cache) {
-		if (flash_cache_get_advanced_settings()['refresh_mode'] === 'cron') {
+		// PHP mode hands expired pages to WordPress itself (cache.tpl).
+		if ('php' === self::$cache_type || flash_cache_get_advanced_settings()['refresh_mode'] === 'cron') {
 			return $response;
 		}
 		$p			 = base64_encode(self::$url_to_cache);
@@ -219,7 +220,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		self::debug('Creating PHP cache file path:' . $path . ' - URL:' . self::$url_to_cache);
 		$response = flash_cache_get_content_to_php(self::$url_to_cache);
 		if (!empty($response['response'])) {
-			self::write_php_cache($cache_path, $response['response'], $response['content_type']);
+			self::write_php_cache($cache_path, apply_filters('flash_cache_response_html', $response['response'], self::$url_to_cache), $response['content_type']);
 		}
 		self::end_create_cache($cache_path);
 	}
@@ -644,7 +645,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			}
 		}
 		if (!empty($response)) {
-			self::write_php_cache($cache_path, $response, $content_type);
+			self::write_php_cache($cache_path, apply_filters('flash_cache_response_html', $response, self::$url_to_cache), $content_type);
 		}
 		self::end_create_cache($cache_path);
 	}

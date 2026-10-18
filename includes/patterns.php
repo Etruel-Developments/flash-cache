@@ -99,10 +99,16 @@ class flash_cache_patterns {
 	 * Whether a pattern applies to a page of this kind, post type and URL.
 	 */
 	public static function applies($pattern, $kind, $post_type, $url) {
-		if ('' === $kind || empty($pattern['page_type'][$kind])) {
+		if ('' === $kind) {
 			return false;
 		}
-		if ('single' === $kind && !empty($pattern['page_type']['posts']) && empty($pattern['page_type']['posts'][(string) $post_type])) {
+		if ('single' === $kind) {
+			// Checked post types imply "Single posts and pages".
+			$post_types = array_filter((array) ($pattern['page_type']['posts'] ?? array()));
+			if ($post_types ? empty($post_types[(string) $post_type]) : empty($pattern['page_type']['single'])) {
+				return false;
+			}
+		} elseif (empty($pattern['page_type'][$kind])) {
 			return false;
 		}
 		foreach (array_filter(array_map('trim', explode("\n", (string) ($pattern['url_must_contain'] ?? ''))), 'strlen') as $text) {
@@ -719,6 +725,9 @@ class flash_cache_patterns {
 									$page_type['posts'][sanitize_key($post_type)] = 1;
 								}
 							}
+							if ($page_type['posts']) {
+								$page_type['single'] = 1;
+							}
 						} else {
 							$page_type[$type] = empty($value[$type]) ? 0 : 1;
 						}
@@ -765,8 +774,8 @@ class flash_cache_patterns {
 	/** A one-line summary of the page types and URL rules a pattern applies to. */
 	public static function applies_to_text($values) {
 		$types = array();
-		if (!empty($values['page_type']['single'])) {
-			$post_types = array_keys(array_filter((array) ($values['page_type']['posts'] ?? array())));
+		$post_types = array_keys(array_filter((array) ($values['page_type']['posts'] ?? array())));
+		if (!empty($values['page_type']['single']) || $post_types) {
 			$labels		= array_map(function ($type) {
 				return get_post_type_object($type)->label ?? $type;
 			}, array_filter($post_types, 'post_type_exists'));

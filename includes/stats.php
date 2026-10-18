@@ -238,13 +238,14 @@ flash_cache_stats::hooks();
 
 /**
  * Writes a file of the cache folder through a temporary file, so readers never get it half
- * written, and keeps the statistics in step.
+ * written, and keeps the statistics in step. A purge may remove the folder meanwhile: the
+ * write is then dropped.
  */
 function flash_cache_write_file($path, $content) {
 	clearstatcache(true, $path);
 	$old	   = is_file($path) ? (int) filesize($path) : null;
 	$temporary = $path . '.' . uniqid('', true) . '.tmp';
-	if (false === file_put_contents($temporary, $content) || !@rename($temporary, $path)) {
+	if (false === @file_put_contents($temporary, $content) || !@rename($temporary, $path)) {
 		@unlink($temporary);
 		return false;
 	}

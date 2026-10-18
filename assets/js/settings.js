@@ -14,6 +14,18 @@ jQuery(document).ready(function ($) {
 		hooks_cookie();
 	});
 
+	// Pattern editor: a post type belongs to "Single posts and pages".
+	$('input[name^="page_type[posts]"]').on('change', function () {
+		if (this.checked) {
+			$('input[name="page_type[single]"]').prop('checked', true);
+		}
+	});
+	$('input[name="page_type[single]"]').on('change', function () {
+		if (!this.checked) {
+			$('input[name^="page_type[posts]"]').prop('checked', false);
+		}
+	});
+
 	$(".wpm_menu_close").click(function (e) {
 		$(".wpm_container").toggleClass("show_menu");
 		return false;
