@@ -767,11 +767,18 @@
 	border-color: #00c957;
 	color: #0b0b0b;
 }
-.wpm_footer .wpm_share a.wpm_share_text{
+.wpm_footer .wpm_share .wpm_share_links{
+	margin-left: 10px;
 	font-size: 13px;
-	font-weight: 600;
-	margin-right: 14px;
+	color: #7f868d;
 }
-.wpm_footer .wpm_share a.wpm_share_text:hover{
+.wpm_footer .wpm_share .wpm_share_links a{
+	margin: 0;
+	font-weight: 600;
+}
+.wpm_footer .wpm_share .wpm_share_links a:hover{
 	color: #00a84a;
+}
+.wpm_footer .wpm_share .wpm_share_links a.wpm_go_pro{
+	color: #0e9fd2;
 }

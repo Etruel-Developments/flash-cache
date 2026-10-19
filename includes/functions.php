@@ -1070,12 +1070,22 @@ function flash_cache_get_header($title, $description = '') {
 	</div>', $title);
 }
 
+/**
+ * "Go Pro · About" at the end of the footer; Pro users get only About.
+ */
+function flash_cache_get_footer_links() {
+	$links = '<a href="' . esc_url(admin_url('admin.php?page=flash_cache_about')) . '">' . esc_html__('About', 'flash-cache') . '</a>';
+	if (!defined('FLASH_CACHE_PRO_VERSION')) {
+		$links = '<a class="wpm_go_pro" href="' . esc_url(admin_url('admin.php?page=flash_cache_about#pro')) . '">' . esc_html__('Go Pro', 'flash-cache') . '</a> &middot; ' . $links;
+	}
+	return '<span class="wpm_share_links">' . $links . '</span>';
+}
+
 function flash_cache_get_menus_social_footer() {
 	$flash_cache_icons = flash_cache_settings_icons();
 
 	return apply_filters('flash_cache_get_menus_social_footer', '
 		<div class="wpm_share">
-			<a class="wpm_share_text" href="https://flashcache.net" target="_blank" rel="noopener">flashcache.net</a>
 			<a href="https://twitter.com/etruel_com" title="Visit us on twitter" target="_blank">
 				' . $flash_cache_icons['social_twitter'] . '
 			</a>
@@ -1097,6 +1107,7 @@ function flash_cache_get_menus_social_footer() {
 			<a href="https://youtube.com/playlist?list=PLA9cHUykgn2pmv331oNGvHTFx_AIwCzww" title="Flash Cache video Tutorials" target="_blank">
 				' . $flash_cache_icons['social_youtube'] . '
 			</a>
+			' . flash_cache_get_footer_links() . '
 		</div>'
 	);
 }
