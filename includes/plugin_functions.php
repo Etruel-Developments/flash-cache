@@ -47,7 +47,6 @@ function flash_cache_init_row_meta($data, $page) {
 			array(
 				'<a href="https://flashcache.net" target="_blank" rel="noopener">' . __('Website', 'flash-cache') . '</a>',
 				'<a href="https://etruel.com/my-account/support/" target="_blank">' . __('Support', 'flash-cache') . '</a>',
-				'<a href="' . admin_url('admin.php?page=flash_cache_advanced_setting') . '" title="' . __('Advanced Settings Page', 'flash-cache') . '">' . __('Advanced Settings', 'flash-cache') . '</a>',
 			)
 	);
 }

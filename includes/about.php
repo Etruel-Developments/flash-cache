@@ -37,7 +37,7 @@ class flash_cache_about {
 	}
 
 	public static function menu_style() {
-		echo '<style>#adminmenu .flash-cache-about-menu{color:#00e065;font-weight:600}</style>';
+		echo '<style>#adminmenu .flash-cache-about-menu{color:#00e065}</style>';
 	}
 
 	public static function add_icon($icons) {
@@ -73,8 +73,9 @@ class flash_cache_about {
 		$has_pro = defined('FLASH_CACHE_PRO_VERSION');
 		$links	 = apply_filters('flash_cache_about_links', array(
 			'site'		=> 'https://flashcache.net',
-			'review'	=> 'https://wordpress.org/support/plugin/flash-cache/reviews/#new-post',
-			'support'	=> 'https://wordpress.org/support/plugin/flash-cache/',
+			'review'	=> 'https://wordpress.org/support/view/plugin-reviews/flash-cache?filter=5&rate=5#new-post',
+			'docs'		=> 'https://etruel.com/faqs/flash-cache/',
+			'support'	=> 'https://etruel.com/my-account/support/',
 			'translate'	=> 'https://translate.wordpress.org/projects/wp-plugins/flash-cache',
 			'checkout'	=> 'https://etruel.com/checkout/?edd_action=add_to_cart&download_id=15114',
 		));
@@ -86,7 +87,7 @@ class flash_cache_about {
  <video class="fc-storm" src="<?php echo esc_url($img . 'storm-small.mp4'); ?>" autoplay loop muted playsinline></video>
  <div class="fc-brand"><img src="<?php echo esc_url(FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-logo.png'); ?>" alt=""><div><h1><b>FLASH</b> CACHE <small><?php echo esc_html(FLASH_CACHE_VERSION); ?></small></h1><span class="fc-tag"><?php esc_html_e('The super accelerator for WordPress', 'flash-cache'); ?></span></div></div>
  <p><?php esc_html_e('Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting.', 'flash-cache'); ?></p>
- <div class="fc-actions"><a class="fc-btn solid" href="<?php echo esc_url($links['review']); ?>" target="_blank" rel="noopener"><?php esc_html_e('★ Rate on WordPress.org', 'flash-cache'); ?></a><a class="fc-btn" href="<?php echo esc_url($links['site']); ?>" target="_blank" rel="noopener">flashcache.net</a><a class="fc-btn" href="<?php echo esc_url($links['support']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Support', 'flash-cache'); ?></a></div>
+ <div class="fc-actions"><a class="fc-btn solid" href="<?php echo esc_url($links['review']); ?>" target="_blank" rel="noopener"><?php esc_html_e('★ Rate on WordPress.org', 'flash-cache'); ?></a><a class="fc-btn" href="<?php echo esc_url($links['docs']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Documentation', 'flash-cache'); ?></a><a class="fc-btn" href="<?php echo esc_url($links['support']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Support', 'flash-cache'); ?></a></div>
 </header>
 <nav class="fc-tabs"><button data-tab="overview"><?php esc_html_e('Overview', 'flash-cache'); ?></button><button data-tab="speed"><?php esc_html_e('Performance', 'flash-cache'); ?></button><button data-tab="servers"><?php esc_html_e('Servers', 'flash-cache'); ?></button><button data-tab="pro" class="pro"><?php esc_html_e('Free vs Pro ★', 'flash-cache'); ?></button></nav>
 
@@ -204,7 +205,7 @@ class flash_cache_about {
 
 <footer class="fc-foot"><span><?php
 	/* translators: %s: Flash Cache version. */
-	printf(esc_html__('Flash Cache %s by', 'flash-cache'), esc_html(FLASH_CACHE_VERSION)); ?> <a href="https://etruel.com/" target="_blank" rel="noopener">Etruel Developments</a></span><a href="<?php echo esc_url($links['site']); ?>" target="_blank" rel="noopener">flashcache.net</a><a href="<?php echo esc_url($links['support']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Support', 'flash-cache'); ?></a><a href="<?php echo esc_url($links['translate']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Translate', 'flash-cache'); ?></a><a href="<?php echo esc_url($links['review']); ?>" target="_blank" rel="noopener"><?php esc_html_e('★★★★★ Leave a review', 'flash-cache'); ?></a></footer>
+	printf(esc_html__('Flash Cache %s by', 'flash-cache'), esc_html(FLASH_CACHE_VERSION)); ?> <a href="https://etruel.com/" target="_blank" rel="noopener">Etruel Developments</a></span><a href="<?php echo esc_url($links['site']); ?>" target="_blank" rel="noopener">flashcache.net</a><a href="<?php echo esc_url($links['docs']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Documentation', 'flash-cache'); ?></a><a href="<?php echo esc_url($links['support']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Support', 'flash-cache'); ?></a><a href="<?php echo esc_url($links['translate']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Translate', 'flash-cache'); ?></a><a href="<?php echo esc_url($links['review']); ?>" target="_blank" rel="noopener"><?php esc_html_e('★★★★★ Leave a review', 'flash-cache'); ?></a></footer>
 
 		<?php
 		echo '</div>';

@@ -98,8 +98,12 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Screenshots ==
 
-1. Settings Screens.
-1. Advanced Settings.
+1. General settings: switch the cache on and see what is stored, with live statistics.
+2. Cache updates: how pages are created, refreshed and replaced after design changes.
+3. Optimization: combine styles and scripts, and leave anything that needs it in place.
+4. Patterns: one set of rules for each kind of page, in the order you choose.
+5. Preload: warm the cache in the background in small batches.
+6. About: measured results against other cache plugins.
 
 
 == Frequently Asked Questions ==

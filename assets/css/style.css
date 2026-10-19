@@ -782,3 +782,8 @@
 .wpm_footer .wpm_share .wpm_share_links a.wpm_go_pro{
 	color: #0e9fd2;
 }
+
+/* The Screen Options tab of the patterns screens sits above the header, not over it. */
+body.post-type-flash_cache_patterns .wpm_container{
+	margin-top: 40px;
+}
