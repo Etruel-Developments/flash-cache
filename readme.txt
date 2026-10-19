@@ -5,7 +5,7 @@ Tags: cache, page cache, performance, speed, optimize
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 3.6
+Stable tag: 4.0
 License: GPLv2 or later
 
 Static page cache served by your web server, without PHP: cache rules per page type, background refreshes and lighter CSS and JavaScript.
