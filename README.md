@@ -76,9 +76,23 @@ Manually: upload the `flash-cache` folder to `/wp-content/plugins/` and activate
 
 ## Screenshots
 
-![Settings](https://user-images.githubusercontent.com/3663229/210109406-bf4cd24d-b91c-4953-a569-bbb8701238cf.png)
+![General settings](screenshot-1.jpg)
+*General settings: switch the cache on and see what is stored, with live statistics.*
 
-![Advanced settings](https://user-images.githubusercontent.com/3663229/210109864-3a15a1b6-7cb4-462f-8f43-fb4ca2084561.png)
+![Cache updates](screenshot-2.jpg)
+*Cache updates: how pages are created, refreshed and replaced after design changes.*
+
+![Optimization](screenshot-3.jpg)
+*Optimization: combine styles and scripts, and leave anything that needs it in place.*
+
+![Patterns](screenshot-4.jpg)
+*Patterns: one set of rules for each kind of page, in the order you choose.*
+
+![Preload](screenshot-5.jpg)
+*Preload: warm the cache in the background in small batches.*
+
+![About](screenshot-6.jpg)
+*About: measured results against other cache plugins.*
 
 ## Frequently Asked Questions
 
