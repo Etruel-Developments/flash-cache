@@ -1053,11 +1053,29 @@ function flash_cache_get_menus() {
 	);
 }
 
+/**
+ * Branded header of every Flash Cache screen.
+ *
+ * @param string $title       Screen title.
+ * @param string $description Optional HTML printed under the title.
+ */
+function flash_cache_get_header($title, $description = '') {
+	return apply_filters('flash_cache_get_header', '
+	<div class="wpm_header">
+		<img class="wpm_header_logo" src="' . esc_url(FLASH_CACHE_PLUGIN_URL . 'assets/img/flash-cache-logo.png') . '" width="64" height="64" alt="">
+		<div class="wpm_header_text">
+			<h1>' . $title . '</h1>' . $description . '
+		</div>
+		<a class="wpm_header_site" href="https://flashcache.net" target="_blank" rel="noopener" title="' . esc_attr__('Flash Cache official site', 'flash-cache') . '">flashcache.net <span>v' . esc_html(FLASH_CACHE_VERSION) . '</span></a>
+	</div>', $title);
+}
+
 function flash_cache_get_menus_social_footer() {
 	$flash_cache_icons = flash_cache_settings_icons();
 
 	return apply_filters('flash_cache_get_menus_social_footer', '
 		<div class="wpm_share">
+			<a class="wpm_share_text" href="https://flashcache.net" target="_blank" rel="noopener">flashcache.net</a>
 			<a href="https://twitter.com/etruel_com" title="Visit us on twitter" target="_blank">
 				' . $flash_cache_icons['social_twitter'] . '
 			</a>

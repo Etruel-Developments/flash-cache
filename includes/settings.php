@@ -131,9 +131,7 @@ class flash_cache_settings {
 	public static function general_settings_page() {
 		$values = flash_cache_get_general_settings();
 		echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
-			<div class="wpm_header">
-			<h1>' . __('General Settings', 'flash-cache') . '</h1>
-			</div>
+			' . flash_cache_get_header(__('General Settings', 'flash-cache')) . '
 			<div class="postbox">';
 		self::get_changes_httacess();
 		echo '<div class="wpm_flex">';
@@ -233,9 +231,7 @@ class flash_cache_settings {
 			wp_enqueue_style('flash_cache-icons', FLASH_CACHE_PLUGIN_URL . 'assets/css/icons.css');
 
 			echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
-			<div class="wpm_header">
-			<h1>' . __('Patterns Settings', 'flash-cache') . '</h1>
-			</div>
+			' . flash_cache_get_header(__('Patterns Settings', 'flash-cache')) . '
 			<div class="postbox">';
 			self::get_changes_httacess();
 			echo '<div class="wpm_flex">';
@@ -302,9 +298,7 @@ class flash_cache_settings {
 		$reset	= wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options&flash_cache_section=' . $section), 'reset_to_default_advanced_options', '_wpnonce');
 
 		echo '<div class="wrap wpm_container show_menu"><div class="flash-wrap-notices"></div>
-			<div class="wpm_header">
-			<h1>' . $titles[$section] . '</h1>
-			</div>
+			' . flash_cache_get_header($titles[$section]) . '
 			<div class="postbox">';
 		self::get_changes_httacess();
 		echo '<div class="wpm_flex">';

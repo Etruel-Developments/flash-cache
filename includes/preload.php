@@ -295,11 +295,8 @@ class flash_cache_preaload {
 		$values = wp_parse_args(get_option('flash_cache_preload', array()), self::default_options());
 
 		echo '<div class="wrap wpm_container show_menu"><h1></h1>
-				<div class="wpm_header">
-				<h1>' . __('Preload', 'flash-cache') . '</h1>
-				<p class="description">' . __('Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached.', 'flash-cache') . '</p>
-				<p class="description">' . __('It runs in small batches in the background to keep the server load low.', 'flash-cache') . '</p>
-				</div>
+				' . flash_cache_get_header(__('Preload', 'flash-cache'), '<p class="description">' . __('Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached.', 'flash-cache') . '</p>
+				<p class="description">' . __('It runs in small batches in the background to keep the server load low.', 'flash-cache') . '</p>') . '
 				<div class="postbox">';
 
 		echo '<div class="wpm_flex">';
