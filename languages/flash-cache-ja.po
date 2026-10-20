@@ -1,0 +1,1467 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache は個別の WordPress サイトで動作し、マルチサイトネットワークでは有効化できません。"
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "プラグインは有効化されませんでした"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "約束ではなく、測定結果"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Apache のテストサイト (WordPress 7.1、PHP 7.4) のトップページを、キャッシュが温まった状態で、キャッシュプラグインなしの同じサイトと比較。"
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0.85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "最初のバイトまで"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "キャッシュなしで 102 ms"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "リクエスト/秒"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "キャッシュなしで 18"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5.8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "訪問ごとに送信"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "キャッシュなしで 43 KB"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "キャッシュに必要なすべて"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "無料で完全: Flash Cache はアップグレードを売るために中核機能を出し惜しみしません。"
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "本物の静的ページ"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "ウェブサーバー自身のルールが配信します。新しいページは WordPress を起動せず、経過時間の確認さえしません。"
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "キャッシュパターン"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "ページの種類ごとに、独自の有効期間を持つルールのセットを用意します。好きな順序にドラッグしてください。"
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "バックグラウンド更新"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "訪問者が空のキャッシュに出会うことはありません。有効期限切れの時に何人が到着しても、更新はページごとに 1 回だけです。"
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "サイトのプリロード"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "バックグラウンドのクローラーが、あなたが制御する小さなバッチでキャッシュを温めます。"
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "より軽いページ"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "スタイルとスクリプトをより少ないファイルにまとめ、すべてのページで共有し、gzip で事前に圧縮します。"
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "常に最新の状況を把握"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "ページ、スタイル、スクリプト、フォントのライブ統計。キャッシュのサイズに関係なく即座に読み込まれます。"
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "クリーンで持ち運びやすい"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "ドロップインファイルも wp-config.php の変更もありません。無効化すればルールとキャッシュは消えます。"
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "オートブログのために"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "WPeMatico の取得のような一括公開では、トップページと各アーカイブをバッチごとに 1 回だけ更新します。"
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "オートブログを始めましょう →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Pro でさらに先へ"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "ライブブロックとウィジェット、共有ウィジェットキャッシュ、ミニファイ、ローカルフォントなど。必須ではありませんが、無料プラグインの成長を支えます。"
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "無料版と Pro を比較 →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "同じサーバーで、Flash Cache あり・なし"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4、WordPress 7.1、PHP 7.4 + OPcache、トップページ、ApacheBench で 3,000 リクエスト・同時 10。棒グラフは同じ基準線から始まります。"
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "最初のバイトまでの時間"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(少ないほど良い)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "キャッシュなし"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120 倍高速"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "訪問ごとに送信されるバイト数"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43.2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "7 倍軽量: 最適化された HTML + 事前圧縮された gzip"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "他のキャッシュプラグインとのリクエスト/秒の比較"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(多いほど良い)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "率直な見方:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "静的ファイルも配信するプラグインと比べると、純粋な速度は同じです。Flash Cache は訪問ごとの送信バイト数が 7〜9 倍少なく、ブラウザーにページを 1 日保持させ、公開時には自分で最新状態を保ちます。すべて初期設定のままです。"
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Pro でさらに高速に"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "無料プラグインにパフォーマンスを加え、その開発を支える最適化機能です。"
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "CSS と JavaScript のミニファイ"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "まとめたファイルから空白とコメントが取り除かれるため、訪問ごとの転送バイト数が減ります。"
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts を自分のサーバーに"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "他のサイトへのリクエストが減り、サードパーティーのホストを待つ必要もありません。"
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "共有ウィジェットキャッシュ"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "すべてのページで同じに見えるウィジェットは一度だけ作成して共有されるため、ページの再構築が低コストになります。"
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "キャッシュを失わないライブブロック"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "印を付けたブロックまたはウィジェットだけが訪問ごとに描画されます。数分ごとの更新でも同様です。残りは静的なままです。"
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "スクリプトをそのまま、プラグインごとに"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "問題のあるプラグインのスクリプトをまとめたファイルから外しても、残りの最適化は諦めずに済みます。"
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "個別投稿を空にする、または再構築する"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "投稿一覧から、また保存時に自動で。"
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "あなたのサイトが動く場所ならどこでも"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache はサーバー用のルールを書き込み、サーバーがそれを実行しているかをお知らせします。"
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "ルールは .htaccess の専用のマーク付きブロックに書き込まれます。設定は不要です。"
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "自動"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: 同じ .htaccess ルール、同じ静的速度。"
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "キャッシュされたページをディスクから直接配信し、サーバーが圧縮します。48,000 リクエスト/秒以上を測定。"
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "一度再起動"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "用意されたブロックをサーバーの設定にコピーして再読み込みします。"
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "コピー＆ペースト"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 以降 · WordPress 5.9 以降 · 個別のサイト · WPeMatico とそのアドオンでテスト済み。"
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Pro は必要ありません。でも、とても助けになります。"
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache は完全で無料です。最大限に活用するのに Pro は必須ではありません。いくつかの追加機能を備え、あえて安く設定されたライセンスは、無料プラグインのサポートと新しい改善の資金になります。"
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "PHP を使わずに配信される静的ページ"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "キャッシュパターン、有効期間、クエリー文字列向けの PHP モード"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "バックグラウンド更新、プリロード、即時のキャッシュ削除"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "まとめたスタイルとスクリプト、gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache、LiteSpeed、OpenLiteSpeed、nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "クエリー文字列付きのページもキャッシュ。トラッキングパラメータによる重複なし"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "公開、コメント、ウィジェット・メニュー・テーマの変更時に、キャッシュが自動で更新されます"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "ページごとの更新は同時に 1 回だけなので、訪問者が空のキャッシュに出会うことはありません"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "ブラウザーのキャッシュ期間を自由に設定"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "ライブのキャッシュ統計とサーバールールの状態"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "無料の機能をすべて表示"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "PRO にする"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "CSS と JS のミニファイ"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "まとめたファイルから空白とコメントが取り除かれるため、サイズが小さくなります。"
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "ページから他のサイトへのリクエストが減ります。"
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "キャッシュなしのウィジェットとブロック"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "ページがキャッシュされたままでも、ブロックやレガシーウィジェットを訪問ごとにライブで描画します。"
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "ウィジェットは一度だけ作成されてすべてのページで共有されます。更新してもキャッシュは空になりません。"
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "選んだプラグインのスクリプトをそのままにします。"
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "投稿ごとのツール"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "投稿一覧から個別投稿のキャッシュを空にし、保存時に再構築します。"
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "更新とサポート"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "ワンクリック更新とライセンスサポート。"
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Flash Cache を支援していただきありがとうございます"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "あなたのライセンスは、無料プラグインのサポートと新しい改善の資金になります。"
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "ライセンスを管理"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Flash Cache を支援して追加機能を解放"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Pro ライセンスはすべて、無料プラグインの開発資金になります。サイトに合ったプランをお選びください。"
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Flash Cache Pro を入手 →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "etruel.com で安全に購入手続き"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s 作者:"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "翻訳"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ レビューを書く"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "概要"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "処理中…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "flashcache.net に接続できませんでした。しばらくしてからもう一度お試しください。"
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "ありがとうございます！"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "この操作を実行する権限がありません。"
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "WordPress のためのスーパーアクセラレーター"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "サイトのすべてのページが静的ファイルになり、ウェブサーバーが訪問者へ直接送信します。PHP も WordPress も待ち時間もありません。"
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ WordPress.org で評価"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "サポート"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "概要"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "パフォーマンス"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "サーバー"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "無料版と Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro の更新が必要です。"
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s は Flash Cache %2$s と連携して動作しません。キャッシュなしのブロックやウィジェットに古いコンテンツが表示される可能性があります。プラグイン画面から Flash Cache Pro を %3$s 以降に更新してください。更新には有効なライセンスが必要です。"
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "プラグインへ移動"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "マイアカウント"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "メニューを表示/非表示。"
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "メニュー"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "一般設定"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "キャッシュ更新"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "詳細設定"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "最適化"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "パターン"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "新しいパターンを追加"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "プリロード"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Flash Cache 公式サイト"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Pro にする"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "新しいパーマリンク構造に合わせて、キャッシュファイルを削除しました。"
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "無効なリクエストです。"
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "キャッシュを削除"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "現在のページのキャッシュを削除"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "パターン"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "新規追加"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "パターンを編集"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "新規パターン"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "パターンを表示"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "パターンを検索"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "パターンが見つかりません"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "ゴミ箱にパターンが見つかりません"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "親パターン:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "このオプションを変更すると、キャッシュ全体が空になります。続行しますか？"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "初期設定に戻しますか？"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "新しいパターンを追加"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "パターンのデータ"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "これはフォールバックパターンです。常にリストの最後にあり、他のどのパターンも受け持たないページをすべてキャッシュします。"
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "ページタイプ"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "このパターンが適用されるページの種類。チェックしていないタイプは他のパターンに任されます。各ページは、パターン一覧のうち自分に当てはまる最初のパターンに従い、デフォルトパターンは常に最後です。"
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "個別投稿と固定ページ"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "投稿タイプを選択しない場合、すべての投稿タイプが含まれます。"
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "投稿が公開または更新されたときにキャッシュする"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "投稿が公開または更新されたときにトップページを更新する"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "そのカテゴリーとタグの最初のページを更新する"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "コメントが承認されたときに投稿を更新する"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "フロントページ (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "投稿ページ (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "フロントページが固定ページのときの最新投稿の一覧。"
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "カテゴリー (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "タグ (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "投稿者ページ (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "その他のアーカイブ (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "日付アーカイブ、カスタムタクソノミー、投稿タイプアーカイブ。"
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "フィード (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "検索結果 (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "URL に含める必要があるもの"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "URL にこれらのテキストをすべて含むページだけがこのパターンを使います。"
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "1 行に 1 つのテキスト。"
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "URL に含めないもの"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "URL にこれらのテキストのいずれかを含むページは、このパターンをスキップします。例: “login”。"
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "キャッシュタイプ"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "静的 HTML (最速)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "ウェブサーバーは PHP を実行せずに保存済みのページを配信します。クエリー文字列付きのページはこのキャッシュからは配信されません。"
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (クエリー文字列付きのページ)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "小さな PHP ファイルがクエリー文字列ごとに 1 つのコピーを保持します。検索やフィードに適しています。静的 HTML よりやや遅くなります。フォーム送信は常に WordPress に届きます。"
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "キャッシュしない"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "このパターンが適用されるページは、常に WordPress がライブで配信します。上書きしたいパターンより上に置いてください。"
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "更新までの時間"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "訪問が新しいコピーを要求するまで、キャッシュされたページを配信する秒数。86400 は 1 日です。"
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "プリロード更新までの時間"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "プリロードがキャッシュ済みページを再構築するまでの秒数。「期限切れページの更新: プリロードのみ」の場合、プリロードは代わりに「更新までの時間」を使います。"
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "並び順"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "適用先"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "キャッシュ"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "常に最後"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "ドラッグして順序を変更"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "フォールバック: 常に最後で、他のどのパターンも受け持たないページをすべてキャッシュします。"
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s、%2$s 後に更新"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "すべての投稿タイプ"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "フロントページ"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "投稿ページ"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "アーカイブ"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "タグ"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "フィード"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "検索"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "投稿者"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "ページタイプなし"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "URL に含む: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "URL に含まない: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "初期設定に戻しました。"
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "初期設定にリセット"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Flash Cache の設定ページへ移動"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "設定"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "サイト"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "無効な投稿です。"
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "この投稿にはキャッシュがありません。"
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "投稿のキャッシュを空にする"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "プリロードを実行"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "プリロードは、あなたのパターンに従って公開ページ (オプションでそのカテゴリーとタグも) のキャッシュを構築し、訪問者がすでにキャッシュされたページを見られるようにします。"
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "サーバー負荷を低く保つため、バックグラウンドで小さなバッチに分けて実行されます。"
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "プリロード実行中: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "プリロードは実行待ちです。"
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "次回の実行: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "プリロードを有効化"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "オフ"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "オン"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "カテゴリーとタグを含める"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "プリロードした各投稿のカテゴリーとタグのアーカイブページもキャッシュします。"
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "バッチごとのページ数"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "各バッチがキャッシュするページ数。プリロード中にサーバーが苦しい場合は減らしてください。"
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "バッチ間の待機"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "次のバッチまで待つ秒数。プリロードが PHP のタイムアウトにかかる場合は増やしてください。"
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "1 周したら停止"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "すべてのページを処理するとプリロードは自動でオフになります。継続的にプリロードするにはオフのままにしてください。"
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "設定を更新しました"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "まずプリロードを有効にしてください。有効な間だけ実行されます。"
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "プリロードを開始しました。バックグラウンドで実行されます。"
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Flash Cache プリロード"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "キャッシュを有効化"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "新しいキャッシュページの作成を止めるにはオフにします。すでにキャッシュされたページは下のボタンで削除されます。"
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "キャッシュを削除"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "キャッシュされたすべてのページとまとめたファイルを削除します。ページは、訪問またはプリロードされるとふたたびキャッシュされます。"
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "パターン設定"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "キャッシュフォルダー"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "キャッシュされたページとまとめたファイルの保存先。表示されているパスからの相対位置です。WordPress のフォルダー以外の、専用のフォルダーである必要があります。"
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "HTTP と HTTPS の両方を配信"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "キャッシュされたページは両方のプロトコルで配信されます。"
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "HTTP を HTTPS にリダイレクト"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "HTTP で来た訪問者は HTTPS にリダイレクトされ、ブラウザーにはブラウザーキャッシュ期間のあいだ HTTPS を使い続けるよう伝えられます (Strict-Transport-Security ヘッダー)。"
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "この管理ページは HTTP で開かれているため、キャッシュされたページはサイトにアクセスされた方法のまま配信されます。管理画面を HTTPS で開くと、訪問者を HTTPS にリダイレクトするオプションがここに表示されます。"
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "ブラウザーキャッシュ期間"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "ブラウザーがキャッシュ済みページを再要求せずに保持できる秒数。Cache-Control ヘッダーで送信されます。86400 は 1 日です。"
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Cookie を持つ訪問者をスキップ"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "名前にこれらのテキストのいずれかを含む Cookie を送る訪問者には、常にライブのページが表示されます。ログイン中のユーザー、コメント投稿者、パスワード保護された投稿の訪問者は初期設定で含まれています。"
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "追加"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "ロック"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "ファイル (推奨)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "ページごとのロックファイルが、2 人の訪問者が同時に同じページを構築するのを防ぎます。"
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "データベース"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "MySQL のロックでも同じことができます。複数のサーバーがデータベースは共有してもディスクは共有しない場合に便利です。"
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "キャッシュの作成"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "訪問されたページを取得 (推奨)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "訪問者が受け取ったページは送信されたままの状態で保存されます。以降の更新では、バックグラウンドでページを再度要求します。"
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "ページを別途要求"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "各ページを独自のリクエストで取得します。遅くなります。他のプラグインが出力バッファリングと競合する場合に使用してください。"
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "期限切れページの更新"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "訪問時 (推奨)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "「更新までの時間」が過ぎたページへの訪問は、サーバーにバックグラウンドでの再構築を要求します。新しいページは追加のリクエストを行いません。"
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "プリロードのみ"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "キャッシュされたページには更新スクリプトが含まれません。期限切れのページはプリロード処理が再構築するので、有効にしておいてください。"
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "このサイトには公開済みの投稿が %s 件あるため、キャッシュは段階的に更新されます。"
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "このサイトには公開済みの投稿が %s 件あるため、キャッシュ全体が削除されます。"
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "デザイン変更後"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "自動 (推奨)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "公開済みの投稿が最大 %s 件のサイトではキャッシュ全体を削除し、それより大きなサイトでは段階的に更新します。"
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "キャッシュ全体を削除"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "ページは、訪問またはプリロードされるとふたたびキャッシュされます。小規模から中規模のサイトに最適です。"
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "段階的に更新"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "ページが少しずつプリロードまたは次の訪問時に置き換えられる間も、訪問者は現在のページを受け取り続けます。空のキャッシュも負荷のピークもありません。大規模サイトに最適です。"
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "何もしない"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "変更のたびに、自分でキャッシュを削除してください。"
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "ウィジェット、メニュー、カスタマイザーの設定、ブロックテーマのテンプレート、同期されたパターンを保存したときに適用されます。テーマを切り替えると、常にキャッシュ全体が削除されます。"
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "キャッシュなしのウィジェット/ブロック"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "ウィジェットキャッシュの無効化は Pro 版で利用できます。"
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "各ウィジェットをサイト全体で一度だけ作成し、保存時にキャッシュされたページ内で更新する機能は Pro 版で利用できます。"
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "スタイルを最適化"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "各ページのスタイルシートを、その順序とメディア指定のまま共有ファイルにまとめ、ページが読み込むファイルを減らします。"
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "スタイルをミニファイ"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "まとめたスタイルシートから空白とコメントを取り除き、サイズを小さくします。"
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Google Fonts をキャッシュ"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Google Fonts のコピーをサーバーに保持し、ページから他のサイトへのリクエストを減らします。"
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "カウント中…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "スクリプトを最適化"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "連続するスクリプトを、順序とページ内の位置を保ったまま共有ファイルにまとめ、ページが読み込むファイルを減らします。"
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "最適化したスクリプトで何かが動かなくなった場合は、関係するスクリプトをそのままにしてください:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "インラインスクリプトをそのままにする"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "ページ内に書かれたスクリプトはその場所に残ります。"
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "テーマのスクリプトをそのままにする"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "有効なテーマとその親テーマのスクリプトは、個別のファイルのまま残ります。"
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "プラグインのスクリプトをそのままにする"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "プラグインのスクリプトは個別のファイルのまま残ります。"
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "プラグインを個別に選ぶ機能は Pro 版で利用できます。"
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "ファイル単位で JavaScript の最適化を避ける"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "特定のスクリプトファイルを、名前またはパスでそのままにします。"
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "他のドメインのスクリプト"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "オフ (推奨): 解析、広告、ソーシャル、その他のサードパーティースクリプトは、最新のまま保たれる各自のサーバーから引き続き読み込まれます。オン: まとめたファイルにコピーされます。"
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "スクリプトをミニファイ"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "まとめたスクリプトから空白とコメントを取り除き、サイズを小さくします。"
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "もう一度確認"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "サーバールール"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx は現在のルールでキャッシュされたページを配信しています。"
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "設定を変更したら、nginx を再読み込みして更新されたルールを読み込ませてください。"
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx は古いバージョンの Flash Cache ルールを実行しています。現在の設定を適用するには nginx を再読み込みしてください。"
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "nginx が Flash Cache ルールを読み込んでいるか確認するためのサイトへのアクセスに失敗しました。"
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx はまだ Flash Cache ルールを読み込んでいません。ページはキャッシュされていますが、まだ PHP で構築されています。"
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "この行をサイトの server { } ブロック内の location ルールより前に追加し、nginx を再読み込みしてください:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "コピーしました"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "コピー"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache はそのファイルを最新に保ちます。設定を変更したら nginx を再読み込みしてください。"
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed は現在のルールでキャッシュされたページを配信しています。"
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed は再起動時にのみ .htaccess を読み込みます。設定を変更したら再起動してください。"
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "OpenLiteSpeed が現在の Flash Cache ルールを実行しているか確認するためのサイトへのアクセスに失敗しました。"
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed はまだ現在の Flash Cache ルールを実行していません。適用するには再起動してください: WebAdmin の Graceful Restart、またはホスティングパネルの LiteSpeed 再起動。"
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "必須: それまでは、ページは OpenLiteSpeed が最後に読み込んだルールに従うか、PHP で構築されます。"
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "オプション: ブラウザーキャッシュのヘッダー"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "キャッシュされたページは、これがなくてもすでに動作します。OpenLiteSpeed は .htaccess のヘッダーを無視するため、ブラウザーはそれらのキャッシュ指示を受け取れません。ブラウザーが各ページを %s 保持し、再訪問の読み込みが速くなるよう、このコンテキストをサイトのバーチャルホストに追加してから、OpenLiteSpeed を再起動してください:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "「HTTP を HTTPS にリダイレクト」の場合は、/ コンテキストのヘッダー操作にも %s を追加してください。"
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "次の更新まで非表示"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "<strong>nginx.conf</strong> ファイルのルールと Flash Cache のルールとの間に違いが見つかりました。単なる空白の違いかもしれませんが、できるだけ早く、ファイル内のルールを以下のものと比較してください。ルールを更新するには「ルールを更新」ボタンをクリックしてください。"
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "<strong>.htaccess</strong> ファイルのルールとプラグインのリライトルールとの間に違いが見つかりました。単なる空白の違いかもしれませんが、できるだけ早く、ファイル内のルールを以下のものと比較してください。ルールを更新するには「ルールを更新」ボタンをクリックしてください。"
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "ルールを更新"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "キャッシュフォルダーは、flash_cache/ のような、WordPress のフォルダー以外のサイト内のフォルダーである必要があります。現在のフォルダーは保持されました。"
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "ウェブサーバーのルールを更新しました"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "キャッシュファイルを削除しました。"
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "静的ページ"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s ページ"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "PHP ページ"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "スタイル"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s ファイル"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "スクリプト"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "フォント"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "合計: %2$s ファイルで %1$s"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "%s前にカウント"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "まだカウントされていません"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "キャッシュ統計"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "再カウント"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "LiteSpeed Enterprise をお使いですか？"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "このための高速モードを検討しています。使うかどうか教えてください。"
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "教える"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "LiteSpeed Enterprise を使っている、または使いたいですか？"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "LiteSpeed Enterprise 向けの高速モードを検討しています。十分な数の方が希望されれば開発します。ボタンを押して関心があることを伝え、リストに 1 人追加してください。"
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "LiteSpeed Enterprise に関心があります"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "あなたの選択、このサイトが LiteSpeed Enterprise を使っているかどうか、Flash Cache と PHP のバージョン、サイトの言語、ランダムな匿名 ID を flashcache.net に送信します。メールアドレスもサイトのアドレスも含まれません。1 サイトにつき 1 票です。"
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "ありがとうございます。リストに追加されました。"
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "どのように使いますか？ (任意)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "準備ができたらメールしてください。そのためにメールアドレスを共有することに同意します。"
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "あなたのメールアドレス"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "送信"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d 人が希望しています。"

@@ -1,0 +1,1467 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache 适用于单个 WordPress 站点，无法在多站点网络中启用。"
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "插件未启用"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "实测数据，而非承诺"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "我们的 Apache 测试站点主页（WordPress 7.1、PHP 7.4），缓存已预热，与未使用任何缓存插件的同一站点对比。"
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0.85 毫秒"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "到第一个字节"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "无缓存时 102 毫秒"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "每秒请求数"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "无缓存时 18"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5.8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "每次访问发送"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "无缓存时 43 KB"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "您的缓存所需的一切"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "免费且完整：Flash Cache 不会为了向您销售升级而保留核心功能。"
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "真正的静态页面"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "由 Web 服务器自身的规则提供。新鲜页面从不启动 WordPress，甚至不会为了检查其存在时间而启动。"
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "缓存样板"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "每种页面一组规则，各有自己的有效期。将它们拖曳到您想要的顺序。"
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "后台刷新"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "访客永远不会遇到空缓存。无论过期时有多少访客到达，每个页面只刷新一次。"
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "站点预加载"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "后台爬虫以您控制的小批量方式预热缓存。"
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "更轻的页面"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "样式和脚本合并为更少的文件，由每个页面共享，并预先使用 gzip 压缩。"
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "随时掌握情况"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "页面、样式、脚本和字体的实时统计数据，无论缓存多大都能即时加载。"
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "干净且可移植"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "没有强化插件文件，不修改 wp-config.php。停用后，规则和缓存都会消失。"
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "为自动博客而生"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "批量发布（例如一次 WPeMatico 抓取）每批只刷新一次主页和各个归档。"
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "开始自动博客 →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "使用 Pro 走得更远"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "实时区块和小工具、共享小工具缓存、压缩、本地字体等。并非必需，但有助于免费插件持续发展。"
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "比较免费版与 Pro →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "同一台服务器，使用与不使用 Flash Cache"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4、WordPress 7.1、PHP 7.4 + OPcache、主页，ApacheBench 3,000 个请求、10 个并发。柱形从同一基线开始。"
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "到第一个字节的时间"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "（越少越好）"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "无缓存"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 毫秒"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120 倍更快"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "每次访问发送的字节数"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43.2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "轻 7 倍：优化的 HTML + 预先压缩的 gzip"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "与其他缓存插件相比的每秒请求数"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "（越多越好）"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "坦诚解读："
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "与同样提供静态文件的插件相比，原始速度相同。Flash Cache 每次访问发送的字节少 7 到 9 倍，让浏览器保留页面一天，并在您发布时自行保持最新，这一切都是默认的。"
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "使用 Pro 速度更快"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "为免费插件增加性能并资助其开发的优化功能。"
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "压缩 CSS 和 JavaScript"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "合并后的文件会去掉空白字符和注释，因此每次访问传输的字节更少。"
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts 存放在您的服务器上"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "对其他站点的请求更少，也无需等待第三方主机。"
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "共享小工具缓存"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "在每个页面上看起来相同的小工具只构建一次并共享，因此重建页面的成本更低。"
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "实时区块而不丢失缓存"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "每次访问只渲染被标记的区块或小工具，即使每隔几分钟刷新一次。其余部分保持静态。"
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "脚本原位保留，逐个插件设置"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "让有问题的插件的脚本不进入合并文件，同时不放弃对其余部分的优化。"
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "清空或重建单篇文章"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "从文章列表操作，并在保存时自动进行。"
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "在您的站点运行的任何地方都能工作"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache 为您的服务器编写规则，并告诉您服务器是否正在运行这些规则。"
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "规则写入 .htaccess 中各自带标记的区块。无需设置。"
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "自动"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise：相同的 .htaccess 规则，相同的静态速度。"
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "缓存页面直接从磁盘提供，由服务器压缩。实测超过 48,000 个请求/秒。"
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "重启一次"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "将现成的区块复制到您的服务器配置中并重新加载。"
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "复制并粘贴"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 或更高版本 · WordPress 5.9 或更高版本 · 单个站点 · 已通过 WPeMatico 及其附加组件测试。"
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "您不需要 Pro。但它很有帮助。"
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache 完整且免费。无需 Pro 也能获得最佳效果：它增加了一些额外功能，而每个许可证（故意定得很低）都为免费插件的支持和新改进提供资金。"
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "不经过 PHP 提供的静态页面"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "缓存样板、有效期和针对查询字符串的 PHP 模式"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "后台刷新、预加载和即时清空"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "合并的样式和脚本，gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache、LiteSpeed、OpenLiteSpeed 和 Nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "带查询字符串的页面也会缓存，没有跟踪参数造成的重复项"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "在您发布、评论或更改小工具、菜单和主题时，缓存自行刷新"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "每个页面同一时间只刷新一次，因此访客永远不会遇到空缓存"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "由您选择的浏览器缓存时间"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "实时缓存统计数据和服务器规则状态"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "查看全部免费功能"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "升级 PRO"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "压缩 CSS 和 JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "合并后的文件会去掉空白字符和注释，因此体积更小。"
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "页面对其他站点的请求更少。"
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "无缓存的小工具和区块"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "在每次访问时实时渲染区块或传统小工具，同时页面保持在缓存中。"
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "小工具只构建一次，由所有页面共享；更新它们永远不会清空缓存。"
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "让您选择的插件的脚本保持原位。"
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "每篇文章的工具"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "从文章列表清空单篇文章的缓存，并在保存时重建。"
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "更新和支持"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "一键更新以及许可证支持。"
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "感谢您支持 Flash Cache"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "您的许可证为免费插件的支持和新改进提供资金。"
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "管理您的许可证"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "支持 Flash Cache 并解锁额外功能"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "每个 Pro 许可证都为免费插件的开发提供资金。选择适合您站点的方案。"
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "获取 Flash Cache Pro →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "在 etruel.com 安全结账"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s，作者"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "翻译"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ 留下评价"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "关于"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "处理中…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "无法连接到 flashcache.net。请稍后再试。"
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "谢谢！"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "你没有执行此操作的权限。"
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "WordPress 的超级加速器"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "您站点的每个页面都会变成一个静态文件，由您的 Web 服务器直接发送给访客，不需要 PHP，不需要 WordPress，无需等待。"
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ 在 WordPress.org 上评分"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "文档"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "支持"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "概览"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "性能"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "服务器"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "免费版与 Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro 需要更新。"
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s 无法与 Flash Cache %2$s 配合使用：其无缓存的区块和小工具可能显示旧内容。请在插件界面将 Flash Cache Pro 更新到 %3$s 或更高版本；更新需要有效的许可证。"
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "前往插件"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "我的账户"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "隐藏/显示菜单。"
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "菜单"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "常规设置"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "缓存更新"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "高级选项"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "优化"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "样板"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "新增样板"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "预加载"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Flash Cache 官方网站"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "升级 Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "已删除缓存文件，以适应新的固定链接结构。"
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "无效请求。"
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "删除缓存"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "删除当前页面的缓存"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "样板"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "新建"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "编辑样板"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "新样板"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "查看样板"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "搜索样板"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "未找到样板"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "回收站中未找到样板"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "上级样板："
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "更改此选项将清空整个缓存。继续吗？"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "还原默认设置？"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "新增样板"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "样板数据"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "这是回退样板：它始终位于列表末尾，因此会缓存没有其他样板处理的每个页面。"
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "页面类型"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "此样板适用的页面类型；未勾选的类型留给其他样板。每个页面遵循样板列表中第一个适用于它的样板，而默认样板始终在最后。"
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "单篇文章和页面"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "未选择文章类型时，包含所有文章类型。"
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "发布或更新文章时缓存该文章"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "发布或更新文章时刷新主页"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "刷新其分类和标签的第一页"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "批准评论时刷新文章"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "首页 (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "文章页面 (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "首页为静态页面时的最新文章列表。"
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "分类 (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "标签（is_tag）"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "作者页面 (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "其他归档 (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "日期归档、自定义分类法和文章类型归档。"
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "订阅源（is_feed）"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "搜索结果 (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "URL 必须包含"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "只有 URL 包含所有这些文本的页面才使用此样板。"
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "每行一个文本。"
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "URL 不得包含"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "URL 包含其中任何文本的页面会跳过此样板，例如“login”。"
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "缓存类型"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "静态 HTML（最快）"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Web 服务器无需运行 PHP 即可交付已存储的页面。带查询字符串的页面不会从此缓存提供。"
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP（带查询字符串的页面）"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "一个小型 PHP 文件为每个查询字符串保留一份副本，适合搜索和 Feed。比静态 HTML 稍慢；表单提交始终会到达 WordPress。"
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "不缓存"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "此样板适用的页面始终由 WordPress 实时提供。请将其放在它必须覆盖的样板之上。"
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "刷新间隔"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "缓存页面在有访问请求新副本之前被提供的秒数。86400 为一天。"
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "预加载刷新间隔"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "预加载重建缓存页面前的秒数。设为“刷新过期页面：仅通过预加载”时，预加载改用“刷新间隔”。"
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "顺序"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "适用于"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "缓存"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "始终在最后"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "拖曳以更改顺序"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "回退：始终在最后，缓存没有其他样板处理的每个页面。"
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s，刷新间隔 %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "所有文章类型"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "首页"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "文章页面"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "归档"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "标签"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "分类"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Feed"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "搜索"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "作者"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "无页面类型"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "URL 包含：%s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "URL 不包含：%s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "已还原默认值。"
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "重置为默认值"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "前往 Flash Cache 设置页面"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "设置"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "网站"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "文章无效。"
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "该文章没有缓存。"
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "清空文章缓存"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "执行预加载"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "预加载会按照您的样板构建公开页面（以及可选的分类和标签）的缓存，使访客找到的页面已在缓存中。"
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "它在后台以小批量运行，以保持较低的服务器负载。"
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "预加载正在执行：%1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "预加载正在等待执行。"
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "下次运行：%s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "启用预加载"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "关闭"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "开启"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "包含分类和标签"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "同时缓存每篇已预加载文章的分类和标签归档页面。"
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "每批页面数"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "每批缓存的页面数。如果服务器在预加载时吃力，请调低。"
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "批次之间的暂停"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "下一批开始前等待的秒数。如果预加载遇到 PHP 超时，请调高。"
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "完整运行一遍后停止"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "处理完所有页面后，预加载会自行关闭。保持关闭可持续预加载。"
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "设置已更新"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "请先启用预加载：它仅在启用时运行。"
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "预加载已开始，正在后台运行。"
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Flash Cache 预加载"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "启用缓存"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "停用以停止创建新的缓存页面。已缓存的页面可用下方按钮删除。"
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "删除缓存"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "移除每个缓存页面和合并文件。页面在被访问或预加载时会再次缓存。"
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "样板设置"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "缓存文件夹"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "存放缓存页面和合并文件的位置，相对于所显示的路径。它必须是独立的文件夹，位于 WordPress 文件夹之外。"
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "同时提供 HTTP 和 HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "缓存页面在两种协议上都会提供。"
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "将 HTTP 重定向到 HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "通过 HTTP 到达的访客会被重定向到 HTTPS，并通知浏览器在浏览器缓存时间内继续使用 HTTPS（Strict-Transport-Security 标头）。"
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "此管理页面通过 HTTP 打开，因此缓存页面按站点被访问的方式提供。当管理后台通过 HTTPS 打开时，将访客重定向到 HTTPS 的选项会显示在这里。"
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "浏览器缓存时间"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "浏览器在再次请求之前可保留缓存页面的秒数，在 Cache-Control 标头中发送。86400 为一天。"
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "跳过带有 Cookie 的访客"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "发送名称包含其中任一文本的 Cookie 的访客始终获得实时页面。默认列出已登录的用户、评论者和受密码保护文章的访客。"
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "添加"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "锁定"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "文件（推荐）"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "每个页面一个锁定文件，可防止两位访客同时构建同一页面。"
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "数据库"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "MySQL 锁定也能做到。当多台服务器共享数据库但不共享磁盘时很有用。"
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "缓存创建"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "捕获被访问的页面（推荐）"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "访客收到的页面按原样存储；之后的刷新会在后台再次请求该页面。"
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "单独请求页面"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "每个页面使用各自的请求获取。较慢；当其他插件与输出缓冲冲突时使用。"
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "刷新过期页面"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "在访问时（推荐）"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "访问“刷新间隔”时间已过的页面会请求服务器在后台重建它。新鲜页面不会产生额外请求。"
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "仅通过预加载"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "缓存页面不带刷新脚本。过期页面由预加载过程重建，因此请保持其启用。"
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "此站点有 %s 篇已发布的文章，因此其缓存会逐步刷新。"
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "此站点有 %s 篇已发布的文章，因此会删除其全部缓存。"
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "设计更改之后"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "自动（推荐）"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "在最多 %s 篇已发布文章的站点上删除全部缓存，在更大的站点上逐步刷新。"
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "删除全部缓存"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "页面在被访问或预加载时会再次缓存。最适合中小型站点。"
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "逐步刷新"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "访客继续获得当前页面，同时页面通过预加载或在访客下次访问时每次替换几个。没有空缓存，没有负载峰值。最适合大型站点。"
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "不做任何操作"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "每次更改后请自行删除缓存。"
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "在保存小工具、菜单、定制器设置、区块主题模板或同步样板时适用。切换主题始终会删除全部缓存。"
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "无缓存的小工具/区块"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "禁用小工具缓存功能在 Pro 版本中提供。"
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "为整个站点只构建一次每个小工具，并在保存时在缓存页面内更新它，该功能在 Pro 版本中提供。"
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "优化样式"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "将每个页面的样式表按其顺序并带着其媒体合并为共享文件，使页面加载更少的文件。"
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "压缩样式"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "从合并的样式表中去掉空白字符和注释，使其体积更小。"
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "缓存 Google Fonts"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "在您的服务器上保留 Google Fonts 的副本，使页面对其他站点的请求更少。"
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "正在计数…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "优化脚本"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "将连续的脚本合并为共享文件，保持其顺序和在页面中的位置，使页面加载更少的文件。"
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "如果优化脚本后有东西不再工作，请让相关脚本保持原位："
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "让内嵌脚本保持原位"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "写在页面内部的脚本保持原处。"
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "让主题脚本保持原位"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "当前主题及其上级主题的脚本保持为独立文件。"
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "让插件脚本保持原位"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "插件的脚本保持为独立文件。"
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "逐个选择插件的功能在 Pro 版本中提供。"
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "按文件避免优化 JavaScript"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "按名称或路径让特定脚本文件保持原位。"
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "来自其他域名的脚本"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "关闭（推荐）：分析、广告、社交及其他第三方脚本继续从它们自己的服务器加载，在那里保持最新。开启：它们会被复制到合并文件中。"
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "压缩脚本"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "从合并的脚本中去掉空白字符和注释，使其体积更小。"
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "再次检查"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "服务器规则"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "Nginx 正在使用当前规则提供缓存页面。"
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "更改设置后，请重新加载 Nginx，使其读取更新后的规则。"
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "Nginx 正在运行较旧版本的 Flash Cache 规则。请重新加载 Nginx 以应用当前设置。"
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "无法访问站点以检查 Nginx 是否读取 Flash Cache 规则。"
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "Nginx 尚未读取 Flash Cache 规则：页面已缓存，但仍由 PHP 构建。"
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "将此行添加到您站点的 server { } 区块内、location 规则之前，然后重新加载 Nginx："
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "已复制"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "复制"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache 会让该文件保持最新；更改设置后请重新加载 Nginx。"
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed 正在使用当前规则提供缓存页面。"
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed 只在重启时读取 .htaccess：更改设置后请重启它。"
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "无法访问站点以检查 OpenLiteSpeed 是否运行当前的 Flash Cache 规则。"
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed 尚未运行当前的 Flash Cache 规则。请重启它以应用：在 WebAdmin 中使用 Graceful Restart，或使用您主机面板的 LiteSpeed 重启。"
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "必需：在此之前，页面遵循 OpenLiteSpeed 最后加载的规则，或由 PHP 构建。"
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "可选：浏览器缓存标头"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "缓存页面即使没有这一步也已能正常工作。OpenLiteSpeed 会忽略 .htaccess 中的标头，因此浏览器不会收到它们的缓存指令。将此上下文添加到您站点的虚拟主机，让浏览器将每个页面保留 %s，使回访加载更快，然后重启 OpenLiteSpeed："
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "对于“将 HTTP 重定向到 HTTPS”，还需将 %s 添加到 / 上下文的标头操作中。"
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "忽略直到下次更新"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "发现您的 <strong>nginx.conf</strong> 文件中的规则与 Flash Cache 规则之间存在差异。这可能只是空白字符的差异，但您应尽快将文件中的规则与下面的规则进行比较。点击 &#8217;更新规则&#8217; 按钮以更新规则。"
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "发现您的 <strong>.htaccess</strong> 文件中的规则与插件重写规则之间存在差异。这可能只是空白字符的差异，但您应尽快将文件中的规则与下面的规则进行比较。点击 &#8217;更新规则&#8217; 按钮以更新规则。"
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "更新规则"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "缓存文件夹必须是站点内的文件夹，例如 flash_cache/，位于 WordPress 文件夹之外。已保留当前文件夹。"
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Web 服务器规则已更新"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "缓存文件已删除。"
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "静态页面"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s 个页面"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "PHP 页面"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "样式"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s 个文件"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "脚本"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "字体"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "总计：%2$s 个文件中的 %1$s"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "%s前统计"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "尚未统计"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "缓存统计数据"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "重新统计"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "您在使用 LiteSpeed Enterprise 吗？"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "我们正在评估为它提供更快的模式。请告诉我们您是否会使用。"
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "告诉我们"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "您在使用或想使用 LiteSpeed Enterprise 吗？"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "我们正在评估为 LiteSpeed Enterprise 提供更快的模式。如果有足够多的人提出需求，我们就会开发。点击按钮告诉我们您有兴趣，并在列表中再加一人。"
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "我对 LiteSpeed Enterprise 感兴趣"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "它会向 flashcache.net 发送您的选择、此站点是否运行 LiteSpeed Enterprise、Flash Cache 和 PHP 版本、站点语言以及一个随机匿名 ID：不含邮箱，也不含站点地址。每个站点一票。"
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "谢谢，您已在列表中。"
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "您会如何使用它？（可选）"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "准备好后请给我发邮件。我同意为此分享我的邮箱地址。"
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "您的邮箱"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "发送"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d 人提出了需求。"

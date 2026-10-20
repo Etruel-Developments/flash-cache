@@ -1,0 +1,1472 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "فلش کش روی سایت‌های تک‌وردپرسی کار می‌کند و نمی‌توان آن را روی شبکه چند سایته فعال کرد."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "افزونه فعال نشد"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "اندازه‌گیری‌شده، نه وعده‌داده‌شده"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "صفحه نخست سایت آزمایشی ما با آپاچی (وردپرس ۷٫۱، PHP 7.4)، با کش گرم، در مقایسه با همان سایت بدون هیچ افزونه کش."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "۰٫۸۵ میلی‌ثانیه"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "تا اولین بایت"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "۱۰۲ میلی‌ثانیه بدون کش"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "درخواست در ثانیه"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "۱۸ بدون کش"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "۵٫۸ کیلوبایت"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "ارسال‌شده در هر بازدید"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "۴۳ کیلوبایت بدون کش"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "هر آنچه کش شما نیاز دارد"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "رایگان و کامل: فلش کش هسته خود را برای فروش ارتقا پنهان نمی‌کند."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "برگه‌های واقعاً ثابت"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "توسط قوانین خود وب‌سرور ارائه می‌شوند. یک برگه تازه هرگز وردپرس را راه‌اندازی نمی‌کند، حتی برای بررسی قدمت خود."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "الگوهای کش"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "یک مجموعه قانون برای هر نوع برگه، با طول عمر مخصوص به خود. آن‌ها را به ترتیب دلخواه بکشید."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "به‌روزرسانی‌ها در زمینه"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "بازدیدکنندگان هرگز با کش خالی روبه‌رو نمی‌شوند. فقط یک به‌روزرسانی برای هر برگه، هر تعداد که هنگام انقضا برسند."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "پیش‌بارگذاری سایت"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "یک خزنده در زمینه کش را در دسته‌های کوچکی که شما کنترل می‌کنید گرم می‌کند."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "برگه‌های سبک‌تر"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "سبک‌ها و اسکریپت‌ها در پرونده‌های کمتر ترکیب شده‌اند، بین همه برگه‌ها مشترک‌اند و با gzip از پیش فشرده شده‌اند."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "همیشه در جریان"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "آمار زنده برگه‌ها، سبک‌ها، اسکریپت‌ها و قلم‌ها که با هر اندازه کش فوراً بارگذاری می‌شود."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "تمیز و قابل حمل"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "بدون پرونده‌های drop-in و بدون تغییر در wp-config.php. با غیرفعال کردن آن، قوانین و کش از بین می‌روند."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "ساخته‌شده برای وبلاگ‌های خودکار"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "انتشار دسته‌جمعی، مثل یک دریافت WPeMatico، صفحه نخست و هر بایگانی را فقط یک بار در هر دسته به‌روزرسانی می‌کند."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "بیایید وبلاگ خودکار بسازیم ←"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "با نسخه حرفه‌ای جلوتر بروید"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "بلوک‌ها و ابزارک‌های زنده، کش ابزارک مشترک، فشرده‌سازی، قلم‌های محلی و بیشتر. ضروری نیست، اما به رشد افزونه رایگان کمک می‌کند."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "مقایسه رایگان و حرفه‌ای ←"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "همان سرور، با فلش کش و بدون آن"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "آپاچی ۲٫۴، وردپرس ۷٫۱، PHP 7.4 + OPcache، صفحه نخست، ApacheBench با ۳٬۰۰۰ درخواست و ۱۰ درخواست هم‌زمان. نمودارها از یک خط پایه شروع می‌شوند."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "زمان تا اولین بایت"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(کمتر بهتر است)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "بدون کش"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "۱۰۲ میلی‌ثانیه"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈۱۲۰ برابر سریع‌تر"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "بایت‌های ارسال‌شده در هر بازدید"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "۴۳٫۲ کیلوبایت"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "۷ برابر سبک‌تر: HTML بهینه‌شده + gzip از پیش فشرده"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "درخواست در ثانیه در برابر دیگر افزونه‌های کش"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(بیشتر بهتر است)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "برداشت صادقانه:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "در برابر افزونه‌هایی که پرونده‌های ثابت هم ارائه می‌کنند، سرعت خام یکسان است. فلش کش ۷ تا ۹ برابر بایت کمتر در هر بازدید ارسال می‌کند، اجازه می‌دهد مرورگر برگه را یک روز نگه دارد و هنگام انتشار خودش را به‌روز می‌کند، همه‌چیز به‌صورت پیش‌فرض."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "با نسخه حرفه‌ای حتی سریع‌تر"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "بهینه‌سازی‌هایی که عملکرد افزونه رایگان را بالا می‌برند و توسعه آن را تأمین مالی می‌کنند."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "فشرده‌سازی CSS و جاوا اسکریپت"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "پرونده‌های ترکیب‌شده فاصله‌ها و توضیحات خود را از دست می‌دهند، پس هر بازدید بایت کمتری حمل می‌کند."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "قلم‌های گوگل روی سرور شما"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "درخواست‌های کمتر به سایت‌های دیگر و بدون انتظار برای میزبان‌های شخص ثالث."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "کش ابزارک مشترک"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "ابزارک‌هایی که در همه برگه‌ها یکسان‌اند یک بار ساخته و به اشتراک گذاشته می‌شوند، پس بازسازی برگه‌ها ارزان‌تر می‌شود."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "بلوک‌های زنده بدون از دست دادن کش"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "فقط بلوک یا ابزارک نشان‌دار در هر بازدید رندر می‌شود، حتی اگر هر چند دقیقه به‌روزرسانی شود. بقیه ثابت می‌مانند."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "اسکریپت‌ها سر جای خود، افزونه به افزونه"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "اسکریپت‌های یک افزونه مشکل‌دار را از پرونده ترکیبی بیرون نگه دارید، بی‌آنکه از بهینه‌سازی بقیه بگذرید."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "پاک کردن یا بازسازی یک نوشته"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "از فهرست نوشته‌ها و به‌صورت خودکار هنگام ذخیره."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "هرجا که سایت شما اجرا می‌شود کار می‌کند"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "فلش کش قوانین را برای سرور شما می‌نویسد و می‌گوید که آن‌ها را اجرا می‌کند یا نه."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "قوانین در .htaccess در بلوک‌های نشان‌دار مخصوص خود نوشته می‌شوند. بدون راه‌اندازی."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "خودکار"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: همان قوانین .htaccess، همان سرعت ثابت."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "برگه‌های کش‌شده مستقیماً از دیسک ارائه می‌شوند و سرور آن‌ها را فشرده می‌کند. بیش از ۴۸٬۰۰۰ درخواست در ثانیه اندازه‌گیری شد."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "یک بار راه‌اندازی مجدد"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "بلوک آماده را در پیکربندی سرور خود کپی کنید و دوباره بارگذاری کنید."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "کپی و چسباندن"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 یا بالاتر · وردپرس ۵٫۹ یا بالاتر · سایت‌های تک‌وردپرسی · آزمایش‌شده با WPeMatico و افزونه‌های آن."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "به نسخه حرفه‌ای نیازی ندارید. اما خیلی کمک می‌کند."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "فلش کش کامل و رایگان است. برای گرفتن بهترین نتیجه به نسخه حرفه‌ای نیازی نیست: چند امکان اضافی دارد، و هر مجوز، با قیمتی عمداً پایین، پشتیبانی و بهبودهای تازه افزونه رایگان را تأمین مالی می‌کند."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "برگه‌های ثابت بدون PHP ارائه می‌شوند"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "الگوهای کش، طول عمر و حالت PHP برای رشته‌های پرس‌وجو"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "به‌روزرسانی در زمینه، پیش‌بارگذاری و پاک‌سازی فوری"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "سبک‌ها و اسکریپت‌های ترکیبی، gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "آپاچی، LiteSpeed، OpenLiteSpeed و nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "برگه‌های دارای رشته پرس‌وجو در کش، بدون نسخه‌های تکراری ناشی از پارامترهای ردیابی"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "کش هنگام انتشار، دیدگاه گذاشتن یا تغییر ابزارک‌ها، فهرست‌ها و پوسته‌ها خودش به‌روز می‌شود"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "در هر لحظه فقط یک به‌روزرسانی برای هر برگه، تا بازدیدکنندگان هرگز با کش خالی روبه‌رو نشوند"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "زمان کش مرورگر به انتخاب شما"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "آمار زنده کش و وضعیت قوانین سرور"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "مشاهده همه امکانات رایگان"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "به PRO بروید"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "فشرده‌سازی CSS و JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "پرونده‌های ترکیب‌شده فاصله‌ها و توضیحات خود را از دست می‌دهند، پس سبک‌تر می‌شوند."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "برگه‌ها درخواست‌های کمتری به سایت‌های دیگر می‌فرستند."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "ابزارک‌ها و بلوک‌ها بدون کش"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "یک بلوک یا ابزارک قدیمی را در هر بازدید زنده رندر کنید، در حالی که برگه در کش می‌ماند."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "ابزارک‌ها یک بار ساخته می‌شوند و همه برگه‌ها آن‌ها را به اشتراک می‌گذارند؛ به‌روزرسانی آن‌ها هرگز کش را خالی نمی‌کند."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "اسکریپت‌های افزونه‌هایی که انتخاب می‌کنید را سر جای خود بگذارید."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "ابزارهای هر نوشته"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "کش یک نوشته را از فهرست نوشته‌ها پاک کنید و هنگام ذخیره آن را بازسازی کنید."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "به‌روزرسانی‌ها و پشتیبانی"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "به‌روزرسانی با یک کلیک و پشتیبانی همراه با مجوز."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "از حمایت شما از فلش کش سپاسگزاریم"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "مجوز شما پشتیبانی و بهبودهای تازه افزونه رایگان را تأمین مالی می‌کند."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "مدیریت مجوز شما"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "از فلش کش حمایت کنید و امکانات اضافی را باز کنید"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "هر مجوز حرفه‌ای توسعه افزونه رایگان را تأمین مالی می‌کند. طرح مناسب سایت‌های خود را انتخاب کنید."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "دریافت فلش کش حرفه‌ای ←"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "پرداخت امن در etruel.com"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "فلش کش %s توسط"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "ترجمه"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ نقد بنویسید"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "درباره"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "در حال انجام…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "دسترسی به flashcache.net ممکن نشد. چند لحظه دیگر دوباره تلاش نمایید."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "سپاس!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "شما اجازهٔ این کار را ندارید."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "شتاب‌دهنده فوق‌العاده برای وردپرس"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "هر برگه از سایت شما به یک پرونده ثابت تبدیل می‌شود که وب‌سرور شما مستقیماً برای بازدیدکننده می‌فرستد، بدون PHP، بدون وردپرس و بدون انتظار."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ در WordPress.org امتیاز دهید"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "مستندات"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "پشتیبانی"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "نمای کلی"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "عملکرد"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "سرورها"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "رایگان و حرفه‌ای ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "فلش کش حرفه‌ای به به‌روزرسانی نیاز دارد."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "فلش کش حرفه‌ای %1$s با فلش کش %2$s کار نمی‌کند: بلوک‌ها و ابزارک‌های بدون کش آن ممکن است محتوای قدیمی نشان دهند. فلش کش حرفه‌ای را از صفحه افزونه‌ها به نگارش %3$s یا بالاتر به‌روزرسانی نمایید؛ به‌روزرسانی‌ها به مجوز فعال نیاز دارند."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "رفتن به افزونه‌ها"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "حساب کاربری من"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "پنهان/نمایان کردن منو."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "منو"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "به‌روزرسانی‌های کش"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "گزینه‌های پیشرفته"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "بهینه‌سازی"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "الگوها"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "افزودن الگوی جدید"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "پیش‌بارگذاری"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "سایت رسمی فلش کش"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "تهیهٔ Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "پرونده‌های کش برای تطبیق با ساختار جدید پیوندهای یکتا پاک شدند."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "درخواست نامعتبر."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "حذف کش"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "حذف کش برگه فعلی"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "الگو"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "افزودن تازه"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "ویرایش الگو"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "الگوی جدید"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "مشاهده الگو"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "جستجوی الگوها"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "هیچ الگویی یافته نشد"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "هیچ الگویی در زباله‌دان یافته نشد"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "الگوی مادر:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "تغییر این گزینه کل کش را خالی می‌کند. ادامه می‌دهید؟"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "تنظیمات پیش‌فرض بازنشانی شود؟"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "افزودن الگوهای جدید"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "داده‌های الگو"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "این الگوی پشتیبان است: همیشه آخرین الگوی فهرست است، پس هر برگه‌ای را که الگوی دیگری نگیرد در کش نگه می‌دارد."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "انواع برگه"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "انواع برگه‌ای که این الگو برای آن‌ها اعمال می‌شود؛ انواع انتخاب‌نشده به الگوهای دیگر واگذار می‌شوند. هر برگه از اولین الگوی فهرست الگوها که شامل آن می‌شود پیروی می‌کند و الگوی پیش‌فرض همیشه آخر است."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "نوشته‌ها و برگه‌های تکی"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "اگر نوع نوشته‌ای انتخاب نشود، همه انواع نوشته شامل می‌شوند."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "نوشته هنگام انتشار یا به‌روزرسانی در کش نگه داشته شود"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "هنگام انتشار یا به‌روزرسانی یک نوشته، صفحه نخست به‌روزرسانی شود"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "به‌روزرسانی اولین برگه دسته‌ها و برچسب‌های آن"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "هنگام تأیید یک دیدگاه، نوشته به‌روزرسانی شود"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "صفحه نخست (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "برگه نوشته‌ها (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "فهرست آخرین نوشته‌ها وقتی صفحه نخست یک برگه ثابت است."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "دسته‌ها (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "برچسب‌ها (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "برگه‌های نویسنده (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "سایر بایگانی‌ها (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "بایگانی‌های تاریخ، طبقه‌بندی‌های سفارشی و بایگانی‌های نوع نوشته."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "خوراک‌ها (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "نتایج جستجو (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "پیوند باید حاوی این باشد"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "فقط برگه‌هایی که پیوندشان حاوی همه این متن‌هاست از این الگو استفاده می‌کنند."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "یک متن در هر خط."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "پیوند نباید حاوی این باشد"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "برگه‌هایی که پیوندشان حاوی هر یک از این متن‌هاست این الگو را رد می‌کنند، برای مثال «login»."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "نوع کش"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "HTML ثابت (سریع‌ترین)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "وب‌سرور برگه ذخیره‌شده را بدون اجرای PHP تحویل می‌دهد. برگه‌های دارای رشته پرس‌وجو از این کش ارائه نمی‌شوند."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (برگه‌های دارای رشته پرس‌وجو)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "یک پرونده کوچک PHP برای هر رشته پرس‌وجو یک نسخه نگه می‌دارد که برای جستجوها و خوراک‌ها مناسب است. کمی کندتر از HTML ثابت؛ ارسال فرم‌ها همیشه به وردپرس می‌رسد."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "بدون کش"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "برگه‌هایی که این الگو برای آن‌ها اعمال می‌شود همیشه زنده توسط وردپرس ارائه می‌شوند. آن را بالاتر از الگوهایی قرار دهید که باید بازنویسی کند."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "به‌روزرسانی پس از"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "ثانیه‌هایی که یک برگه کش‌شده ارائه می‌شود تا اینکه یک بازدید نسخه تازه بخواهد. ۸۶۴۰۰ یک روز است."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "به‌روزرسانی پیش‌بارگذاری پس از"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "ثانیه‌هایی که پیش‌بارگذاری برگه کش‌شده را بازسازی می‌کند. با «به‌روزرسانی برگه‌های منقضی‌شده: فقط از پیش‌بارگذاری»، پیش‌بارگذاری به‌جای آن از «به‌روزرسانی پس از» استفاده می‌کند."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "ترتیب"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "اعمال می‌شود به"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "حافظهٔ نهان"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "همیشه آخر"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "برای تغییر ترتیب بکشید"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "پشتیبان: همیشه آخر است و هر برگه‌ای را که الگوی دیگری نگیرد در کش نگه می‌دارد."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s، به‌روزرسانی پس از %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "همه انواع نوشته"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "صفحه نخست"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "برگه نوشته‌ها"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "بایگانی‌ها"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "برچسب‌ها"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "دسته‌ها"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "خوراک‌ها"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "جستجو"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "نویسنده"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "هیچ نوع برگه‌ای نیست"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "پیوند حاوی این است: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "پیوند حاوی این نیست: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "مقادیر پیش‌فرض بازیابی شدند."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "بازنشانی به پیش‌فرض"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "رفتن به صفحه تنظیمات فلش کش"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "وب‌سایت"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "نوشته نامعتبر."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "نوشته کش ندارد."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "خالی کردن کش نوشته"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "اجرای پیش‌بارگذاری"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "پیش‌بارگذاری کش برگه‌های عمومی و در صورت تمایل دسته‌ها و برچسب‌های آن‌ها را بر اساس الگوهای شما می‌سازد تا بازدیدکنندگان آن‌ها را از قبل در کش بیابند."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "در دسته‌های کوچک در زمینه اجرا می‌شود تا بار سرور پایین بماند."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "پیش‌بارگذاری هم‌اکنون در حال اجراست: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "پیش‌بارگذاری منتظر اجراست."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "اجرای بعدی: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "فعال‌سازی پیش‌بارگذاری"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "خاموش"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "روشن"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "شامل دسته‌ها و برچسب‌ها"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "برگه‌های بایگانی دسته‌ها و برچسب‌های هر نوشته پیش‌بارگذاری‌شده را هم در کش نگه می‌دارد."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "برگه در هر دسته"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "هر دسته چند برگه را در کش نگه می‌دارد. اگر سرور هنگام پیش‌بارگذاری دچار مشکل می‌شود آن را کمتر کنید."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "توقف بین دسته‌ها"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "ثانیه‌های انتظار پیش از دسته بعدی. اگر پیش‌بارگذاری به محدودیت زمانی PHP می‌خورد آن را بیشتر کنید."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "توقف پس از یک گذر کامل"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "پیش‌بارگذاری پس از پردازش همه برگه‌ها خودش را خاموش می‌کند. برای پیش‌بارگذاری پیوسته آن را خاموش بگذارید."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "تنظیمات به‌روزرسانی شد"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "ابتدا پیش‌بارگذاری را روشن کنید: فقط تا زمانی که فعال باشد اجرا می‌شود."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "پیش‌بارگذاری شروع شد و در زمینه اجرا می‌شود."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "پیش‌بارگذاری فلش کش"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "فعال‌سازی کش"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "برای متوقف کردن ساخت برگه‌های کش‌شده تازه آن را غیرفعال کنید. برگه‌هایی که از قبل در کش‌اند با دکمه زیر حذف می‌شوند."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "حذف کش"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "هر برگه کش‌شده و هر پرونده ترکیبی را پاک می‌کند. برگه‌ها هنگام بازدید یا پیش‌بارگذاری دوباره در کش نگه داشته می‌شوند."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "تنظیمات الگوها"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "پوشه کش"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "جایی که برگه‌های کش‌شده و پرونده‌های ترکیبی ذخیره می‌شوند، نسبت به مسیر نمایش‌داده‌شده. باید پوشه‌ای جداگانه و بیرون از پوشه‌های وردپرس باشد."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "ارائه HTTP و HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "برگه‌های کش‌شده روی هر دو پروتکل ارائه می‌شوند."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "تغییر مسیر HTTP به HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "بازدیدکنندگانی که با HTTP می‌رسند به HTTPS هدایت می‌شوند و به مرورگرها گفته می‌شود در طول زمان کش مرورگر از HTTPS استفاده کنند (سربرگ Strict-Transport-Security)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "این صفحه مدیریت با HTTP باز شده است، پس برگه‌های کش‌شده همان‌طور که سایت در دسترس است ارائه می‌شوند. گزینه هدایت بازدیدکنندگان به HTTPS وقتی مدیریت با HTTPS باز شود اینجا نمایان می‌شود."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "زمان کش مرورگر"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "ثانیه‌هایی که مرورگر می‌تواند برگه کش‌شده را پیش از درخواست دوباره نگه دارد، در سربرگ Cache-Control ارسال می‌شود. ۸۶۴۰۰ یک روز است."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "پرش از بازدیدکنندگان دارای کوکی"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "بازدیدکنندگانی که کوکی‌ای می‌فرستند که نامش حاوی یکی از این متن‌هاست همیشه برگه زنده را می‌گیرند. کاربران واردشده، دیدگاه‌گذاران و بازدیدکنندگان نوشته‌های دارای گذرواژه به‌صورت پیش‌فرض فهرست شده‌اند."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "افزودن"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "قفل"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "پرونده‌ها (پیشنهادی)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "یک پرونده قفل برای هر برگه مانع می‌شود دو بازدیدکننده هم‌زمان یک برگه را بسازند."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "پایگاه‌داده"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "یک قفل MySQL همین کار را می‌کند. وقتی چند سرور پایگاه‌داده را به اشتراک می‌گذارند اما دیسک را نه، مفید است."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "ایجاد کش"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "برگه بازدیدشده را ثبت کن (پیشنهادی)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "برگه‌ای که بازدیدکننده دریافت می‌کند همان‌طور که ارسال شده ذخیره می‌شود؛ به‌روزرسانی‌های بعدی برگه را در زمینه دوباره درخواست می‌کنند."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "درخواست جداگانه برگه"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "هر برگه با درخواست خودش گرفته می‌شود. کندتر؛ وقتی افزونه دیگری با بافر خروجی تداخل دارد از آن استفاده کنید."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "به‌روزرسانی برگه‌های منقضی‌شده"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "هنگام بازدیدها (پیشنهادی)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "بازدید از برگه‌ای که زمان «به‌روزرسانی پس از» آن گذشته از سرور می‌خواهد آن را در زمینه بازسازی کند. برگه‌های تازه درخواست اضافی نمی‌فرستند."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "فقط از پیش‌بارگذاری"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "برگه‌های کش‌شده اسکریپت به‌روزرسانی ندارند. برگه‌های منقضی‌شده توسط فرایند پیش‌بارگذاری بازسازی می‌شوند، پس آن را فعال نگه دارید."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "این سایت %s نوشته منتشرشده دارد، پس کش آن به‌تدریج به‌روز می‌شود."
+msgstr[1] "این سایت %s نوشته منتشرشده دارد، پس کش آن به‌تدریج به‌روز می‌شود."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "این سایت %s نوشته منتشرشده دارد، پس کل کش آن حذف می‌شود."
+msgstr[1] "این سایت %s نوشته منتشرشده دارد، پس کل کش آن حذف می‌شود."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "پس از تغییرات طراحی"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "خودکار (پیشنهادی)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "در سایت‌هایی تا %s نوشته منتشرشده کل کش را حذف می‌کند و در سایت‌های بزرگ‌تر آن را به‌تدریج به‌روز می‌کند."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "حذف کل کش"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "برگه‌ها هنگام بازدید یا پیش‌بارگذاری دوباره در کش نگه داشته می‌شوند. برای سایت‌های کوچک و متوسط بهترین است."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "به‌روزرسانی تدریجی"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "بازدیدکنندگان همچنان برگه‌های فعلی را می‌گیرند در حالی که چند برگه در هر نوبت توسط پیش‌بارگذاری یا در بازدید بعدی‌شان جایگزین می‌شوند. بدون کش خالی و بدون اوج بار. برای سایت‌های بزرگ بهترین است."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "هیچ کاری نکن"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "پس از هر تغییر، خودتان کش را حذف نمایید."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "هنگام ذخیره ابزارک‌ها، فهرست‌ها، تنظیمات سفارشی‌ساز، قالب‌های پوسته بلوکی یا الگوهای همگام‌شده اعمال می‌شود. تغییر پوسته همیشه کل کش را حذف می‌کند."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "ابزارک‌ها/بلوک‌های بدون کش"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "غیرفعال کردن کش ابزارک در نسخه حرفه‌ای در دسترس است."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "ساخت هر ابزارک یک بار برای کل سایت و به‌روزرسانی آن در برگه‌های کش‌شده هنگام ذخیره در نسخه حرفه‌ای در دسترس است."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "بهینه‌سازی سبک‌ها"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "برگه‌های سبک هر برگه را در پرونده‌های مشترک، به ترتیب و با رسانه‌های خودشان، ادغام می‌کند تا برگه‌ها پرونده‌های کمتری بارگذاری کنند."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "فشرده‌سازی سبک‌ها"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "فاصله‌ها و توضیحات را از برگه‌های سبک ترکیبی حذف می‌کند تا سبک‌تر شوند."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "کش قلم‌های گوگل"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "یک نسخه از قلم‌های گوگل را روی سرور شما نگه می‌دارد تا برگه‌ها درخواست‌های کمتری به سایت‌های دیگر بفرستند."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "در حال شمارش…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "بهینه‌سازی اسکریپت‌ها"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "اسکریپت‌های پشت سر هم را در پرونده‌های مشترک ادغام می‌کند و ترتیب و جایگاهشان در برگه را حفظ می‌کند تا برگه‌ها پرونده‌های کمتری بارگذاری کنند."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "اگر با اسکریپت‌های بهینه‌شده چیزی از کار افتاد، اسکریپت‌های دخیل را سر جای خود بگذارید:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "اسکریپت‌های توکار را سر جای خود بگذار"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "اسکریپت‌هایی که درون برگه نوشته شده‌اند همان‌جا که هستند می‌مانند."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "اسکریپت‌های پوسته را سر جای خود بگذار"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "اسکریپت‌های پوسته فعال و پوسته والد آن به‌صورت پرونده‌های جداگانه می‌مانند."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "اسکریپت‌های افزونه‌ها را سر جای خود بگذار"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "اسکریپت‌های افزونه‌ها به‌صورت پرونده‌های جداگانه می‌مانند."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "انتخاب هر افزونه به‌طور جداگانه در نسخه حرفه‌ای در دسترس است."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "جلوگیری از بهینه‌سازی جاوا اسکریپت براساس پرونده"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "پرونده‌های اسکریپت مشخصی را براساس نام یا مسیر سر جای خود نگه می‌دارد."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "اسکریپت‌ها از دامنه‌های دیگر"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "خاموش (پیشنهادی): اسکریپت‌های تحلیل، تبلیغات، شبکه‌های اجتماعی و دیگر اسکریپت‌های شخص ثالث همچنان از سرورهای خودشان بارگذاری می‌شوند و به‌روز می‌مانند. روشن: آن‌ها در پرونده‌های ترکیبی کپی می‌شوند."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "فشرده‌سازی اسکریپت‌ها"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "فاصله‌ها و توضیحات را از اسکریپت‌های ترکیبی حذف می‌کند تا سبک‌تر شوند."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "بررسی دوباره"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "قوانین سرور"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx برگه‌های کش‌شده را با قوانین فعلی ارائه می‌کند."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "پس از تغییر تنظیمات، nginx را نوسازی کنید تا قوانین به‌روز را بخواند."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx نگارش قدیمی‌تری از قوانین فلش کش را اجرا می‌کند. برای اعمال تنظیمات فعلی nginx را نوسازی کنید."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "دسترسی به سایت برای بررسی اینکه آیا nginx قوانین فلش کش را می‌خواند ممکن نشد."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx هنوز قوانین فلش کش را نمی‌خواند: برگه‌ها در کش‌اند اما هنوز توسط PHP ساخته می‌شوند."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "این خط را داخل بلوک server { } سایت خود، پیش از قوانین location آن، اضافه کنید و nginx را نوسازی کنید:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "کپی شد"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "رونوشت"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "فلش کش این پرونده را به‌روز نگه می‌دارد؛ پس از تغییر تنظیمات nginx را نوسازی کنید."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed برگه‌های کش‌شده را با قوانین فعلی ارائه می‌کند."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed فقط هنگام راه‌اندازی مجدد .htaccess را می‌خواند: پس از تغییر تنظیمات آن را راه‌اندازی مجدد کنید."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "دسترسی به سایت برای بررسی اینکه آیا OpenLiteSpeed قوانین فعلی فلش کش را اجرا می‌کند ممکن نشد."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed هنوز قوانین فعلی فلش کش را اجرا نمی‌کند. برای اعمال آن‌ها راه‌اندازی مجدد کنید: Graceful Restart در WebAdmin یا راه‌اندازی مجدد LiteSpeed در پنل میزبانی شما."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "ضروری: تا آن زمان، برگه‌ها از قوانینی که OpenLiteSpeed آخرین بار بارگذاری کرده پیروی می‌کنند یا توسط PHP ساخته می‌شوند."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "اختیاری: سربرگ‌های کش مرورگر"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "برگه‌های کش‌شده بدون این هم کار می‌کنند. OpenLiteSpeed سربرگ‌های .htaccess را نادیده می‌گیرد، پس مرورگرها دستورالعملی برای کش آن‌ها نمی‌گیرند. این زمینه را به میزبان مجازی سایت خود اضافه کنید تا مرورگرها هر برگه را %s نگه دارند و بازدیدهای بعدی سریع‌تر بارگذاری شوند، سپس OpenLiteSpeed را راه‌اندازی مجدد کنید:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "برای «تغییر مسیر HTTP به HTTPS»، همچنین %s را به عملیات سربرگ زمینه / اضافه کنید."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "رد کردن تا به‌روزرسانی بعدی"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "فلش کش"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "تفاوتی میان قوانین پرونده <strong>nginx.conf</strong> شما و قوانین فلش کش پیدا شد. ممکن است تفاوت‌های ساده فاصله‌ها باشد، اما باید هرچه زودتر قوانین پرونده را با قوانین زیر مقایسه نمایید. برای به‌روزرسانی قوانین روی دکمه &#8217;به‌روزرسانی قوانین&#8217; کلیک نمایید."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "تفاوتی میان قوانین پرونده <strong>.htaccess</strong> شما و قوانین بازنویسی افزونه پیدا شد. ممکن است تفاوت‌های ساده فاصله‌ها باشد، اما باید هرچه زودتر قوانین پرونده را با قوانین زیر مقایسه نمایید. برای به‌روزرسانی قوانین روی دکمه &#8217;به‌روزرسانی قوانین&#8217; کلیک نمایید."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "به‌روزرسانی قوانین"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "پوشه کش باید پوشه‌ای داخل سایت باشد، مانند flash_cache/، بیرون از پوشه‌های وردپرس. پوشه فعلی حفظ شد."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "قوانین وب‌سرور به‌روزرسانی شد"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "پرونده‌های کش حذف شدند."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "برگه‌های ثابت"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s برگه"
+msgstr[1] "%s برگه"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "برگه‌های PHP"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "سبک‌ها"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s پرونده"
+msgstr[1] "%s پرونده"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "اسکریپت‌ها"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "قلم‌ها"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "مجموع: %1$s در %2$s پرونده"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "%s پیش شمارش شد"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "هنوز شمارش نشده"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "آمار کش"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "شمارش دوباره"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "از LiteSpeed Enterprise استفاده می‌کنید؟"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "ما در حال بررسی حالتی سریع‌تر برای آن هستیم. به ما بگویید اگر از آن استفاده می‌کردید."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "به ما بگویید"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "از LiteSpeed Enterprise استفاده می‌کنید یا می‌خواهید استفاده کنید؟"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "ما در حال بررسی حالتی سریع‌تر برای LiteSpeed Enterprise هستیم. اگر افراد کافی آن را بخواهند، آن را می‌سازیم. دکمه را فشار دهید تا به ما بگویید علاقه‌مندید و یک نفر دیگر به فهرست اضافه شود."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "به LiteSpeed Enterprise علاقه‌مندم"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "انتخاب شما، اینکه این سایت از LiteSpeed Enterprise استفاده می‌کند یا نه، نگارش‌های فلش کش و PHP، زبان سایت و یک شناسه ناشناس تصادفی را به flashcache.net می‌فرستد: بدون ایمیل و بدون نشانی سایت. یک رأی برای هر سایت."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "سپاس، شما در فهرست هستید."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "چگونه از آن استفاده می‌کردید؟ (اختیاری)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "وقتی آماده شد به من ایمیل بزنید. موافقم که نشانی ایمیلم را برای این کار به اشتراک بگذارم."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "ایمیل شما"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "ارسال"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d نفر آن را خواسته است."
+msgstr[1] "%d نفر آن را خواسته‌اند."

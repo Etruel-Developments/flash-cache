@@ -1,0 +1,1472 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache funziona sui singoli siti WordPress e non può essere attivato in una rete multisito."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "Plugin non attivato"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "Misurato, non promesso"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Homepage del nostro sito di prova con Apache (WordPress 7.1, PHP 7.4), con cache calda, a confronto con lo stesso sito senza alcun plugin di cache."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0,85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "fino al primo byte"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "102 ms senza cache"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "richieste al secondo"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "18 senza cache"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5,8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "inviati a ogni visita"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "43 KB senza cache"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "Tutto ciò di cui la tua cache ha bisogno"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "Gratuito e completo: Flash Cache non trattiene il suo nucleo per venderti un aggiornamento."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "Pagine davvero statiche"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "Servite dalle regole stesse del web server. Una pagina fresca non avvia mai WordPress, nemmeno per controllare la propria età."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "Pattern di cache"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "Un insieme di regole per ogni tipo di pagina, con la sua durata. Trascinali nell'ordine che vuoi."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "Aggiornamenti in background"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "I visitatori non trovano mai una cache vuota. Un solo aggiornamento per pagina, per quanti ne arrivino alla scadenza."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "Precaricamento del sito"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "Un crawler in background scalda la cache in piccoli lotti che controlli tu."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "Pagine più leggere"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "Stili e script combinati in meno file, condivisi da ogni pagina e precompressi con gzip."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "Sempre al corrente"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "Statistiche in tempo reale di pagine, stili, script e font, caricate all'istante con qualsiasi dimensione della cache."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "Pulito e portabile"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "Nessun file drop-in, nessuna modifica a wp-config.php. Se lo disattivi, le regole e la cache spariscono."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "Pensato per gli autoblog"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "La pubblicazione di massa, come un recupero di WPeMatico, aggiorna la homepage e ogni archivio una sola volta per lotto."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "Iniziamo con l'autoblogging →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Vai oltre con Pro"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "Blocchi e widget in tempo reale, cache dei widget condivisa, minificazione, font locali e altro. Non è obbligatorio, ma aiuta il plugin gratuito a crescere."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "Confronta Gratuito e Pro →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "Lo stesso server, con e senza Flash Cache"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, homepage, ApacheBench con 3.000 richieste e 10 simultanee. Le barre partono dalla stessa linea di base."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "Tempo fino al primo byte"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(meno è meglio)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "Senza cache"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120× più veloce"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "Byte inviati a ogni visita"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43,2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "7× più leggero: HTML ottimizzato + gzip precompresso"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "Richieste al secondo rispetto ad altri plugin di cache"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(più è meglio)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "Lettura onesta:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "rispetto ai plugin che servono anch'essi file statici, la velocità pura è uguale. Flash Cache invia da 7 a 9 volte meno byte a ogni visita, lascia che il browser conservi la pagina per un giorno e si mantiene aggiornato da solo quando pubblichi, il tutto in modo predefinito."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Ancora più veloce con Pro"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "Ottimizzazioni che aggiungono prestazioni al plugin gratuito e ne finanziano lo sviluppo."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "Minifica CSS e JavaScript"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "I file combinati perdono spazi e commenti, quindi ogni visita trasporta meno byte."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts sul tuo server"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "Meno richieste ad altri siti e nessuna attesa degli host di terze parti."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "Cache dei widget condivisa"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "I widget che appaiono uguali su ogni pagina vengono creati una volta e condivisi, così ricostruire le pagine costa meno."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "Blocchi in tempo reale senza perdere la cache"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "Solo il blocco o il widget contrassegnato viene visualizzato a ogni visita, anche se aggiornato ogni pochi minuti. Il resto rimane statico."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "Script al loro posto, plugin per plugin"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "Tieni gli script di un plugin problematico fuori dal file combinato senza rinunciare all'ottimizzazione degli altri."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "Svuota o ricostruisci un singolo articolo"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "Dall'elenco degli articoli e automaticamente al salvataggio."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "Funziona dove gira il tuo sito"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache scrive le regole per il tuo server e ti dice se le sta eseguendo."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "Regole scritte in .htaccess nei loro blocchi contrassegnati. Nessuna configurazione."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "automatico"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: stesse regole .htaccess, stessa velocità statica."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "Pagine in cache servite direttamente dal disco e compresse dal server. Misurate oltre 48.000 richieste/s."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "riavvia una volta"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "Copia il blocco già pronto nella configurazione del tuo server e ricaricala."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "copia e incolla"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 o successivo · WordPress 5.9 o successivo · singoli siti · testato con WPeMatico e i suoi add-on."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Non hai bisogno di Pro. Ma aiuta molto."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache è completo e gratuito. Pro non è necessario per ottenere il meglio: aggiunge qualche extra, e ogni licenza, volutamente a basso prezzo, finanzia il supporto e i nuovi miglioramenti del plugin gratuito."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "Pagine statiche servite senza PHP"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "Pattern di cache, durate e modalità PHP per le stringhe di query"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "Aggiornamento in background, precaricamento e svuotamento istantaneo"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "Stili e script combinati, gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache, LiteSpeed, OpenLiteSpeed e nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "Pagine con stringhe di query in cache, senza duplicati dovuti ai parametri di tracciamento"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "Cache aggiornata da sola quando pubblichi, commenti o modifichi widget, menu e temi"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "Un solo aggiornamento per pagina alla volta, così i visitatori non trovano mai una cache vuota"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "Durata della cache del browser a tua scelta"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "Statistiche della cache in tempo reale e stato delle regole del server"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "Visualizza tutte le funzionalità gratuite"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "Passa a PRO"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "Minifica CSS e JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "I file combinati perdono spazi e commenti, quindi pesano meno."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "Le pagine fanno meno richieste ad altri siti."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "Widget e blocchi senza cache"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "Visualizza un blocco o un widget legacy in tempo reale a ogni visita mentre la pagina resta in cache."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "I widget vengono creati una volta e condivisi da tutte le pagine; aggiornarli non svuota mai la cache."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "Lascia al loro posto gli script dei plugin che scegli."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "Strumenti per singolo articolo"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "Svuota la cache di un singolo articolo dall'elenco degli articoli e ricostruiscila al salvataggio."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "Aggiornamenti e supporto"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "Aggiornamenti con un clic e supporto con licenza."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Grazie per sostenere Flash Cache"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "La tua licenza finanzia il supporto e i nuovi miglioramenti del plugin gratuito."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "Gestisci la tua licenza"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Sostieni Flash Cache e sblocca gli extra"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Ogni licenza Pro finanzia lo sviluppo del plugin gratuito. Scegli il piano adatto ai tuoi siti."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Ottieni Flash Cache Pro →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "Pagamento sicuro su etruel.com"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s di"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "Traduci"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ Lascia una recensione"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "Informazioni"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "Elaborazione in corso…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "Impossibile raggiungere flashcache.net. Riprova tra un momento."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "Grazie!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "Non hai i permessi per farlo."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "Il super acceleratore per WordPress"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "Ogni pagina del tuo sito diventa un file statico che il tuo web server invia direttamente al visitatore, senza PHP, senza WordPress, senza attese."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ Valuta su WordPress.org"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "Documentazione"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "Supporto"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "Panoramica"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "Prestazioni"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "Server"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "Gratuito e Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro ha bisogno di un aggiornamento."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s non funziona con Flash Cache %2$s: i suoi blocchi e widget senza cache possono mostrare contenuti vecchi. Aggiorna Flash Cache Pro alla versione %3$s o successiva dalla schermata dei plugin; gli aggiornamenti richiedono una licenza attiva."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "Vai ai plugin"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "Il mio account"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "Nascondi/mostra il menu."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "MENU"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "Impostazioni generali"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "Aggiornamenti della cache"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "Opzioni avanzate"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "Ottimizzazione"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "Pattern"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "Aggiungi un nuovo pattern"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "Precaricamento"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Sito ufficiale di Flash Cache"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Passa a Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "I file della cache sono stati rimossi per adattarsi alla nuova struttura dei permalink."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "Richiesta non valida."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "Elimina la cache"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "Elimina la cache della pagina corrente"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "Pattern"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "Aggiungi nuova"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "Modifica pattern"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "Nuovo pattern"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "Visualizza pattern"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "Cerca pattern"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "Nessun pattern trovato"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "Nessun pattern trovato nel cestino"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "Pattern genitore:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "Modificare questa opzione svuota l'intera cache. Continuare?"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "Reimpostare le impostazioni predefinite?"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "Aggiungi nuovi pattern"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "Dati del pattern"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "Questo è il pattern di riserva: è sempre l'ultimo dell'elenco, quindi mette in cache ogni pagina che nessun altro pattern prende."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "Tipi di pagina"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "I tipi di pagina a cui si applica questo pattern; i tipi non selezionati sono lasciati agli altri pattern. Ogni pagina segue il primo pattern dell'elenco dei pattern che la riguarda, e il pattern predefinito è sempre l'ultimo."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "Singoli articoli e pagine"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "Se non è selezionato alcun tipo di contenuto, sono inclusi tutti i tipi di contenuto."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "Metti in cache l'articolo quando viene pubblicato o aggiornato"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "Aggiorna la homepage quando un articolo viene pubblicato o aggiornato"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "Aggiorna la prima pagina delle sue categorie e tag"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "Aggiorna l'articolo quando un commento viene approvato"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "Home page (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "Pagina degli articoli (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "L'elenco degli articoli più recenti quando la home page è una pagina statica."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "Categorie (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "Tag (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "Pagine degli autori (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "Altri archivi (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "Archivi per data, tassonomie personalizzate e archivi dei tipi di contenuto."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "Feed (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "Risultati della ricerca (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "L'URL deve contenere"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "Solo le pagine il cui URL contiene tutti questi testi usano questo pattern."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "Un testo per riga."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "L'URL non deve contenere"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "Le pagine il cui URL contiene uno qualsiasi di questi testi saltano questo pattern, ad esempio “login”."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "Tipo di cache"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "HTML statico (il più veloce)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Il web server consegna la pagina memorizzata senza eseguire PHP. Le pagine con una stringa di query non vengono servite da questa cache."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (pagine con stringhe di query)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "Un piccolo file PHP conserva una copia per ogni stringa di query, adatta a ricerche e feed. Un po' più lento dell'HTML statico; gli invii dei moduli raggiungono sempre WordPress."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "Non mettere in cache"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "Le pagine a cui si applica questo pattern sono sempre servite in tempo reale da WordPress. Mettilo sopra i pattern che deve sovrascrivere."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "Aggiorna dopo"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "Secondi in cui una pagina in cache viene servita prima che una visita richieda una copia nuova. 86400 è un giorno."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "Aggiornamento del precaricamento dopo"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "Secondi prima che il precaricamento ricostruisca una pagina in cache. Con “Aggiorna le pagine scadute: solo dal precaricamento”, il precaricamento usa invece “Aggiorna dopo”."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "Ordine"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "Si applica a"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "Cache"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "Sempre ultimo"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "Trascina per cambiare l'ordine"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "Di riserva: sempre ultimo, mette in cache ogni pagina che nessun altro pattern prende."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s, aggiorna dopo %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "Tutti i tipi di contenuto"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "Home page"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "Pagina degli articoli"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "Archivi"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "Tag"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "Categorie"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Feed"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "Ricerca"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "Autori"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "Nessun tipo di pagina"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "L'URL contiene: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "L'URL non contiene: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "I valori predefiniti sono stati ripristinati."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "Reimposta ai valori predefiniti"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Vai alla pagina delle impostazioni di Flash Cache"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "Sito web"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "Articolo non valido."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "L'articolo non ha cache."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "Svuota la cache dell'articolo"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "Esegui precaricamento"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "Il precaricamento costruisce la cache delle pagine pubbliche, e facoltativamente delle loro categorie e tag, seguendo i tuoi pattern, così i visitatori le trovano già in cache."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "Funziona in piccoli lotti in background per mantenere basso il carico del server."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "Il precaricamento è in esecuzione ora: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "Il precaricamento è in attesa di essere eseguito."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "Prossima esecuzione: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "Abilita precaricamento"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "Disattivato"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "On"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "Includi categorie e tag"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "Mette in cache anche le pagine di archivio delle categorie e dei tag di ogni articolo precaricato."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "Pagine per lotto"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "Quante pagine mette in cache ogni lotto. Riducilo se il server fatica durante il precaricamento."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "Pausa tra i lotti"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "Secondi di attesa prima del lotto successivo. Aumentalo se il precaricamento incappa nei timeout di PHP."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "Fermati dopo un passaggio completo"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "Il precaricamento si disattiva da solo quando ogni pagina è stata elaborata. Lascialo disattivato per precaricare di continuo."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "Impostazioni aggiornate"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "Abilita prima il precaricamento: funziona solo finché è abilitato."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "Il precaricamento è iniziato e funziona in background."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Precaricamento di Flash Cache"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "Abilita cache"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "Disabilitala per smettere di creare nuove pagine in cache. Le pagine già in cache vengono eliminate con il pulsante qui sotto."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "Elimina la cache"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "Rimuove ogni pagina in cache e ogni file combinato. Le pagine vengono rimesse in cache quando vengono visitate o precaricate."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "Impostazioni dei pattern"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "Cartella della cache"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "Dove vengono memorizzate le pagine in cache e i file combinati, relativa al percorso mostrato. Deve essere una cartella a sé, fuori dalle cartelle di WordPress."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "Servi HTTP e HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "Le pagine in cache vengono servite su entrambi i protocolli."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "Reindirizza HTTP a HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "I visitatori che arrivano via HTTP vengono reindirizzati a HTTPS, e ai browser viene detto di continuare a usare HTTPS per la durata della cache del browser (header Strict-Transport-Security)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "Questa pagina di amministrazione è aperta tramite HTTP, quindi le pagine in cache vengono servite così come si accede al sito. L'opzione per reindirizzare i visitatori a HTTPS compare qui quando l'amministrazione viene aperta tramite HTTPS."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "Durata della cache del browser"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "Secondi per cui un browser può conservare una pagina in cache prima di richiederla di nuovo, inviati nell'header Cache-Control. 86400 è un giorno."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Salta i visitatori con cookie"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "I visitatori che inviano un cookie il cui nome contiene uno di questi testi ricevono sempre la pagina in tempo reale. Gli utenti connessi, chi commenta e i visitatori di articoli protetti da password sono elencati in modo predefinito."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "Aggiungi"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "Blocco"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "File (consigliato)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "Un file di blocco per pagina impedisce a due visitatori di costruire la stessa pagina contemporaneamente."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "Database"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "Un blocco MySQL fa la stessa cosa. Utile quando più server condividono il database ma non il disco."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "Creazione della cache"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "Cattura la pagina visitata (consigliato)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "La pagina che un visitatore riceve viene memorizzata così com'è stata inviata; gli aggiornamenti successivi richiedono di nuovo la pagina in background."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "Richiedi la pagina separatamente"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "Ogni pagina viene recuperata con una richiesta propria. Più lento; usalo quando un altro plugin è in conflitto con il buffering dell'output."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "Aggiorna le pagine scadute"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "Alle visite (consigliato)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "Una visita a una pagina il cui tempo “Aggiorna dopo” è scaduto chiede al server di ricostruirla in background. Le pagine fresche non fanno alcuna richiesta aggiuntiva."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "Solo dal precaricamento"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "Le pagine in cache non portano uno script di aggiornamento. Le pagine scadute vengono ricostruite dal processo di precaricamento, quindi tienilo abilitato."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "Questo sito ha %s articolo pubblicato, quindi la sua cache viene aggiornata gradualmente."
+msgstr[1] "Questo sito ha %s articoli pubblicati, quindi la sua cache viene aggiornata gradualmente."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "Questo sito ha %s articolo pubblicato, quindi tutta la sua cache viene eliminata."
+msgstr[1] "Questo sito ha %s articoli pubblicati, quindi tutta la sua cache viene eliminata."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "Dopo le modifiche al design"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "Automatico (consigliato)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "Elimina tutta la cache sui siti fino a %s articoli pubblicati e la aggiorna gradualmente su quelli più grandi."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "Elimina tutta la cache"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "Le pagine vengono rimesse in cache quando vengono visitate o precaricate. Il migliore per i siti piccoli e medi."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "Aggiorna gradualmente"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "I visitatori continuano a ricevere le pagine attuali mentre vengono sostituite poche alla volta, dal precaricamento o alla visita successiva. Nessuna cache vuota, nessun picco di carico. Il migliore per i siti grandi."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "Non fare nulla"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "Elimina tu stesso la cache dopo ogni modifica."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "Si applica quando vengono salvati widget, menu, impostazioni di Personalizza, template dei temi a blocchi o pattern sincronizzati. Cambiare tema elimina sempre tutta la cache."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "Widget/blocchi senza cache"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "La disabilitazione della cache dei widget è disponibile nella versione Pro."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "Costruire ogni widget una sola volta per tutto il sito e aggiornarlo dentro le pagine in cache quando viene salvato è disponibile nella versione Pro."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "Ottimizza gli stili"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "Unisce i fogli di stile di ogni pagina in file condivisi, nel loro ordine e con i loro media, così le pagine caricano meno file."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "Minifica gli stili"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "Rimuove spazi e commenti dai fogli di stile combinati, così pesano meno."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Metti in cache Google Fonts"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Conserva una copia di Google Fonts sul tuo server, così le pagine fanno meno richieste ad altri siti."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "Conteggio in corso…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "Ottimizza gli script"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "Unisce gli script consecutivi in file condivisi, mantenendone l'ordine e la posizione nella pagina, così le pagine caricano meno file."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "Se qualcosa smette di funzionare con gli script ottimizzati, lascia al loro posto gli script coinvolti:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "Lascia al loro posto gli script inline"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "Gli script scritti dentro la pagina restano dove sono."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "Lascia al loro posto gli script del tema"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "Gli script del tema attivo e del suo tema genitore restano come file separati."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "Lascia al loro posto gli script dei plugin"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "Gli script dei plugin restano come file separati."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "Scegliere ogni plugin singolarmente è disponibile nella versione Pro."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "Evita di ottimizzare JavaScript per file"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "Lascia al loro posto specifici file di script, per nome o percorso."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "Script di altri domini"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "Off (consigliato): gli script di analisi, pubblicità, social e altri di terze parti continuano a caricarsi dai loro server, dove restano aggiornati. On: vengono copiati nei file combinati."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "Minifica gli script"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "Rimuove spazi e commenti dagli script combinati, così pesano meno."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "Controlla di nuovo"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "Regole del server"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx sta servendo le pagine in cache con le regole attuali."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "Dopo aver modificato le impostazioni, ricarica nginx perché legga le regole aggiornate."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx sta eseguendo una versione più vecchia delle regole di Flash Cache. Ricarica nginx per applicare le impostazioni attuali."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "Non è stato possibile raggiungere il sito per verificare se nginx legge le regole di Flash Cache."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx non legge ancora le regole di Flash Cache: le pagine sono in cache ma vengono ancora costruite da PHP."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "Aggiungi questa riga dentro il blocco server { } del tuo sito, prima delle sue regole location, e ricarica nginx:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "Copiato"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "Copia"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache mantiene quel file aggiornato; ricarica nginx dopo aver modificato le impostazioni."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed sta servendo le pagine in cache con le regole attuali."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed legge .htaccess solo al riavvio: riavvialo dopo aver modificato le impostazioni."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "Non è stato possibile raggiungere il sito per verificare se OpenLiteSpeed esegue le regole attuali di Flash Cache."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed non esegue ancora le regole attuali di Flash Cache. Riavvialo per applicarle: Graceful Restart in WebAdmin, oppure il riavvio di LiteSpeed dal pannello del tuo hosting."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "Necessario: fino ad allora, le pagine seguono le regole che OpenLiteSpeed ha caricato per ultime, oppure vengono costruite da PHP."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "Facoltativo: header della cache del browser"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "Le pagine in cache funzionano già senza questo. OpenLiteSpeed ignora gli header in .htaccess, quindi i browser non ricevono istruzioni di cache per esse. Aggiungi questo contesto all'host virtuale del tuo sito per far conservare ai browser ogni pagina per %s, così le visite successive si caricano più in fretta, quindi riavvia OpenLiteSpeed:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "Per “Reindirizza HTTP a HTTPS”, aggiungi anche %s alle operazioni di header del contesto /."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "Ignora fino al prossimo aggiornamento"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "È stata trovata una differenza tra le regole nel tuo file <strong>nginx.conf</strong> e le regole di Flash Cache. Potrebbero essere semplici differenze di spazi, ma dovresti confrontare al più presto le regole nel file con quelle qui sotto. Fai clic sul pulsante &#8217;Aggiorna le regole&#8217; per aggiornare le regole."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "È stata trovata una differenza tra le regole nel tuo file <strong>.htaccess</strong> e le regole di riscrittura del plugin. Potrebbero essere semplici differenze di spazi, ma dovresti confrontare al più presto le regole nel file con quelle qui sotto. Fai clic sul pulsante &#8217;Aggiorna le regole&#8217; per aggiornare le regole."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "Aggiorna le regole"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "La cartella della cache deve essere una cartella all'interno del sito, come flash_cache/, fuori dalle cartelle di WordPress. È stata mantenuta la cartella attuale."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Regole del web server aggiornate"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "I file della cache sono stati eliminati."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "Pagine statiche"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s pagina"
+msgstr[1] "%s pagine"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "Pagine PHP"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "Stili"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s file"
+msgstr[1] "%s file"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "Script"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "Font"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "Totale: %1$s in %2$s file"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "Conteggiato %s fa"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "Non ancora conteggiato"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "Statistiche della cache"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "Riconta"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "Usi LiteSpeed Enterprise?"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "Stiamo valutando una modalità più veloce per esso. Dicci se la useresti."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "Dillo a noi"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "Usi o vuoi usare LiteSpeed Enterprise?"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "Stiamo valutando una modalità più veloce per LiteSpeed Enterprise. Se ne faranno richiesta abbastanza persone, la costruiremo. Premi il pulsante per dirci che sei interessato e aggiungere un altro alla lista."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "Sono interessato a LiteSpeed Enterprise"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "Invia la tua scelta, se questo sito usa LiteSpeed Enterprise, le versioni di Flash Cache e di PHP, la lingua del sito e un ID anonimo casuale a flashcache.net: nessuna email e nessun indirizzo del sito. Un voto per sito."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "Grazie, sei nella lista."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "Come lo useresti? (facoltativo)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "Scrivimi quando sarà pronto. Accetto di condividere il mio indirizzo email per questo."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "La tua email"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "Invia"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d persona l'ha richiesto."
+msgstr[1] "%d persone l'hanno richiesto."

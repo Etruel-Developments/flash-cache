@@ -1,0 +1,1477 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: sk_SK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache funguje na jednotlivých webových stránkach WordPress a nedá sa aktivovať v sieti Multisite."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "Plugin nebol aktivovaný"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "Zmerané, nie sľúbené"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Domovská stránka našej testovacej webovej stránky s Apache (WordPress 7.1, PHP 7.4) so zahriatou cache v porovnaní s rovnakou webovou stránkou bez akéhokoľvek cache pluginu."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0,85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "po prvý bajt"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "102 ms bez cache"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "požiadaviek za sekundu"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "18 bez cache"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5,8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "odoslaných pri každej návšteve"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "43 KB bez cache"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "Všetko, čo vaša cache potrebuje"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "Zadarmo a kompletné: Flash Cache si nedrží jadro späť, aby vám predal upgrade."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "Skutočne statické stránky"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "Obsluhujú ich pravidlá samotného webového servera. Čerstvá stránka nikdy nespustí WordPress, ani len na kontrolu svojho veku."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "Vzory cache"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "Jedna sada pravidiel pre každý druh stránky, s vlastnou životnosťou. Presuňte ich do poradia, aké chcete."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "Obnovenia na pozadí"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "Návštevníci nikdy nenarazia na prázdnu cache. Jedno obnovenie na stránku, bez ohľadu na to, koľko ich príde po vypršaní platnosti."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "Predbežné načítanie webovej stránky"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "Prehľadávač na pozadí zahrieva cache v malých dávkach, ktoré ovládate vy."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "Ľahšie stránky"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "Štýly a skripty zlúčené do menšieho počtu súborov, zdieľané každou stránkou a vopred komprimované pomocou gzip."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "Vždy v obraze"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "Štatistiky stránok, štýlov, skriptov a písem v reálnom čase, načítané okamžite pri akejkoľvek veľkosti cache."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "Čisté a prenosné"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "Žiadne súbory drop-in, žiadne zmeny v wp-config.php. Po deaktivácii zmiznú pravidlá aj cache."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "Vytvorené pre autoblogy"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "Hromadné publikovanie, napríklad získanie z WPeMatico, obnoví domovskú stránku a každý archív raz na dávku."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "Poďme na autoblogging →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Choďte ďalej s Pro"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "Živé bloky a widgety, zdieľaná cache widgetov, minifikácia, lokálne písma a ďalšie. Nie je to povinné, ale pomáha to bezplatnému pluginu rásť."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "Porovnať bezplatnú verziu a Pro →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "Ten istý server, s Flash Cache aj bez neho"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, domovská stránka, ApacheBench s 3 000 požiadavkami a 10 súbežnými. Stĺpce začínajú od rovnakej základne."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "Čas do prvého bajtu"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(menej je lepšie)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "Bez cache"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120× rýchlejšie"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "Bajty odoslané pri každej návšteve"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43,2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "7× ľahšie: optimalizované HTML + vopred komprimované gzip"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "Požiadavky za sekundu v porovnaní s inými cache pluginmi"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(viac je lepšie)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "Úprimné zhodnotenie:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "v porovnaní s pluginmi, ktoré tiež servírujú statické súbory, je surová rýchlosť rovnaká. Flash Cache odošle 7 až 9× menej bajtov na návštevu, nechá prehliadač držať stránku jeden deň a pri publikovaní sa aktualizuje sám, to všetko predvolene."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Ešte rýchlejšie s Pro"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "Optimalizácie, ktoré pridávajú výkon bezplatnému pluginu a financujú jeho vývoj."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "Minifikácia CSS a JavaScriptu"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "Zlúčené súbory stratia medzery a komentáre, takže každá návšteva prenesie menej bajtov."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts na vašom serveri"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "Menej požiadaviek na iné webové stránky a žiadne čakanie na hostiteľov tretích strán."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "Zdieľaná cache widgetov"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "Widgety, ktoré vyzerajú rovnako na každej stránke, sa vytvoria raz a zdieľajú sa, takže prebudovanie stránok je lacnejšie."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "Živé bloky bez straty cache"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "Pri každej návšteve sa vykreslí iba označený blok alebo widget, aj keď sa obnovuje každých pár minút. Zvyšok zostáva statický."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "Skripty na svojom mieste, plugin po plugine"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "Nechajte skripty problémového pluginu mimo zlúčeného súboru bez toho, aby ste sa vzdali optimalizácie ostatných."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "Vyprázdniť alebo prebudovať jeden článok"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "Zo zoznamu článkov a automaticky pri uložení."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "Funguje tam, kde beží vaša webová stránka"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache píše pravidlá pre váš server a hovorí vám, či ich spúšťa."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "Pravidlá zapísané v .htaccess vo vlastných označených blokoch. Bez nastavovania."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "automaticky"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: rovnaké pravidlá .htaccess, rovnaká statická rýchlosť."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "Stránky z cache priamo z disku, komprimované serverom. Nameraných viac ako 48 000 požiadaviek/s."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "reštart raz"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "Skopírujte hotový blok do konfigurácie svojho servera a znovu ju načítajte."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "kopírovať a vložiť"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 alebo novšie · WordPress 5.9 alebo novší · jednotlivé webové stránky · testované s WPeMatico a jeho doplnkami."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Pro nepotrebujete. Ale veľmi to pomáha."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache je kompletný a zadarmo. Pro nie je potrebné na získanie toho najlepšieho: pridáva niekoľko extra funkcií a každá licencia, zámerne takto lacná, financuje podporu a nové vylepšenia bezplatného pluginu."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "Statické stránky obsluhované bez PHP"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "Vzory cache, životnosť a režim PHP pre reťazce dopytu"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "Obnovenie na pozadí, predbežné načítanie a okamžité vyprázdnenie"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "Zlúčené štýly a skripty, gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache, LiteSpeed, OpenLiteSpeed a nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "Stránky s reťazcami dopytu v cache, bez duplikátov spôsobených sledovacími parametrami"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "Cache sa obnoví sama pri publikovaní, komentovaní alebo zmene widgetov, ponúk a tém"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "Iba jedno obnovenie na stránku naraz, aby návštevníci nikdy nenarazili na prázdnu cache"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "Čas cache prehliadača podľa vášho výberu"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "Štatistiky cache v reálnom čase a stav pravidiel servera"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "Zobraziť všetky bezplatné funkcie"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "Prejsť na PRO"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "Minifikácia CSS a JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "Zlúčené súbory stratia medzery a komentáre, takže vážia menej."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "Stránky vykonávajú menej požiadaviek na iné webové stránky."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "Widgety a bloky bez cache"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "Vykreslite blok alebo starší widget naživo pri každej návšteve, kým stránka zostáva v cache."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "Widgety sa vytvoria raz a zdieľajú ich všetky stránky; ich aktualizácia nikdy nevyprázdni cache."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "Nechajte na svojom mieste skripty vybraných pluginov."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "Nástroje pre jednotlivé články"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "Vyprázdnite cache jedného článku zo zoznamu článkov a prebudujte ju pri uložení."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "Aktualizácie a podpora"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "Aktualizácie jedným kliknutím a podpora s licenciou."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Ďakujeme, že podporujete Flash Cache"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "Vaša licencia financuje podporu a nové vylepšenia bezplatného pluginu."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "Spravovať vašu licenciu"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Podporte Flash Cache a odomknite extra funkcie"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Každá licencia Pro financuje vývoj bezplatného pluginu. Vyberte si plán, ktorý vyhovuje vašim webovým stránkam."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Získať Flash Cache Pro →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "Bezpečná platba na etruel.com"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s od"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "Prekladať"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ Zanechať recenziu"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "O plugine"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "Pracuje sa…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "Nepodarilo sa spojiť s flashcache.net. Skúste to o chvíľu znova."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "Ďakujeme!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "Na toto nemáte oprávnenie."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "Superurýchľovač pre WordPress"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "Každá stránka vašej webovej stránky sa stane statickým súborom, ktorý váš webový server posiela priamo návštevníkovi, bez PHP, bez WordPressu, bez čakania."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ Ohodnotiť na WordPress.org"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "Dokumentácia"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "Podpora"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "Prehľad"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "Výkon"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "Servery"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "Zadarmo a Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro potrebuje aktualizáciu."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s nefunguje s Flash Cache %2$s: jeho bloky a widgety bez cache môžu zobrazovať starý obsah. Aktualizujte Flash Cache Pro na %3$s alebo novšiu z obrazovky pluginov; aktualizácie vyžadujú aktívnu licenciu."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "Prejsť na pluginy"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "Môj účet"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "Skryť/zobraziť ponuku."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "PONUKA"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "Všeobecné nastavenia"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "Aktualizácie cache"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "Rozšírené možnosti"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "Optimalizácia"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "Vzory"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "Pridať nový vzor"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "Predbežné načítanie"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Oficiálna webová stránka Flash Cache"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Prejsť na Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "Súbory cache boli odstránené, aby zodpovedali novej štruktúre trvalých odkazov."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "Neplatná požiadavka."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "Odstrániť cache"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "Odstrániť cache aktuálnej stránky"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "Vzor"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "Pridať novú"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "Upraviť vzor"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "Nový vzor"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "Zobraziť vzor"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "Hľadať vzory"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "Nenašli sa žiadne vzory"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "V koši sa nenašli žiadne vzory"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "Nadradený vzor:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "Zmena tejto možnosti vyprázdni celú cache. Pokračovať?"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "Obnoviť predvolené nastavenia?"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "Pridať nové vzory"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "Údaje vzoru"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "Toto je záložný vzor: je vždy posledný v zozname, takže ukladá do cache každú stránku, ktorú nezoberie žiadny iný vzor."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "Typy stránok"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "Druhy stránok, na ktoré sa tento vzor vzťahuje; neoznačené typy sú ponechané ostatným vzorom. Každá stránka sleduje prvý vzor v zozname vzorov, ktorý sa na ňu vzťahuje, a predvolený vzor je vždy posledný."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "Jednotlivé články a stránky"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "Ak nie je vybraný žiadny typ obsahu, zahrnuté sú všetky typy obsahu."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "Ukladať článok do cache pri jeho publikovaní alebo aktualizácii"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "Obnoviť domovskú stránku pri publikovaní alebo aktualizácii článku"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "Obnoviť prvú stránku jeho kategórií a značiek"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "Obnoviť článok pri schválení komentára"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "Úvodná stránka (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "Stránka článkov (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "Zoznam najnovších článkov, keď je úvodná stránka statická stránka."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "Kategórie (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "Značky (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "Stránky autorov (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "Ostatné archívy (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "Archívy podľa dátumu, vlastné taxonómie a archívy typov obsahu."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "Kanály (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "Výsledky vyhľadávania (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "URL adresa musí obsahovať"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "Tento vzor používajú iba stránky, ktorých URL adresa obsahuje všetky tieto texty."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "Jeden text na riadok."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "URL adresa nesmie obsahovať"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "Stránky, ktorých URL adresa obsahuje ktorýkoľvek z týchto textov, tento vzor preskočia, napríklad „login“."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "Typ cache"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "Statické HTML (najrýchlejšie)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Webový server doručí uloženú stránku bez spustenia PHP. Stránky s reťazcom dopytu sa z tejto cache neobsluhujú."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (stránky s reťazcami dopytu)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "Malý súbor PHP uchováva jednu kópiu na každý reťazec dopytu, čo sa hodí pre vyhľadávanie a feedy. O niečo pomalšie ako statické HTML; odoslané formuláre vždy dorazia do WordPressu."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "Neukladať do cache"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "Stránky, na ktoré sa tento vzor vzťahuje, vždy obsluhuje WordPress naživo. Umiestnite ho nad vzory, ktoré má prepísať."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "Obnoviť po"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "Sekundy, počas ktorých sa stránka z cache obsluhuje, kým návšteva nepožiada o novú kópiu. 86400 je jeden deň."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "Obnovenie predbežným načítaním po"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "Sekundy, kým predbežné načítanie prebuduje stránku z cache. Pri „Obnovovať stránky s vypršanou platnosťou: iba z predbežného načítania“ predbežné načítanie použije namiesto toho „Obnoviť po“."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "Poradie"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "Vzťahuje sa na"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "Vyrovnávacia pamäť"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "Vždy posledný"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "Presunutím zmeníte poradie"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "Záloha: vždy posledný, ukladá do cache každú stránku, ktorú nezoberie žiadny iný vzor."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s, obnoviť po %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "Všetky typy obsahu"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "Úvodná stránka"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "Stránka článkov"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "Archívy"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "Značky"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "Kategórie"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Feedy"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "Vyhľadávanie"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "Autori"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "Žiadne typy stránok"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "URL adresa obsahuje: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "URL adresa neobsahuje: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "Predvolené hodnoty boli obnovené."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "Obnoviť predvolené nastavenia"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Prejsť na stránku nastavení Flash Cache"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "Webová stránka"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "Neplatný článok."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "Článok nemá cache."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "Vyprázdniť cache článku"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "Spustiť predbežné načítanie"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "Predbežné načítanie vytvára cache verejných stránok a voliteľne ich kategórií a značiek podľa vašich vzorov, aby ich návštevníci našli už v cache."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "Beží v malých dávkach na pozadí, aby zaťaženie servera zostalo nízke."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "Predbežné načítanie práve beží: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "Predbežné načítanie čaká na spustenie."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "Ďalšie spustenie: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "Zapnúť predbežné načítanie"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "Vypnuté"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "Zapnuté"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "Zahrnúť kategórie a značky"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "Ukladá do cache aj archívne stránky kategórií a značiek každého predbežne načítaného článku."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "Stránok na dávku"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "Koľko stránok uloží do cache každá dávka. Znížte hodnotu, ak server pri predbežnom načítaní zápasí."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "Prestávka medzi dávkami"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "Sekundy čakania pred ďalšou dávkou. Zvýšte hodnotu, ak predbežné načítanie narazí na časové limity PHP."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "Zastaviť po jednom úplnom prechode"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "Predbežné načítanie sa samo vypne, keď sa spracuje každá stránka. Nechajte ho vypnuté, aby predbežné načítanie bežalo nepretržite."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "Nastavenia aktualizované"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "Najprv zapnite predbežné načítanie: beží, iba kým je zapnuté."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "Predbežné načítanie sa spustilo a beží na pozadí."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Predbežné načítanie Flash Cache"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "Zapnúť cache"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "Vypnite ho, aby sa prestali vytvárať nové stránky v cache. Stránky, ktoré už sú v cache, sa odstránia tlačidlom nižšie."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "Odstrániť cache"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "Odstráni každú stránku z cache a zlúčený súbor. Stránky sa do cache ukladajú znova, keď ich niekto navštívi alebo sa predbežne načítajú."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "Nastavenia vzorov"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "Priečinok cache"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "Kde sa ukladajú stránky z cache a zlúčené súbory, vzhľadom na zobrazenú cestu. Musí to byť samostatný priečinok mimo priečinkov WordPressu."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "Obsluhovať HTTP aj HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "Stránky z cache sa obsluhujú na oboch protokoloch."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "Presmerovať HTTP na HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "Návštevníci prichádzajúci cez HTTP sú presmerovaní na HTTPS a prehliadače sú poučené, aby ďalej používali HTTPS počas času cache prehliadača (hlavička Strict-Transport-Security)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "Táto administračná stránka je otvorená cez HTTP, takže stránky z cache sa obsluhujú tak, ako sa k webovej stránke pristupuje. Možnosť presmerovať návštevníkov na HTTPS sa tu zobrazí, keď sa administrácia otvorí cez HTTPS."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "Čas cache prehliadača"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "Sekundy, počas ktorých môže prehliadač držať stránku z cache, kým o ňu znova požiada; odosielajú sa v hlavičke Cache-Control. 86400 je jeden deň."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Preskočiť návštevníkov s cookies"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "Návštevníci, ktorí odošlú cookie s názvom obsahujúcim jeden z týchto textov, vždy dostanú živú stránku. Prihlásení používatelia, komentujúci a návštevníci článkov chránených heslom sú v zozname predvolene."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "Pridať"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "Zámok"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "Súbory (odporúčané)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "Súbor zámku na každú stránku bráni tomu, aby dvaja návštevníci stavali tú istú stránku naraz."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "Databáza"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "Zámok MySQL robí to isté. Užitočné, keď viacero serverov zdieľa databázu, ale nie disk."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "Vytváranie cache"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "Zachytiť navštívenú stránku (odporúčané)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "Stránka, ktorú návštevník dostane, sa uloží tak, ako sa odošle; neskoršie obnovenia požiadajú o stránku znova na pozadí."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "Požiadať o stránku samostatne"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "Každá stránka sa načíta vlastnou požiadavkou. Pomalšie; použite, keď iný plugin kolíduje s ukladaním výstupu do vyrovnávacej pamäte."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "Obnovovať stránky s vypršanou platnosťou"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "Pri návštevách (odporúčané)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "Návšteva stránky, ktorej čas „Obnoviť po“ uplynul, požiada server, aby ju prebudoval na pozadí. Čerstvé stránky nevykonávajú žiadnu ďalšiu požiadavku."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "Iba z predbežného načítania"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "Stránky z cache nenesú skript na obnovenie. Stránky s vypršanou platnosťou prebudováva proces predbežného načítania, takže ho nechajte zapnutý."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "Táto webová stránka má %s publikovaný článok, takže jej cache sa obnovuje postupne."
+msgstr[1] "Táto webová stránka má %s publikované články, takže jej cache sa obnovuje postupne."
+msgstr[2] "Táto webová stránka má %s publikovaných článkov, takže jej cache sa obnovuje postupne."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "Táto webová stránka má %s publikovaný článok, takže sa odstráni celá jej cache."
+msgstr[1] "Táto webová stránka má %s publikované články, takže sa odstráni celá jej cache."
+msgstr[2] "Táto webová stránka má %s publikovaných článkov, takže sa odstráni celá jej cache."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "Po zmenách dizajnu"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "Automaticky (odporúčané)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "Odstráni celú cache na webových stránkach s najviac %s publikovanými článkami a na väčších ju obnovuje postupne."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "Odstrániť celú cache"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "Stránky sa do cache ukladajú znova, keď ich niekto navštívi alebo sa predbežne načítajú. Najlepšie pre malé a stredné webové stránky."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "Obnovovať postupne"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "Návštevníci naďalej dostávajú aktuálne stránky, kým sa nahrádzajú po niekoľkých, predbežným načítaním alebo pri ich ďalšej návšteve. Žiadna prázdna cache, žiadna špička zaťaženia. Najlepšie pre veľké webové stránky."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "Nerobiť nič"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "Po každej zmene odstráňte cache sami."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "Platí pri uložení widgetov, ponúk, nastavení Prispôsobenia, šablón blokových tém alebo synchronizovaných vzorov. Prepnutie témy vždy odstráni celú cache."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "Widgety/bloky bez cache"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "Vypnutie cache widgetov je dostupné vo verzii Pro."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "Vytvorenie každého widgetu raz pre celú webovú stránku a jeho aktualizácia v stránkach z cache pri uložení je dostupné vo verzii Pro."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "Optimalizovať štýly"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "Spojí štýlové tabuľky každej stránky do zdieľaných súborov, v ich poradí a s ich médiami, aby stránky načítali menej súborov."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "Minifikovať štýly"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "Odstráni medzery a komentáre zo zlúčených štýlových tabuliek, aby vážili menej."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Ukladať Google Fonts do cache"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Uchováva kópiu Google Fonts na vašom serveri, aby stránky vykonávali menej požiadaviek na iné webové stránky."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "Počíta sa…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "Optimalizovať skripty"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "Spojí po sebe idúce skripty do zdieľaných súborov, zachová ich poradie a miesto na stránke, aby stránky načítali menej súborov."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "Ak niečo prestane fungovať s optimalizovanými skriptami, nechajte príslušné skripty na svojom mieste:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "Nechať vložené skripty na mieste"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "Skripty napísané priamo v stránke zostanú tam, kde sú."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "Nechať skripty témy na mieste"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "Skripty aktívnej témy a jej nadradenej témy zostanú ako samostatné súbory."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "Nechať skripty pluginov na mieste"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "Skripty pluginov zostanú ako samostatné súbory."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "Výber každého pluginu samostatne je dostupný vo verzii Pro."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "Nevyhnúť sa optimalizácii JavaScriptu podľa súboru"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "Necháva určité súbory skriptov na mieste podľa názvu alebo cesty."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "Skripty z iných domén"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "Vypnuté (odporúčané): analytické, reklamné, sociálne a iné skripty tretích strán sa naďalej načítavajú z vlastných serverov, kde zostávajú aktuálne. Zapnuté: kopírujú sa do zlúčených súborov."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "Minifikovať skripty"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "Odstráni medzery a komentáre zo zlúčených skriptov, aby vážili menej."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "Skontrolovať znova"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "Pravidlá servera"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx obsluhuje stránky z cache s aktuálnymi pravidlami."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "Po zmene nastavení znova načítajte nginx, aby prečítal aktualizované pravidlá."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx spúšťa staršiu verziu pravidiel Flash Cache. Znova načítajte nginx, aby sa použili aktuálne nastavenia."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "Nepodarilo sa pristúpiť k webovej stránke, aby sa overilo, či nginx číta pravidlá Flash Cache."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx ešte nečíta pravidlá Flash Cache: stránky sú v cache, ale stále ich stavia PHP."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "Pridajte tento riadok do bloku server { } vašej webovej stránky, pred jej pravidlá location, a znova načítajte nginx:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "Skopírované"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "Kopírovať"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache udržiava tento súbor aktuálny; po zmene nastavení znova načítajte nginx."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed obsluhuje stránky z cache s aktuálnymi pravidlami."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed číta .htaccess iba pri reštarte: po zmene nastavení ho reštartujte."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "Nepodarilo sa pristúpiť k webovej stránke, aby sa overilo, či OpenLiteSpeed spúšťa aktuálne pravidlá Flash Cache."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed ešte nespúšťa aktuálne pravidlá Flash Cache. Reštartujte ho, aby sa použili: Graceful Restart vo WebAdmin alebo reštart LiteSpeed z panela vášho hostingu."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "Povinné: dovtedy stránky sledujú pravidlá, ktoré OpenLiteSpeed načítal naposledy, alebo ich stavia PHP."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "Voliteľné: hlavičky cache prehliadača"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "Stránky z cache už fungujú aj bez toho. OpenLiteSpeed ignoruje hlavičky v .htaccess, takže prehliadače pre ne nedostávajú pokyny na cache. Pridajte tento kontext do virtuálneho hostiteľa vašej webovej stránky, aby prehliadače držali každú stránku %s a opakované návštevy sa načítali rýchlejšie, a potom reštartujte OpenLiteSpeed:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "Pre „Presmerovať HTTP na HTTPS“ pridajte aj %s do operácií hlavičky kontextu /."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "Skryť do ďalšej aktualizácie"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Bol nájdený rozdiel medzi pravidlami vo vašom súbore <strong>nginx.conf</strong> a pravidlami Flash Cache. Môžu to byť jednoduché rozdiely v medzerách, ale mali by ste čo najskôr porovnať pravidlá v súbore s tými nižšie. Kliknutím na tlačidlo &#8217;Aktualizovať pravidlá&#8217; pravidlá aktualizujete."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Bol nájdený rozdiel medzi pravidlami vo vašom súbore <strong>.htaccess</strong> a pravidlami prepisovania pluginu. Môžu to byť jednoduché rozdiely v medzerách, ale mali by ste čo najskôr porovnať pravidlá v súbore s tými nižšie. Kliknutím na tlačidlo &#8217;Aktualizovať pravidlá&#8217; pravidlá aktualizujete."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "Aktualizovať pravidlá"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "Priečinok cache musí byť priečinok vo vnútri webovej stránky, napríklad flash_cache/, mimo priečinkov WordPressu. Aktuálny priečinok bol zachovaný."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Pravidlá webového servera boli aktualizované"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "Súbory cache boli odstránené."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "Statické stránky"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s stránka"
+msgstr[1] "%s stránky"
+msgstr[2] "%s stránok"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "Stránky PHP"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "Štýly"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s súbor"
+msgstr[1] "%s súbory"
+msgstr[2] "%s súborov"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "Skripty"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "Písma"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "Spolu: %1$s v %2$s súboroch"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "Spočítané pred %s"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "Zatiaľ nespočítané"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "Štatistiky cache"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "Prepočítať"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "Používate LiteSpeed Enterprise?"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "Vyhodnocujeme pre neho rýchlejší režim. Povedzte nám, či by ste ho používali."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "Povedzte nám"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "Používate alebo chcete používať LiteSpeed Enterprise?"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "Vyhodnocujeme rýchlejší režim pre LiteSpeed Enterprise. Ak oň požiada dosť ľudí, vytvoríme ho. Stlačte tlačidlo, aby ste nám dali vedieť, že vás to zaujíma, a pridali ďalšieho do zoznamu."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "Zaujíma ma LiteSpeed Enterprise"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "Odošle váš výber, či táto webová stránka používa LiteSpeed Enterprise, verzie Flash Cache a PHP, jazyk webovej stránky a náhodné anonymné ID na flashcache.net: bez e-mailu a bez adresy webovej stránky. Jeden hlas na webovú stránku."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "Ďakujeme, ste v zozname."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "Ako by ste ho používali? (voliteľné)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "Napíšte mi, keď bude hotový. Súhlasím so zdieľaním mojej e-mailovej adresy na tento účel."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "Váš e-mail"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "Odoslať"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d osoba oň požiadala."
+msgstr[1] "%d osoby oň požiadali."
+msgstr[2] "%d osôb oň požiadalo."

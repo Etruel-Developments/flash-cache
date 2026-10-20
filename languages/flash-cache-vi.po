@@ -1,0 +1,1467 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache hoạt động trên các trang web WordPress đơn lẻ và không thể kích hoạt trên mạng multisite."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "Plugin chưa được kích hoạt"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "Đã đo lường, không phải lời hứa"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Trang chủ của trang web thử nghiệm Apache của chúng tôi (WordPress 7.1, PHP 7.4), bộ nhớ đệm đã làm nóng, so với chính trang web đó khi không có plugin bộ nhớ đệm nào."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0,85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "đến byte đầu tiên"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "102 ms khi không có bộ nhớ đệm"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "yêu cầu mỗi giây"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "18 khi không có bộ nhớ đệm"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5,8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "được gửi mỗi lượt truy cập"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "43 KB khi không có bộ nhớ đệm"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "Mọi thứ bộ nhớ đệm của bạn cần"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "Miễn phí và đầy đủ: Flash Cache không giữ lại phần cốt lõi để bán cho bạn một bản nâng cấp."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "Trang tĩnh đúng nghĩa"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "Được phục vụ bởi chính các quy tắc của máy chủ web. Một trang còn mới không bao giờ khởi động WordPress, ngay cả để kiểm tra tuổi của nó."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "Mẫu bộ nhớ đệm"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "Một bộ quy tắc cho mỗi loại trang, với thời hạn riêng. Kéo chúng theo thứ tự bạn muốn."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "Làm mới ở nền"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "Khách truy cập không bao giờ gặp bộ nhớ đệm trống. Chỉ một lần làm mới cho mỗi trang, dù có bao nhiêu người đến khi nó hết hạn."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "Tải trước trang web"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "Một trình thu thập chạy nền làm nóng bộ nhớ đệm theo từng lô nhỏ do bạn kiểm soát."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "Trang nhẹ hơn"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "Style và script được gộp thành ít file hơn, dùng chung cho mọi trang và được nén trước bằng gzip."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "Luôn nắm bắt kịp thời"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "Thống kê trực tiếp về trang, style, script và font chữ, tải ngay lập tức ở mọi kích thước bộ nhớ đệm."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "Sạch sẽ và dễ di chuyển"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "Không có file drop-in, không thay đổi wp-config.php. Tắt nó đi thì các quy tắc và bộ nhớ đệm biến mất."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "Dành cho autoblog"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "Đăng hàng loạt, như một lần lấy bài của WPeMatico, chỉ làm mới trang chủ và từng trang lưu trữ một lần cho mỗi lô."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "Cùng bắt đầu autoblog →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Đi xa hơn với Pro"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "Block và widget trực tiếp, bộ nhớ đệm widget dùng chung, thu nhỏ, font chữ cục bộ và nhiều hơn nữa. Không bắt buộc, nhưng giúp plugin miễn phí phát triển."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "So sánh bản Miễn phí và Pro →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "Cùng một máy chủ, có và không có Flash Cache"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, trang chủ, ApacheBench với 3.000 yêu cầu và 10 yêu cầu đồng thời. Các cột bắt đầu từ cùng một đường cơ sở."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "Thời gian đến byte đầu tiên"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(càng ít càng tốt)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "Không có bộ nhớ đệm"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120× nhanh hơn"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "Byte được gửi mỗi lượt truy cập"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43,2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "Nhẹ hơn 7×: HTML đã tối ưu + gzip nén trước"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "Yêu cầu mỗi giây so với các plugin bộ nhớ đệm khác"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(càng nhiều càng tốt)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "Nhận định thẳng thắn:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "so với các plugin cũng phục vụ file tĩnh, tốc độ thuần là như nhau. Flash Cache gửi ít byte hơn 7–9× mỗi lượt truy cập, để trình duyệt giữ trang trong một ngày, và tự cập nhật khi bạn đăng bài, tất cả đều mặc định."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Nhanh hơn nữa với Pro"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "Các tối ưu hóa bổ sung hiệu năng cho plugin miễn phí và tài trợ cho việc phát triển nó."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "Thu nhỏ CSS và JavaScript"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "Các file đã gộp mất khoảng trắng và chú thích, nên mỗi lượt truy cập mang ít byte hơn."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts trên máy chủ của bạn"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "Ít yêu cầu hơn đến các trang web khác và không phải chờ máy chủ của bên thứ ba."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "Bộ nhớ đệm widget dùng chung"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "Các widget trông giống nhau trên mọi trang chỉ được tạo một lần và dùng chung, nên việc dựng lại trang rẻ hơn."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "Block trực tiếp mà không mất bộ nhớ đệm"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "Chỉ block hoặc widget đã đánh dấu được hiển thị mỗi lượt truy cập, kể cả khi làm mới vài phút một lần. Phần còn lại vẫn tĩnh."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "Script giữ nguyên vị trí, từng plugin một"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "Giữ script của một plugin gặp vấn đề ra ngoài file đã gộp mà không bỏ tối ưu hóa phần còn lại."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "Làm trống hoặc dựng lại một bài viết"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "Từ danh sách bài viết và tự động khi lưu."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "Chạy ở bất cứ nơi nào trang web của bạn chạy"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache viết các quy tắc cho máy chủ của bạn và cho bạn biết nó có đang chạy chúng không."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "Các quy tắc được ghi vào .htaccess trong các khối được đánh dấu riêng. Không cần thiết lập."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "tự động"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: cùng quy tắc .htaccess, cùng tốc độ tĩnh."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "Các trang trong bộ nhớ đệm được phục vụ thẳng từ đĩa, do máy chủ nén. Đo được hơn 48.000 yêu cầu/giây."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "khởi động lại một lần"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "Sao chép khối dựng sẵn vào cấu hình máy chủ của bạn rồi tải lại."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "sao chép và dán"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 trở lên · WordPress 5.9 trở lên · trang web đơn lẻ · đã thử nghiệm với WPeMatico và các add-on của nó."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Bạn không cần Pro. Nhưng nó giúp ích rất nhiều."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache đầy đủ và miễn phí. Không cần Pro để có được điều tốt nhất: nó thêm vài tính năng bổ sung, và mỗi giấy phép, được định giá thấp có chủ ý, tài trợ cho việc hỗ trợ và các cải tiến mới của plugin miễn phí."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "Trang tĩnh được phục vụ không cần PHP"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "Mẫu bộ nhớ đệm, thời hạn và chế độ PHP cho chuỗi truy vấn"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "Làm mới ở nền, tải trước và xóa tức thì"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "Style và script đã gộp, gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache, LiteSpeed, OpenLiteSpeed và nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "Trang có chuỗi truy vấn được lưu đệm, không trùng lặp do tham số theo dõi"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "Bộ nhớ đệm tự làm mới khi bạn đăng bài, bình luận hoặc thay đổi widget, menu và giao diện"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "Mỗi trang chỉ làm mới một lần tại một thời điểm, để khách truy cập không bao giờ gặp bộ nhớ đệm trống"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "Thời gian bộ nhớ đệm của trình duyệt do bạn chọn"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "Thống kê bộ nhớ đệm trực tiếp và trạng thái quy tắc máy chủ"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "Xem tất cả tính năng miễn phí"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "Lên PRO"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "Thu nhỏ CSS và JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "Các file đã gộp mất khoảng trắng và chú thích, nên nhẹ hơn."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "Các trang gửi ít yêu cầu hơn đến các trang web khác."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "Widget và block không dùng bộ nhớ đệm"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "Hiển thị trực tiếp một block hoặc widget cũ mỗi lượt truy cập trong khi trang vẫn nằm trong bộ nhớ đệm."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "Widget được tạo một lần và dùng chung cho mọi trang; cập nhật chúng không bao giờ làm trống bộ nhớ đệm."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "Giữ nguyên vị trí script của các plugin bạn chọn."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "Công cụ cho từng bài viết"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "Làm trống bộ nhớ đệm của một bài viết từ danh sách bài viết và dựng lại khi lưu."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "Cập nhật và hỗ trợ"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "Cập nhật chỉ với một lần click và hỗ trợ theo giấy phép."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Cảm ơn bạn đã ủng hộ Flash Cache"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "Giấy phép của bạn tài trợ cho việc hỗ trợ và các cải tiến mới của plugin miễn phí."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "Quản lý giấy phép của bạn"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Ủng hộ Flash Cache và mở khóa các tính năng bổ sung"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Mỗi giấy phép Pro tài trợ cho việc phát triển plugin miễn phí. Chọn gói phù hợp với các trang web của bạn."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Nhận Flash Cache Pro →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "Thanh toán an toàn tại etruel.com"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s bởi"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "Dịch"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ Để lại đánh giá"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "Giới thiệu"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "Đang xử lý…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "Không thể kết nối với flashcache.net. Hãy thử lại sau giây lát."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "Cảm ơn bạn!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "Bạn không được phép làm việc này."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "Bộ tăng tốc siêu việt cho WordPress"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "Mỗi trang trên trang web của bạn trở thành một file tĩnh mà máy chủ web gửi thẳng đến khách truy cập, không PHP, không WordPress, không chờ đợi."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ Đánh giá trên WordPress.org"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "Tài liệu"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "Tổng quan"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "Hiệu năng"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "Máy chủ"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "Miễn phí và Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro cần được cập nhật."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s không hoạt động với Flash Cache %2$s: các block và widget không dùng bộ nhớ đệm của nó có thể hiển thị nội dung cũ. Hãy cập nhật Flash Cache Pro lên phiên bản %3$s trở lên từ trang plugin; cập nhật cần có giấy phép đang hoạt động."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "Đến trang plugin"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "Tài khoản của tôi"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "Ẩn/hiện menu."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "MENU"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "Cài đặt chung"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "Cập nhật bộ nhớ đệm"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "Tuỳ chọn nâng cao"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "Tối ưu hóa"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "Mẫu"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "Thêm mẫu mới"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "Tải trước"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Trang web chính thức của Flash Cache"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Lên Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "Các file bộ nhớ đệm đã được xoá để phù hợp với cấu trúc đường dẫn tĩnh mới."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "Yêu cầu không hợp lệ."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "Xoá bộ nhớ đệm"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "Xoá bộ nhớ đệm của trang hiện tại"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "Mẫu"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "Thêm mới"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "Sửa mẫu"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "Mẫu mới"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "Xem mẫu"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "Tìm kiếm mẫu"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "Không tìm thấy mẫu nào"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "Không tìm thấy mẫu nào trong thùng rác"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "Mẫu cha:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "Thay đổi tuỳ chọn này sẽ làm trống toàn bộ bộ nhớ đệm. Tiếp tục?"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "Khôi phục cài đặt mặc định?"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "Thêm các mẫu mới"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "Dữ liệu mẫu"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "Đây là mẫu dự phòng: nó luôn nằm cuối danh sách, nên lưu đệm mọi trang mà không mẫu nào khác nhận."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "Loại trang"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "Các loại trang mà mẫu này áp dụng; các loại chưa chọn được để lại cho các mẫu khác. Mỗi trang theo mẫu đầu tiên trong danh sách mẫu phù hợp với nó, và mẫu mặc định luôn ở cuối."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "Bài viết và trang đơn lẻ"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "Nếu không chọn loại bài viết nào, tất cả các loại bài viết đều được bao gồm."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "Lưu đệm bài viết khi nó được đăng hoặc cập nhật"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "Làm mới trang chủ khi một bài viết được đăng hoặc cập nhật"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "Làm mới trang đầu tiên của các chuyên mục và thẻ của nó"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "Làm mới bài viết khi một bình luận được duyệt"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "Trang chủ (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "Trang bài viết (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "Danh sách các bài viết mới nhất khi trang chủ là một trang tĩnh."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "Chuyên mục (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "Thẻ (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "Trang tác giả (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "Lưu trữ khác (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "Lưu trữ theo ngày, phân loại tuỳ chỉnh và lưu trữ loại bài viết."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "Feed (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "Kết quả tìm kiếm (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "URL phải chứa"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "Chỉ những trang có URL chứa tất cả các văn bản này mới dùng mẫu này."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "Một văn bản trên mỗi dòng."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "URL không được chứa"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "Những trang có URL chứa bất kỳ văn bản nào trong số này sẽ bỏ qua mẫu này, ví dụ “login”."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "Loại bộ nhớ đệm"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "HTML tĩnh (nhanh nhất)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Máy chủ web phát trang đã lưu mà không chạy PHP. Các trang có chuỗi truy vấn không được phục vụ từ bộ nhớ đệm này."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (trang có chuỗi truy vấn)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "Một file PHP nhỏ giữ một bản sao cho mỗi chuỗi truy vấn, phù hợp với tìm kiếm và feed. Chậm hơn HTML tĩnh một chút; các biểu mẫu gửi đi luôn đến được WordPress."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "Không lưu đệm"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "Các trang mà mẫu này áp dụng luôn được WordPress phục vụ trực tiếp. Hãy đặt nó phía trên các mẫu mà nó cần ghi đè."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "Làm mới sau"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "Số giây một trang trong bộ nhớ đệm được phục vụ trước khi một lượt truy cập yêu cầu bản sao mới. 86400 là một ngày."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "Làm mới của tải trước sau"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "Số giây trước khi tải trước dựng lại một trang trong bộ nhớ đệm. Với “Làm mới trang hết hạn: chỉ từ tải trước”, tải trước sẽ dùng “Làm mới sau”."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "Thứ tự"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "Áp dụng cho"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "Bộ nhớ đệm"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "Luôn ở cuối"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "Kéo để đổi thứ tự"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "Dự phòng: luôn ở cuối, lưu đệm mọi trang mà không mẫu nào khác nhận."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s, làm mới sau %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "Tất cả loại bài viết"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "Trang chủ"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "Trang bài viết"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "Lưu trữ"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "Thẻ"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "Chuyên mục"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Feed"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "Tác giả"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "Không có loại trang"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "URL chứa: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "URL không chứa: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "Các giá trị mặc định đã được khôi phục."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "Đặt lại về mặc định"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Đến trang cài đặt Flash Cache"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "Trang web"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "Bài viết không hợp lệ."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "Bài viết không có bộ nhớ đệm."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "Làm trống bộ nhớ đệm của bài viết"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "Chạy tải trước"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "Tải trước xây dựng bộ nhớ đệm của các trang công khai, và tuỳ chọn cả chuyên mục và thẻ của chúng, theo các mẫu của bạn, để khách truy cập thấy chúng đã nằm sẵn trong bộ nhớ đệm."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "Nó chạy theo từng lô nhỏ ở nền để giữ tải máy chủ ở mức thấp."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "Tải trước đang chạy: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "Tải trước đang chờ chạy."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "Lần chạy tiếp theo: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "Bật tải trước"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "Tắt"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "Bật"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "Bao gồm chuyên mục và thẻ"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "Cũng lưu đệm các trang lưu trữ của chuyên mục và thẻ của mỗi bài viết được tải trước."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "Số trang mỗi lô"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "Số trang mỗi lô lưu đệm. Hãy giảm nếu máy chủ gặp khó khăn khi tải trước."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "Tạm dừng giữa các lô"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "Số giây chờ trước lô tiếp theo. Hãy tăng nếu tải trước gặp giới hạn thời gian của PHP."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "Dừng sau một lượt đầy đủ"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "Tải trước tự tắt khi mọi trang đã được xử lý. Để tắt nếu muốn tải trước liên tục."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "Đã cập nhật cài đặt"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "Hãy bật tải trước trước: nó chỉ chạy khi đang được bật."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "Tải trước đã bắt đầu và chạy ở nền."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Tải trước Flash Cache"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "Bật bộ nhớ đệm"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "Tắt để ngừng tạo các trang mới trong bộ nhớ đệm. Các trang đã nằm trong bộ nhớ đệm sẽ bị xoá bằng nút bên dưới."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "Xoá bộ nhớ đệm"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "Xoá mọi trang trong bộ nhớ đệm và file đã gộp. Các trang được lưu đệm lại khi được truy cập hoặc tải trước."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "Cài đặt mẫu"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "Thư mục bộ nhớ đệm"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "Nơi lưu các trang trong bộ nhớ đệm và file đã gộp, tương đối so với đường dẫn hiển thị. Phải là một thư mục riêng, nằm ngoài các thư mục của WordPress."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "Phục vụ HTTP và HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "Các trang trong bộ nhớ đệm được phục vụ trên cả hai giao thức."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "Chuyển hướng HTTP sang HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "Khách truy cập đến qua HTTP được chuyển hướng sang HTTPS, và trình duyệt được yêu cầu tiếp tục dùng HTTPS trong thời gian bộ nhớ đệm của trình duyệt (header Strict-Transport-Security)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "Trang quản trị này đang mở qua HTTP, nên các trang trong bộ nhớ đệm được phục vụ đúng như cách truy cập trang web. Tuỳ chọn chuyển hướng khách truy cập sang HTTPS sẽ xuất hiện ở đây khi trang quản trị được mở qua HTTPS."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "Thời gian bộ nhớ đệm của trình duyệt"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "Số giây một trình duyệt có thể giữ một trang trong bộ nhớ đệm trước khi yêu cầu lại, được gửi trong header Cache-Control. 86400 là một ngày."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Bỏ qua khách truy cập có cookie"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "Khách truy cập gửi một cookie có tên chứa một trong các văn bản này luôn nhận trang trực tiếp. Người dùng đã đăng nhập, người bình luận và khách truy cập các bài viết được bảo vệ bằng mật khẩu được liệt kê mặc định."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "Thêm"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "Khoá"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "File (khuyến nghị)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "Một file khoá cho mỗi trang ngăn hai khách truy cập dựng cùng một trang cùng lúc."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "Cơ sở dữ liệu"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "Một khoá MySQL cũng làm được như vậy. Hữu ích khi nhiều máy chủ dùng chung cơ sở dữ liệu nhưng không dùng chung đĩa."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "Tạo bộ nhớ đệm"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "Ghi lại trang được truy cập (khuyến nghị)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "Trang khách truy cập nhận được sẽ được lưu đúng như khi gửi; các lần làm mới sau đó yêu cầu lại trang ở nền."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "Yêu cầu trang riêng biệt"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "Mỗi trang được lấy bằng một yêu cầu riêng. Chậm hơn; dùng khi plugin khác xung đột với việc đệm đầu ra."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "Làm mới trang hết hạn"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "Khi có lượt truy cập (khuyến nghị)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "Một lượt truy cập vào trang đã quá thời gian “Làm mới sau” sẽ yêu cầu máy chủ dựng lại nó ở nền. Các trang còn mới không gửi thêm yêu cầu nào."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "Chỉ từ tải trước"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "Các trang trong bộ nhớ đệm không mang script làm mới. Các trang hết hạn được tiến trình tải trước dựng lại, vì vậy hãy giữ nó được bật."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "Trang web này có %s bài viết đã đăng, nên bộ nhớ đệm của nó được làm mới dần dần."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "Trang web này có %s bài viết đã đăng, nên toàn bộ bộ nhớ đệm của nó bị xoá."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "Sau khi thay đổi thiết kế"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "Tự động (khuyến nghị)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "Xoá toàn bộ bộ nhớ đệm trên các trang web có tối đa %s bài viết đã đăng và làm mới dần trên các trang lớn hơn."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "Xoá toàn bộ bộ nhớ đệm"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "Các trang được lưu đệm lại khi được truy cập hoặc tải trước. Tốt nhất cho trang web nhỏ và vừa."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "Làm mới dần dần"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "Khách truy cập vẫn nhận các trang hiện tại trong khi chúng được thay từng ít một, bằng tải trước hoặc ở lượt truy cập kế tiếp. Không có bộ nhớ đệm trống, không có đỉnh tải. Tốt nhất cho trang web lớn."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "Không làm gì"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "Hãy tự xoá bộ nhớ đệm sau mỗi thay đổi."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "Áp dụng khi widget, menu, cài đặt Công cụ tùy chỉnh, mẫu giao diện block hoặc mẫu được đồng bộ được lưu. Chuyển giao diện luôn xoá toàn bộ bộ nhớ đệm."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "Widget/block không dùng bộ nhớ đệm"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "Tắt bộ nhớ đệm widget có sẵn trong phiên bản Pro."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "Tạo mỗi widget một lần cho toàn bộ trang web và cập nhật nó bên trong các trang trong bộ nhớ đệm khi được lưu có sẵn trong phiên bản Pro."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "Tối ưu style"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "Gộp các style sheet của mỗi trang thành các file dùng chung, theo đúng thứ tự và với media của chúng, để các trang tải ít file hơn."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "Thu nhỏ style"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "Xoá khoảng trắng và chú thích khỏi các style sheet đã gộp để chúng nhẹ hơn."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Lưu đệm Google Fonts"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Giữ một bản sao của Google Fonts trên máy chủ của bạn để các trang gửi ít yêu cầu hơn đến các trang web khác."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "Đang đếm…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "Tối ưu script"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "Gộp các script liên tiếp thành các file dùng chung, giữ nguyên thứ tự và vị trí của chúng trong trang, để các trang tải ít file hơn."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "Nếu có gì ngừng hoạt động với script đã tối ưu, hãy giữ nguyên vị trí các script liên quan:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "Giữ nguyên vị trí script nội tuyến"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "Các script viết bên trong trang vẫn ở nguyên chỗ cũ."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "Giữ nguyên vị trí script của giao diện"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "Script của giao diện đang dùng và giao diện cha của nó vẫn là các file riêng."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "Giữ nguyên vị trí script của plugin"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "Script của plugin vẫn là các file riêng."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "Chọn từng plugin riêng lẻ có sẵn trong phiên bản Pro."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "Tránh tối ưu JavaScript theo file"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "Giữ nguyên vị trí các file script cụ thể, theo tên hoặc đường dẫn."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "Script từ các tên miền khác"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "Tắt (khuyến nghị): các script phân tích, quảng cáo, mạng xã hội và script bên thứ ba khác tiếp tục tải từ máy chủ riêng của chúng, nơi chúng luôn được cập nhật. Bật: chúng được sao chép vào các file đã gộp."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "Thu nhỏ script"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "Xoá khoảng trắng và chú thích khỏi các script đã gộp để chúng nhẹ hơn."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "Kiểm tra lại"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "Quy tắc máy chủ"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx đang phục vụ các trang trong bộ nhớ đệm bằng các quy tắc hiện tại."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "Sau khi thay đổi cài đặt, hãy tải lại nginx để nó đọc các quy tắc đã cập nhật."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx đang chạy một phiên bản cũ hơn của quy tắc Flash Cache. Hãy tải lại nginx để áp dụng cài đặt hiện tại."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "Không thể truy cập trang web để kiểm tra xem nginx có đọc quy tắc Flash Cache không."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx chưa đọc quy tắc Flash Cache: các trang đã nằm trong bộ nhớ đệm nhưng vẫn do PHP dựng."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "Thêm dòng này vào bên trong khối server { } của trang web bạn, trước các quy tắc location của nó, rồi tải lại nginx:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "Đã sao chép"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "Sao chép"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache giữ file đó luôn cập nhật; hãy tải lại nginx sau khi thay đổi cài đặt."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed đang phục vụ các trang trong bộ nhớ đệm bằng các quy tắc hiện tại."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed chỉ đọc .htaccess khi khởi động lại: hãy khởi động lại nó sau khi thay đổi cài đặt."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "Không thể truy cập trang web để kiểm tra xem OpenLiteSpeed có chạy quy tắc Flash Cache hiện tại không."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed chưa chạy quy tắc Flash Cache hiện tại. Hãy khởi động lại để áp dụng: Graceful Restart trong WebAdmin, hoặc nút khởi động lại LiteSpeed của bảng điều khiển hosting."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "Bắt buộc: cho đến lúc đó, các trang theo các quy tắc mà OpenLiteSpeed tải lần gần nhất, hoặc do PHP dựng."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "Không bắt buộc: header bộ nhớ đệm của trình duyệt"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "Các trang trong bộ nhớ đệm đã hoạt động mà không cần điều này. OpenLiteSpeed bỏ qua các header trong .htaccess, nên trình duyệt không nhận hướng dẫn bộ nhớ đệm cho chúng. Hãy thêm ngữ cảnh này vào virtual host của trang web bạn để trình duyệt giữ mỗi trang trong %s, giúp các lượt truy cập lại tải nhanh hơn, rồi khởi động lại OpenLiteSpeed:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "Với “Chuyển hướng HTTP sang HTTPS”, hãy thêm cả %s vào các thao tác header của ngữ cảnh /."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "Bỏ qua đến lần cập nhật tiếp theo"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Đã tìm thấy sự khác biệt giữa các quy tắc trong file <strong>nginx.conf</strong> của bạn và các quy tắc Flash Cache. Có thể chỉ là khác biệt khoảng trắng, nhưng bạn nên so sánh các quy tắc trong file với các quy tắc bên dưới càng sớm càng tốt. Hãy click nút &#8217;Cập nhật quy tắc&#8217; để cập nhật các quy tắc."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Đã tìm thấy sự khác biệt giữa các quy tắc trong file <strong>.htaccess</strong> của bạn và các quy tắc rewrite của plugin. Có thể chỉ là khác biệt khoảng trắng, nhưng bạn nên so sánh các quy tắc trong file với các quy tắc bên dưới càng sớm càng tốt. Hãy click nút &#8217;Cập nhật quy tắc&#8217; để cập nhật các quy tắc."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "Cập nhật quy tắc"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "Thư mục bộ nhớ đệm phải là một thư mục bên trong trang web, chẳng hạn flash_cache/, nằm ngoài các thư mục của WordPress. Thư mục hiện tại đã được giữ lại."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Đã cập nhật quy tắc máy chủ web"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "Các file bộ nhớ đệm đã bị xoá."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "Trang tĩnh"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s trang"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "Trang PHP"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "Style"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s file"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "Script"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "Font chữ"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "Tổng số: %1$s trong %2$s file"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "Đã đếm %s trước"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "Chưa đếm"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "Thống kê bộ nhớ đệm"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "Đếm lại"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "Bạn có dùng LiteSpeed Enterprise không?"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "Chúng tôi đang cân nhắc một chế độ nhanh hơn cho nó. Hãy cho chúng tôi biết nếu bạn sẽ dùng."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "Cho chúng tôi biết"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "Bạn đang dùng hoặc muốn dùng LiteSpeed Enterprise?"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "Chúng tôi đang cân nhắc một chế độ nhanh hơn cho LiteSpeed Enterprise. Nếu đủ nhiều người yêu cầu, chúng tôi sẽ xây dựng nó. Nhấn nút để cho chúng tôi biết bạn quan tâm và thêm một người nữa vào danh sách."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "Tôi quan tâm đến LiteSpeed Enterprise"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "Nó gửi lựa chọn của bạn, việc trang web này có chạy LiteSpeed Enterprise không, phiên bản Flash Cache và PHP, ngôn ngữ của trang web và một ID ẩn danh ngẫu nhiên đến flashcache.net: không có email và không có địa chỉ trang web. Mỗi trang web một phiếu."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "Cảm ơn, bạn đã có trong danh sách."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "Bạn sẽ dùng nó như thế nào? (không bắt buộc)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "Hãy gửi email cho tôi khi nó sẵn sàng. Tôi đồng ý chia sẻ địa chỉ email của mình cho việc đó."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "Email của bạn"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "Gửi"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d người đã yêu cầu."

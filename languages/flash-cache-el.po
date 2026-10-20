@@ -1,0 +1,1472 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Το Flash Cache λειτουργεί σε μεμονωμένους ιστότοπους WordPress και δεν μπορεί να ενεργοποιηθεί σε δίκτυο Multisite."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "Το πρόσθετο δεν ενεργοποιήθηκε"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "Μετρημένο, όχι υποσχόμενο"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Αρχική σελίδα του δοκιμαστικού μας ιστότοπου με Apache (WordPress 7.1, PHP 7.4), με ζεστή προσωρινή μνήμη, σε σύγκριση με τον ίδιο ιστότοπο χωρίς κανένα πρόσθετο προσωρινής αποθήκευσης."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0,85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "έως το πρώτο byte"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "102 ms χωρίς προσωρινή μνήμη"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "αιτήματα ανά δευτερόλεπτο"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "18 χωρίς προσωρινή μνήμη"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5,8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "αποστέλλονται σε κάθε επίσκεψη"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "43 KB χωρίς προσωρινή μνήμη"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "Ό,τι χρειάζεται η προσωρινή σας μνήμη"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "Δωρεάν και πλήρες: το Flash Cache δεν κρατά πίσω τον πυρήνα του για να σας πουλήσει αναβάθμιση."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "Πραγματικά στατικές σελίδες"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "Εξυπηρετούνται από τους ίδιους τους κανόνες του διακομιστή ιστού. Μια πρόσφατη σελίδα δεν εκκινεί ποτέ το WordPress, ούτε καν για να ελέγξει την ηλικία της."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "Μοτίβα προσωρινής μνήμης"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "Ένα σύνολο κανόνων για κάθε είδος σελίδας, με τη δική του διάρκεια. Σύρετέ τα στη σειρά που θέλετε."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "Ανανεώσεις στο παρασκήνιο"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "Οι επισκέπτες δεν βρίσκουν ποτέ κενή προσωρινή μνήμη. Μία ανανέωση ανά σελίδα, όσοι κι αν φτάσουν όταν λήξει."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "Προφόρτωση του ιστότοπου"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "Ένας ανιχνευτής στο παρασκήνιο ζεσταίνει την προσωρινή μνήμη σε μικρές παρτίδες που ελέγχετε εσείς."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "Ελαφρύτερες σελίδες"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "Στυλ και σενάρια συνδυασμένα σε λιγότερα αρχεία, κοινά για κάθε σελίδα και προσυμπιεσμένα με gzip."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "Πάντα ενήμεροι"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "Στατιστικά σε πραγματικό χρόνο για σελίδες, στυλ, σενάρια και γραμματοσειρές, που φορτώνουν άμεσα με οποιοδήποτε μέγεθος προσωρινής μνήμης."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "Καθαρό και φορητό"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "Χωρίς αρχεία drop-in, χωρίς αλλαγές στο wp-config.php. Αν το απενεργοποιήσετε, οι κανόνες και η προσωρινή μνήμη εξαφανίζονται."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "Φτιαγμένο για autoblogs"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "Η μαζική δημοσίευση, όπως μια λήψη του WPeMatico, ανανεώνει την αρχική σελίδα και κάθε αρχείο μία φορά ανά παρτίδα."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "Ας κάνουμε autoblogging →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Προχωρήστε παραπέρα με το Pro"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "Μπλοκ και μικροεφαρμογές σε πραγματικό χρόνο, κοινή προσωρινή μνήμη μικροεφαρμογών, ελαχιστοποίηση, τοπικές γραμματοσειρές και άλλα. Δεν είναι απαραίτητο, αλλά βοηθά το δωρεάν πρόσθετο να μεγαλώνει."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "Σύγκριση Δωρεάν και Pro →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "Ο ίδιος διακομιστής, με και χωρίς Flash Cache"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, αρχική σελίδα, ApacheBench με 3.000 αιτήματα και 10 ταυτόχρονα. Οι μπάρες ξεκινούν από την ίδια βάση."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "Χρόνος έως το πρώτο byte"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(λιγότερο είναι καλύτερο)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "Χωρίς προσωρινή μνήμη"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120× ταχύτερο"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "Byte που αποστέλλονται ανά επίσκεψη"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43,2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "7× ελαφρύτερο: βελτιστοποιημένο HTML + προσυμπιεσμένο gzip"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "Αιτήματα ανά δευτερόλεπτο σε σύγκριση με άλλα πρόσθετα προσωρινής μνήμης"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(περισσότερο είναι καλύτερο)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "Ειλικρινής ανάγνωση:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "σε σύγκριση με πρόσθετα που εξυπηρετούν επίσης στατικά αρχεία, η ακατέργαστη ταχύτητα είναι ίδια. Το Flash Cache στέλνει 7–9× λιγότερα byte ανά επίσκεψη, αφήνει τον περιηγητή να κρατά τη σελίδα για μία ημέρα και ενημερώνεται μόνο του όταν δημοσιεύετε, όλα από προεπιλογή."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Ακόμη ταχύτερο με το Pro"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "Βελτιστοποιήσεις που προσθέτουν απόδοση στο δωρεάν πρόσθετο και χρηματοδοτούν την ανάπτυξή του."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "Ελαχιστοποίηση CSS και JavaScript"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "Τα συνδυασμένα αρχεία χάνουν κενά και σχόλια, οπότε κάθε επίσκεψη μεταφέρει λιγότερα byte."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts στον διακομιστή σας"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "Λιγότερα αιτήματα σε άλλους ιστότοπους και καμία αναμονή για διακομιστές τρίτων."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "Κοινή προσωρινή μνήμη μικροεφαρμογών"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "Οι μικροεφαρμογές που φαίνονται ίδιες σε κάθε σελίδα δημιουργούνται μία φορά και μοιράζονται, οπότε η ανοικοδόμηση των σελίδων κοστίζει λιγότερο."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "Μπλοκ σε πραγματικό χρόνο χωρίς απώλεια της προσωρινής μνήμης"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "Μόνο το σημειωμένο μπλοκ ή η μικροεφαρμογή αποδίδεται σε κάθε επίσκεψη, ακόμη και αν ανανεώνεται κάθε λίγα λεπτά. Τα υπόλοιπα παραμένουν στατικά."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "Σενάρια στη θέση τους, πρόσθετο προς πρόσθετο"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "Κρατήστε τα σενάρια ενός προβληματικού πρόσθετου εκτός του συνδυασμένου αρχείου χωρίς να παραιτηθείτε από τη βελτιστοποίηση των υπολοίπων."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "Άδειασμα ή ανοικοδόμηση ενός μεμονωμένου άρθρου"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "Από τη λίστα άρθρων και αυτόματα όταν αποθηκεύετε."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "Λειτουργεί όπου τρέχει ο ιστότοπός σας"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Το Flash Cache γράφει τους κανόνες για τον διακομιστή σας και σας λέει αν τους εφαρμόζει."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "Κανόνες γραμμένοι στο .htaccess σε δικά τους σημειωμένα μπλοκ. Χωρίς ρύθμιση."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "αυτόματο"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: οι ίδιοι κανόνες .htaccess, η ίδια στατική ταχύτητα."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "Σελίδες από την προσωρινή μνήμη απευθείας από τον δίσκο, συμπιεσμένες από τον διακομιστή. Μετρήθηκαν πάνω από 48.000 αιτήματα/s."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "επανεκκίνηση μία φορά"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "Αντιγράψτε το έτοιμο μπλοκ στις ρυθμίσεις του διακομιστή σας και επαναφορτώστε."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "αντιγραφή και επικόλληση"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 ή νεότερο · WordPress 5.9 ή νεότερο · μεμονωμένοι ιστότοποι · δοκιμασμένο με το WPeMatico και τα πρόσθετά του."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Δεν χρειάζεστε το Pro. Αλλά βοηθά πολύ."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Το Flash Cache είναι πλήρες και δωρεάν. Το Pro δεν είναι απαραίτητο για να αξιοποιήσετε ό,τι καλύτερο έχει: προσθέτει μερικά extra, και κάθε άδεια, σκόπιμα φθηνή, χρηματοδοτεί την υποστήριξη και τις νέες βελτιώσεις του δωρεάν πρόσθετου."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "Στατικές σελίδες χωρίς PHP"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "Μοτίβα προσωρινής μνήμης, διάρκειες και λειτουργία PHP για συμβολοσειρές ερωτήματος"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "Ανανέωση στο παρασκήνιο, προφόρτωση και άμεσο άδειασμα"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "Συνδυασμένα στυλ και σενάρια, gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache, LiteSpeed, OpenLiteSpeed και nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "Σελίδες με συμβολοσειρές ερωτήματος στην προσωρινή μνήμη, χωρίς διπλότυπα από παραμέτρους παρακολούθησης"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "Η προσωρινή μνήμη ανανεώνεται μόνη της όταν δημοσιεύετε, σχολιάζετε ή αλλάζετε μικροεφαρμογές, μενού και θέματα εμφάνισης"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "Μόνο μία ανανέωση ανά σελίδα τη φορά, ώστε οι επισκέπτες να μη βρίσκουν ποτέ κενή προσωρινή μνήμη"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "Χρόνος προσωρινής μνήμης περιηγητή της επιλογής σας"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "Στατιστικά προσωρινής μνήμης σε πραγματικό χρόνο και κατάσταση των κανόνων διακομιστή"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "Δείτε όλες τις δωρεάν λειτουργίες"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "Πηγαίνετε σε PRO"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "Ελαχιστοποίηση CSS και JS"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "Τα συνδυασμένα αρχεία χάνουν κενά και σχόλια, οπότε ζυγίζουν λιγότερο."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "Οι σελίδες κάνουν λιγότερα αιτήματα σε άλλους ιστότοπους."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "Μικροεφαρμογές και μπλοκ χωρίς προσωρινή μνήμη"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "Αποδώστε ένα μπλοκ ή μια παλιά μικροεφαρμογή σε πραγματικό χρόνο σε κάθε επίσκεψη ενώ η σελίδα παραμένει στην προσωρινή μνήμη."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "Οι μικροεφαρμογές δημιουργούνται μία φορά και μοιράζονται σε όλες τις σελίδες· η ενημέρωσή τους δεν αδειάζει ποτέ την προσωρινή μνήμη."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "Αφήστε στη θέση τους τα σενάρια των πρόσθετων που θα επιλέξετε."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "Εργαλεία ανά άρθρο"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "Αδειάστε την προσωρινή μνήμη ενός άρθρου από τη λίστα άρθρων και ξαναχτίστε την όταν αποθηκεύετε."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "Ενημερώσεις και υποστήριξη"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "Ενημερώσεις με ένα κλικ και υποστήριξη με άδεια."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Ευχαριστούμε που υποστηρίζετε το Flash Cache"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "Η άδειά σας χρηματοδοτεί την υποστήριξη και τις νέες βελτιώσεις του δωρεάν πρόσθετου."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "Διαχείριση της άδειάς σας"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Υποστηρίξτε το Flash Cache και ξεκλειδώστε τα extra"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Κάθε άδεια Pro χρηματοδοτεί την ανάπτυξη του δωρεάν πρόσθετου. Διαλέξτε το πλάνο που ταιριάζει στους ιστότοπούς σας."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Αποκτήστε το Flash Cache Pro →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "Ασφαλής πληρωμή στο etruel.com"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s από"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "Μετάφραση"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ Αφήστε μια αξιολόγηση"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "Σχετικά"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "Σε εξέλιξη…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "Δεν ήταν δυνατή η σύνδεση με το flashcache.net. Δοκιμάστε ξανά σε λίγο."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "Ευχαριστούμε!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "Δεν επιτρέπεται να το κάνετε αυτό."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "Ο υπερ-επιταχυντής για το WordPress"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "Κάθε σελίδα του ιστότοπού σας γίνεται ένα στατικό αρχείο που ο διακομιστής ιστού σας στέλνει κατευθείαν στον επισκέπτη, χωρίς PHP, χωρίς WordPress, χωρίς αναμονή."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ Αξιολογήστε στο WordPress.org"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "Υποστήριξη"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "Επισκόπηση"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "Απόδοση"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "Διακομιστές"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "Δωρεάν και Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Το Flash Cache Pro χρειάζεται ενημέρωση."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Το Flash Cache Pro %1$s δεν λειτουργεί με το Flash Cache %2$s: τα μπλοκ και οι μικροεφαρμογές του χωρίς προσωρινή μνήμη μπορεί να εμφανίζουν παλιό περιεχόμενο. Ενημερώστε το Flash Cache Pro στην έκδοση %3$s ή νεότερη από την οθόνη των πρόσθετων· οι ενημερώσεις απαιτούν ενεργή άδεια."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "Μετάβαση στα πρόσθετα"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "Ο λογαριασμός μου"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "Απόκρυψη/εμφάνιση μενού."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "ΜΕΝΟΥ"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "Γενικές ρυθμίσεις"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "Ενημερώσεις προσωρινής μνήμης"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "Σύνθετες επιλογές"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "Βελτιστοποίηση"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "Μοτίβα"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "Προσθήκη νέου μοτίβου"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "Προφόρτωση"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Επίσημος ιστότοπος του Flash Cache"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Αποκτήστε Pro"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "Τα αρχεία προσωρινής μνήμης αφαιρέθηκαν ώστε να ταιριάζουν με τη νέα δομή μόνιμων συνδέσμων."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "Μη έγκυρο αίτημα."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "Διαγραφή προσωρινής μνήμης"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "Διαγραφή της προσωρινής μνήμης της τρέχουσας σελίδας"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "Μοτίβο"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "Προσθήκη νέας"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "Τροποποίηση μοτίβου"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "Νέο μοτίβο"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "Προβολή μοτίβου"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "Αναζήτηση μοτίβων"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "Δεν βρέθηκαν μοτίβα"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "Δεν βρέθηκαν μοτίβα στον κάδο"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "Γονικό μοτίβο:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "Η αλλαγή αυτής της επιλογής αδειάζει ολόκληρη την προσωρινή μνήμη. Συνέχεια;"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "Επαναφορά των προεπιλεγμένων ρυθμίσεων;"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "Προσθήκη νέων μοτίβων"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "Δεδομένα μοτίβου"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "Αυτό είναι το εφεδρικό μοτίβο: είναι πάντα τελευταίο στη λίστα, οπότε αποθηκεύει προσωρινά κάθε σελίδα που δεν παίρνει κανένα άλλο μοτίβο."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "Τύποι σελίδων"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "Τα είδη σελίδων στα οποία εφαρμόζεται αυτό το μοτίβο· οι τύποι που δεν έχουν επιλεγεί αφήνονται στα άλλα μοτίβα. Κάθε σελίδα ακολουθεί το πρώτο μοτίβο της λίστας μοτίβων που της ταιριάζει, και το προεπιλεγμένο μοτίβο είναι πάντα τελευταίο."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "Μεμονωμένα άρθρα και σελίδες"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "Αν δεν έχει επιλεγεί τύπος περιεχομένου, συμπεριλαμβάνονται όλοι οι τύποι."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "Αποθήκευση του άρθρου στην προσωρινή μνήμη όταν δημοσιεύεται ή ενημερώνεται"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "Ανανέωση της αρχικής σελίδας όταν δημοσιεύεται ή ενημερώνεται ένα άρθρο"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "Ανανέωση της πρώτης σελίδας των κατηγοριών και των ετικετών του"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "Ανανέωση του άρθρου όταν εγκρίνεται ένα σχόλιο"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "Αρχική σελίδα (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "Σελίδα άρθρων (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "Η λίστα των τελευταίων άρθρων όταν η αρχική σελίδα είναι στατική σελίδα."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "Κατηγορίες (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "Ετικέτες (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "Σελίδες συγγραφέων (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "Άλλα αρχεία (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "Αρχεία ημερομηνίας, προσαρμοσμένες ταξινομίες και αρχεία τύπων περιεχομένου."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "Ροές (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "Αποτελέσματα αναζήτησης (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "Το URL πρέπει να περιέχει"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "Μόνο οι σελίδες των οποίων το URL περιέχει όλα αυτά τα κείμενα χρησιμοποιούν αυτό το μοτίβο."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "Ένα κείμενο ανά γραμμή."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "Το URL δεν πρέπει να περιέχει"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "Οι σελίδες των οποίων το URL περιέχει οποιοδήποτε από αυτά τα κείμενα παραλείπουν αυτό το μοτίβο, για παράδειγμα «login»."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "Τύπος προσωρινής μνήμης"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "Στατικό HTML (το ταχύτερο)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Ο διακομιστής ιστού παραδίδει την αποθηκευμένη σελίδα χωρίς να εκτελέσει PHP. Οι σελίδες με συμβολοσειρά ερωτήματος δεν εξυπηρετούνται από αυτή την προσωρινή μνήμη."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (σελίδες με συμβολοσειρές ερωτήματος)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "Ένα μικρό αρχείο PHP κρατά ένα αντίγραφο ανά συμβολοσειρά ερωτήματος, κάτι που ταιριάζει σε αναζητήσεις και ροές. Λίγο πιο αργό από το στατικό HTML· οι υποβολές φορμών φτάνουν πάντα στο WordPress."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "Χωρίς προσωρινή αποθήκευση"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "Οι σελίδες στις οποίες εφαρμόζεται αυτό το μοτίβο εξυπηρετούνται πάντα ζωντανά από το WordPress. Τοποθετήστε το πάνω από τα μοτίβα που πρέπει να παρακάμψει."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "Ανανέωση μετά από"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "Δευτερόλεπτα που μια σελίδα της προσωρινής μνήμης εξυπηρετείται πριν μια επίσκεψη ζητήσει νέο αντίγραφο. Το 86400 είναι μία ημέρα."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "Ανανέωση προφόρτωσης μετά από"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "Δευτερόλεπτα πριν η προφόρτωση ξαναχτίσει μια σελίδα της προσωρινής μνήμης. Με το «Ανανέωση ληγμένων σελίδων: μόνο από την προφόρτωση», η προφόρτωση χρησιμοποιεί το «Ανανέωση μετά από»."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "Σειρά"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "Εφαρμόζεται σε"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "Προσωρινή μνήμη"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "Πάντα τελευταίο"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "Σύρετε για να αλλάξετε τη σειρά"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "Εφεδρικό: πάντα τελευταίο, αποθηκεύει προσωρινά κάθε σελίδα που δεν παίρνει κανένα άλλο μοτίβο."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s, ανανέωση μετά από %2$s"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "Όλοι οι τύποι περιεχομένου"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "Αρχική σελίδα"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "Σελίδα άρθρων"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "Αρχεία"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Ροές"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "Συγγραφείς"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "Κανένας τύπος σελίδας"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "Το URL περιέχει: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "Το URL δεν περιέχει: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "Οι προεπιλογές έχουν επανέλθει."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "Επαναφορά στις προεπιλογές"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Μετάβαση στη σελίδα ρυθμίσεων του Flash Cache"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "Ιστότοπος"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "Μη έγκυρο άρθρο."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "Το άρθρο δεν έχει προσωρινή μνήμη."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "Άδειασμα προσωρινής μνήμης του άρθρου"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "Εκτέλεση προφόρτωσης"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "Η προφόρτωση χτίζει την προσωρινή μνήμη των δημόσιων σελίδων, και προαιρετικά των κατηγοριών και ετικετών τους, ακολουθώντας τα μοτίβα σας, ώστε οι επισκέπτες να τις βρίσκουν ήδη αποθηκευμένες."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "Εκτελείται σε μικρές παρτίδες στο παρασκήνιο ώστε το φορτίο του διακομιστή να παραμένει χαμηλό."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "Η προφόρτωση εκτελείται τώρα: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "Η προφόρτωση περιμένει να εκτελεστεί."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "Επόμενη εκτέλεση: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "Ενεργοποίηση προφόρτωσης"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "Ανενεργό"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "Ενεργό"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "Συμπερίληψη κατηγοριών και ετικετών"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "Αποθηκεύει επίσης στην προσωρινή μνήμη τις σελίδες αρχείου των κατηγοριών και ετικετών κάθε προφορτωμένου άρθρου."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "Σελίδες ανά παρτίδα"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "Πόσες σελίδες αποθηκεύει κάθε παρτίδα. Μειώστε το αν ο διακομιστής δυσκολεύεται κατά την προφόρτωση."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "Παύση μεταξύ παρτίδων"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "Δευτερόλεπτα αναμονής πριν από την επόμενη παρτίδα. Αυξήστε το αν η προφόρτωση προσκρούει σε χρονικά όρια της PHP."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "Διακοπή μετά από ένα πλήρες πέρασμα"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "Η προφόρτωση απενεργοποιείται μόνη της όταν επεξεργαστεί κάθε σελίδα. Αφήστε την απενεργοποιημένη για συνεχή προφόρτωση."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "Οι ρυθμίσεις ενημερώθηκαν"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "Ενεργοποιήστε πρώτα την προφόρτωση: εκτελείται μόνο όσο είναι ενεργοποιημένη."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "Η προφόρτωση ξεκίνησε και εκτελείται στο παρασκήνιο."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Προφόρτωση Flash Cache"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "Ενεργοποίηση προσωρινής μνήμης"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "Απενεργοποιήστε το για να σταματήσει η δημιουργία νέων σελίδων στην προσωρινή μνήμη. Οι σελίδες που ήδη βρίσκονται σε αυτήν διαγράφονται με το παρακάτω κουμπί."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "Διαγραφή προσωρινής μνήμης"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "Αφαιρεί κάθε σελίδα της προσωρινής μνήμης και κάθε συνδυασμένο αρχείο. Οι σελίδες αποθηκεύονται ξανά όταν επισκέπτονται ή προφορτώνονται."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "Ρυθμίσεις μοτίβων"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "Φάκελος προσωρινής μνήμης"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "Όπου αποθηκεύονται οι σελίδες της προσωρινής μνήμης και τα συνδυασμένα αρχεία, σχετικά με τη διαδρομή που εμφανίζεται. Πρέπει να είναι δικός του φάκελος, εκτός των φακέλων του WordPress."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "Εξυπηρέτηση HTTP και HTTPS"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "Οι σελίδες της προσωρινής μνήμης εξυπηρετούνται και στα δύο πρωτόκολλα."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "Ανακατεύθυνση HTTP σε HTTPS"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "Οι επισκέπτες που φτάνουν μέσω HTTP ανακατευθύνονται σε HTTPS και οι περιηγητές ενημερώνονται να συνεχίσουν να χρησιμοποιούν HTTPS για τον χρόνο προσωρινής μνήμης του περιηγητή (κεφαλίδα Strict-Transport-Security)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "Αυτή η σελίδα διαχείρισης είναι ανοιχτή μέσω HTTP, οπότε οι σελίδες της προσωρινής μνήμης εξυπηρετούνται όπως προσπελαύνεται ο ιστότοπος. Η επιλογή ανακατεύθυνσης των επισκεπτών σε HTTPS εμφανίζεται εδώ όταν η διαχείριση ανοίγει μέσω HTTPS."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "Χρόνος προσωρινής μνήμης περιηγητή"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "Δευτερόλεπτα που ένας περιηγητής μπορεί να κρατά μια σελίδα της προσωρινής μνήμης πριν τη ζητήσει ξανά, αποστέλλονται στην κεφαλίδα Cache-Control. Το 86400 είναι μία ημέρα."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Παράλειψη επισκεπτών με cookies"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "Οι επισκέπτες που στέλνουν cookie του οποίου το όνομα περιέχει ένα από αυτά τα κείμενα λαμβάνουν πάντα τη ζωντανή σελίδα. Οι συνδεδεμένοι χρήστες, όσοι σχολιάζουν και οι επισκέπτες άρθρων με συνθηματικό αναφέρονται από προεπιλογή."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "Κλείδωμα"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "Αρχεία (προτείνεται)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "Ένα αρχείο κλειδώματος ανά σελίδα εμποδίζει δύο επισκέπτες να χτίσουν την ίδια σελίδα ταυτόχρονα."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "Βάση δεδομένων"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "Ένα κλείδωμα MySQL κάνει το ίδιο. Χρήσιμο όταν πολλοί διακομιστές μοιράζονται τη βάση δεδομένων αλλά όχι τον δίσκο."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "Δημιουργία προσωρινής μνήμης"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "Καταγραφή της σελίδας που επισκέφθηκε (προτείνεται)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "Η σελίδα που λαμβάνει ένας επισκέπτης αποθηκεύεται όπως στάλθηκε· οι επόμενες ανανεώσεις ζητούν ξανά τη σελίδα στο παρασκήνιο."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "Αίτημα της σελίδας ξεχωριστά"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "Κάθε σελίδα ανακτάται με δικό της αίτημα. Πιο αργό· χρησιμοποιήστε το όταν ένα άλλο πρόσθετο συγκρούεται με την προσωρινή αποθήκευση εξόδου."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "Ανανέωση ληγμένων σελίδων"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "Στις επισκέψεις (προτείνεται)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "Μια επίσκεψη σε σελίδα της οποίας ο χρόνος «Ανανέωση μετά από» έχει περάσει ζητά από τον διακομιστή να την ξαναχτίσει στο παρασκήνιο. Οι πρόσφατες σελίδες δεν κάνουν επιπλέον αίτημα."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "Μόνο από την προφόρτωση"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "Οι σελίδες της προσωρινής μνήμης δεν φέρουν σενάριο ανανέωσης. Οι ληγμένες σελίδες ξαναχτίζονται από τη διεργασία προφόρτωσης, οπότε κρατήστε την ενεργοποιημένη."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "Αυτός ο ιστότοπος έχει %s δημοσιευμένο άρθρο, οπότε η προσωρινή του μνήμη ανανεώνεται σταδιακά."
+msgstr[1] "Αυτός ο ιστότοπος έχει %s δημοσιευμένα άρθρα, οπότε η προσωρινή του μνήμη ανανεώνεται σταδιακά."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "Αυτός ο ιστότοπος έχει %s δημοσιευμένο άρθρο, οπότε διαγράφεται ολόκληρη η προσωρινή του μνήμη."
+msgstr[1] "Αυτός ο ιστότοπος έχει %s δημοσιευμένα άρθρα, οπότε διαγράφεται ολόκληρη η προσωρινή του μνήμη."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "Μετά από αλλαγές σχεδίασης"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "Αυτόματο (προτείνεται)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "Διαγράφει ολόκληρη την προσωρινή μνήμη σε ιστότοπους με έως %s δημοσιευμένα άρθρα και την ανανεώνει σταδιακά στους μεγαλύτερους."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "Διαγραφή ολόκληρης της προσωρινής μνήμης"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "Οι σελίδες αποθηκεύονται ξανά όταν επισκέπτονται ή προφορτώνονται. Ιδανικό για μικρούς και μεσαίους ιστότοπους."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "Σταδιακή ανανέωση"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "Οι επισκέπτες συνεχίζουν να παίρνουν τις τρέχουσες σελίδες ενώ αντικαθίστανται λίγες τη φορά, από την προφόρτωση ή στην επόμενη επίσκεψή τους. Χωρίς κενή προσωρινή μνήμη, χωρίς αιχμή φορτίου. Ιδανικό για μεγάλους ιστότοπους."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "Καμία ενέργεια"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "Διαγράψτε μόνοι σας την προσωρινή μνήμη μετά από κάθε αλλαγή."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "Εφαρμόζεται όταν αποθηκεύονται μικροεφαρμογές, μενού, ρυθμίσεις του Προσαρμογέα, πρότυπα θεμάτων με μπλοκ ή συγχρονισμένα μοτίβα. Η αλλαγή θέματος εμφάνισης διαγράφει πάντα ολόκληρη την προσωρινή μνήμη."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "Μικροεφαρμογές/μπλοκ χωρίς προσωρινή μνήμη"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "Η απενεργοποίηση της προσωρινής μνήμης μικροεφαρμογών είναι διαθέσιμη στην έκδοση Pro."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "Η δημιουργία κάθε μικροεφαρμογής μία φορά για ολόκληρο τον ιστότοπο και η ενημέρωσή της μέσα στις σελίδες της προσωρινής μνήμης όταν αποθηκεύεται είναι διαθέσιμη στην έκδοση Pro."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "Βελτιστοποίηση στυλ"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "Ενώνει τα φύλλα στυλ κάθε σελίδας σε κοινά αρχεία, με τη σειρά και τα μέσα τους, ώστε οι σελίδες να φορτώνουν λιγότερα αρχεία."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "Ελαχιστοποίηση στυλ"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "Αφαιρεί κενά και σχόλια από τα συνδυασμένα φύλλα στυλ, ώστε να ζυγίζουν λιγότερο."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Προσωρινή αποθήκευση Google Fonts"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Κρατά αντίγραφο των Google Fonts στον διακομιστή σας, ώστε οι σελίδες να κάνουν λιγότερα αιτήματα σε άλλους ιστότοπους."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "Καταμέτρηση…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "Βελτιστοποίηση σεναρίων"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "Ενώνει διαδοχικά σενάρια σε κοινά αρχεία, διατηρώντας τη σειρά και τη θέση τους στη σελίδα, ώστε οι σελίδες να φορτώνουν λιγότερα αρχεία."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "Αν κάτι σταματήσει να λειτουργεί με τα βελτιστοποιημένα σενάρια, αφήστε στη θέση τους τα σενάρια που εμπλέκονται:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "Διατήρηση των ενσωματωμένων σεναρίων στη θέση τους"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "Τα σενάρια που είναι γραμμένα μέσα στη σελίδα μένουν εκεί που είναι."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "Διατήρηση των σεναρίων του θέματος εμφάνισης στη θέση τους"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "Τα σενάρια του ενεργού θέματος εμφάνισης και του γονικού του μένουν ως ξεχωριστά αρχεία."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "Διατήρηση των σεναρίων των πρόσθετων στη θέση τους"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "Τα σενάρια των πρόσθετων μένουν ως ξεχωριστά αρχεία."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "Η επιλογή κάθε πρόσθετου ξεχωριστά είναι διαθέσιμη στην έκδοση Pro."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "Αποφυγή βελτιστοποίησης JavaScript ανά αρχείο"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "Αφήνει συγκεκριμένα αρχεία σεναρίων στη θέση τους, με όνομα ή διαδρομή."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "Σενάρια από άλλους τομείς"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "Ανενεργό (προτείνεται): σενάρια ανάλυσης, διαφημίσεων, κοινωνικών δικτύων και άλλων τρίτων συνεχίζουν να φορτώνουν από τους δικούς τους διακομιστές, όπου μένουν ενημερωμένα. Ενεργό: αντιγράφονται στα συνδυασμένα αρχεία."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "Ελαχιστοποίηση σεναρίων"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "Αφαιρεί κενά και σχόλια από τα συνδυασμένα σενάρια, ώστε να ζυγίζουν λιγότερο."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "Έλεγχος ξανά"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "Κανόνες διακομιστή"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "Το nginx εξυπηρετεί τις σελίδες της προσωρινής μνήμης με τους τρέχοντες κανόνες."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "Μετά την αλλαγή ρυθμίσεων, επαναφορτώστε το nginx ώστε να διαβάσει τους ενημερωμένους κανόνες."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "Το nginx εκτελεί παλαιότερη έκδοση των κανόνων του Flash Cache. Επαναφορτώστε το nginx για να εφαρμοστούν οι τρέχουσες ρυθμίσεις."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "Δεν ήταν δυνατή η πρόσβαση στον ιστότοπο για να ελεγχθεί αν το nginx διαβάζει τους κανόνες του Flash Cache."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "Το nginx δεν διαβάζει ακόμη τους κανόνες του Flash Cache: οι σελίδες αποθηκεύονται αλλά εξακολουθούν να χτίζονται από την PHP."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "Προσθέστε αυτή τη γραμμή μέσα στο μπλοκ server { } του ιστότοπού σας, πριν από τους κανόνες location, και επαναφορτώστε το nginx:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "Αντιγράφηκε"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Το Flash Cache κρατά αυτό το αρχείο ενημερωμένο· επαναφορτώστε το nginx μετά την αλλαγή ρυθμίσεων."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "Το OpenLiteSpeed εξυπηρετεί τις σελίδες της προσωρινής μνήμης με τους τρέχοντες κανόνες."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "Το OpenLiteSpeed διαβάζει το .htaccess μόνο όταν επανεκκινείται: επανεκκινήστε το μετά την αλλαγή ρυθμίσεων."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "Δεν ήταν δυνατή η πρόσβαση στον ιστότοπο για να ελεγχθεί αν το OpenLiteSpeed εκτελεί τους τρέχοντες κανόνες του Flash Cache."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "Το OpenLiteSpeed δεν εκτελεί ακόμη τους τρέχοντες κανόνες του Flash Cache. Επανεκκινήστε το για να εφαρμοστούν: Graceful Restart στο WebAdmin ή η επανεκκίνηση του LiteSpeed από τον πίνακα φιλοξενίας σας."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "Απαιτείται: μέχρι τότε, οι σελίδες ακολουθούν τους κανόνες που φόρτωσε τελευταία το OpenLiteSpeed ή χτίζονται από την PHP."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "Προαιρετικό: κεφαλίδες προσωρινής μνήμης περιηγητή"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "Οι σελίδες της προσωρινής μνήμης λειτουργούν ήδη χωρίς αυτό. Το OpenLiteSpeed αγνοεί τις κεφαλίδες στο .htaccess, οπότε οι περιηγητές δεν λαμβάνουν οδηγίες προσωρινής αποθήκευσης για αυτές. Προσθέστε αυτό το πλαίσιο στον εικονικό διακομιστή του ιστότοπού σας ώστε οι περιηγητές να κρατούν κάθε σελίδα για %s, ώστε οι επόμενες επισκέψεις να φορτώνουν γρηγορότερα, και μετά επανεκκινήστε το OpenLiteSpeed:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "Για το «Ανακατεύθυνση HTTP σε HTTPS», προσθέστε επίσης %s στις λειτουργίες κεφαλίδας του πλαισίου /."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "Παράβλεψη μέχρι την επόμενη ενημέρωση"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Βρέθηκε διαφορά μεταξύ των κανόνων στο αρχείο <strong>nginx.conf</strong> και των κανόνων του Flash Cache. Μπορεί να είναι απλές διαφορές κενών, αλλά θα πρέπει να συγκρίνετε το συντομότερο τους κανόνες του αρχείου με τους παρακάτω. Πατήστε το κουμπί &#8217;Ενημέρωση κανόνων&#8217; για να ενημερωθούν οι κανόνες."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "Βρέθηκε διαφορά μεταξύ των κανόνων στο αρχείο <strong>.htaccess</strong> και των κανόνων επανεγγραφής του πρόσθετου. Μπορεί να είναι απλές διαφορές κενών, αλλά θα πρέπει να συγκρίνετε το συντομότερο τους κανόνες του αρχείου με τους παρακάτω. Πατήστε το κουμπί &#8217;Ενημέρωση κανόνων&#8217; για να ενημερωθούν οι κανόνες."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "Ενημέρωση κανόνων"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "Ο φάκελος προσωρινής μνήμης πρέπει να είναι φάκελος μέσα στον ιστότοπο, όπως flash_cache/, εκτός των φακέλων του WordPress. Διατηρήθηκε ο τρέχων φάκελος."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Οι κανόνες του διακομιστή ιστού ενημερώθηκαν"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "Τα αρχεία προσωρινής μνήμης διαγράφηκαν."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "Στατικές σελίδες"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s σελίδα"
+msgstr[1] "%s σελίδες"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "Σελίδες PHP"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "Στυλ"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s αρχείο"
+msgstr[1] "%s αρχεία"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "Σενάρια"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "Γραμματοσειρές"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "Σύνολο: %1$s σε %2$s αρχεία"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "Μετρήθηκε πριν από %s"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "Δεν έχει μετρηθεί ακόμη"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "Στατιστικά προσωρινής μνήμης"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "Επανακαταμέτρηση"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "Χρησιμοποιείτε το LiteSpeed Enterprise;"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "Αξιολογούμε μια ταχύτερη λειτουργία για αυτό. Πείτε μας αν θα τη χρησιμοποιούσατε."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "Πείτε μας"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "Χρησιμοποιείτε ή θέλετε να χρησιμοποιήσετε το LiteSpeed Enterprise;"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "Αξιολογούμε μια ταχύτερη λειτουργία για το LiteSpeed Enterprise. Αν την ζητήσουν αρκετά άτομα, θα την φτιάξουμε. Πατήστε το κουμπί για να μας πείτε ότι ενδιαφέρεστε και να προστεθεί ένα ακόμη στη λίστα."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "Ενδιαφέρομαι για το LiteSpeed Enterprise"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "Στέλνει την επιλογή σας, αν αυτός ο ιστότοπος χρησιμοποιεί LiteSpeed Enterprise, τις εκδόσεις του Flash Cache και της PHP, τη γλώσσα του ιστότοπου και ένα τυχαίο ανώνυμο αναγνωριστικό στο flashcache.net: χωρίς email και χωρίς διεύθυνση ιστότοπου. Μία ψήφος ανά ιστότοπο."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "Ευχαριστούμε, είστε στη λίστα."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "Πώς θα το χρησιμοποιούσατε; (προαιρετικό)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "Στείλτε μου email όταν είναι έτοιμο. Συμφωνώ να μοιραστώ τη διεύθυνση email μου γι’ αυτόν τον σκοπό."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "Το email σας"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "Αποστολή"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d άτομο το ζήτησε."
+msgstr[1] "%d άτομα το ζήτησαν."

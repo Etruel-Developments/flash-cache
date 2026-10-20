@@ -1,0 +1,1472 @@
+# Copyright (C) 2026 etruel Developments
+# This file is distributed under the same license as the Flash Cache plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Cache 4.0\n"
+"Report-Msgid-Bugs-To: https://etruel.com/my-account/support/\n"
+"POT-Creation-Date: 2026-10-20 16:31+0000\n"
+"PO-Revision-Date: 2026-10-20 13:31+0000\n"
+"Last-Translator: Etruel Developments <translations@etruel.com>\n"
+"Language-Team: Etruel Developments <translations@etruel.com>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lang\n"
+"X-Poedit-SearchPathExcluded-1: tools\n"
+"X-Domain: flash-cache\n"
+
+#: flash_cache.php:149
+msgid "Flash Cache works on single WordPress sites and cannot be activated on a Multisite network."
+msgstr "Flash Cache tek WordPress sitelerinde çalışır ve bir çoklu site ağında etkinleştirilemez."
+
+#: flash_cache.php:149
+msgid "Plugin not activated"
+msgstr "Eklenti etkinleştirilmedi"
+
+#: includes/about.php:103
+msgid "Measured, not promised"
+msgstr "Ölçülmüş, vaat edilmemiş"
+
+#: includes/about.php:104
+msgid "Home page on our Apache test site (WordPress 7.1, PHP 7.4), warm cache, compared with the same site without any cache plugin."
+msgstr "Apache test sitemizin ana sayfası (WordPress 7.1, PHP 7.4), ön belleği ısıtılmış hâlde, hiçbir ön bellek eklentisi olmayan aynı site ile karşılaştırıldı."
+
+#: includes/about.php:106 includes/about.php:133
+msgid "0.85 ms"
+msgstr "0,85 ms"
+
+#: includes/about.php:106
+msgid "to the first byte"
+msgstr "ilk bayta kadar"
+
+#: includes/about.php:106
+msgid "102 ms without cache"
+msgstr "ön bellek olmadan 102 ms"
+
+#: includes/about.php:107
+msgid "requests per second"
+msgstr "saniyedeki istek"
+
+#: includes/about.php:107
+msgid "18 without cache"
+msgstr "ön bellek olmadan 18"
+
+#: includes/about.php:108 includes/about.php:137
+msgid "5.8 KB"
+msgstr "5,8 KB"
+
+#: includes/about.php:108
+msgid "sent per visit"
+msgstr "her ziyarette gönderilen"
+
+#: includes/about.php:108
+msgid "43 KB without cache"
+msgstr "ön bellek olmadan 43 KB"
+
+#: includes/about.php:110
+msgid "Everything your cache needs"
+msgstr "Ön belleğinizin ihtiyaç duyduğu her şey"
+
+#: includes/about.php:111
+msgid "Free and complete: Flash Cache does not hold back its core to sell an upgrade."
+msgstr "Ücretsiz ve eksiksiz: Flash Cache, size bir yükseltme satmak için çekirdeğini geri tutmaz."
+
+#: includes/about.php:113
+msgid "Truly static pages"
+msgstr "Gerçekten statik sayfalar"
+
+#: includes/about.php:113
+msgid "Served by the web server's own rules. A fresh page never starts WordPress, not even to check its age."
+msgstr "Web sunucusunun kendi kuralları tarafından sunulur. Taze bir sayfa, yaşını denetlemek için bile WordPress'i asla başlatmaz."
+
+#: includes/about.php:114
+msgid "Cache patterns"
+msgstr "Ön bellek modelleri"
+
+#: includes/about.php:114
+msgid "One set of rules for each kind of page, with its own lifetime. Drag them into the order you want."
+msgstr "Her sayfa türü için kendi ömrüne sahip bir kural kümesi. İstediğiniz sıraya sürükleyin."
+
+#: includes/about.php:115
+msgid "Background refreshes"
+msgstr "Arka planda yenilemeler"
+
+#: includes/about.php:115
+msgid "Visitors never meet an empty cache. One refresh per page, however many arrive when it expires."
+msgstr "Ziyaretçiler asla boş bir ön belleğe rastlamaz. Süresi dolduğunda kaç kişi gelirse gelsin sayfa başına tek bir yenileme."
+
+#: includes/about.php:116
+msgid "Preload the site"
+msgstr "Sitenin ön yüklenmesi"
+
+#: includes/about.php:116
+msgid "A background crawler warms the cache in small batches you control."
+msgstr "Arka plandaki bir tarayıcı, sizin denetlediğiniz küçük gruplarla ön belleği ısıtır."
+
+#: includes/about.php:117
+msgid "Lighter pages"
+msgstr "Daha hafif sayfalar"
+
+#: includes/about.php:117
+msgid "Styles and scripts combined into fewer files, shared by every page, pre-compressed with gzip."
+msgstr "Daha az dosyada birleştirilmiş, her sayfa tarafından paylaşılan ve gzip ile önceden sıkıştırılmış stiller ve betikler."
+
+#: includes/about.php:118
+msgid "Always in the know"
+msgstr "Her zaman haberdar"
+
+#: includes/about.php:118
+msgid "Live statistics of pages, styles, scripts and fonts, loaded instantly at any cache size."
+msgstr "Sayfaların, stillerin, betiklerin ve yazı tiplerinin canlı istatistikleri; ön bellek ne kadar büyük olursa olsun anında yüklenir."
+
+#: includes/about.php:119
+msgid "Clean and portable"
+msgstr "Temiz ve taşınabilir"
+
+#: includes/about.php:119
+msgid "No drop-in files, no wp-config.php changes. Deactivate it and the rules and the cache are gone."
+msgstr "drop-in dosyası yok, wp-config.php değişikliği yok. Etkisizleştirirseniz kurallar ve ön bellek yok olur."
+
+#: includes/about.php:120
+msgid "Made for autoblogs"
+msgstr "Otomatik bloglar için yapıldı"
+
+#: includes/about.php:120
+msgid "Bulk publishing, like a WPeMatico fetch, refreshes the home page and each archive once per batch."
+msgstr "WPeMatico çekimi gibi toplu yayımlama, ana sayfayı ve her arşivi grup başına yalnızca bir kez yeniler."
+
+#: includes/about.php:120
+msgid "Let's autoblog →"
+msgstr "Otomatik bloglamaya başlayalım →"
+
+#: includes/about.php:121
+msgid "Go further with Pro"
+msgstr "Pro ile daha ileri gidin"
+
+#: includes/about.php:121
+msgid "Live blocks and widgets, shared widget cache, minify, local fonts and more. Not required, but it keeps the free plugin growing."
+msgstr "Canlı bloklar ve bileşenler, paylaşılan bileşen ön belleği, küçültme, yerel yazı tipleri ve daha fazlası. Gerekli değil, ancak ücretsiz eklentinin büyümesine yardımcı olur."
+
+#: includes/about.php:121
+msgid "Compare Free vs Pro →"
+msgstr "Ücretsiz ve Pro'yu karşılaştırın →"
+
+#: includes/about.php:128
+msgid "Same server, with and without Flash Cache"
+msgstr "Aynı sunucu, Flash Cache ile ve onsuz"
+
+#: includes/about.php:129
+msgid "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, home page, ApacheBench 3,000 requests at 10 concurrent. Bars start at the same baseline."
+msgstr "Apache 2.4, WordPress 7.1, PHP 7.4 + OPcache, ana sayfa, 3.000 istek ve 10 eşzamanlı ile ApacheBench. Çubuklar aynı taban çizgisinden başlar."
+
+#: includes/about.php:131
+msgid "Time to first byte"
+msgstr "İlk bayta kadar geçen süre"
+
+#: includes/about.php:131 includes/about.php:135
+msgid "(lower is better)"
+msgstr "(daha az daha iyidir)"
+
+#: includes/about.php:132 includes/about.php:136 includes/about.php:145
+msgid "No cache"
+msgstr "Ön bellek yok"
+
+#: includes/about.php:132
+msgid "102 ms"
+msgstr "102 ms"
+
+#: includes/about.php:134
+msgid "≈120× faster"
+msgstr "≈120× daha hızlı"
+
+#: includes/about.php:135
+msgid "Bytes sent per visit"
+msgstr "Her ziyarette gönderilen bayt"
+
+#: includes/about.php:136
+msgid "43.2 KB"
+msgstr "43,2 KB"
+
+#: includes/about.php:138
+msgid "7× lighter: optimized HTML + precompressed gzip"
+msgstr "7× daha hafif: iyileştirilmiş HTML + önceden sıkıştırılmış gzip"
+
+#: includes/about.php:139
+msgid "Requests per second against other cache plugins"
+msgstr "Diğer ön bellek eklentilerine karşı saniyedeki istek"
+
+#: includes/about.php:139
+msgid "(higher is better)"
+msgstr "(daha fazla daha iyidir)"
+
+#: includes/about.php:148
+msgid "Honest reading:"
+msgstr "Dürüst okuma:"
+
+#: includes/about.php:148
+msgid "against plugins that also serve static files, raw speed is equal. Flash Cache sends 7–9× fewer bytes per visit, lets the browser keep the page for a day, and keeps itself up to date when you publish — all by default."
+msgstr "statik dosyaları da sunan eklentilere kıyasla ham hız aynıdır. Flash Cache her ziyarette 7–9× daha az bayt gönderir, tarayıcının sayfayı bir gün saklamasını sağlar ve siz yayımladığınızda kendini güncel tutar; hepsi varsayılan olarak."
+
+#: includes/about.php:149
+msgid "Even faster with Pro"
+msgstr "Pro ile daha da hızlı"
+
+#: includes/about.php:150
+msgid "Optimizations that add performance on top of the free plugin, and fund its development."
+msgstr "Ücretsiz eklentiye başarım katan ve geliştirilmesini finanse eden iyileştirmeler."
+
+#: includes/about.php:152
+msgid "Minify CSS and JavaScript"
+msgstr "CSS ve JavaScript'i küçült"
+
+#: includes/about.php:152
+msgid "The combined files lose spaces and comments, so every visit carries fewer bytes."
+msgstr "Birleştirilmiş dosyalar boşluklarını ve yorumlarını kaybeder, böylece her ziyaret daha az bayt taşır."
+
+#: includes/about.php:153 includes/about.php:197
+msgid "Google Fonts on your server"
+msgstr "Google Fonts sunucunuzda"
+
+#: includes/about.php:153
+msgid "Fewer requests to other sites and no wait for third-party hosts."
+msgstr "Diğer sitelere daha az istek ve üçüncü taraf sunucuları beklemek yok."
+
+#: includes/about.php:154 includes/about.php:199 includes/settings.php:462
+msgid "Shared widget cache"
+msgstr "Paylaşılan bileşen ön belleği"
+
+#: includes/about.php:154
+msgid "Widgets that look the same on every page are built once and shared, so rebuilding pages is cheaper."
+msgstr "Her sayfada aynı görünen bileşenler bir kez oluşturulur ve paylaşılır, böylece sayfaları yeniden oluşturmak daha ucuz olur."
+
+#: includes/about.php:155
+msgid "Live blocks without losing the cache"
+msgstr "Ön belleği kaybetmeden canlı bloklar"
+
+#: includes/about.php:155
+msgid "Only the marked block or widget renders on each visit, even refreshed every few minutes. The rest stays static."
+msgstr "Her ziyarette yalnızca işaretlenen blok veya bileşen işlenir, birkaç dakikada bir yenilense bile. Geri kalanı statik kalır."
+
+#: includes/about.php:156 includes/about.php:200
+msgid "Scripts in place, plugin by plugin"
+msgstr "Betikler yerinde, eklenti eklenti"
+
+#: includes/about.php:156
+msgid "Keep a problematic plugin's scripts out of the combined file without giving up optimization for the rest."
+msgstr "Sorunlu bir eklentinin betiklerini birleştirilmiş dosyanın dışında tutun; geri kalanın iyileştirilmesinden vazgeçmeyin."
+
+#: includes/about.php:157
+msgid "Clear or rebuild a single post"
+msgstr "Tek bir yazıyı boşalt veya yeniden oluştur"
+
+#: includes/about.php:157
+msgid "From the posts list, and automatically when you save."
+msgstr "Yazı listesinden ve kaydederken otomatik olarak."
+
+#: includes/about.php:163
+msgid "Works where your site runs"
+msgstr "Siteniz nerede çalışıyorsa orada çalışır"
+
+#: includes/about.php:164
+msgid "Flash Cache writes the rules for your server and tells you whether it is running them."
+msgstr "Flash Cache sunucunuz için kuralları yazar ve onları çalıştırıp çalıştırmadığını söyler."
+
+#: includes/about.php:166
+msgid "Rules written to .htaccess in their own marked blocks. Zero setup."
+msgstr "Kurallar .htaccess içine kendi işaretli bloklarında yazılır. Kurulum gerekmez."
+
+#: includes/about.php:166 includes/about.php:167
+msgid "automatic"
+msgstr "otomatik"
+
+#: includes/about.php:167
+msgid "Enterprise: same .htaccess rules, same static speed."
+msgstr "Enterprise: aynı .htaccess kuralları, aynı statik hız."
+
+#: includes/about.php:168
+msgid "Cached pages straight from disk, compressed by the server. 48,000+ req/s measured."
+msgstr "Ön bellekteki sayfalar doğrudan diskten sunulur ve sunucu tarafından sıkıştırılır. 48.000'den fazla istek/sn ölçüldü."
+
+#: includes/about.php:168
+msgid "restart once"
+msgstr "bir kez yeniden başlat"
+
+#: includes/about.php:169
+msgid "Copy the ready-made block into your server config and reload."
+msgstr "Hazır bloğu sunucu yapılandırmanıza kopyalayın ve yeniden yükleyin."
+
+#: includes/about.php:169
+msgid "copy & paste"
+msgstr "kopyala ve yapıştır"
+
+#: includes/about.php:172
+msgid "PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons."
+msgstr "PHP 7.2 veya sonrası · WordPress 5.9 veya sonrası · tek siteler · WPeMatico ve eklentileriyle denendi."
+
+#: includes/about.php:177
+msgid "You don't need Pro. But it helps a lot."
+msgstr "Pro'ya ihtiyacınız yok. Ama çok yardımcı olur."
+
+#: includes/about.php:178
+msgid "Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin."
+msgstr "Flash Cache eksiksiz ve ücretsizdir. En iyisini almak için Pro gerekli değildir: birkaç ek özellik sunar ve bilerek düşük fiyatlı her lisans, ücretsiz eklentinin desteğini ve yeni iyileştirmelerini finanse eder."
+
+#: includes/about.php:182
+msgid "Static pages served without PHP"
+msgstr "PHP olmadan sunulan statik sayfalar"
+
+#: includes/about.php:183
+msgid "Cache patterns, lifetimes and PHP mode for query strings"
+msgstr "Ön bellek modelleri, ömürler ve sorgu dizgeleri için PHP kipi"
+
+#: includes/about.php:184
+msgid "Background refresh, preload and instant purge"
+msgstr "Arka planda yenileme, ön yükleme ve anında boşaltma"
+
+#: includes/about.php:185
+msgid "Combined styles and scripts, gzip"
+msgstr "Birleştirilmiş stiller ve betikler, gzip"
+
+#: includes/about.php:186
+msgid "Apache, LiteSpeed, OpenLiteSpeed and nginx"
+msgstr "Apache, LiteSpeed, OpenLiteSpeed ve nginx"
+
+#: includes/about.php:187
+msgid "Pages with query strings cached, without tracking-parameter duplicates"
+msgstr "Sorgu dizgeli sayfalar ön bellekte, izleme parametrelerinden doğan kopyalar olmadan"
+
+#: includes/about.php:188
+msgid "Cache refreshed by itself when you publish, comment or change widgets, menus and themes"
+msgstr "Siz yayımladığınızda, yorum yaptığınızda ya da bileşenleri, menüleri ve temaları değiştirdiğinizde ön bellek kendini yeniler"
+
+#: includes/about.php:189
+msgid "Only one refresh per page at a time, so visitors never meet an empty cache"
+msgstr "Sayfa başına aynı anda yalnızca bir yenileme, böylece ziyaretçiler asla boş bir ön belleğe rastlamaz"
+
+#: includes/about.php:190
+msgid "Browser cache time of your choice"
+msgstr "Seçiminize göre tarayıcı ön bellek süresi"
+
+#: includes/about.php:191
+msgid "Live cache statistics and server-rules status"
+msgstr "Canlı ön bellek istatistikleri ve sunucu kuralları durumu"
+
+#: includes/about.php:192
+msgid "View all free features"
+msgstr "Tüm ücretsiz özellikleri görüntüle"
+
+#: includes/about.php:194
+msgid "Go PRO"
+msgstr "PRO'ya geç"
+
+#: includes/about.php:196
+msgid "Minify CSS and JS"
+msgstr "CSS ve JS'yi küçült"
+
+#: includes/about.php:196
+msgid "The combined files lose spaces and comments, so they weigh less."
+msgstr "Birleştirilmiş dosyalar boşluklarını ve yorumlarını kaybeder, böylece daha az yer kaplar."
+
+#: includes/about.php:197
+msgid "Pages make fewer requests to other sites."
+msgstr "Sayfalar diğer sitelere daha az istek yapar."
+
+#: includes/about.php:198
+msgid "Widgets and blocks without cache"
+msgstr "Ön belleksiz bileşenler ve bloklar"
+
+#: includes/about.php:198
+msgid "Render a block or legacy widget live on every visit while the page stays cached."
+msgstr "Sayfa ön bellekte kalırken, bir bloğu veya eski bir bileşeni her ziyarette canlı olarak işleyin."
+
+#: includes/about.php:199
+msgid "Widgets built once and shared by every page; updating them never empties the cache."
+msgstr "Bileşenler bir kez oluşturulur ve tüm sayfalar tarafından paylaşılır; onları güncellemek ön belleği asla boşaltmaz."
+
+#: includes/about.php:200
+msgid "Leave chosen plugins' scripts where they are."
+msgstr "Seçtiğiniz eklentilerin betiklerini yerinde bırakın."
+
+#: includes/about.php:201
+msgid "Per-post tools"
+msgstr "Yazı başına araçlar"
+
+#: includes/about.php:201
+msgid "Clear a single post's cache from the posts list, and rebuild it when you save."
+msgstr "Bir yazının ön belleğini yazı listesinden boşaltın ve kaydederken yeniden oluşturun."
+
+#: includes/about.php:202
+msgid "Updates and support"
+msgstr "Güncellemeler ve destek"
+
+#: includes/about.php:202
+msgid "One-click updates and license support."
+msgstr "Tek tıkla güncellemeler ve lisans desteği."
+
+#: includes/about.php:206
+msgid "Thank you for supporting Flash Cache"
+msgstr "Flash Cache'i desteklediğiniz için teşekkürler"
+
+#: includes/about.php:206
+msgid "Your license funds support and new improvements for the free plugin."
+msgstr "Lisansınız, ücretsiz eklentinin desteğini ve yeni iyileştirmelerini finanse eder."
+
+#: includes/about.php:207
+msgid "Manage your license"
+msgstr "Lisansınızı yönetin"
+
+#: includes/about.php:209
+msgid "Support Flash Cache and unlock the extras"
+msgstr "Flash Cache'i destekleyin ve ek özelliklerin kilidini açın"
+
+#: includes/about.php:209
+msgid "Every Pro license funds the free plugin's development. Pick the plan that fits your sites."
+msgstr "Her Pro lisansı ücretsiz eklentinin geliştirilmesini finanse eder. Sitelerinize uygun planı seçin."
+
+#: includes/about.php:210
+msgid "Get Flash Cache Pro →"
+msgstr "Flash Cache Pro'yu edinin →"
+
+#: includes/about.php:210
+msgid "Secure checkout at etruel.com"
+msgstr "etruel.com'da güvenli ödeme"
+
+#: includes/about.php:216
+msgid "Flash Cache %s by"
+msgstr "Flash Cache %s, geliştiren"
+
+#: includes/about.php:216
+msgid "Translate"
+msgstr "Çevir"
+
+#: includes/about.php:216
+msgid "★★★★★ Leave a review"
+msgstr "★★★★★ Bir değerlendirme bırakın"
+
+#: includes/about.php:31 includes/about.php:32 includes/about.php:54 includes/functions.php:1077
+msgid "About"
+msgstr "Hakkında"
+
+#: includes/about.php:69
+msgid "Working…"
+msgstr "İşleniyor…"
+
+#: includes/about.php:70 includes/votes.php:100
+msgid "Could not reach flashcache.net. Try again in a moment."
+msgstr "flashcache.net'e ulaşılamadı. Biraz sonra yeniden deneyin."
+
+#: includes/about.php:71
+msgid "Thank you!"
+msgstr "Teşekkürler!"
+
+#: includes/about.php:77 includes/functions.php:137 includes/patterns.php:849 includes/votes.php:91
+msgid "You are not allowed to do this."
+msgstr "Bunu yapma izniniz yok."
+
+#: includes/about.php:95
+msgid "The super accelerator for WordPress"
+msgstr "WordPress için süper hızlandırıcı"
+
+#: includes/about.php:96
+msgid "Every page of your site becomes a static file that your web server sends straight to the visitor — no PHP, no WordPress, no waiting."
+msgstr "Sitenizin her sayfası, web sunucunuzun doğrudan ziyaretçiye gönderdiği statik bir dosyaya dönüşür; PHP yok, WordPress yok, bekleme yok."
+
+#: includes/about.php:97
+msgid "★ Rate on WordPress.org"
+msgstr "★ WordPress.org'da puanlayın"
+
+#: includes/about.php:97 includes/about.php:216
+msgid "Documentation"
+msgstr "Belgeler"
+
+#: includes/about.php:97 includes/about.php:216 includes/plugin_functions.php:49
+msgid "Support"
+msgstr "Destek"
+
+#: includes/about.php:99
+msgid "Overview"
+msgstr "Genel bakış"
+
+#: includes/about.php:99
+msgid "Performance"
+msgstr "Başarım"
+
+#: includes/about.php:99
+msgid "Servers"
+msgstr "Sunucular"
+
+#: includes/about.php:99
+msgid "Free vs Pro ★"
+msgstr "Ücretsiz ve Pro ★"
+
+#: includes/compat.php:51
+msgid "Flash Cache Pro needs an update."
+msgstr "Flash Cache Pro'nun güncellenmesi gerekiyor."
+
+#. translators: 1: installed Pro version, 2: Flash Cache version, 3: Pro version to install.
+#: includes/compat.php:54
+msgid "Flash Cache Pro %1$s does not work with Flash Cache %2$s: its blocks and widgets without cache may show old content. Update Flash Cache Pro to %3$s or later from the Plugins screen; updates need an active license."
+msgstr "Flash Cache Pro %1$s, Flash Cache %2$s ile çalışmıyor: ön belleksiz blokları ve bileşenleri eski içerik gösterebilir. Flash Cache Pro'yu eklentiler ekranından %3$s veya sonrasına güncelleyin; güncellemeler etkin bir lisans gerektirir."
+
+#: includes/compat.php:59
+msgid "Go to Plugins"
+msgstr "Eklentilere git"
+
+#: includes/compat.php:59
+msgid "My account"
+msgstr "Hesabım"
+
+#: includes/functions.php:1043
+msgid "Hide/Show menu."
+msgstr "Menüyü gizle/göster."
+
+#: includes/functions.php:1043
+msgid "MENU"
+msgstr "MENÜ"
+
+#: includes/functions.php:1044 includes/settings.php:134
+msgid "General Settings"
+msgstr "Genel ayarlar"
+
+#: includes/functions.php:1045 includes/settings.php:91 includes/settings.php:295
+msgid "Cache updates"
+msgstr "Ön bellek güncellemeleri"
+
+#: includes/functions.php:1046 includes/settings.php:92 includes/settings.php:296
+msgid "Advanced options"
+msgstr "Gelişmiş seçenekler"
+
+#: includes/functions.php:1047 includes/settings.php:93 includes/settings.php:294
+msgid "Optimization"
+msgstr "İyileştirme"
+
+#: includes/functions.php:1048 includes/patterns.php:198 includes/patterns.php:209 includes/patterns.php:279 includes/patterns.php:280
+msgid "Patterns"
+msgstr "Modeller"
+
+#: includes/functions.php:1049 includes/patterns.php:201
+msgid "Add New Pattern"
+msgstr "Yeni model ekle"
+
+#: includes/functions.php:1050 includes/preload.php:246 includes/preload.php:247 includes/preload.php:298
+msgid "Preload"
+msgstr "Ön yükleme"
+
+#: includes/functions.php:1069
+msgid "Flash Cache official site"
+msgstr "Flash Cache resmî sitesi"
+
+#: includes/functions.php:1079
+msgid "Go Pro"
+msgstr "Pro'ya geç"
+
+#: includes/functions.php:1118
+msgid "Cache files have been removed to fit the new permalinks structure."
+msgstr "Ön bellek dosyaları, yeni kalıcı bağlantı yapısına uyması için kaldırıldı."
+
+#: includes/functions.php:141 includes/votes.php:122
+msgid "Invalid request."
+msgstr "Geçersiz istek."
+
+#: includes/functions.php:227 includes/settings.php:176
+msgid "Delete Cache"
+msgstr "Ön belleği sil"
+
+#: includes/functions.php:228
+msgid "Delete cache of the current page"
+msgstr "Geçerli sayfanın ön belleğini sil"
+
+#: includes/patterns.php:199
+msgid "Pattern"
+msgstr "Model"
+
+#: includes/patterns.php:200
+msgid "Add New"
+msgstr "Yeni ekle"
+
+#: includes/patterns.php:202
+msgid "Edit Pattern"
+msgstr "Modeli düzenle"
+
+#: includes/patterns.php:203
+msgid "New Pattern"
+msgstr "Yeni model"
+
+#: includes/patterns.php:204
+msgid "View Pattern"
+msgstr "Modeli görüntüle"
+
+#: includes/patterns.php:205
+msgid "Search Patterns"
+msgstr "Modellerde ara"
+
+#: includes/patterns.php:206
+msgid "No Patterns found"
+msgstr "Model bulunamadı"
+
+#: includes/patterns.php:207
+msgid "No Patterns found in Trash"
+msgstr "Çöp kutusunda model bulunamadı"
+
+#: includes/patterns.php:208
+msgid "Parent Pattern:"
+msgstr "Üst model:"
+
+#: includes/patterns.php:264 includes/settings.php:48
+msgid "Changing this option clears the whole cache. Continue?"
+msgstr "Bu seçeneği değiştirmek tüm ön belleği boşaltır. Devam edilsin mi?"
+
+#: includes/patterns.php:265 includes/settings.php:49
+msgid "Restore the default settings?"
+msgstr "Varsayılan ayarlar geri yüklensin mi?"
+
+#: includes/patterns.php:288 includes/patterns.php:289
+msgid "Add New Patterns"
+msgstr "Yeni modeller ekle"
+
+#: includes/patterns.php:332
+msgid "Pattern Data"
+msgstr "Model verileri"
+
+#: includes/patterns.php:350
+msgid "This is the fallback pattern: it is always last in the list, so it caches every page that no other pattern takes."
+msgstr "Bu, yedek modeldir: listede her zaman sonuncudur, bu yüzden başka hiçbir modelin almadığı her sayfayı ön belleğe alır."
+
+#: includes/patterns.php:355
+msgid "Page types"
+msgstr "Sayfa türleri"
+
+#: includes/patterns.php:359
+msgid "The kinds of pages this pattern applies to; unchecked types are left to the other patterns. Each page follows the first pattern in the Patterns list that applies to it, and the Default pattern is always last."
+msgstr "Bu modelin uygulandığı sayfa türleri; işaretlenmeyen türler diğer modellere bırakılır. Her sayfa, model listesinde kendisine uyan ilk modeli izler ve varsayılan model her zaman sonuncudur."
+
+#: includes/patterns.php:361
+msgid "Single posts and pages"
+msgstr "Tekil yazılar ve sayfalar"
+
+#: includes/patterns.php:380
+msgid "With no post type selected, every post type is included."
+msgstr "Hiçbir yazı türü seçilmezse tüm yazı türleri dahil edilir."
+
+#: includes/patterns.php:382
+msgid "Cache the post when it is published or updated"
+msgstr "Yazı yayımlandığında veya güncellendiğinde ön belleğe al"
+
+#: includes/patterns.php:384
+msgid "Refresh the home page when a post is published or updated"
+msgstr "Bir yazı yayımlandığında veya güncellendiğinde ana sayfayı yenile"
+
+#: includes/patterns.php:386
+msgid "Refresh the first page of its categories and tags"
+msgstr "Kategorilerinin ve etiketlerinin ilk sayfasını yenile"
+
+#: includes/patterns.php:388
+msgid "Refresh the post when a comment is approved"
+msgstr "Bir yorum onaylandığında yazıyı yenile"
+
+#: includes/patterns.php:394
+msgid "Front page (is_front_page)"
+msgstr "Ön sayfa (is_front_page)"
+
+#: includes/patterns.php:397
+msgid "Posts page (is_home)"
+msgstr "Yazılar sayfası (is_home)"
+
+#: includes/patterns.php:398
+msgid "The list of latest posts when the front page is a static page."
+msgstr "Ön sayfa statik bir sayfa olduğunda son yazıların listesi."
+
+#: includes/patterns.php:401
+msgid "Categories (is_category)"
+msgstr "Kategoriler (is_category)"
+
+#: includes/patterns.php:404
+msgid "Tags (is_tag)"
+msgstr "Etiketler (is_tag)"
+
+#: includes/patterns.php:407
+msgid "Author pages (is_author)"
+msgstr "Yazar sayfaları (is_author)"
+
+#: includes/patterns.php:410
+msgid "Other archives (is_archive)"
+msgstr "Diğer arşivler (is_archive)"
+
+#: includes/patterns.php:411
+msgid "Date archives, custom taxonomies and post type archives."
+msgstr "Tarih arşivleri, özel taksonomiler ve yazı türü arşivleri."
+
+#: includes/patterns.php:414
+msgid "Feeds (is_feed)"
+msgstr "Akışlar (is_feed)"
+
+#: includes/patterns.php:417
+msgid "Search results (is_search)"
+msgstr "Arama sonuçları (is_search)"
+
+#: includes/patterns.php:426
+msgid "URL must contain"
+msgstr "Adres şunu içermeli"
+
+#: includes/patterns.php:429
+msgid "Only pages whose URL contains every one of these texts use this pattern."
+msgstr "Yalnızca adresi bu metinlerin hepsini içeren sayfalar bu modeli kullanır."
+
+#: includes/patterns.php:430 includes/patterns.php:438
+msgid "One text per line."
+msgstr "Satır başına bir metin."
+
+#: includes/patterns.php:434
+msgid "URL should not contain"
+msgstr "Adres şunu içermemeli"
+
+#: includes/patterns.php:437
+msgid "Pages whose URL contains any of these texts skip this pattern, for example “login”."
+msgstr "Adresi bu metinlerden herhangi birini içeren sayfalar bu modeli atlar, örneğin “login”."
+
+#: includes/patterns.php:445
+msgid "Cache type"
+msgstr "Ön bellek türü"
+
+#: includes/patterns.php:451
+msgid "Static HTML (fastest)"
+msgstr "Statik HTML (en hızlı)"
+
+#: includes/patterns.php:452
+msgid "The web server delivers the stored page without running PHP. Pages with a query string are not served from this cache."
+msgstr "Web sunucusu, kaydedilmiş sayfayı PHP çalıştırmadan iletir. Sorgu dizgeli sayfalar bu ön bellekten sunulmaz."
+
+#: includes/patterns.php:459
+msgid "PHP (pages with query strings)"
+msgstr "PHP (sorgu dizgeli sayfalar)"
+
+#: includes/patterns.php:460
+msgid "A small PHP file keeps one copy per query string, which suits searches and feeds. A bit slower than static HTML; form submissions always reach WordPress."
+msgstr "Küçük bir PHP dosyası her sorgu dizgesi için bir kopya tutar; bu aramalara ve akışlara uygundur. Statik HTML'den biraz daha yavaş; form gönderimleri her zaman WordPress'e ulaşır."
+
+#: includes/patterns.php:467 includes/patterns.php:766
+msgid "Don't cache"
+msgstr "Ön belleğe alma"
+
+#: includes/patterns.php:468
+msgid "The pages this pattern applies to are always served live by WordPress. Place it above the patterns it must override."
+msgstr "Bu modelin uygulandığı sayfalar her zaman WordPress tarafından canlı olarak sunulur. Geçersiz kılması gereken modellerin üstüne yerleştirin."
+
+#: includes/patterns.php:477
+msgid "Refresh after"
+msgstr "Şundan sonra yenile"
+
+#: includes/patterns.php:480
+msgid "Seconds a cached page is served before a visit asks for a fresh copy. 86400 is one day."
+msgstr "Bir ziyaret yeni bir kopya isteyene kadar ön bellekteki bir sayfanın sunulduğu saniye sayısı. 86400 bir gündür."
+
+#: includes/patterns.php:484
+msgid "Preload refresh after"
+msgstr "Ön yükleme şundan sonra yenilesin"
+
+#: includes/patterns.php:487
+msgid "Seconds before the preload rebuilds a cached page. With “Refresh expired pages: from the preload only”, the preload uses “Refresh after” instead."
+msgstr "Ön yüklemenin ön bellekteki bir sayfayı yeniden oluşturmasına kadar geçen saniye. “Süresi dolan sayfaları yenile: yalnızca ön yüklemeden” ile ön yükleme bunun yerine “Şundan sonra yenile” değerini kullanır."
+
+#: includes/patterns.php:747
+msgid "Order"
+msgstr "Sıra"
+
+#: includes/patterns.php:749
+msgid "Applies to"
+msgstr "Uygulandığı yer"
+
+#: includes/patterns.php:750
+msgid "Cache"
+msgstr "Ön bellek"
+
+#: includes/patterns.php:758
+msgid "Always last"
+msgstr "Her zaman sonuncu"
+
+#: includes/patterns.php:758
+msgid "Drag to change the order"
+msgstr "Sırayı değiştirmek için sürükleyin"
+
+#: includes/patterns.php:762
+msgid "Fallback: always last, it caches every page no other pattern takes."
+msgstr "Yedek: her zaman sonuncudur, başka hiçbir modelin almadığı her sayfayı ön belleğe alır."
+
+#: includes/patterns.php:769
+msgid "%1$s, refresh after %2$s"
+msgstr "%1$s, %2$s sonra yenile"
+
+#: includes/patterns.php:782
+msgid "All post types"
+msgstr "Tüm yazı türleri"
+
+#: includes/patterns.php:785
+msgid "Front page"
+msgstr "Ön sayfa"
+
+#: includes/patterns.php:786
+msgid "Posts page"
+msgstr "Yazılar sayfası"
+
+#: includes/patterns.php:787
+msgid "Archives"
+msgstr "Arşivler"
+
+#: includes/patterns.php:788
+msgid "Tags"
+msgstr "Etiketler"
+
+#: includes/patterns.php:789
+msgid "Categories"
+msgstr "Kategoriler"
+
+#: includes/patterns.php:790
+msgid "Feeds"
+msgstr "Akışlar"
+
+#: includes/patterns.php:791
+msgid "Search"
+msgstr "Arama"
+
+#: includes/patterns.php:792
+msgid "Authors"
+msgstr "Yazarlar"
+
+#: includes/patterns.php:799
+msgid "No page types"
+msgstr "Sayfa türü yok"
+
+#: includes/patterns.php:801
+msgid "URL contains: %s"
+msgstr "Adres şunu içeriyor: %s"
+
+#: includes/patterns.php:801
+msgid "URL does not contain: %s"
+msgstr "Adres şunu içermiyor: %s"
+
+#: includes/patterns.php:891 includes/preload.php:446 includes/settings.php:787 includes/settings.php:807
+msgid "Defaults have been restored."
+msgstr "Varsayılan değerler geri yüklendi."
+
+#: includes/patterns.php:902 includes/preload.php:403 includes/settings.php:188 includes/settings.php:314 includes/settings.php:322
+msgid "Reset to default"
+msgstr "Varsayılana sıfırla"
+
+#: includes/plugin_functions.php:29
+msgid "Go to Flash Cache Settings Page"
+msgstr "Flash Cache ayarlar sayfasına git"
+
+#: includes/plugin_functions.php:29
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: includes/plugin_functions.php:48
+msgid "Website"
+msgstr "Site"
+
+#: includes/posts.php:216
+msgid "Invalid post."
+msgstr "Geçersiz yazı."
+
+#: includes/posts.php:223
+msgid "The post has no cache."
+msgstr "Yazının ön belleği yok."
+
+#: includes/posts.php:264
+msgid "Clear Entry Cache"
+msgstr "Yazı ön belleğini boşalt"
+
+#: includes/preload.php:283
+msgid "Execute Preload"
+msgstr "Ön yüklemeyi çalıştır"
+
+#: includes/preload.php:298
+msgid "Preload builds the cache of the public pages, and optionally their categories and tags, following your patterns, so visitors find them already cached."
+msgstr "Ön yükleme, modellerinizi izleyerek herkese açık sayfaların ve isteğe bağlı olarak kategorilerinin ve etiketlerinin ön belleğini oluşturur; böylece ziyaretçiler onları zaten ön bellekte bulur."
+
+#: includes/preload.php:299
+msgid "It runs in small batches in the background to keep the server load low."
+msgstr "Sunucu yükünü düşük tutmak için arka planda küçük gruplar hâlinde çalışır."
+
+#: includes/preload.php:324
+msgid "Preload is running now: %1$s - %2$s - %3$s"
+msgstr "Ön yükleme şimdi çalışıyor: %1$s - %2$s - %3$s"
+
+#: includes/preload.php:327
+msgid "Preload is waiting to run."
+msgstr "Ön yükleme çalışmayı bekliyor."
+
+#: includes/preload.php:331
+msgid "Next run: %s"
+msgstr "Sonraki çalıştırma: %s"
+
+#: includes/preload.php:338
+msgid "Enable preload"
+msgstr "Ön yüklemeyi etkinleştir"
+
+#: includes/preload.php:342 includes/preload.php:356 includes/preload.php:385 includes/settings.php:147 includes/settings.php:152 includes/settings.php:485 includes/settings.php:506 includes/settings.php:525 includes/settings.php:540 includes/settings.php:555 includes/settings.php:572
+msgid "Off"
+msgstr "Kapalı"
+
+#: includes/preload.php:344 includes/preload.php:358 includes/preload.php:387 includes/settings.php:149 includes/settings.php:154 includes/settings.php:487 includes/settings.php:508 includes/settings.php:527 includes/settings.php:542 includes/settings.php:557 includes/settings.php:574
+msgid "On"
+msgstr "Açık"
+
+#: includes/preload.php:352
+msgid "Include categories and tags"
+msgstr "Kategorileri ve etiketleri dahil et"
+
+#: includes/preload.php:363
+msgid "Also caches the archive pages of the categories and tags of each preloaded post."
+msgstr "Ön yüklenen her yazının kategorilerinin ve etiketlerinin arşiv sayfalarını da ön belleğe alır."
+
+#: includes/preload.php:367
+msgid "Pages per batch"
+msgstr "Grup başına sayfa"
+
+#: includes/preload.php:370
+msgid "How many pages each batch caches. Lower it if the server struggles while preloading."
+msgstr "Her grubun ön belleğe aldığı sayfa sayısı. Sunucu ön yükleme sırasında zorlanıyorsa azaltın."
+
+#: includes/preload.php:374
+msgid "Pause between batches"
+msgstr "Gruplar arası duraklatma"
+
+#: includes/preload.php:377
+msgid "Seconds to wait before the next batch. Raise it if preloading runs into PHP timeouts."
+msgstr "Sonraki gruptan önce beklenecek saniye. Ön yükleme PHP zaman aşımlarına takılıyorsa artırın."
+
+#: includes/preload.php:381
+msgid "Stop after one full pass"
+msgstr "Tam bir turdan sonra dur"
+
+#: includes/preload.php:392
+msgid "Preload turns itself off once every page has been processed. Leave it off to keep preloading continuously."
+msgstr "Her sayfa işlendiğinde ön yükleme kendini kapatır. Sürekli ön yükleme için kapalı bırakın."
+
+#: includes/preload.php:424 includes/settings.php:701 includes/settings.php:753
+msgid "Settings updated"
+msgstr "Ayarlar güncellendi"
+
+#: includes/preload.php:433
+msgid "Turn on the preload first: it runs only while enabled."
+msgstr "Önce ön yüklemeyi açın: yalnızca etkin olduğu sürece çalışır."
+
+#: includes/preload.php:438
+msgid "The preload has started and runs in the background."
+msgstr "Ön yükleme başladı ve arka planda çalışıyor."
+
+#: includes/preload.php:74
+msgid "Flash Cache Preload"
+msgstr "Flash Cache ön yüklemesi"
+
+#: includes/settings.php:158
+msgid "Enable cache"
+msgstr "Ön belleği etkinleştir"
+
+#: includes/settings.php:166
+msgid "Turn it off to stop creating new cached pages. Pages already cached are deleted with the button below."
+msgstr "Yeni ön bellek sayfaları oluşturmayı durdurmak için kapatın. Zaten ön bellekte olan sayfalar aşağıdaki düğmeyle silinir."
+
+#: includes/settings.php:174
+msgid "Delete cache"
+msgstr "Ön belleği sil"
+
+#: includes/settings.php:177
+msgid "Removes every cached page and combined file. Pages are cached again as they are visited or preloaded."
+msgstr "Ön bellekteki her sayfayı ve birleştirilmiş dosyayı kaldırır. Sayfalar ziyaret edildiğinde veya ön yüklendiğinde yeniden ön belleğe alınır."
+
+#: includes/settings.php:234
+msgid "Patterns Settings"
+msgstr "Model ayarları"
+
+#: includes/settings.php:333
+msgid "Cache folder"
+msgstr "Ön bellek klasörü"
+
+#: includes/settings.php:337
+msgid "Where cached pages and combined files are stored, relative to the path shown. It must be a folder of its own, outside the WordPress folders."
+msgstr "Ön bellekteki sayfaların ve birleştirilmiş dosyaların depolandığı yer, gösterilen yola göredir. Kendine ait bir klasör olmalı ve WordPress klasörlerinin dışında olmalıdır."
+
+#: includes/settings.php:341
+msgid "HTTPS"
+msgstr "HTTPS"
+
+#: includes/settings.php:346
+msgid "Serve HTTP and HTTPS"
+msgstr "HTTP ve HTTPS sun"
+
+#: includes/settings.php:347
+msgid "Cached pages are served on both protocols."
+msgstr "Ön bellekteki sayfalar her iki protokolde de sunulur."
+
+#: includes/settings.php:350
+msgid "Redirect HTTP to HTTPS"
+msgstr "HTTP'yi HTTPS'ye yönlendir"
+
+#: includes/settings.php:351
+msgid "Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header)."
+msgstr "HTTP üzerinden gelen ziyaretçiler HTTPS'ye yönlendirilir ve tarayıcılara tarayıcı ön bellek süresi boyunca HTTPS kullanmaya devam etmeleri söylenir (Strict-Transport-Security üst bilgisi)."
+
+#: includes/settings.php:355
+msgid "This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS."
+msgstr "Bu yönetim sayfası HTTP üzerinden açık, bu yüzden ön bellekteki sayfalar siteye ulaşıldığı gibi sunulur. Ziyaretçileri HTTPS'ye yönlendirme seçeneği, yönetim HTTPS üzerinden açıldığında burada görünür."
+
+#: includes/settings.php:361
+msgid "Browser cache time"
+msgstr "Tarayıcı ön bellek süresi"
+
+#: includes/settings.php:364
+msgid "Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day."
+msgstr "Bir tarayıcının, yeniden istemeden önce ön bellekteki bir sayfayı saklayabileceği saniye sayısı; Cache-Control üst bilgisinde gönderilir. 86400 bir gündür."
+
+#: includes/settings.php:369
+msgid "Skip visitors with cookies"
+msgstr "Tanımlama bilgisi olan ziyaretçileri atla"
+
+#: includes/settings.php:374
+msgid "Visitors who send a cookie whose name contains one of these texts always get the live page. Logged-in users, commenters and visitors of password-protected posts are listed by default."
+msgstr "Adında bu metinlerden birini içeren bir tanımlama bilgisi gönderen ziyaretçiler her zaman canlı sayfayı alır. Oturum açmış kullanıcılar, yorum yapanlar ve parola korumalı yazıların ziyaretçileri varsayılan olarak listelenir."
+
+#: includes/settings.php:386
+msgid "Add"
+msgstr "Ekle"
+
+#: includes/settings.php:391
+msgid "Lock"
+msgstr "Kilit"
+
+#: includes/settings.php:393
+msgid "Files (Recommended)"
+msgstr "Dosyalar (önerilir)"
+
+#: includes/settings.php:394
+msgid "A lock file per page keeps two visitors from building the same page at the same time."
+msgstr "Sayfa başına bir kilit dosyası, iki ziyaretçinin aynı sayfayı aynı anda oluşturmasını engeller."
+
+#: includes/settings.php:396
+msgid "Database"
+msgstr "Veritabanı"
+
+#: includes/settings.php:397
+msgid "A MySQL lock does the same. Useful when several servers share the database but not the disk."
+msgstr "Bir MySQL kilidi aynı işi yapar. Birden çok sunucu veritabanını paylaşıp diski paylaşmadığında kullanışlıdır."
+
+#: includes/settings.php:405
+msgid "Cache creation"
+msgstr "Ön bellek oluşturma"
+
+#: includes/settings.php:407
+msgid "Capture the visited page (Recommended)"
+msgstr "Ziyaret edilen sayfayı yakala (önerilir)"
+
+#: includes/settings.php:407
+msgid "The page a visitor receives is stored as it is sent; later refreshes request the page again in the background."
+msgstr "Bir ziyaretçinin aldığı sayfa gönderildiği gibi saklanır; sonraki yenilemeler sayfayı arka planda yeniden ister."
+
+#: includes/settings.php:409
+msgid "Request the page separately"
+msgstr "Sayfayı ayrı iste"
+
+#: includes/settings.php:410
+msgid "Every page is fetched with its own request. Slower; use it when another plugin conflicts with output buffering."
+msgstr "Her sayfa kendi isteğiyle getirilir. Daha yavaş; başka bir eklenti çıktı arabelleğiyle çakıştığında kullanın."
+
+#: includes/settings.php:415
+msgid "Refresh expired pages"
+msgstr "Süresi dolan sayfaları yenile"
+
+#: includes/settings.php:417
+msgid "On visits (Recommended)"
+msgstr "Ziyaretlerde (önerilir)"
+
+#: includes/settings.php:418
+msgid "A visit to a page whose “Refresh after” time has passed asks the server to rebuild it in the background. Fresh pages make no extra request."
+msgstr "“Şundan sonra yenile” süresi geçmiş bir sayfaya yapılan ziyaret, sunucudan sayfayı arka planda yeniden oluşturmasını ister. Taze sayfalar ek istek yapmaz."
+
+#: includes/settings.php:420
+msgid "From the preload only"
+msgstr "Yalnızca ön yüklemeden"
+
+#: includes/settings.php:421
+msgid "Cached pages carry no refresh script. Expired pages are rebuilt by the Preload process, so keep it enabled."
+msgstr "Ön bellekteki sayfalar yenileme betiği taşımaz. Süresi dolan sayfaları ön yükleme süreci yeniden oluşturur, bu yüzden etkin tutun."
+
+#: includes/settings.php:428
+msgid "This site has %s published post, so its cache is refreshed gradually."
+msgid_plural "This site has %s published posts, so its cache is refreshed gradually."
+msgstr[0] "Bu sitede %s yayımlanmış yazı var, bu yüzden ön belleği kademeli olarak yenilenir."
+msgstr[1] "Bu sitede %s yayımlanmış yazı var, bu yüzden ön belleği kademeli olarak yenilenir."
+
+#: includes/settings.php:429
+msgid "This site has %s published post, so its whole cache is deleted."
+msgid_plural "This site has %s published posts, so its whole cache is deleted."
+msgstr[0] "Bu sitede %s yayımlanmış yazı var, bu yüzden tüm ön belleği silinir."
+msgstr[1] "Bu sitede %s yayımlanmış yazı var, bu yüzden tüm ön belleği silinir."
+
+#: includes/settings.php:431
+msgid "After design changes"
+msgstr "Tasarım değişikliklerinden sonra"
+
+#: includes/settings.php:433
+msgid "Automatic (Recommended)"
+msgstr "Otomatik (önerilir)"
+
+#: includes/settings.php:434
+msgid "Deletes the whole cache on sites with up to %s published posts and refreshes it gradually on larger ones."
+msgstr "En fazla %s yayımlanmış yazısı olan sitelerde tüm ön belleği siler, daha büyük sitelerde kademeli olarak yeniler."
+
+#: includes/settings.php:437
+msgid "Delete the whole cache"
+msgstr "Tüm ön belleği sil"
+
+#: includes/settings.php:438
+msgid "Pages are cached again as they are visited or preloaded. Best for small and medium sites."
+msgstr "Sayfalar ziyaret edildiğinde veya ön yüklendiğinde yeniden ön belleğe alınır. Küçük ve orta boyutlu siteler için en iyisi."
+
+#: includes/settings.php:440
+msgid "Refresh gradually"
+msgstr "Kademeli olarak yenile"
+
+#: includes/settings.php:441
+msgid "Visitors keep getting the current pages while they are replaced a few at a time, by the preload or on their next visit. No empty cache, no load spike. Best for large sites."
+msgstr "Ziyaretçiler, sayfalar ön yükleme tarafından veya sonraki ziyaretlerinde birkaçı birden değiştirilirken geçerli sayfaları almaya devam eder. Boş ön bellek yok, yük sıçraması yok. Büyük siteler için en iyisi."
+
+#: includes/settings.php:443
+msgid "Do nothing"
+msgstr "Hiçbir şey yapma"
+
+#: includes/settings.php:444
+msgid "Delete the cache yourself after each change."
+msgstr "Her değişiklikten sonra ön belleği kendiniz silin."
+
+#: includes/settings.php:446
+msgid "Applies when widgets, menus, Customizer settings, block theme templates or synced patterns are saved. Switching themes always deletes the whole cache."
+msgstr "Bileşenler, menüler, Özelleştirici ayarları, blok tema şablonları veya eşitlenen modeller kaydedildiğinde uygulanır. Tema değiştirmek her zaman tüm ön belleği siler."
+
+#: includes/settings.php:451
+msgid "Widgets/blocks without cache"
+msgstr "Ön belleksiz bileşenler/bloklar"
+
+#: includes/settings.php:454
+msgid "Widget cache disabling is available in the Pro version."
+msgstr "Bileşen ön belleğini etkisizleştirme Pro sürümünde mevcuttur."
+
+#: includes/settings.php:464
+msgid "Building each widget once for the whole site, and updating it inside the cached pages when it is saved, is available in the Pro version."
+msgstr "Her bileşeni tüm site için bir kez oluşturmak ve kaydedildiğinde ön bellekteki sayfaların içinde güncellemek Pro sürümünde mevcuttur."
+
+#: includes/settings.php:481
+msgid "Optimize styles"
+msgstr "Stilleri iyileştir"
+
+#: includes/settings.php:492
+msgid "Joins the stylesheets of each page into shared files, in their order and with their media, so pages load fewer files."
+msgstr "Her sayfanın stil sayfalarını sıralarıyla ve ortamlarıyla paylaşılan dosyalarda birleştirir, böylece sayfalar daha az dosya yükler."
+
+#: includes/settings.php:494
+msgid "Minify styles"
+msgstr "Stilleri küçült"
+
+#: includes/settings.php:494
+msgid "Removes spaces and comments from the combined stylesheets, so they weigh less."
+msgstr "Birleştirilmiş stil sayfalarından boşlukları ve yorumları kaldırır, böylece daha az yer kaplar."
+
+#: includes/settings.php:496
+msgid "Cache Google fonts"
+msgstr "Google Fonts'u ön belleğe al"
+
+#: includes/settings.php:496
+msgid "Keeps a copy of Google Fonts on your server, so pages make fewer requests to other sites."
+msgstr "Google Fonts'un bir kopyasını sunucunuzda tutar, böylece sayfalar diğer sitelere daha az istek yapar."
+
+#: includes/settings.php:50
+msgid "Counting…"
+msgstr "Sayılıyor…"
+
+#: includes/settings.php:502
+msgid "Optimize scripts"
+msgstr "Betikleri iyileştir"
+
+#: includes/settings.php:513
+msgid "Joins consecutive scripts into shared files, keeping their order and their place in the page, so pages load fewer files."
+msgstr "Ardışık betikleri, sıralarını ve sayfadaki yerlerini koruyarak paylaşılan dosyalarda birleştirir, böylece sayfalar daha az dosya yükler."
+
+#: includes/settings.php:517
+msgid "If something stops working with optimized scripts, leave the scripts involved in place:"
+msgstr "İyileştirilmiş betiklerle bir şey çalışmayı bırakırsa, ilgili betikleri yerinde bırakın:"
+
+#: includes/settings.php:521
+msgid "Leave inline scripts in place"
+msgstr "Satır içi betikleri yerinde bırak"
+
+#: includes/settings.php:532
+msgid "Scripts written inside the page stay where they are."
+msgstr "Sayfanın içine yazılmış betikler olduğu yerde kalır."
+
+#: includes/settings.php:536
+msgid "Leave theme scripts in place"
+msgstr "Tema betiklerini yerinde bırak"
+
+#: includes/settings.php:547
+msgid "Scripts of the active theme, and of its parent theme, stay as separate files."
+msgstr "Etkin temanın ve üst temasının betikleri ayrı dosyalar olarak kalır."
+
+#: includes/settings.php:551
+msgid "Leave plugin scripts in place"
+msgstr "Eklenti betiklerini yerinde bırak"
+
+#: includes/settings.php:562
+msgid "Scripts of plugins stay as separate files."
+msgstr "Eklentilerin betikleri ayrı dosyalar olarak kalır."
+
+#: includes/settings.php:563
+msgid "Choosing each plugin individually is available in the Pro version."
+msgstr "Her eklentiyi ayrı ayrı seçmek Pro sürümünde mevcuttur."
+
+#: includes/settings.php:563
+msgid "Avoid optimizing JavaScript by file"
+msgstr "JavaScript'i dosya bazında iyileştirmekten kaçın"
+
+#: includes/settings.php:563
+msgid "Leaves specific script files in place, by name or path."
+msgstr "Belirli betik dosyalarını ada veya yola göre yerinde bırakır."
+
+#: includes/settings.php:568
+msgid "Scripts from other domains"
+msgstr "Diğer alan adlarından betikler"
+
+#: includes/settings.php:579
+msgid "Off (recommended): analytics, ads, social and other third-party scripts keep loading from their own servers, where they stay up to date. On: they are copied into the combined files."
+msgstr "Kapalı (önerilir): analiz, reklam, sosyal ve diğer üçüncü taraf betikleri güncel kaldıkları kendi sunucularından yüklenmeye devam eder. Açık: birleştirilmiş dosyalara kopyalanırlar."
+
+#: includes/settings.php:586
+msgid "Minify scripts"
+msgstr "Betikleri küçült"
+
+#: includes/settings.php:586
+msgid "Removes spaces and comments from the combined scripts, so they weigh less."
+msgstr "Birleştirilmiş betiklerden boşlukları ve yorumları kaldırır, böylece daha az yer kaplar."
+
+#: includes/settings.php:600 includes/settings.php:629
+msgid "Check again"
+msgstr "Yeniden denetle"
+
+#: includes/settings.php:601 includes/settings.php:620
+msgid "Server rules"
+msgstr "Sunucu kuralları"
+
+#: includes/settings.php:603
+msgid "nginx is serving cached pages with the current rules."
+msgstr "nginx ön bellekteki sayfaları geçerli kurallarla sunuyor."
+
+#: includes/settings.php:604
+msgid "After changing settings, reload nginx so it reads the updated rules."
+msgstr "Ayarları değiştirdikten sonra, güncellenen kuralları okuması için nginx'i yeniden yükleyin."
+
+#: includes/settings.php:608
+msgid "nginx is running an older version of the Flash Cache rules. Reload nginx to apply the current settings."
+msgstr "nginx, Flash Cache kurallarının daha eski bir sürümünü çalıştırıyor. Geçerli ayarları uygulamak için nginx'i yeniden yükleyin."
+
+#: includes/settings.php:611
+msgid "The site could not be reached to check whether nginx reads the Flash Cache rules."
+msgstr "nginx'in Flash Cache kurallarını okuyup okumadığını denetlemek için siteye ulaşılamadı."
+
+#: includes/settings.php:611
+msgid "nginx is not reading the Flash Cache rules yet: pages are cached but still built by PHP."
+msgstr "nginx henüz Flash Cache kurallarını okumuyor: sayfalar ön bellekte, ancak hâlâ PHP tarafından oluşturuluyor."
+
+#: includes/settings.php:612
+msgid "Add this line inside the server { } block of your site, before its location rules, and reload nginx:"
+msgstr "Bu satırı sitenizin server { } bloğunun içine, location kurallarından önce ekleyin ve nginx'i yeniden yükleyin:"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copied"
+msgstr "Kopyalandı"
+
+#: includes/settings.php:614 includes/settings.php:645
+msgid "Copy"
+msgstr "Kopyala"
+
+#: includes/settings.php:615
+msgid "Flash Cache keeps that file up to date; reload nginx after changing settings."
+msgstr "Flash Cache bu dosyayı güncel tutar; ayarları değiştirdikten sonra nginx'i yeniden yükleyin."
+
+#: includes/settings.php:624
+msgid "OpenLiteSpeed is serving cached pages with the current rules."
+msgstr "OpenLiteSpeed ön bellekteki sayfaları geçerli kurallarla sunuyor."
+
+#: includes/settings.php:625
+msgid "OpenLiteSpeed reads .htaccess only when it restarts: restart it after changing settings."
+msgstr "OpenLiteSpeed .htaccess dosyasını yalnızca yeniden başladığında okur: ayarları değiştirdikten sonra yeniden başlatın."
+
+#: includes/settings.php:627
+msgid "The site could not be reached to check whether OpenLiteSpeed runs the current Flash Cache rules."
+msgstr "OpenLiteSpeed'in geçerli Flash Cache kurallarını çalıştırıp çalıştırmadığını denetlemek için siteye ulaşılamadı."
+
+#: includes/settings.php:627
+msgid "OpenLiteSpeed is not running the current Flash Cache rules yet. Restart it to apply them: Graceful Restart in WebAdmin, or the LiteSpeed restart of your hosting panel."
+msgstr "OpenLiteSpeed henüz geçerli Flash Cache kurallarını çalıştırmıyor. Uygulamak için yeniden başlatın: WebAdmin'de Graceful Restart veya barındırma panelinizin LiteSpeed yeniden başlatması."
+
+#: includes/settings.php:628
+msgid "Required: until then, pages follow the rules OpenLiteSpeed loaded last, or are built by PHP."
+msgstr "Gerekli: o zamana kadar sayfalar OpenLiteSpeed'in en son yüklediği kuralları izler veya PHP tarafından oluşturulur."
+
+#: includes/settings.php:637
+msgid "Optional: browser cache headers"
+msgstr "İsteğe bağlı: tarayıcı ön bellek üst bilgileri"
+
+#: includes/settings.php:639
+msgid "Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:"
+msgstr "Ön bellekteki sayfalar bu olmadan da zaten çalışır. OpenLiteSpeed .htaccess içindeki üst bilgileri yok sayar, bu yüzden tarayıcılar onlar için ön bellek talimatı almaz. Tarayıcıların her sayfayı %s saklaması ve geri dönen ziyaretlerin daha hızlı yüklenmesi için bu bağlamı sitenizin sanal sunucusuna ekleyin, ardından OpenLiteSpeed'i yeniden başlatın:"
+
+#: includes/settings.php:643
+msgid "For \"Redirect HTTP to HTTPS\", also add %s to the Header Operations of the / context."
+msgstr "“HTTP'yi HTTPS'ye yönlendir” için, / bağlamının üst bilgi işlemlerine %s da ekleyin."
+
+#: includes/settings.php:646
+msgid "Dismiss until the next update"
+msgstr "Sonraki güncellemeye kadar yoksay"
+
+#: includes/settings.php:66 includes/settings.php:67
+msgid "Flash Cache"
+msgstr "Flash Cache"
+
+#: includes/settings.php:669
+msgid "A difference between the rules in your <strong>nginx.conf</strong> file and the Flash Cache rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "<strong>nginx.conf</strong> dosyanızdaki kurallar ile Flash Cache kuralları arasında bir fark bulundu. Bu yalnızca boşluk farkları olabilir, ancak dosyadaki kuralları en kısa sürede aşağıdakilerle karşılaştırmalısınız. Kuralları güncellemek için &#8217;Kuralları güncelle&#8217; düğmesine tıklayın."
+
+#: includes/settings.php:671
+msgid "A difference between the rules in your <strong>.htaccess</strong> file and the plugin rewrite rules has been found. This could be simple whitespace differences, but you should compare the rules in the file with those below as soon as possible. Click the &#8217;Update Rules&#8217; button to update the rules."
+msgstr "<strong>.htaccess</strong> dosyanızdaki kurallar ile eklentinin yeniden yazma kuralları arasında bir fark bulundu. Bu yalnızca boşluk farkları olabilir, ancak dosyadaki kuralları en kısa sürede aşağıdakilerle karşılaştırmalısınız. Kuralları güncellemek için &#8217;Kuralları güncelle&#8217; düğmesine tıklayın."
+
+#: includes/settings.php:681
+msgid "Update Rules"
+msgstr "Kuralları güncelle"
+
+#: includes/settings.php:727
+msgid "The cache folder must be a folder inside the site, such as flash_cache/, outside the WordPress folders. The current folder was kept."
+msgstr "Ön bellek klasörü, flash_cache/ gibi, sitenin içinde ve WordPress klasörlerinin dışında bir klasör olmalıdır. Geçerli klasör korundu."
+
+#: includes/settings.php:765
+msgid "Web server rules updated"
+msgstr "Web sunucusu kuralları güncellendi"
+
+#: includes/settings.php:772
+msgid "The cache files have been deleted."
+msgstr "Ön bellek dosyaları silindi."
+
+#: includes/stats.php:208
+msgid "Static pages"
+msgstr "Statik sayfalar"
+
+#: includes/stats.php:208 includes/stats.php:209
+msgid "%s page"
+msgid_plural "%s pages"
+msgstr[0] "%s sayfa"
+msgstr[1] "%s sayfa"
+
+#: includes/stats.php:209
+msgid "PHP pages"
+msgstr "PHP sayfaları"
+
+#: includes/stats.php:210
+msgid "Styles"
+msgstr "Stiller"
+
+#: includes/stats.php:210 includes/stats.php:211 includes/stats.php:212
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s dosya"
+msgstr[1] "%s dosya"
+
+#: includes/stats.php:211
+msgid "Scripts"
+msgstr "Betikler"
+
+#: includes/stats.php:212
+msgid "Fonts"
+msgstr "Yazı tipleri"
+
+#. translators: 1: size, 2: number of files
+#: includes/stats.php:221
+msgid "Total: %1$s in %2$s files"
+msgstr "Toplam: %2$s dosyada %1$s"
+
+#. translators: %s: time span, such as "3 mins"
+#: includes/stats.php:227
+msgid "Counted %s ago"
+msgstr "%s önce sayıldı"
+
+#: includes/stats.php:229
+msgid "Not counted yet"
+msgstr "Henüz sayılmadı"
+
+#: includes/stats.php:232
+msgid "Cache statistics"
+msgstr "Ön bellek istatistikleri"
+
+#: includes/stats.php:232
+msgid "Recount"
+msgstr "Yeniden say"
+
+#: includes/votes.php:137
+msgid "Using LiteSpeed Enterprise?"
+msgstr "LiteSpeed Enterprise kullanıyor musunuz?"
+
+#: includes/votes.php:138
+msgid "We are evaluating a faster mode for it. Tell us if you would use it."
+msgstr "Bunun için daha hızlı bir kip değerlendiriyoruz. Kullanıp kullanmayacağınızı bize söyleyin."
+
+#: includes/votes.php:139
+msgid "Tell us"
+msgstr "Bize söyleyin"
+
+#: includes/votes.php:151
+msgid "Are you using or want to use LiteSpeed Enterprise?"
+msgstr "LiteSpeed Enterprise kullanıyor veya kullanmak istiyor musunuz?"
+
+#: includes/votes.php:152
+msgid "We are evaluating a faster mode for LiteSpeed Enterprise. If enough people ask for it, we will build it. Press the button to let us know you are interested and add one more to the list."
+msgstr "LiteSpeed Enterprise için daha hızlı bir kip değerlendiriyoruz. Yeterince kişi isterse onu geliştireceğiz. İlgilendiğinizi bize bildirmek ve listeye bir kişi daha eklemek için düğmeye basın."
+
+#: includes/votes.php:154
+msgid "I'm interested in LiteSpeed Enterprise"
+msgstr "LiteSpeed Enterprise ile ilgileniyorum"
+
+#: includes/votes.php:155
+msgid "It sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID to flashcache.net: no email and no site address. One vote per site."
+msgstr "Seçiminizi, bu sitenin LiteSpeed Enterprise kullanıp kullanmadığını, Flash Cache ve PHP sürümlerini, site dilini ve rastgele anonim bir kimliği flashcache.net'e gönderir: e-posta yok, site adresi yok. Site başına bir oy."
+
+#: includes/votes.php:158
+msgid "Thanks, you're on the list."
+msgstr "Teşekkürler, listedesiniz."
+
+#: includes/votes.php:162
+msgid "How would you use it? (optional)"
+msgstr "Bunu nasıl kullanırdınız? (isteğe bağlı)"
+
+#: includes/votes.php:164
+msgid "Email me when it is ready. I agree to share my email address for that."
+msgstr "Hazır olduğunda bana e-posta gönderin. Bunun için e-posta adresimi paylaşmayı kabul ediyorum."
+
+#: includes/votes.php:165
+msgid "Your email"
+msgstr "E-postanız"
+
+#: includes/votes.php:166
+msgid "Send"
+msgstr "Gönder"
+
+#: includes/votes.php:86
+msgid "%d person has asked for it."
+msgid_plural "%d people have asked for it."
+msgstr[0] "%d kişi bunu istedi."
+msgstr[1] "%d kişi bunu istedi."
