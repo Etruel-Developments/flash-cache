@@ -25,6 +25,10 @@ if (!defined('ABSPATH'))
 if (!defined('FLASH_CACHE_VERSION')) {
 	define('FLASH_CACHE_VERSION', '4.0');
 }
+// Oldest Flash Cache Pro this version works with; raised only by a release that changes what Pro relies on.
+if (!defined('FLASH_CACHE_REQUIRED_PRO_VERSION')) {
+	define('FLASH_CACHE_REQUIRED_PRO_VERSION', '2.0');
+}
 
 /**
  * Main Flash Cache class
@@ -98,6 +102,7 @@ class Flash_Cache {
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/version.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/preload.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/about.php';
+		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/compat.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/enviroment.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/assets.php';
 		require_once FLASH_CACHE_PLUGIN_DIR . 'includes/optimize_styles.php';
