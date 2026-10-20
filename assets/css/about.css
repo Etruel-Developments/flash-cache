@@ -144,3 +144,15 @@
 .fc-link:hover{text-decoration:underline}
 .fc-brand{flex-direction:row;gap:12px}
 .fc-brand img{width:150px;height:150px}
+
+/* Vote card */
+.fc-vote{margin-top:20px;padding:22px 26px;background:#111214;border-radius:10px;color:#fff}
+.fc-vote h3{margin:0 0 6px;color:#f3e2a9;font-size:18px}
+.fc-vote p{margin:0 0 12px;color:#c9ccd1}
+.fc-vote small{display:block;margin-top:10px;color:#8a9096;font-size:12px}
+.fc-vote .fc-btn{cursor:pointer;font-size:14px}
+.fc-vote [hidden]{display:none!important}
+.fc-vote-details label{display:block;margin:10px 0 6px;color:#c9ccd1;font-size:13px}
+.fc-vote-details textarea,.fc-vote-details input[type=email]{display:block;width:100%;max-width:520px;margin:4px 0 8px}
+.fc-vote-details .fc-vote-consent input{margin-right:6px}
+.fc-vote-msg{min-height:1.2em;margin:10px 0 0!important;color:#00e065!important;font-weight:600}

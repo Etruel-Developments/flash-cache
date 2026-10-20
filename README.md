@@ -94,6 +94,10 @@ Manually: upload the `flash-cache` folder to `/wp-content/plugins/` and activate
 ![About](screenshot-6.jpg)
 *About: measured results against other cache plugins.*
 
+## External services
+
+Flash Cache connects to a service only when you press a button that says so. **"I'm interested in LiteSpeed Enterprise"** (About > Servers) sends, to [flashcache.net](https://flashcache.net), your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID that is not derived from your site address. If you also tick the box to be emailed when it is ready, it sends the email address you type, and the note if you write one. Nothing is sent until you press the button.
+
 ## Frequently Asked Questions
 
 ### I have this plugin installed and activated. What must I do now?

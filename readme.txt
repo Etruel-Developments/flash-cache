@@ -106,6 +106,12 @@ You can either install it automatically from the WordPress admin, or do it manua
 6. About: measured results against other cache plugins.
 
 
+== External services ==
+
+Flash Cache connects to a service only when you press a button that says so:
+
+* **"I'm interested in LiteSpeed Enterprise" (About > Servers)**, operated by us at [flashcache.net](https://flashcache.net) ([privacy policy](https://flashcache.net/privacy-policy/)). Pressing it sends your choice, whether this site runs LiteSpeed Enterprise, the Flash Cache and PHP versions, the site language and a random anonymous ID that is not derived from your site address. If you also tick the box to be emailed when it is ready, it sends the email address you type, and the note if you write one. Nothing is sent until you press the button.
+
 == Frequently Asked Questions ==
 
 = I have this plugin installed and activated. What must I do now? =

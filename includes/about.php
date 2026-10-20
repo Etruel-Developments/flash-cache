@@ -63,6 +63,13 @@ class flash_cache_about {
 		$js	 = FLASH_CACHE_PLUGIN_DIR . 'assets/js/about.js';
 		wp_enqueue_style('flash_cache-about', FLASH_CACHE_PLUGIN_URL . 'assets/css/about.css', array(), FLASH_CACHE_VERSION . '.' . filemtime($css));
 		wp_enqueue_script('flash_cache-about', FLASH_CACHE_PLUGIN_URL . 'assets/js/about.js', array(), FLASH_CACHE_VERSION . '.' . filemtime($js), true);
+		wp_localize_script('flash_cache-about', 'flash_cache_vote', array(
+			'ajax_url'	 => admin_url('admin-ajax.php'),
+			'nonce'		 => wp_create_nonce(flash_cache_votes::NONCE),
+			'working'	 => __('Working…', 'flash-cache'),
+			'failed'	 => __('Could not reach flashcache.net. Try again in a moment.', 'flash-cache'),
+			'sent'		 => __('Thank you!', 'flash-cache'),
+		));
 	}
 
 	public static function page() {
@@ -161,6 +168,7 @@ class flash_cache_about {
   <div class="fc-srv"><h3><?php esc_html_e('OpenLiteSpeed', 'flash-cache'); ?></h3><p><?php esc_html_e('Cached pages straight from disk, compressed by the server. 48,000+ req/s measured.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('restart once', 'flash-cache'); ?></span></div>
   <div class="fc-srv"><h3><?php esc_html_e('nginx', 'flash-cache'); ?></h3><p><?php esc_html_e('Copy the ready-made block into your server config and reload.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('copy & paste', 'flash-cache'); ?></span></div>
  </div>
+ <?php flash_cache_votes::render_card(); ?>
  <p class="lead" style="margin-top:24px"><?php esc_html_e('PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons.', 'flash-cache'); ?></p>
 </section>
 
