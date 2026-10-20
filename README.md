@@ -83,7 +83,7 @@ Manually: upload the `flash-cache` folder to `/wp-content/plugins/` and activate
 *Cache updates: how pages are created, refreshed and replaced after design changes.*
 
 ![Optimization](screenshot-3.jpg)
-*Optimization: combine styles and scripts, and leave anything that needs it in place.*
+*Optimization with Professional Addon: combine styles and scripts, and leave anything that needs it in place.*
 
 ![Patterns](screenshot-4.jpg)
 *Patterns: one set of rules for each kind of page, in the order you choose.*
