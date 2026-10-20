@@ -151,7 +151,7 @@ Flash Cache connects to a service only when you press a button that says so:
 
 == Changelog ==
 
-= 4.0 Oct 15, 2026 =
+= 4.0 Oct 20, 2026 =
 * A new major version, for PHP 7.2 or later and WordPress 5.9 or later.
 * Cached pages stay fully static: the browser checks the page's age itself and asks for a refresh only once its minimum TTL has passed, so visits to fresh pages never start WordPress.
 * Emptying the cache is instant at any size: the files are set aside at once and removed in the background, so large sites never wait or time out.
