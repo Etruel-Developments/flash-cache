@@ -130,18 +130,18 @@ class flash_cache_about {
  <div class="fc-bench">
   <div class="fc-chart"><h3><?php esc_html_e('Time to first byte', 'flash-cache'); ?> <small style="color:#646970"><?php esc_html_e('(lower is better)', 'flash-cache'); ?></small></h3>
    <div class="fc-bar"><span><?php esc_html_e('No cache', 'flash-cache'); ?></span><i data-w="100%"></i><b><?php esc_html_e('102 ms', 'flash-cache'); ?></b></div>
-   <div class="fc-bar us"><span><?php esc_html_e('Flash Cache', 'flash-cache'); ?></span><i data-w="2%"></i><b><?php esc_html_e('0.85 ms', 'flash-cache'); ?></b></div>
+   <div class="fc-bar us"><span>Flash Cache</span><i data-w="2%"></i><b><?php esc_html_e('0.85 ms', 'flash-cache'); ?></b></div>
    <p style="color:#646970;font-size:12px;margin:12px 0 0"><?php esc_html_e('≈120× faster', 'flash-cache'); ?></p></div>
   <div class="fc-chart"><h3><?php esc_html_e('Bytes sent per visit', 'flash-cache'); ?> <small style="color:#646970"><?php esc_html_e('(lower is better)', 'flash-cache'); ?></small></h3>
    <div class="fc-bar"><span><?php esc_html_e('No cache', 'flash-cache'); ?></span><i data-w="100%"></i><b><?php esc_html_e('43.2 KB', 'flash-cache'); ?></b></div>
-   <div class="fc-bar us"><span><?php esc_html_e('Flash Cache', 'flash-cache'); ?></span><i data-w="13%"></i><b><?php esc_html_e('5.8 KB', 'flash-cache'); ?></b></div>
+   <div class="fc-bar us"><span>Flash Cache</span><i data-w="13%"></i><b><?php esc_html_e('5.8 KB', 'flash-cache'); ?></b></div>
    <p style="color:#646970;font-size:12px;margin:12px 0 0"><?php esc_html_e('7× lighter: optimized HTML + precompressed gzip', 'flash-cache'); ?></p></div>
   <div class="fc-chart" style="grid-column:1/-1"><h3><?php esc_html_e('Requests per second against other cache plugins', 'flash-cache'); ?> <small style="color:#646970"><?php esc_html_e('(higher is better)', 'flash-cache'); ?></small></h3>
-   <div class="fc-bar us"><span><?php esc_html_e('Flash Cache', 'flash-cache'); ?></span><i data-w="100%"></i><b>23,555</b></div>
-   <div class="fc-bar"><span><?php esc_html_e('WP Fastest Cache', 'flash-cache'); ?></span><i data-w="99%"></i><b>23,304</b></div>
-   <div class="fc-bar"><span><?php esc_html_e('WP Super Cache (Expert)', 'flash-cache'); ?></span><i data-w="96.5%"></i><b>22,743</b></div>
-   <div class="fc-bar"><span><?php esc_html_e('W3 Total Cache', 'flash-cache'); ?></span><i data-w="47.5%"></i><b>11,191</b></div>
-   <div class="fc-bar"><span><?php esc_html_e('WP Super Cache (Simple)', 'flash-cache'); ?></span><i data-w="2.4%"></i><b>559</b></div>
+   <div class="fc-bar us"><span>Flash Cache</span><i data-w="100%"></i><b>23,555</b></div>
+   <div class="fc-bar"><span>WP Fastest Cache</span><i data-w="99%"></i><b>23,304</b></div>
+   <div class="fc-bar"><span>WP Super Cache (Expert)</span><i data-w="96.5%"></i><b>22,743</b></div>
+   <div class="fc-bar"><span>W3 Total Cache</span><i data-w="47.5%"></i><b>11,191</b></div>
+   <div class="fc-bar"><span>WP Super Cache (Simple)</span><i data-w="2.4%"></i><b>559</b></div>
    <div class="fc-bar"><span><?php esc_html_e('No cache', 'flash-cache'); ?></span><i data-w="0.5%"></i><b>18</b></div>
   </div>
  </div>
@@ -163,10 +163,10 @@ class flash_cache_about {
  <h2><?php esc_html_e('Works where your site runs', 'flash-cache'); ?></h2>
  <p class="lead"><?php esc_html_e('Flash Cache writes the rules for your server and tells you whether it is running them.', 'flash-cache'); ?></p>
  <div class="fc-servers">
-  <div class="fc-srv"><h3><?php esc_html_e('Apache', 'flash-cache'); ?></h3><p><?php esc_html_e('Rules written to .htaccess in their own marked blocks. Zero setup.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('automatic', 'flash-cache'); ?></span></div>
-  <div class="fc-srv"><h3><?php esc_html_e('LiteSpeed', 'flash-cache'); ?></h3><p><?php esc_html_e('Enterprise: same .htaccess rules, same static speed.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('automatic', 'flash-cache'); ?></span></div>
-  <div class="fc-srv"><h3><?php esc_html_e('OpenLiteSpeed', 'flash-cache'); ?></h3><p><?php esc_html_e('Cached pages straight from disk, compressed by the server. 48,000+ req/s measured.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('restart once', 'flash-cache'); ?></span></div>
-  <div class="fc-srv"><h3><?php esc_html_e('nginx', 'flash-cache'); ?></h3><p><?php esc_html_e('Copy the ready-made block into your server config and reload.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('copy & paste', 'flash-cache'); ?></span></div>
+  <div class="fc-srv"><h3>Apache</h3><p><?php esc_html_e('Rules written to .htaccess in their own marked blocks. Zero setup.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('automatic', 'flash-cache'); ?></span></div>
+  <div class="fc-srv"><h3>LiteSpeed</h3><p><?php esc_html_e('Enterprise: same .htaccess rules, same static speed.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('automatic', 'flash-cache'); ?></span></div>
+  <div class="fc-srv"><h3>OpenLiteSpeed</h3><p><?php esc_html_e('Cached pages straight from disk, compressed by the server. 48,000+ req/s measured.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('restart once', 'flash-cache'); ?></span></div>
+  <div class="fc-srv"><h3>nginx</h3><p><?php esc_html_e('Copy the ready-made block into your server config and reload.', 'flash-cache'); ?></p><span class="chip"><?php esc_html_e('copy & paste', 'flash-cache'); ?></span></div>
  </div>
  <?php flash_cache_votes::render_card(); ?>
  <p class="lead" style="margin-top:24px"><?php esc_html_e('PHP 7.2 or later · WordPress 5.9 or later · single sites · tested with WPeMatico and its add-ons.', 'flash-cache'); ?></p>
@@ -175,9 +175,9 @@ class flash_cache_about {
 <!-- PRO -->
 <section class="fc-pane" id="fc-pro">
  <h2><?php esc_html_e('You don\'t need Pro. But it helps a lot.', 'flash-cache'); ?></h2>
- <p class="lead"><?php esc_html_e('Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every licence — priced so low on purpose — pays for support and for new improvements to the free plugin.', 'flash-cache'); ?></p>
+ <p class="lead"><?php esc_html_e('Flash Cache is complete and free. Pro is not required to get the best of it: it adds a few extras, and every license — priced so low on purpose — pays for support and for new improvements to the free plugin.', 'flash-cache'); ?></p>
  <div class="fc-vs">
-  <div class="fc-col free"><div class="fc-colhead"><?php esc_html_e('Flash Cache', 'flash-cache'); ?></div><img class="fc-collogo" src="<?php echo esc_url($img . 'fc-icon.png'); ?>" alt="">
+  <div class="fc-col free"><div class="fc-colhead">Flash Cache</div><img class="fc-collogo" src="<?php echo esc_url($img . 'fc-icon.png'); ?>" alt="">
    <ul class="fc-checks">
     <li><?php esc_html_e('Static pages served without PHP', 'flash-cache'); ?></li>
     <li><?php esc_html_e('Cache patterns, lifetimes and PHP mode for query strings', 'flash-cache'); ?></li>
@@ -199,14 +199,14 @@ class flash_cache_about {
     <li><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><div><h4><?php esc_html_e('Shared widget cache', 'flash-cache'); ?></h4><p><?php esc_html_e('Widgets built once and shared by every page; updating them never empties the cache.', 'flash-cache'); ?></p></div></li>
     <li><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><div><h4><?php esc_html_e('Scripts in place, plugin by plugin', 'flash-cache'); ?></h4><p><?php esc_html_e('Leave chosen plugins\' scripts where they are.', 'flash-cache'); ?></p></div></li>
     <li><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg><div><h4><?php esc_html_e('Per-post tools', 'flash-cache'); ?></h4><p><?php esc_html_e('Clear a single post\'s cache from the posts list, and rebuild it when you save.', 'flash-cache'); ?></p></div></li>
-    <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><div><h4><?php esc_html_e('Updates and support', 'flash-cache'); ?></h4><p><?php esc_html_e('One-click updates and licence support.', 'flash-cache'); ?></p></div></li>
+    <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><div><h4><?php esc_html_e('Updates and support', 'flash-cache'); ?></h4><p><?php esc_html_e('One-click updates and license support.', 'flash-cache'); ?></p></div></li>
    </ul></div>
  </div>
 <?php if ($has_pro) : ?>
- <div class="fc-cta thanks"><div><h3><?php esc_html_e('Thank you for supporting Flash Cache', 'flash-cache'); ?></h3><p><?php esc_html_e('Your licence funds support and new improvements for the free plugin.', 'flash-cache'); ?></p></div>
-  <div><a class="fc-btn" href="<?php echo esc_url(admin_url('admin.php?page=flash_cache_pro_licenses')); ?>"><?php esc_html_e('Manage your licence', 'flash-cache'); ?></a></div></div>
+ <div class="fc-cta thanks"><div><h3><?php esc_html_e('Thank you for supporting Flash Cache', 'flash-cache'); ?></h3><p><?php esc_html_e('Your license funds support and new improvements for the free plugin.', 'flash-cache'); ?></p></div>
+  <div><a class="fc-btn" href="<?php echo esc_url(admin_url('admin.php?page=flash_cache_pro_licenses')); ?>"><?php esc_html_e('Manage your license', 'flash-cache'); ?></a></div></div>
 <?php else : ?>
- <div class="fc-cta"><div><h3><?php esc_html_e('Support Flash Cache and unlock the extras', 'flash-cache'); ?></h3><p><?php esc_html_e('Every Pro licence funds the free plugin\'s development. Pick the plan that fits your sites.', 'flash-cache'); ?></p></div>
+ <div class="fc-cta"><div><h3><?php esc_html_e('Support Flash Cache and unlock the extras', 'flash-cache'); ?></h3><p><?php esc_html_e('Every Pro license funds the free plugin\'s development. Pick the plan that fits your sites.', 'flash-cache'); ?></p></div>
   <div><a class="fc-btn" href="<?php echo esc_url($links['checkout']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Get Flash Cache Pro →', 'flash-cache'); ?></a><small><?php esc_html_e('Secure checkout at etruel.com', 'flash-cache'); ?></small></div></div>
 <?php endif; ?>
 </section>

@@ -321,10 +321,10 @@ class flash_cache_preaload {
 				$next_page			 = ( absint($values_cron['execution_offeset']) + absint($values['pages_per_execution']) );
 
 				// translators: %1$s: $execution_offset, %2$s: $next_page, %3$s: $current_post_url 
-				echo '<div class="preload_info"><code>' . sprintf(__('Preload is executing now: %1$s - %2$s - %3$s', 'flash-cache'), esc_attr($execution_offeset), esc_attr($next_page), esc_url($current_post_url)) . '</code></div>';
+				echo '<div class="preload_info"><code>' . sprintf(__('Preload is running now: %1$s - %2$s - %3$s', 'flash-cache'), esc_attr($execution_offeset), esc_attr($next_page), esc_url($current_post_url)) . '</code></div>';
 			} else {
 				if ($next_run < time() && $values_cron['finished'] && !$values_cron['started']) {
-					echo '<div class="preload_info"><code>' . __('Preload is pending to execution.', 'flash-cache') . '</code></div>';
+					echo '<div class="preload_info"><code>' . __('Preload is waiting to run.', 'flash-cache') . '</code></div>';
 				} else {
 					if ($next_run > time() && $values_cron['finished'] && !$values_cron['started']) {
 						// translators: %s: Date of next run cron preload

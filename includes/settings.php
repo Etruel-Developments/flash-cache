@@ -292,8 +292,8 @@ class flash_cache_settings {
 		$values = flash_cache_get_advanced_settings();
 		$titles = array(
 			'optimization' => __('Optimization', 'flash-cache'),
-			'updates'	   => __('Cache Updates', 'flash-cache'),
-			'advanced'	   => __('Advanced Settings', 'flash-cache'),
+			'updates'	   => __('Cache updates', 'flash-cache'),
+			'advanced'	   => __('Advanced options', 'flash-cache'),
 		);
 		$reset	= wp_nonce_url(admin_url('admin-post.php?action=reset_to_default_advanced_options&flash_cache_section=' . $section), 'reset_to_default_advanced_options', '_wpnonce');
 
@@ -560,7 +560,7 @@ class flash_cache_settings {
 													</span>
 												</div>
 												<p class="description">' . __('Scripts of plugins stay as separate files.', 'flash-cache') . '</p>
-												' . (has_filter('flash_cache_exclude_scripts_extra_html') ? apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) : '<p class="description">' . __('Choosing each plugin individually is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p></td></tr>' . self::pro_row(__('Avoid optimize javascript by file', 'flash-cache'), __('Leaves specific script files in place, by name or path.', 'flash-cache'), false)) . '
+												' . (has_filter('flash_cache_exclude_scripts_extra_html') ? apply_filters('flash_cache_exclude_scripts_extra_html', '', $values) : '<p class="description">' . __('Choosing each plugin individually is available in the Pro version.', 'flash-cache') . ' <span class="flash-cache-pro-badge">PRO</span></p></td></tr>' . self::pro_row(__('Avoid optimizing JavaScript by file', 'flash-cache'), __('Leaves specific script files in place, by name or path.', 'flash-cache'), false)) . '
 											</td>
 										</tr>
 
