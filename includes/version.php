@@ -48,6 +48,11 @@ class flash_cache_version {
 		if (get_option('flash_cache_updated_4_0') != 1) {
 			self::update_to_4_0();
 		}
+
+		if (get_option('flash_cache_updated_4_0_1') != 1) {
+			flash_cache_purge_all();
+			update_option('flash_cache_updated_4_0_1', 1);
+		}
 	}
 
 	/**

@@ -325,7 +325,8 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		$post			  = null;
 
 		// A rebuild names its post in $optional_post_id (one process may rebuild many); a visit uses the queried post.
-		if ($current_query['is_single'] || $current_query['is_page']) {
+		// A post's comments feed is not the post: it is stored under its own URL.
+		if (($current_query['is_single'] || $current_query['is_page']) && !$current_query['is_feed']) {
 			$post = self::$optional_post_id ? get_post(self::$optional_post_id) : get_post();
 			if ($post) {
 				self::$optional_post_id = $post->ID;
