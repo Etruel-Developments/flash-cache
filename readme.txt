@@ -5,7 +5,7 @@ Tags: cache, page cache, performance, speed, optimize
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 4.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 
 Static page cache served by your web server, without PHP: cache rules per page type, background refreshes and lighter CSS and JavaScript.
@@ -150,6 +150,13 @@ Flash Cache connects to a service only when you press a button that says so:
 
 
 == Changelog ==
+
+= 4.0.1 Nov 2, 2026 =
+* Browser cache time by kind of site: choose News site, Blog or business, or Static site and its usual time is filled in, ready to adjust. News site makes browsers check the front page, categories, tags, authors and feeds on every visit, so new posts show at once.
+* Return visits to pages stored in PHP mode get a short "not modified" answer when nothing has changed.
+* Browsers keep the combined styles and scripts for a year, so return visits load them without asking.
+* Each post's comments feed is cached at its own address, so the cached page of a post always holds the post itself.
+* The cache is emptied once when updating, so every page starts from a clean copy.
 
 = 4.0 Oct 20, 2026 =
 * A new major version, for PHP 7.2 or later and WordPress 5.9 or later.
@@ -344,6 +351,9 @@ Flash Cache connects to a service only when you press a button that says so:
 First Release
 
 == Upgrade Notice ==
+
+= 4.0.1 =
+The cache is emptied once after updating and rebuilds on its own. Sites on the previous browser cache time of one day move to 5 minutes; choose the kind of site in Advanced options to set it. Nginx users: reload nginx after updating, to apply the new rules.
 
 = 4.0 =
 A major version: it requires PHP 7.2 and WordPress 5.9 or later, and it works on single sites only, not on Multisite networks. After updating, the cache is rebuilt from scratch and the server rules are refreshed automatically.
