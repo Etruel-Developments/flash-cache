@@ -243,6 +243,7 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 		return strtr((string) file_get_contents($cache_template), array(
 			'{home_path}'	=> var_export((string) flash_cache_get_home_path(), true),
 			'{url_path}'	=> var_export((string) self::$url_to_cache, true),
+			'{cache_control}' => var_export(flash_cache_page_cache_control((array) self::$current_query), true),
 			'{minimum_ttl}' => (string) absint(self::$pattern['ttl_minimum']),
 			'{maximum_ttl}' => (string) absint(self::$pattern['ttl_maximum']),
 		));

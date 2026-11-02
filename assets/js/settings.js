@@ -151,4 +151,9 @@ jQuery(document).ready(function ($) {
 			}
 		});
 	}
+
+	// Choosing a kind of site fills in its usual browser cache time, which stays editable.
+	$('#flash_cache_advanced_site_type').on('change', function () {
+		$('#flash_cache_advanced_ttl_default').val($(this).find('option:selected').data('seconds'));
+	});
 });

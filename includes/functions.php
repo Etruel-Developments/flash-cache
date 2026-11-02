@@ -402,6 +402,19 @@ function flash_cache_get_nginx_conf_info() {
 		$cache_rules[]	 = 'if ($cache_uri_php != "null cache") {';
 		$cache_rules[]	 = 'rewrite .* "' . esc_attr($inst_root) . esc_attr($cache_dir) . esc_attr($server_name) . '/${cache_uri_php}/index-cache.php" last;';
 		$cache_rules[]	 = '}';
+
+		// Static pages carry their Cache-Control here, and the combined styles and scripts, named
+		// after their content, are kept for good. PHP-mode pages send their own (cache.tpl).
+		// A location's add_header replaces the server's, so the HSTS header is repeated.
+		$hsts_line		 = $advanced_settings['viewer_protocol_policy'] == 'redirect_http_to_https' ? ' add_header Strict-Transport-Security "' . esc_attr(flash_cache_hsts_header()) . '";' : '';
+		$cache_folder	 = '^' . esc_attr(preg_quote($inst_root . $cache_dir, '"'));
+		if ('news' === ($advanced_settings['site_type'] ?? '')) {
+			foreach (flash_cache_fresh_paths() as $fresh_path) {
+				$cache_rules[] = 'location ~ "' . $cache_folder . '[^/]+/' . $fresh_path . 'index-cache\.html$" { add_header Cache-Control "no-cache";' . $hsts_line . ' }';
+			}
+		}
+		$cache_rules[]	 = 'location ~ "' . $cache_folder . '[^/]+/(.*/)?index-cache\.html$" { add_header Cache-Control "max-age=' . absint($advanced_settings['ttl_default']) . ', public";' . $hsts_line . ' }';
+		$cache_rules[]	 = 'location ~ "' . $cache_folder . 'assets/[^/]+/(css|js)/" { add_header Cache-Control "public, max-age=31536000, immutable";' . $hsts_line . ' }';
 	}
 	$cache_rules		 = apply_filters('flash_cache_nginx_cache_rules', $cache_rules);
 	$final_cache_rules	 = apply_filters('flash_cache_nginx_final_cache_rules', implode("\n", $cache_rules));
@@ -487,6 +500,13 @@ function flash_cache_get_htaccess_info() {
 		}
 
 
+		/* News site: browsers check these pages on every visit (see the Cache-Control rule below) */
+		if ('news' === ($advanced_settings['site_type'] ?? '')) {
+			foreach (flash_cache_fresh_paths() as $fresh_path) {
+				$cache_rules[] = 'RewriteRule ^' . $fresh_path . '$ - [E=FLASH_CACHE_FRESH:1]';
+			}
+		}
+
 		/* Cache static pages with gzip */
 		if (flash_cache_process::writes_gzip_copy()) {
 			if (substr($permalink_structure, -1) == '/') {
@@ -546,10 +566,27 @@ function flash_cache_get_htaccess_info() {
 		$cache_rules[]	 = '<FilesMatch "index-cache">';
 		$cache_rules[]	 = '<IfModule mod_headers.c>';
 		$cache_rules[]	 = 'Header set Vary "Accept-Encoding"';
-		$cache_rules[]	 = 'Header set Cache-Control "max-age=' . absint($advanced_settings['ttl_default']) . ', public"';
 		$cache_rules[]	 = 'Header set Cached-By "Flash Cache"';
 		$cache_rules[]	 = '</IfModule>';
 		$cache_rules[]	 = '</FilesMatch>';
+
+		// Static pages carry their Cache-Control here; PHP-mode pages send their own (cache.tpl).
+		$cache_rules[]	 = '<FilesMatch "index-cache\.html(\.gz)?$">';
+		$cache_rules[]	 = '<IfModule mod_headers.c>';
+		$cache_rules[]	 = 'Header set Cache-Control "max-age=' . absint($advanced_settings['ttl_default']) . ', public"';
+		if ('news' === ($advanced_settings['site_type'] ?? '')) {
+			$cache_rules[] = 'Header set Cache-Control "no-cache" env=REDIRECT_FLASH_CACHE_FRESH';
+		}
+		$cache_rules[]	 = '</IfModule>';
+		$cache_rules[]	 = '</FilesMatch>';
+
+		// Combined styles and scripts are named after their content, so browsers keep them for good.
+		$cache_rules[]	 = '<IfModule mod_setenvif.c>';
+		$cache_rules[]	 = 'SetEnvIf Request_URI "^' . esc_attr(preg_quote($inst_root . $cache_dir, '"')) . 'assets/[^/]+/(css|js)/" FLASH_CACHE_ASSET';
+		$cache_rules[]	 = '</IfModule>';
+		$cache_rules[]	 = '<IfModule mod_headers.c>';
+		$cache_rules[]	 = 'Header set Cache-Control "public, max-age=31536000, immutable" env=FLASH_CACHE_ASSET';
+		$cache_rules[]	 = '</IfModule>';
 	}
 	$cache_rules		 = apply_filters('flash_cache_apache_cache_rules', $cache_rules);
 	$final_cache_rules	 = apply_filters('flash_cache_apache_final_cache_rules', implode("\n", $cache_rules));
@@ -590,7 +627,38 @@ function flash_cache_get_htaccess_info() {
  * so they are added only through the flash_cache_hsts_header filter.
  */
 function flash_cache_hsts_header() {
-	return (string) apply_filters('flash_cache_hsts_header', 'max-age=' . absint(flash_cache_get_advanced_settings()['ttl_default']));
+	return (string) apply_filters('flash_cache_hsts_header', 'max-age=' . absint(flash_cache_get_advanced_settings()['hsts_max_age'] ?? 86400));
+}
+
+/**
+ * Cache-Control of a cached page: "News site" asks browsers to check the front page, the
+ * listings and the feeds on every visit; every other page is kept for the browser cache time.
+ */
+function flash_cache_page_cache_control($query = array()) {
+	$settings = flash_cache_get_advanced_settings();
+	$value	  = 'max-age=' . absint($settings['ttl_default']) . ', public';
+	if ('news' === ($settings['site_type'] ?? '')) {
+		foreach (array('is_front_page', 'is_home', 'is_category', 'is_tag', 'is_author', 'is_feed') as $flag) {
+			if (!empty($query[$flag])) {
+				$value = 'no-cache';
+				break;
+			}
+		}
+	}
+	return (string) apply_filters('flash_cache_page_cache_control', $value, $query);
+}
+
+/**
+ * Regex fragments of the page paths a "News site" asks browsers to check on every visit, relative
+ * to the home path and ending where the cache folder name begins: the front page and its pages,
+ * and the listings of categories, tags, authors and feeds.
+ */
+function flash_cache_fresh_paths() {
+	$bases = array_unique(array_filter(array(trim((string) get_option('category_base'), '/') ?: 'category', trim((string) get_option('tag_base'), '/') ?: 'tag', 'author', 'feed')));
+	$paths = array('(page/[0-9]+/)?/?', '(' . implode('|', array_map(function ($base) {
+				return preg_quote($base, '#');
+			}, $bases)) . ')/.*');
+	return (array) apply_filters('flash_cache_fresh_paths', $paths);
 }
 
 function flash_cache_seconds_2_time($seconds) {

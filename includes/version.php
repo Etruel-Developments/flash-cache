@@ -50,9 +50,31 @@ class flash_cache_version {
 		}
 
 		if (get_option('flash_cache_updated_4_0_1') != 1) {
-			flash_cache_purge_all();
-			update_option('flash_cache_updated_4_0_1', 1);
+			self::update_to_4_0_1();
 		}
+	}
+
+	/**
+	 * The HTTPS header has its own time (hsts_max_age), taken from the site's browser cache time.
+	 * A site on the default of one day moves to 5 minutes, one with its own value keeps it. The
+	 * rules are written again and the cache starts clean.
+	 */
+	private static function update_to_4_0_1() {
+		$advanced_settings = get_option('flash_cache_advanced_settings', array());
+		if (is_array($advanced_settings) && isset($advanced_settings['ttl_default'])) {
+			$ttl = absint($advanced_settings['ttl_default']);
+			$advanced_settings['hsts_max_age'] = $ttl;
+			if (86400 === $ttl) {
+				$advanced_settings['ttl_default'] = 300;
+			}
+			update_option('flash_cache_advanced_settings', $advanced_settings);
+			flash_cache_get_advanced_settings(true);
+		}
+		if (flash_cache_get_general_settings()['activate']) {
+			flash_cache_update_htaccess();
+		}
+		flash_cache_purge_all();
+		update_option('flash_cache_updated_4_0_1', 1);
 	}
 
 	/**

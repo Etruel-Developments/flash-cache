@@ -6,6 +6,7 @@
  */
 $flash_cache_home_path	 = {home_path};
 $flash_cache_minimum_ttl = {minimum_ttl};
+$flash_cache_control	 = {cache_control};
 
 if (in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', array('GET', 'HEAD'), true)) {
 	$flash_cache_query = $_GET;
@@ -22,7 +23,14 @@ if (in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', array('GET', 'HEAD'), true)) {
 			// A handler stored with the response serves it and exits, or returns to let WordPress build it.
 			include $flash_cache_file . '.php';
 		} else {
-			$flash_cache_type = @file_get_contents($flash_cache_file . '.header');
+			$flash_cache_type	 = @file_get_contents($flash_cache_file . '.header');
+			$flash_cache_stored	 = filemtime($flash_cache_file . '.html');
+			header('Cache-Control: ' . $flash_cache_control);
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $flash_cache_stored) . ' GMT');
+			if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $flash_cache_stored) {
+				http_response_code(304);
+				exit;
+			}
 			header('Content-Type: ' . ($flash_cache_type ? $flash_cache_type : 'text/html; charset=UTF-8'));
 			readfile($flash_cache_file . '.html');
 			exit;

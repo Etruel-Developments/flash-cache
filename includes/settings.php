@@ -102,7 +102,7 @@ class flash_cache_settings {
 		return apply_filters('flash_cache_advanced_sections', array(
 			'optimization' => array('optimize_styles', 'optimize_scripts', 'inline_scripts', 'social_scripts', 'theme_files', 'plugins_files', 'plugins_exclude', 'avoid_optimize', 'avoid_optimize_text'),
 			'updates'	   => array('process_type', 'refresh_mode', 'design_changes', 'disable_widget_cache'),
-			'advanced'	   => array('cache_dir', 'viewer_protocol_policy', 'ttl_default', 'dont_cache_cookie', 'lock_type'),
+			'advanced'	   => array('cache_dir', 'viewer_protocol_policy', 'site_type', 'ttl_default', 'dont_cache_cookie', 'lock_type'),
 		));
 	}
 
@@ -193,11 +193,24 @@ class flash_cache_settings {
 		echo ' </div>';
 	}
 
+	/**
+	 * The kinds of site a visitor's browser cache can be set for, with the seconds each one fills in.
+	 */
+	public static function site_types() {
+		return array(
+			'news'	 => array('label' => __('News site', 'flash-cache'), 'seconds' => 300),
+			'blog'	 => array('label' => __('Blog or business', 'flash-cache'), 'seconds' => 3600),
+			'static' => array('label' => __('Static site', 'flash-cache'), 'seconds' => 86400),
+		);
+	}
+
 	public static function default_advanced_options() {
 		$array = array(
 			'cache_dir'				 => 'flash_cache/',
 			'viewer_protocol_policy' => 'http_and_https',
-			'ttl_default'			 => 86400,
+			'site_type'				 => 'blog',
+			'ttl_default'			 => 3600,
+			'hsts_max_age'			 => 86400,
 			'dont_cache_cookie'		 => array(
 				'comment_author_',
 				flash_cache_get_logged_in_cookie(),
@@ -348,11 +361,15 @@ class flash_cache_settings {
 							</div>
 							<div class="radio-group">
 								<label><input type="radio" ' . checked($values['viewer_protocol_policy'], 'redirect_http_to_https', false) . ' name="flash_cache_advanced[viewer_protocol_policy]" value="redirect_http_to_https"/> ' . __('Redirect HTTP to HTTPS', 'flash-cache') . '</label>
-								<p class="description">' . __('Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for the browser cache time (Strict-Transport-Security header).', 'flash-cache') . '</p>
+								<p class="description">' . __('Visitors arriving over HTTP are redirected to HTTPS, and browsers are told to keep using HTTPS for a day (Strict-Transport-Security header).', 'flash-cache') . '</p>
 							</div>';
 		} else {
 			echo '<input type="hidden" name="flash_cache_advanced[viewer_protocol_policy]" value="http_and_https"/>
 							<p class="description">' . __('This admin page is open over HTTP, so cached pages are served as the site is reached. The option to redirect visitors to HTTPS appears here when the admin is opened over HTTPS.', 'flash-cache') . '</p>';
+		}
+		$site_options_html = '';
+		foreach (self::site_types() as $type => $site_type) {
+			$site_options_html .= '<option value="' . esc_attr($type) . '" data-seconds="' . absint($site_type['seconds']) . '"' . selected($values['site_type'], $type, false) . '>' . esc_html($site_type['label']) . '</option>';
 		}
 		echo '</td>
 					</tr>
@@ -360,8 +377,9 @@ class flash_cache_settings {
 					<tr valign="top" class="wrap-row">
 						<th scope="row">' . __('Browser cache time', 'flash-cache') . '</th>
 						<td>
+<select name="flash_cache_advanced[site_type]" id="flash_cache_advanced_site_type">' . $site_options_html . '</select>
 							<input type="text" name="flash_cache_advanced[ttl_default]" id="flash_cache_advanced_ttl_default" value="' . esc_attr(absint($values['ttl_default'])) . '"/>
-							<p class="description">' . __('Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. 86400 is one day.', 'flash-cache') . '</p>
+							<p class="description">' . __('Seconds a browser may keep a cached page before asking for it again, sent in the Cache-Control header. Choosing a kind of site fills in its usual time, which you can change. News site also makes browsers check the front page, categories, tags, authors and feeds on every visit, so new posts show at once. 300 is five minutes and 86400 is one day.', 'flash-cache') . '</p>
 						</td>
 					</tr>
 					
@@ -633,7 +651,7 @@ class flash_cache_settings {
 			$home_root = parse_url(get_bloginfo('url'), PHP_URL_PATH);
 			$uri	   = trailingslashit(is_string($home_root) ? $home_root : '/') . flash_cache_get_cache_dir();
 			$ttl	   = absint(flash_cache_get_advanced_settings()['ttl_default']);
-			$context   = 'context ' . $uri . " {\n  location                \$DOC_ROOT" . $uri . "\n  allowBrowse             1\n  extraHeaders            <<<END_extraHeaders\nset Cache-Control \"max-age=" . $ttl . ", public\"\nset Cached-By \"Flash Cache\"\n  END_extraHeaders\n}";
+			$context   = 'context ' . $uri . " {\n  location                \$DOC_ROOT" . $uri . "\n  allowBrowse             1\n  extraHeaders            <<<END_extraHeaders\nset Cache-Control \"max-age=" . $ttl . ", public\"\nset Cached-By \"Flash Cache\"\n  END_extraHeaders\n}\n\ncontext " . $uri . "assets/ {\n  location                \$DOC_ROOT" . $uri . "assets/\n  allowBrowse             1\n  extraHeaders            <<<END_extraHeaders\nset Cache-Control \"public, max-age=31536000, immutable\"\n  END_extraHeaders\n}";
 			$html	  .= '<div class="flash-cache-ols-headers" style="margin-top:12px;padding:1px 12px;background:#fff;border:1px solid #c3c4c7;border-left:4px solid #72aee6"><p><strong>' . esc_html__('Optional: browser cache headers', 'flash-cache') . '</strong></p>';
 			/* translators: %s: browser cache time, such as "1 day". */
 			$html	  .= '<p>' . esc_html(sprintf(__('Cached pages already work without this. OpenLiteSpeed ignores the headers in .htaccess, so browsers get no caching instructions for them. Add this context to the virtual host of your site to let browsers keep each page for %s, so return visits load faster, then restart OpenLiteSpeed:', 'flash-cache'), flash_cache_seconds_2_time($ttl))) . '</p>';
@@ -733,6 +751,9 @@ class flash_cache_settings {
 
 		if (!in_array($new_options['refresh_mode'], array('visitors', 'cron'), true)) {
 			$new_options['refresh_mode'] = 'visitors';
+		}
+		if (!isset(self::site_types()[$new_options['site_type']])) {
+			$new_options['site_type'] = 'blog';
 		}
 		if (!in_array($new_options['design_changes'], array('auto', 'delete', 'gradual', 'none'), true)) {
 			$new_options['design_changes'] = 'auto';
