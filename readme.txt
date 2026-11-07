@@ -5,7 +5,7 @@ Tags: cache, page cache, performance, speed, optimize
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 License: GPLv2 or later
 
 Static page cache served by your web server, without PHP: cache rules per page type, background refreshes and lighter CSS and JavaScript.
@@ -150,6 +150,10 @@ Flash Cache connects to a service only when you press a button that says so:
 
 
 == Changelog ==
+
+= 4.0.2 Nov 7, 2026 =
+* The cached page of a post always holds the post itself: its embed card, its later pages and its comment pages are kept apart from it.
+* The cache is emptied once when updating, so every page starts from a clean copy.
 
 = 4.0.1 Nov 2, 2026 =
 * Browser cache time by kind of site: choose News site, Blog or business, or Static site and its usual time is filled in, ready to adjust. News site makes browsers check the front page, categories, tags, authors and feeds on every visit, so new posts show at once.
