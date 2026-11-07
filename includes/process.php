@@ -420,8 +420,8 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			}
 		}
 
-		// The embed card of a post has its own address: it is never stored as the post.
-		if (is_embed()) {
+		// A post's embed card, its later pages and its comment pages have their own addresses: only the post itself is stored under the post's path.
+		if (is_embed() || (int) get_query_var('page') > 1 || '' !== (string) get_query_var('cpage')) {
 			return true;
 		}
 
