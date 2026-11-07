@@ -420,6 +420,11 @@ window.addEventListener("load", function () { var s = document.createElement("sc
 			}
 		}
 
+		// The embed card of a post has its own address: it is never stored as the post.
+		if (is_embed()) {
+			return true;
+		}
+
 		self::$template_redirect = true;
 		$default_query			 = flash_cache_default_query();
 		$current_query			 = array();
